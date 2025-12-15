@@ -1,5 +1,5 @@
-import { ComponentExample } from "@/components/component-example";
+import { CvPage } from "@/components/cv/cv-page";
 
 export default function Page() {
-return <ComponentExample />;
+  return <CvPage />;
 }

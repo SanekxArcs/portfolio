@@ -13,6 +13,135 @@
  */
 
 // Source: schema.json
+export type CvProfile = {
+  _id: string;
+  _type: "cvProfile";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  role?: string;
+  description?: string;
+  about?: string;
+  profilePhoto?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  cvUrl?: string;
+  cvFile?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+    };
+    media?: unknown;
+    _type: "file";
+  };
+  contacts?: {
+    email?: string;
+    phoneNumber?: string;
+    location?: string;
+    relocationReady?: boolean;
+    typeOfContract?: Array<string>;
+    workAvailability?: Array<string>;
+  };
+  links?: Array<{
+    link?: string;
+    name?: string;
+    title?: string;
+    iconName?: string;
+    _key: string;
+  }>;
+  languages?: Array<{
+    language?: string;
+    level?: string;
+    _key: string;
+  }>;
+  softSkills?: Array<string>;
+  skillsFrontend?: Array<string>;
+  skillsBackend?: Array<string>;
+  skillsDevOps?: Array<string>;
+  skillsOther?: Array<string>;
+  interests?: Array<string>;
+  education?: Array<{
+    institution?: string;
+    specialization?: string;
+    _key: string;
+  }>;
+  projects?: Array<{
+    petProject?: boolean;
+    isPinned?: boolean;
+    nda?: boolean;
+    title?: string;
+    description?: string;
+    image?: Array<{
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+      _key: string;
+    }>;
+    features?: Array<string>;
+    technologies?: Array<string>;
+    url?: string;
+    urlToCode?: string;
+    _key: string;
+  }>;
+  courses?: Array<{
+    title?: string;
+    platform?: string;
+    date?: string;
+    badges?: Array<string>;
+    visibleOnCV?: boolean;
+    _key: string;
+  }>;
+  workExperience?: Array<{
+    jobTitle?: string;
+    jobTitle2?: string;
+    companyName?: string;
+    location?: string;
+    duration?: string;
+    type?: string;
+    description?: Array<string>;
+    website?: string;
+    websiteName?: string;
+    isRelated?: boolean;
+    hideFromCV?: boolean;
+    _key: string;
+  }>;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
 export type SanityImagePaletteSwatch = {
   _type: "sanity.imagePaletteSwatch";
   background?: string;
@@ -48,22 +177,6 @@ export type SanityImageMetadata = {
   blurHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
 };
 
 export type SanityFileAsset = {
@@ -131,5 +244,5 @@ export type Slug = {
   source?: string;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint | Slug;
+export type AllSanitySchemaTypes = CvProfile | SanityImageCrop | SanityImageHotspot | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint | Slug;
 export declare const internalGroqTypeReferenceTo: unique symbol;

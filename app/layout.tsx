@@ -3,6 +3,9 @@ import { Geist, Geist_Mono, Noto_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { SanityLive } from "@/sanity/lib/live";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Footer } from "@/components/footer";
+import Navbar from "@/components/navbar";
 
 const notoSans = Noto_Sans({ variable: "--font-sans" });
 
@@ -27,13 +30,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={notoSans.variable}>
+    <html lang="en" className={notoSans.variable} suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-emerald-950/5`}
       >
-        {children}
-        <Toaster />
-        <SanityLive />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+          <Toaster />
+          <SanityLive />
+        </ThemeProvider>
       </body>
     </html>
   );

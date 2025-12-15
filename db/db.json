@@ -1,0 +1,407 @@
+{
+  "petProjects": [
+    {
+      "title": "ERM System for VDG Solar",
+      "description": "Developed a custom ERM system for VDG Solar to manage electrical engineering operations. Features include Google Sheets integration, store management, cost calculation, and invoice generation. Initially a pet project, now under commercial development.",
+      "features": [
+        "PWA",
+        "Database updates Google Sheets or Batch import",
+        "Store management",
+        "Firm costs calculation",
+        "Invoice generation",
+        "Equipment management",
+        "Equipment search"
+      ],
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Zog",
+        "Sanity",
+        "Google API"
+      ],
+      "url": "https://vdg-erm.o-d.dev"
+    },
+    {
+      "title": "TunerFest",
+      "description": "Developed TunerFest, a community website for The Crew MotorFest players in collaboration with Militia Gaming. Features PWA support, Sanity DB integration, fast search, and tuning tracking. From start it has more than 1000+ users. More than 32,000+ views. Median time on page 8:30 min. DB more than 5000+ records and unique pages. First load time 0.7 sec. GTmetrix A+. Seo text and image generation.",
+      "features": [
+        "PWA",
+        "Database Sanity",
+        "Fast search",
+        "Save and track used tuning",
+        "Registration",
+        "Moderation",
+        "Adding to favorites",
+        "Filters"
+      ],
+      "technologies": [
+        "Next.js 15",
+        "Zustand",
+        "Tailwind CSS",
+        "Sanity",
+        "Framer motion",
+        "shadcn/ui"
+      ],
+      "url": "https://tunerfest.o-d.dev/"
+    },
+    {
+      "title": "Book Database Website",
+      "description": "Created a dynamic book database web application allowing users to add, edit, delete, and favorite books via server interaction. p.s. server can be down sometimes.",
+      "features": [
+        "Database updates",
+        "Adding books",
+        "Deleting books",
+        "Editing books",
+        "Adding to favorites"
+      ],
+      "technologies": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React.js",
+        "Tailwind CSS",
+        "Vite"
+      ],
+      "url": "https://book-list.o-d.dev/"
+    },
+    {
+      "title": "Startupz Portfolio",
+      "description": "Built a pixel-perfect portfolio website based on a provided design as a test task, showcasing front-end implementation skills.",
+      "features": [
+        "Pixel-perfect layout implementation",
+        "Portfolio showcase"
+      ],
+      "technologies": ["HTML", "CSS", "Tailwind CSS", "React.js", "JavaScript"],
+      "url": "https://startupz-t-task.o-d.dev/"
+    },
+    {
+      "title": "Bankist",
+      "description": "Implemented Bankist, a portfolio website featuring animations, sliders, and modal windows using vanilla JavaScript, as part of a course assignment.",
+      "features": ["Animations", "Slider", "Modal window on timer"],
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "url": "https://bankist.o-d.dev/"
+    },
+    {
+      "title": "Bankist WebApp Demo",
+      "description": "Developed a functional demo of a banking web application enabling user login (demo credentials: js, 1111), fund transfers, and account sorting.",
+      "features": ["User login (js, 1111)", "Money transfers", "Account sorting"],
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "url": "https://bankist-app.o-d.dev/"
+    },
+    {
+      "title": "Maply",
+      "description": "Created Maply, a web service for users to save and manage favorite locations and bike routes, utilizing local storage for data persistence.",
+      "features": ["Spot and trip storage", "Local storage for history", "Calculations"],
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "url": "https://maply.o-d.dev/"
+    },
+    {
+      "title": "Transliteration Plugin",
+      "description": "Developed a Chrome extension for automatic text transliteration between Latin and Cyrillic keyboard layouts.",
+      "features": [
+        "Transliteration of Latin to English",
+        "Transliteration of English to Latin",
+        "Google Chrome plugin"
+      ],
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "url": "https://github.com/SanekxArcs/keyboard-layout-converter"
+    },
+    {
+      "title": "Employee Accounting App",
+      "description": "Built an employee management web application featuring CRUD operations (add, delete, edit), bonus assignments, sorting, and search functionality.",
+      "features": [
+        "Employee record management",
+        "Adding and deleting employees",
+        "Editing employee information",
+        "Awarding bonuses",
+        "Sorting",
+        "Search"
+      ],
+      "technologies": ["HTML", "CSS", "React.js", "Tailwind CSS", "JavaScript"],
+      "url": "https://app-accounting-employees.o-d.dev/"
+    },
+    {
+      "title": "Number Guessing Game",
+      "description": "Developed a number guessing game with a limited attempt system (20 tries) and high-score tracking.",
+      "features": ["Number guessing within 20 attempts", "Ranking system", "Fun design"],
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "url": "https://game-od.o-d.dev/"
+    },
+    {
+      "title": "Dice Rolling Game",
+      "description": "Created a two-player dice game with turn-based mechanics, point accumulation, and a rule to reset score on rolling a 1.",
+      "features": [
+        "Turn-based dice rolling",
+        "Points accumulation",
+        "Reset on rolling a 1",
+        "Multiplayer"
+      ],
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "url": "https://game-dice-od.o-d.dev/"
+    },
+    {
+      "title": "Omnifood",
+      "description": "Designed and built Omnifood, a responsive landing page for a conceptual healthy food service, focusing on clean HTML/CSS implementation.",
+      "features": ["Healthy eating showcase", "Clean HTML and CSS"],
+      "technologies": ["HTML", "CSS"],
+      "url": "https://omnifood.o-d.dev/"
+    },
+    {
+      "title": "3D Visualization Portfolio",
+      "description": "Developed a portfolio site displaying high-accuracy (up to 5cm) 3D visualizations of solar panel installations integrated onto real photographs.",
+      "features": [
+        "3D visualizations of solar panels",
+        "Accuracy up to 5 cm",
+        "Portfolio showcase",
+        "Gallery"
+      ],
+      "technologies": ["HTML", "CSS", "3D modeling software"],
+      "url": "https://skethup-portfolio.o-d.dev/"
+    },
+    {
+      "title": "Personal Business Card Website",
+      "description": "Built a dynamic personal business card website using vanilla JavaScript to showcase contact information.",
+      "features": ["Contact information", "Pure JavaScript implementation"],
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "url": "https://contact-me-dev.o-d.dev/"
+    },
+    {
+      "title": "QR Code VCard Generator",
+      "description": "Created a web tool to generate vCard QR codes from user-provided contact details.",
+      "features": ["QR code generation", "Contact information input"],
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "url": "https://qr-code.o-d.dev/"
+    },
+    {
+      "title": "Password Generator",
+      "description": "Developed a secure password generator web application with password history storage functionality.",
+      "features": ["Password generation", "Password history storage"],
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "url": "https://pas-gen.o-d.dev/"
+    },
+    {
+      "title": "Portfolio Testing Website",
+      "description": "Built the ActiveBox portfolio site as a self-assessment exercise focusing on layout and responsiveness.",
+      "features": ["Skill testing", "Portfolio showcase"],
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "url": "https://activebox-t-task.o-d.dev/"
+    },
+    {
+      "title": "Portfolio Testing Website 2",
+      "description": "Built the Merx portfolio site as a self-assessment exercise focusing on implementing specific UI components.",
+      "features": ["Skill testing", "Portfolio showcase"],
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "url": "https://merx-t-task.o-d.dev"
+    },
+    {
+      "title": "Skill Testing Website",
+      "description": "Built the Mogo portfolio site as a self-assessment exercise to practice advanced CSS techniques.",
+      "features": ["Skill testing"],
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "url": "https://mogo-sa.o-d.dev/"
+    },
+    {
+      "title": "JavaScript Drum Kit",
+      "description": "Implemented an interactive JavaScript Drum Kit that triggers sounds based on keyboard input, demonstrating event handling.",
+      "features": ["Sound playback on key press", "Skill testing"],
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "url": "https://js-drum-kit-sanekx.o-d.dev/"
+    },
+    {
+      "title": "Sushi Shop",
+      "description": "Developed a demo e-commerce sushi shop with functional product addition and dynamic shopping cart calculation features.",
+      "features": [
+        "Online store setup",
+        "Shopping cart functionality",
+        "Automatic calculation of items"
+      ],
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "url": "https://sushi-shop.o-d.dev/"
+    },
+    {
+      "title": "Tip Calculator",
+      "description": "Built an advanced tip calculator featuring bill splitting among multiple people and individual share calculation.",
+      "features": [
+        "Bill splitting",
+        "Individual cost assignment",
+        "Tip calculation"
+      ],
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "url": "https://tip-calc.o-d.dev/"
+    },
+    {
+      "title": "Test Task",
+      "description": "Completed a front-end test task simulating product display and interaction features for an online shop concept.",
+      "features": ["Test task assignment"],
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "url": "https://moyo-test-task.o-d.dev/"
+    },
+    {
+      "title": "Modal Testing",
+      "description": "Implemented and tested modal window functionality using vanilla JavaScript as a focused learning exercise.",
+      "features": ["Modal window testing"],
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "url": "https://modal-test-od.o-d.dev/"
+    },
+    {
+      "title": "Frontend Mentor Task",
+      "description": "Completed a Frontend Mentor challenge, focusing on achieving a pixel-perfect implementation of the provided UI design.",
+      "features": [
+        "Frontend Mentor task",
+        "Pixel-perfect design implementation"
+      ],
+      "technologies": ["HTML", "CSS"],
+      "url": "https:/product-test-task.o-d.dev/"
+    }
+  ],
+  "commercialProjects": [
+    {
+      "title": "Feigin Electric",
+      "description": "Corporate Websites - The site was designed to showcase the company in the renewable energy space on the Internet. Branding was created, as well as the site from scratch to the state it is today.",
+      "features": [
+        "Blog",
+        "SPA",
+        "Fully Responsive",
+        "GTmetrix: A",
+        "Seo Optimization"
+      ],
+      "technologies": [
+        "Next.js 15",
+        "TypeScript",
+        "Tailwind CSS",
+        "Vercel",
+        "Sanity"
+      ],
+      "url": "https://feiginelectric.o-d.dev/"
+    },
+    {
+      "title": "Solar Sense",
+      "description": "Corporate Websites - The site was designed to showcase the company in the renewable energy space on the Internet. Branding was created, as well as the site from scratch to the state it is today.",
+      "features": [
+        "Multi-Page SPA",
+        "Fully Responsive",
+        "GTmetrix: A",
+        "Calculator",
+        "Validation"
+      ],
+      "technologies": [
+        "Vite",
+        "React.js",
+        "Tailwind CSS",
+        "JavaScript",
+        "React Router",
+        "Host LH.pl"
+      ],
+      "url": "https://solarsense.o-d.dev/"
+    },
+    {
+      "title": "LIBERTY IMMIGRATION",
+      "description": "Bussines card - The website is a business card landing page of a company dealing with legalization of foreigners in Poland. The site was created from scratch and the design accommodates two languages, Ukrainian and Belarusian.",
+      "features": [
+        "Animation when element is visible",
+        "Fully Responsive",
+        "Contact form",
+        "UA and BY languages",
+        "GTmetrix: A"
+      ],
+      "technologies": [
+        "React.js",
+        "Tailwind CSS",
+        "Netlify",
+        "JavaScript",
+        "Custom Hooks"
+      ],
+      "url": "https://liberty-immigration.o-d.dev/"
+    },
+    {
+      "title": "UWP Digital",
+      "description": "Only the first main page of the site was created using the Pixel Perfect layout, and then it was handed over to the team.",
+      "features": [
+        "Made first page",
+        "Fully Responsive",
+        "Contact form",
+        "Semantic",
+        "Slider",
+        "Accordion",
+        "Modal"
+      ],
+      "technologies": ["HTML", "Tailwind CSS"],
+      "url": "https://uwp.digital/"
+    },
+    {
+      "title": "Fun Quest",
+      "description": "Company website - Based on a template, the template was modified according to the client's needs, I also filled the entire site with content and customized it according to the client's needs.",
+      "features": [
+        "Remade WP template",
+        "Fully Responsive",
+        "Contact form",
+        "Slider",
+        "CMS"
+      ],
+      "technologies": ["HTML", "CSS", "SASS", "JavaScript", "WordPress", "PHP"],
+      "url": "https://fq.ua/"
+    },
+    {
+      "title": "Belavtodor UA",
+      "description": "Corporate Websites - I created the site and all its elements according to the designer's layout.",
+      "features": [
+        "Fully Responsive",
+        "Semantic",
+        "Contact form",
+        "Slider",
+        "Accordion",
+        "Modal"
+      ],
+      "technologies": ["HTML", "CSS", "SASS"],
+      "url": "https://web.archive.org/web/20210618203112/https://belautodor-ua.com/"
+    },
+    {
+      "title": "Eco-smart",
+      "description": "E-commerce - Site redesign, provide an admin panel for content management, customization for all types of devices",
+      "features": ["Design", "Fully Responsive", "Semantic"],
+      "technologies": ["HTML", "CSS", "WP", "Photoshop"],
+      "url": "https://eco-smart.com.ua/"
+    },
+    {
+      "title": "Club Smart Mam",
+      "description": "News portal - Creating a modern design for the Smart Mom Club news portal, site creation, provide an admin panel for content management, customization for all types of devices",
+      "features": [
+        "Fully Responsive",
+        "Contact form",
+        "Semantic",
+        "Forum",
+        "Accordion",
+        "Modal"
+      ],
+      "technologies": ["HTML", "CSS", "SASS", "JavaScript", "WordPress", "PHP"],
+      "url": "https://www.smartmama.com.ua/"
+    },
+    {
+      "title": "Plenum",
+      "description": "Business card-page - Creation of a unique design and programming of a business card website for a legal association.",
+      "features": [
+        "Create a unique design for the site",
+        "Create a blog",
+        "CRM",
+        "Accommodate all types of devices"
+      ],
+      "technologies": [
+        "HTML",
+        "CSS",
+        "SASS",
+        "JavaScript",
+        "WordPress",
+        "PhotoShop"
+      ],
+      "url": "https://plenum.com.ua/uk/#pll_switcher"
+    },
+    {
+      "title": "Webpage - Resume/CV",
+      "description": "Site Resume - make for peoples their CV online and pdf ready",
+      "features": ["Design", "Fully Responsive", "Semantic", "Accordion"],
+      "technologies": ["HTML", "Tailwind CSS", "React", "Figma", "Photoshop"],
+      "url": "https://marsela.netlify.app/"
+    }
+  ]
+}
