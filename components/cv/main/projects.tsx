@@ -18,9 +18,22 @@ import Link from "next/link";
 import { ActionButton } from "../atoms/action-button";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { motion, Variants } from "motion/react";
 
 type Props = {
   profile: CvProfile;
+};
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
 };
 
 function ProjectCard({ project }: { project: CvProject }) {
@@ -192,7 +205,14 @@ export function Projects({ profile }: Props) {
     .sort((a, b) => (a.isPinned === b.isPinned ? 0 : a.isPinned ? -1 : 1));
 
   return (
-    <section id="projects" className="mb-20 scroll-mt-24 space-y-12">
+    <motion.section
+      id="projects"
+      className="mb-20 scroll-mt-24 space-y-12"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={containerVariants}
+    >
       {commercialProjects.length > 0 && (
         <div className="space-y-8">
           <div className="flex items-center gap-3">
@@ -224,6 +244,6 @@ export function Projects({ profile }: Props) {
           </div>
         </div>
       )}
-    </section>
+    </motion.section>
   );
 }

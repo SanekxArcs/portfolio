@@ -21,9 +21,40 @@ import Image from "next/image";
 import { ActionButton } from "@/components/cv/atoms/action-button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import FlagIcon from "@/components/FlagIcon";
+import { motion, Variants } from "motion/react";
 
 type Props = {
   profile: CvProfile;
+};
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
+const imageVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.8, rotate: -15 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    rotate: 0,
+    transition: { duration: 0.8, ease: "backOut" },
+  },
 };
 
 export function MainHead({ profile }: Props) {
@@ -60,12 +91,16 @@ export function MainHead({ profile }: Props) {
     .slice(0, 2);
 
   return (
-    <section
-      className={`mb-20 mt-15 pt-10 cursor-default transition-all duration-1000 `}
+    <motion.section
+      className={`mb-20 mt-15 pt-10 relative cursor-default transition-all duration-1000 `}
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
     >
+      
       <div className="flex flex-col lg:flex-row gap-12 items-start">
         <div className="flex-1 md:w-2/3">
-          <div className="inline-block mb-4">
+          <motion.div className="inline-block mb-4" variants={itemVariants}>
             <Badge
               variant="secondary"
               className="text-sm p-2.5 font-medium animate-pulse dark:bg-emerald-950/80 bg-emerald-200/80"
@@ -79,20 +114,29 @@ export function MainHead({ profile }: Props) {
                   : profile.contacts.workAvailability[0]
                 : "Available for opportunities"}
             </Badge>
-          </div>
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-4 bg-linear-to-r from-foreground to-primary dark:from-foreground dark:to-emerald-950 bg-clip-text text-transparent leading-tight">
+          </motion.div>
+          <motion.h1 
+            className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-4 bg-linear-to-r from-foreground to-primary dark:from-foreground dark:to-emerald-950 bg-clip-text text-transparent leading-tight"
+            variants={itemVariants}
+          >
             {profile.name}
-          </h1>
-          <p className="text-2xl sm:text-3xl text-muted-foreground mb-6 font-light">
+          </motion.h1>
+          <motion.p 
+            className="text-2xl sm:text-3xl text-muted-foreground mb-6 font-light"
+            variants={itemVariants}
+          >
             {profile.role}
-          </p>
+          </motion.p>
           {profile.description && (
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl leading-relaxed">
+            <motion.p 
+              className="text-lg text-muted-foreground mb-8 max-w-2xl leading-relaxed"
+              variants={itemVariants}
+            >
               {profile.description}
-            </p>
+            </motion.p>
           )}
 
-          <div className="flex flex-wrap gap-4 mb-8">
+          <motion.div className="flex flex-wrap gap-4 mb-8" variants={itemVariants}>
             <ButtonGroup>
               {profile.cvFileUrl && (
                 <ActionButton
@@ -109,6 +153,7 @@ export function MainHead({ profile }: Props) {
                   href={profile.cvUrl}
                   icon={<ExternalLink />}
                   label="View CV"
+                  
                   className="rounded-l-none"
                   external
                 />
@@ -128,14 +173,14 @@ export function MainHead({ profile }: Props) {
                 <ActionButton
                   href={`tel:${profile.contacts.phoneNumber}`}
                   icon={<Phone />}
-                  label={profile.contacts.phoneNumber}
+                  spoiler
                   variant="outline"
                   className="rounded-l-none text-muted-foreground"
                 />
               )}
             </ButtonGroup>
-          </div>
-          <div className="flex flex-row flex-wrap gap-3 mb-6">
+          </motion.div>
+          <motion.div className="flex flex-row flex-wrap gap-3 mb-6" variants={itemVariants}>
             {githubLink && (
               <ActionButton
                 href={githubLink.link}
@@ -186,10 +231,9 @@ export function MainHead({ profile }: Props) {
                 external
               />
             )}
-          </div>
-
+          </motion.div>
           {profile.languages && profile.languages.length > 0 && (
-            <div className="flex flex-wrap gap-4 mb-4">
+            <motion.div className="flex flex-wrap gap-4 mb-4" variants={itemVariants}>
               {profile.languages.map((lang, i) => (
                 <Badge
                   key={i}
@@ -207,10 +251,10 @@ export function MainHead({ profile }: Props) {
                   </span>
                 </Badge>
               ))}
-            </div>
+            </motion.div>
           )}
 
-          <div className="flex flex-row flex-wrap gap-2 mb-4">
+          <motion.div className="flex flex-row flex-wrap gap-2 mb-4" variants={itemVariants}>
             {profile.contacts?.location && (
               <ActionButton
                 href="https://www.google.pl/maps?q=Warszawa"
@@ -249,10 +293,13 @@ export function MainHead({ profile }: Props) {
                 className="flex items-center gap-2 text-muted-foreground"
               />
             )}
-          </div>
+          </motion.div>
         </div>
 
-        <div className="relative hidden md:block group w-1/3 m-auto lg:mx-0">
+        <motion.div 
+          className="relative hidden md:block group w-1/3 m-auto lg:mx-0"
+          variants={imageVariants}
+        >
           <div className="w-64 h-64 rounded-2xl bg-linear-to-br from-secondary to-muted dark:from-primary dark:to-secondary overflow-hidden shadow-2xl transform group-hover:scale-105 group-hover:rotate-3 transition-all duration-500 relative flex justify-center items-center">
             {profile.profilePhotoUrl ? (
               <Image
@@ -267,8 +314,8 @@ export function MainHead({ profile }: Props) {
               </div>
             )}
           </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

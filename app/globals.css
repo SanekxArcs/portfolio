@@ -117,10 +117,27 @@
 }
 
 @layer base {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  * {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
   * {
     @apply border-border outline-ring/50;
+    scrollbar-gutter: stable;
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .mask-to-bottom {
+    mask-image: linear-gradient(to bottom, black, transparent);
   }
 }

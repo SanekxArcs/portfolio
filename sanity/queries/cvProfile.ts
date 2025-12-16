@@ -6,6 +6,7 @@ export const cvProfileQuery = /* groq */ `
   description,
   about,
   cvUrl,
+  "logoUrl": logo.asset->url,
   "profilePhotoUrl": profilePhoto.asset->url,
   "cvFileUrl": cvFile.asset->url,
   contacts{

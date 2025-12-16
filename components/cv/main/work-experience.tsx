@@ -7,14 +7,22 @@ import {
   ChevronRight,
   Building2,
   ArrowRight,
+  Globe,
 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { CvProfile, CvWorkExperience } from "@/components/cv/types";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { ActionButton } from "../atoms/action-button";
 
 type Props = {
   profile: CvProfile;
@@ -38,12 +46,55 @@ const itemVariants = {
   },
 };
 
+function escapeRegExp(string: string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function HighlightedText({ text, skills }: { text: string; skills: string[] }) {
+  const parts = useMemo(() => {
+    if (!skills || skills.length === 0) return [text];
+
+    const sortedSkills = [...skills].sort((a, b) => b.length - a.length);
+    const pattern = new RegExp(
+      `(?<=^|[\\s.,;!?()"'])(${sortedSkills
+        .map(escapeRegExp)
+        .join("|")})(?=$|[\\s.,;!?()"'])`,
+      "gi"
+    );
+
+    return text.split(pattern);
+  }, [text, skills]);
+
+  return (
+    <span>
+      {parts.map((part, i) => {
+        const isSkill = skills.some(
+          (s) => s.toLowerCase() === part.toLowerCase()
+        );
+        if (isSkill) {
+          return (
+            <span
+              key={i}
+              className="group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors font-medium"
+            >
+              {part}
+            </span>
+          );
+        }
+        return part;
+      })}
+    </span>
+  );
+}
+
 function ExperienceCard({
   job,
   layoutId,
+  allSkills,
 }: {
   job: CvWorkExperience;
   layoutId: string;
+  allSkills: string[];
 }) {
   const isRelated = job.isRelated;
 
@@ -70,13 +121,13 @@ function ExperienceCard({
             <div className="space-y-2">
               <CardTitle
                 className={cn(
-                  "text-xl flex items-center gap-2 transition-colors",
+                  "text-xl flex items-start gap-2 transition-colors",
                   isRelated
                     ? "group-hover:text-emerald-600 dark:group-hover:text-emerald-400"
                     : "group-hover:text-gray-600 dark:group-hover:text-gray-400"
                 )}
               >
-                <Briefcase className="w-5 h-5 shrink-0" />
+                <Briefcase className="w-5 h-5 mt-1 shrink-0" />
                 <span className="flex items-center gap-2 flex-wrap">
                   {job.jobTitle}
                   {job.jobTitle2 && (
@@ -90,13 +141,13 @@ function ExperienceCard({
               <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
                 {job.companyName && (
                   <span className="flex items-center gap-1 font-semibold text-foreground">
-                    <Building2 className="w-4 h-4" />
+                    <Building2 className="w-4 h-4 mr-2" />
                     {job.companyName}
                   </span>
                 )}
                 {job.location && (
                   <span className="flex items-center gap-1">
-                    <MapPin className="w-4 h-4" />
+                    <MapPin className="w-4 h-4  mr-2 md:mr-0" />
                     {job.location}
                   </span>
                 )}
@@ -142,12 +193,27 @@ function ExperienceCard({
                       isRelated ? "text-emerald-500" : "text-gray-400"
                     )}
                   />
-                  <span>{desc}</span>
+                  <span>
+                    <HighlightedText text={desc} skills={allSkills} />
+                  </span>
                 </li>
               ))}
             </ul>
           )}
         </CardContent>
+        <CardFooter>
+          {job.website && (
+            <ActionButton
+              href={job.website}
+              label={job.websiteName || "Website"}
+              icon={<Globe />}
+              variant="link"
+              size="sm"
+              className="h-auto p-0 gap-2 text-muted-foreground hover:text-foreground"
+              external
+            />
+          )}
+        </CardFooter>
       </Card>
     </motion.div>
   );
@@ -155,6 +221,15 @@ function ExperienceCard({
 
 export function WorkExperience({ profile }: Props) {
   const [activeTab, setActiveTab] = useState("related");
+
+  const allSkills = useMemo(() => {
+    const skills = new Set<string>();
+    profile.skillsFrontend?.forEach((s) => skills.add(s));
+    profile.skillsBackend?.forEach((s) => skills.add(s));
+    profile.skillsDevOps?.forEach((s) => skills.add(s));
+    profile.skillsOther?.forEach((s) => skills.add(s));
+    return Array.from(skills);
+  }, [profile]);
 
   if (!profile.workExperience || profile.workExperience.length === 0) {
     return null;
@@ -179,7 +254,7 @@ export function WorkExperience({ profile }: Props) {
   return (
     <section id="experience" className="mb-20 scroll-mt-24">
       <div className="flex items-center gap-3 mb-8">
-        <div className="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+        <div className="w-12 h-12 rounded-xl aspect-square bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
           <Briefcase className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
         </div>
         <h2 className="text-3xl font-bold">Experience</h2>
@@ -187,8 +262,8 @@ export function WorkExperience({ profile }: Props) {
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-3 mb-8">
-          <TabsTrigger value="related">Related to Role</TabsTrigger>
-          <TabsTrigger value="all">All History</TabsTrigger>
+          <TabsTrigger value="related">Related</TabsTrigger>
+          <TabsTrigger value="all">Full History</TabsTrigger>
           <TabsTrigger value="notrelated">Not Related</TabsTrigger>
         </TabsList>
         <div className="space-y-6">
@@ -200,6 +275,7 @@ export function WorkExperience({ profile }: Props) {
                     key={`${job.companyName}-${job.jobTitle}-${index}`}
                     layoutId={`${job.companyName}-${job.jobTitle}`}
                     job={job}
+                    allSkills={allSkills}
                   />
                 ))
               ) : (

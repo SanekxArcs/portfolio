@@ -9,7 +9,6 @@ import { Projects } from "@/components/cv/main/projects";
 import { Cta } from "@/components/cv/main/cta";
 import Link from "next/link";
 import { Rodo } from "./main/rodo";
-
 export async function CvPage() {
   let profile: CvProfile | null = null;
 

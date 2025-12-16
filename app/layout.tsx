@@ -6,6 +6,7 @@ import { SanityLive } from "@/sanity/lib/live";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Footer } from "@/components/footer";
 import Navbar from "@/components/navbar";
+import LightRays from "@/components/bg";
 
 const notoSans = Noto_Sans({ variable: "--font-sans" });
 
@@ -63,7 +64,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={notoSans.variable} suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-emerald-950/5`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-emerald-950/5`}
       >
         <ThemeProvider
           attribute="class"
@@ -72,7 +73,23 @@ export default function RootLayout({
           disableTransitionOnChange={true}
         >
           <Navbar />
-          <main className="min-h-screen">{children}</main>
+          <main className="min-h-screen relative">
+            <div className="absolute h-screen top-0 -z-10 inset-x-0 overflow-hidden pointer-events-none mask-to-bottom">
+          <LightRays
+            raysOrigin="top-center"
+            raysColor="#00ffff"
+            raysSpeed={1.5}
+            lightSpread={0.8}
+            rayLength={1.2}
+            followMouse={true}
+            mouseInfluence={0.1}
+            noiseAmount={0.1}
+            distortion={0.05}
+            className="custom-rays"
+          />
+        </div>
+            {children}
+          </main>
           <Footer />
           <Toaster />
           <SanityLive />

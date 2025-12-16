@@ -10,14 +10,34 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import type { CvProfile } from "@/components/cv/types";
+import { motion, Variants } from "motion/react";
 
 type Props = {
   profile: CvProfile;
 };
 
+const containerVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
+
 export function Skills({ profile }: Props) {
   return (
-    <section id="skills" className="mb-20 scroll-mt-24">
+    <motion.section
+      id="skills"
+      className="mb-20 scroll-mt-24"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={containerVariants}
+    >
       <div className="flex items-center gap-3 mb-8">
         <div className="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
           <Code className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
@@ -121,6 +141,6 @@ export function Skills({ profile }: Props) {
           </Card>
         )}
       </div>
-    </section>
+    </motion.section>
   );
 }
