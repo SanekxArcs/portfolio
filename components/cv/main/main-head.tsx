@@ -68,7 +68,7 @@ export function MainHead({ profile }: Props) {
           <div className="inline-block mb-4">
             <Badge
               variant="secondary"
-              className="text-sm p-2.5 font-medium animate-pulse bg-emerald-950/80"
+              className="text-sm p-2.5 font-medium animate-pulse dark:bg-emerald-950/80 bg-emerald-200/80"
             >
               <BadgeCheck className="text-emerald-600 mr-1" />
               {profile.contacts?.workAvailability &&
@@ -252,7 +252,7 @@ export function MainHead({ profile }: Props) {
           </div>
         </div>
 
-        <div className="relative group w-1/3 m-auto lg:mx-0">
+        <div className="relative hidden md:block group w-1/3 m-auto lg:mx-0">
           <div className="w-64 h-64 rounded-2xl bg-linear-to-br from-secondary to-muted dark:from-primary dark:to-secondary overflow-hidden shadow-2xl transform group-hover:scale-105 group-hover:rotate-3 transition-all duration-500 relative flex justify-center items-center">
             {profile.profilePhotoUrl ? (
               <Image

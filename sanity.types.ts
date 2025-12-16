@@ -23,6 +23,16 @@ export type CvProfile = {
   role?: string;
   description?: string;
   about?: string;
+  logo?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+    };
+    media?: unknown;
+    _type: "file";
+  };
   profilePhoto?: {
     asset?: {
       _ref: string;

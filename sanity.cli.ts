@@ -9,7 +9,6 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
 
 export default defineCliConfig({
   api: { projectId, dataset },
-  storageLocation: './.sanity',
   typegen: {
     path: "./src/**/*.{ts,tsx,js,jsx}", // glob pattern to your typescript files. Can also be an array of paths
     schema: "schema.json", // path to your schema file, generated with 'sanity schema extract' command

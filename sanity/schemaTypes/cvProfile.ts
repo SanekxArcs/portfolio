@@ -31,6 +31,11 @@ export const cvProfile = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "logo",
+      title: "Logo",
+      type: "file",
+    }),
+    defineField({
       name: "profilePhoto",
       title: "Profile photo",
       type: "image",

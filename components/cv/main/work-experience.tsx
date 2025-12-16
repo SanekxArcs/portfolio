@@ -1,25 +1,23 @@
 "use client";
 
-import { Briefcase, MapPin, Calendar, ChevronRight, Building2, ArrowRight } from "lucide-react";
+import {
+  Briefcase,
+  MapPin,
+  Calendar,
+  ChevronRight,
+  Building2,
+  ArrowRight,
+} from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { CvProfile, CvWorkExperience } from "@/components/cv/types";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 type Props = {
   profile: CvProfile;
-};
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
 };
 
 const itemVariants = {
@@ -31,13 +29,34 @@ const itemVariants = {
       duration: 0.4,
     },
   },
+  exit: {
+    opacity: 0,
+    y: -20,
+    transition: {
+      duration: 0.3,
+    },
+  },
 };
 
-function ExperienceCard({ job }: { job: CvWorkExperience }) {
+function ExperienceCard({
+  job,
+  layoutId,
+}: {
+  job: CvWorkExperience;
+  layoutId: string;
+}) {
   const isRelated = job.isRelated;
 
   return (
-    <motion.div variants={itemVariants}>
+    <motion.div
+      key={layoutId}
+      layoutId={layoutId}
+      variants={itemVariants}
+      initial="hidden"
+      whileInView="visible"
+      exit="exit"
+      viewport={{ once: true, margin: "0px 0px -100px 0px" }}
+    >
       <Card
         className={cn(
           "overflow-hidden border-2 transition-all hover:shadow-lg group",
@@ -135,6 +154,8 @@ function ExperienceCard({ job }: { job: CvWorkExperience }) {
 }
 
 export function WorkExperience({ profile }: Props) {
+  const [activeTab, setActiveTab] = useState("related");
+
   if (!profile.workExperience || profile.workExperience.length === 0) {
     return null;
   }
@@ -142,6 +163,18 @@ export function WorkExperience({ profile }: Props) {
   const relatedExperience = profile.workExperience.filter(
     (job) => job.isRelated
   );
+
+  const notRelatedExperience = profile.workExperience.filter(
+    (job) => !job.isRelated
+  );
+
+  // Get cards to display based on active tab
+  const displayedCards =
+    activeTab === "related"
+      ? relatedExperience
+      : activeTab === "notrelated"
+        ? notRelatedExperience
+        : profile.workExperience;
 
   return (
     <section id="experience" className="mb-20 scroll-mt-24">
@@ -152,51 +185,32 @@ export function WorkExperience({ profile }: Props) {
         <h2 className="text-3xl font-bold">Experience</h2>
       </div>
 
-      <Tabs defaultValue="related" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 mb-8">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <TabsList className="grid w-full grid-cols-3 mb-8">
           <TabsTrigger value="related">Related to Role</TabsTrigger>
           <TabsTrigger value="all">All History</TabsTrigger>
+          <TabsTrigger value="notrelated">Not Related</TabsTrigger>
         </TabsList>
-        <AnimatePresence mode="wait">
-          <TabsContent value="related" className="space-y-6">
-            <motion.div
-              key="related"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              className="space-y-6"
-            >
-              {relatedExperience.length > 0 ? (
-                relatedExperience.map((job, index) => (
-                  <ExperienceCard key={index} job={job} />
+        <div className="space-y-6">
+          <div key={activeTab} className="space-y-6">
+            <AnimatePresence mode="wait">
+              {displayedCards.length > 0 ? (
+                displayedCards.map((job, index) => (
+                  <ExperienceCard
+                    key={`${job.companyName}-${job.jobTitle}-${index}`}
+                    layoutId={`${job.companyName}-${job.jobTitle}`}
+                    job={job}
+                  />
                 ))
               ) : (
-                <motion.div
-                  variants={itemVariants}
-                  className="text-center text-muted-foreground py-8"
-                >
+                <motion.div className="text-center text-muted-foreground py-8">
                   No specific related experience marked. Check &quot;All
                   History&quot; to see full background.
                 </motion.div>
               )}
-            </motion.div>
-          </TabsContent>
-          <TabsContent value="all" className="space-y-6">
-            <motion.div
-              key="all"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              className="space-y-6"
-            >
-              {profile.workExperience.map((job, index) => (
-                <ExperienceCard key={index} job={job} />
-              ))}
-            </motion.div>
-          </TabsContent>
-        </AnimatePresence>
+            </AnimatePresence>
+          </div>
+        </div>
       </Tabs>
     </section>
   );
