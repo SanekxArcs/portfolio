@@ -1,0 +1,630 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Full name"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "role",
+        "type": "string",
+        "title": "Role / Position"
+      },
+      {
+        "rows": 5,
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "rows": 5,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "about",
+        "type": "text"
+      },
+      {
+        "name": "logo",
+        "type": "file"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "profilePhoto",
+        "type": "image",
+        "title": "Profile photo"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Optional link to an online CV (e.g. site, Google Docs).",
+        "name": "cvUrl",
+        "type": "url",
+        "title": "CV link (URL)"
+      },
+      {
+        "options": {
+          "accept": "application/pdf"
+        },
+        "description": "Optional uploaded CV PDF file.",
+        "name": "cvFile",
+        "type": "file",
+        "title": "CV file (PDF)"
+      },
+      {
+        "fields": [
+          {
+            "name": "email",
+            "type": "string"
+          },
+          {
+            "name": "phoneNumber",
+            "type": "string",
+            "title": "Phone number"
+          },
+          {
+            "name": "location",
+            "type": "string"
+          },
+          {
+            "name": "relocationReady",
+            "type": "boolean",
+            "title": "Relocation ready"
+          },
+          {
+            "options": {
+              "list": [
+                "Full-time",
+                "Part-time",
+                "B2B",
+                "Contract",
+                "Temporary",
+                "Internship"
+              ]
+            },
+            "of": [
+              {
+                "type": "string"
+              }
+            ],
+            "name": "typeOfContract",
+            "type": "array",
+            "title": "Type of contract"
+          },
+          {
+            "options": {
+              "list": [
+                "Immediately",
+                "Within 2 weeks",
+                "Within 1 month",
+                "Not available"
+              ]
+            },
+            "of": [
+              {
+                "type": "string"
+              }
+            ],
+            "name": "workAvailability",
+            "type": "array",
+            "title": "Work availability"
+          }
+        ],
+        "name": "contacts",
+        "type": "object"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      },
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "link",
+                "type": "url",
+                "title": "URL"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "name",
+                "type": "string",
+                "title": "Label"
+              },
+              {
+                "name": "title",
+                "type": "string",
+                "title": "Tooltip"
+              },
+              {
+                "description": "Example: Github, Linkedin, Send, MessagesSquare, Facebook",
+                "name": "iconName",
+                "type": "string",
+                "title": "Icon name (lucide)"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "links",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "language",
+                "type": "string"
+              },
+              {
+                "name": "level",
+                "type": "string"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "languages",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "softSkills",
+        "type": "array",
+        "title": "Soft skills"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "skillsFrontend",
+        "type": "array",
+        "title": "Frontend Skills"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "skillsBackend",
+        "type": "array",
+        "title": "Backend Skills"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "skillsDevOps",
+        "type": "array",
+        "title": "DevOps & Tools Skills"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "skillsOther",
+        "type": "array",
+        "title": "Other Technical Skills"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "interests",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "institution",
+                "type": "string"
+              },
+              {
+                "name": "specialization",
+                "type": "string"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "education",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "initialValue": false,
+                "name": "petProject",
+                "type": "boolean",
+                "title": "Pet Project?"
+              },
+              {
+                "initialValue": false,
+                "name": "isPinned",
+                "type": "boolean",
+                "title": "Pinned?"
+              },
+              {
+                "initialValue": false,
+                "name": "nda",
+                "type": "boolean",
+                "title": "NDA?"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "rows": 4,
+                "name": "description",
+                "type": "text"
+              },
+              {
+                "of": [
+                  {
+                    "options": {
+                      "hotspot": true
+                    },
+                    "type": "image"
+                  }
+                ],
+                "name": "image",
+                "type": "array"
+              },
+              {
+                "of": [
+                  {
+                    "type": "string"
+                  }
+                ],
+                "name": "features",
+                "type": "array"
+              },
+              {
+                "of": [
+                  {
+                    "type": "string"
+                  }
+                ],
+                "name": "technologies",
+                "type": "array"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "url",
+                "type": "url",
+                "title": "URL"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "urlToCode",
+                "type": "url",
+                "title": "URL to Code"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "projects",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "name": "platform",
+                "type": "string"
+              },
+              {
+                "name": "date",
+                "type": "string"
+              },
+              {
+                "of": [
+                  {
+                    "type": "string"
+                  }
+                ],
+                "name": "badges",
+                "type": "array"
+              },
+              {
+                "initialValue": true,
+                "name": "visibleOnCV",
+                "type": "boolean",
+                "title": "Visible on CV"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "courses",
+        "type": "array",
+        "title": "Courses / Certificates"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "jobTitle",
+                "type": "string",
+                "title": "Job title"
+              },
+              {
+                "name": "jobTitle2",
+                "type": "string",
+                "title": "Job title (second)"
+              },
+              {
+                "name": "companyName",
+                "type": "string",
+                "title": "Company"
+              },
+              {
+                "name": "location",
+                "type": "string"
+              },
+              {
+                "name": "duration",
+                "type": "string"
+              },
+              {
+                "name": "type",
+                "type": "string"
+              },
+              {
+                "of": [
+                  {
+                    "type": "string"
+                  }
+                ],
+                "name": "description",
+                "type": "array"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "website",
+                "type": "url"
+              },
+              {
+                "name": "websiteName",
+                "type": "string",
+                "title": "Website label"
+              },
+              {
+                "initialValue": false,
+                "name": "isRelated",
+                "type": "boolean",
+                "title": "Related to role?"
+              },
+              {
+                "initialValue": false,
+                "name": "hideFromCV",
+                "type": "boolean",
+                "title": "Hide"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "workExperience",
+        "type": "array",
+        "title": "Work experience"
+      }
+    ],
+    "name": "cvProfile",
+    "type": "document",
+    "title": "CV Profile"
+  }
+]

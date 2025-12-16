@@ -6,9 +6,13 @@ import { defineCliConfig } from 'sanity/cli'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
+const appId = process.env.NEXT_PUBLIC_SANITY_APP_ID
 
 export default defineCliConfig({
   api: { projectId, dataset },
+  deployment: {
+    appId: appId,
+  },
   typegen: {
     path: "./src/**/*.{ts,tsx,js,jsx}", // glob pattern to your typescript files. Can also be an array of paths
     schema: "schema.json", // path to your schema file, generated with 'sanity schema extract' command
