@@ -1,4 +1,6 @@
-export const cvProfileQuery = /* groq */ `
+import { defineQuery } from "next-sanity";
+
+export const CV_PROFILE_DATA = defineQuery(`
 *[_type == "cvProfile"][0]{
   _id,
   name,
@@ -31,7 +33,10 @@ export const cvProfileQuery = /* groq */ `
   skillsBackend,
   skillsDevOps,
   skillsOther,
-  softSkills,
+  softSkills[]{
+    skill,
+    description
+  },
   interests,
   education[]{
     institution,
@@ -70,4 +75,4 @@ export const cvProfileQuery = /* groq */ `
     hideFromCV
   }
 }
-`;
+`);

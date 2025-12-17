@@ -1,5 +1,7 @@
-import { cvProfileQuery } from "@/sanity/queries/cvProfile";
-import type { CvProfile } from "@/components/cv/types";
+import {client} from '@/sanity/lib/client'
+import { CV_PROFILE_DATA } from "@/sanity/queries/queries";
+import {CV_PROFILE_DATAResult} from '@/sanity.types'
+
 import { MainHead } from "@/components/cv/main/main-head";
 import { About } from "@/components/cv/main/about";
 import { WorkExperience } from "@/components/cv/main/work-experience";
@@ -9,13 +11,15 @@ import { Projects } from "@/components/cv/main/projects";
 import { Cta } from "@/components/cv/main/cta";
 import Link from "next/link";
 import { Rodo } from "./main/rodo";
+import { toast } from "sonner";
+
 export async function CvPage() {
-  let profile: CvProfile | null = null;
+  let profile: CV_PROFILE_DATAResult | null = null
 
   try {
-    const { client } = await import("@/sanity/lib/client");
-    profile = await client.fetch<CvProfile | null>(cvProfileQuery);
+    profile = await client.fetch<CV_PROFILE_DATAResult>(CV_PROFILE_DATA)
   } catch (error) {
+    toast.error("Failed to load CV profile data.");
     console.error("Failed to load CV profile data", error);
   }
 
@@ -40,7 +44,7 @@ export async function CvPage() {
 
   return (
     <>
-      <div className="container mx-auto px-4 py-8 max-w-5xl cursor-default">
+      <div className="container mx-auto max-w-5xl cursor-default px-4 py-8">
         <MainHead profile={profile} />
         <About profile={profile} />
         <WorkExperience profile={profile} />
@@ -51,5 +55,5 @@ export async function CvPage() {
       </div>
       <Cta profile={profile} />
     </>
-  );
+  )
 }

@@ -23,6 +23,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import { useState, useMemo } from "react";
 import { ActionButton } from "../atoms/action-button";
+import { useUIStore } from "@/hooks/use-ui-store";
 
 type Props = {
   profile: CvProfile;
@@ -96,6 +97,7 @@ function ExperienceCard({
   layoutId: string;
   allSkills: string[];
 }) {
+  const { isReducedMotion } = useUIStore();
   const isRelated = job.isRelated;
 
   return (
@@ -103,7 +105,7 @@ function ExperienceCard({
       key={layoutId}
       layoutId={layoutId}
       variants={itemVariants}
-      initial="hidden"
+      initial={isReducedMotion ? "visible" : "hidden"}
       whileInView="visible"
       exit="exit"
       viewport={{ once: true, margin: "0px 0px -100px 0px" }}

@@ -132,6 +132,12 @@ export const cvProfile = defineType({
                 "Example: Github, Linkedin, Send, MessagesSquare, Facebook",
             }),
           ],
+          preview: {
+            select: {
+              title: "title",
+              subtitle: "link",
+            },
+          },
         },
       ],
     }),
@@ -151,6 +157,12 @@ export const cvProfile = defineType({
             }),
             defineField({ name: "level", title: "Level", type: "string" }),
           ],
+          preview: {
+            select: {
+              title: "language",
+              subtitle: "level",
+            },
+          },
         },
       ],
     }),
@@ -158,7 +170,30 @@ export const cvProfile = defineType({
       name: "softSkills",
       title: "Soft skills",
       type: "array",
-      of: [{ type: "string" }],
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({
+              name: "skill",
+              title: "Skill",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: "description",
+              title: "Description",
+              type: "string",
+            }),
+          ],
+          preview: {
+            select: {
+              title: "skill",
+              subtitle: "description",
+            },
+          },
+        },
+      ],
     }),
     defineField({
       name: "skillsFrontend",
@@ -209,6 +244,12 @@ export const cvProfile = defineType({
               type: "string",
             }),
           ],
+          preview: {
+            select: {
+              title: "institution",
+              subtitle: "specialization",
+            },
+          },
         },
       ],
     }),
@@ -269,8 +310,17 @@ export const cvProfile = defineType({
               of: [{ type: "string" }],
             }),
             defineField({ name: "url", title: "URL", type: "url" }),
-            defineField({ name: "urlToCode", title: "URL to Code", type: "url" }),
+            defineField({
+              name: "urlToCode",
+              title: "URL to Code",
+              type: "url",
+            }),
           ],
+          preview: {
+            select:{
+              title: "title",
+              subtitle: "description", 
+            }},
         },
       ],
     }),
@@ -307,6 +357,13 @@ export const cvProfile = defineType({
               initialValue: true,
             }),
           ],
+          preview: {
+            select: {
+              title: "title",
+              subtitle: "platform",
+              data: "date",
+            },
+          },
         },
       ],
     }),
@@ -370,6 +427,13 @@ export const cvProfile = defineType({
               initialValue: false,
             }),
           ],
+          preview: {
+            select: {
+              title: "jobTitle",
+              subtitle: "companyName",
+              description: "duration",
+            },
+          },
         },
       ],
     }),

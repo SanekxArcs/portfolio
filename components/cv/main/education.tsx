@@ -5,6 +5,7 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import type { CvProfile } from "@/components/cv/types";
 import { motion, Variants } from "motion/react";
+import { useUIStore } from "@/hooks/use-ui-store";
 
 type Props = {
   profile: CvProfile;
@@ -23,6 +24,8 @@ const containerVariants: Variants = {
 };
 
 export function Education({ profile }: Props) {
+  const { isReducedMotion } = useUIStore();
+
   if (
     (!profile.education || profile.education.length === 0) &&
     (!profile.courses || profile.courses.length === 0)
@@ -34,7 +37,7 @@ export function Education({ profile }: Props) {
     <motion.section
       id="education"
       className="mb-20 scroll-mt-24"
-      initial="hidden"
+      initial={isReducedMotion ? "visible" : "hidden"}
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={containerVariants}
@@ -82,6 +85,15 @@ export function Education({ profile }: Props) {
                       <p className="text-sm text-muted-foreground mt-1">
                         {cert.platform}
                       </p>
+                    )}
+                    {cert.badges && cert.badges.length > 0 && (
+                      <div className="flex flex-wrap gap-1 mt-2">
+                        {cert.badges.map((badge, i) => (
+                          <Badge key={i} variant="outline" className="text-xs">
+                            {badge}
+                          </Badge>
+                        ))}
+                      </div>
                     )}
                   </div>
                 </div>

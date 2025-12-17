@@ -36,7 +36,7 @@ export function ActionButton({
       {React.cloneElement(
         icon as React.ReactElement<React.SVGProps<SVGSVGElement>>,
         {
-          className: "size-4 group-hover:scale-110 transition-all duration-300",
+          className: "size-4 group-hover/button:scale-110 transition-all duration-300",
         }
       )}
       {spoiler ? (
@@ -55,7 +55,7 @@ export function ActionButton({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={cn(`group cursor-pointer`, classLink)}
+        className={cn(`group/button cursor-pointer`, classLink)}
         download={download}
         {...props}
       >
@@ -63,7 +63,7 @@ export function ActionButton({
           variant={variant}
           size={size}
           className={cn(
-            "group-active:scale-90 transition-all duration-200 cursor-pointer",
+            "group-active/button:scale-90 transition-all duration-200 cursor-pointer",
             className
           )}
         >
@@ -76,7 +76,7 @@ export function ActionButton({
   return (
     <Link
       href={href}
-      className={cn(`group cursor-pointer`, classLink)}
+      className={cn(`group/button cursor-pointer`, classLink)}
       download={download}
       {...props}
     >
@@ -84,7 +84,7 @@ export function ActionButton({
         variant={variant}
         size={size}
         className={cn(
-          "group-active:scale-90 transition-all duration-200 cursor-pointer",
+          "group-active/button:scale-90 transition-all duration-200 cursor-pointer",
           className
         )}
       >

@@ -3,8 +3,14 @@
 import { User } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import type { CvProfile } from "@/components/cv/types";
 import { motion, Variants } from "motion/react";
+import { useUIStore } from "@/hooks/use-ui-store";
 
 type Props = {
   profile: CvProfile;
@@ -24,11 +30,13 @@ const containerVariants: Variants = {
 };
 
 export function About({ profile }: Props) {
+  const { isReducedMotion } = useUIStore();
+
   return (
     <motion.section
       id="about"
       className="mb-20 scroll-mt-24"
-      initial="hidden"
+      initial={isReducedMotion ? "visible" : "hidden"}
       animate="visible"
       variants={containerVariants}
     >
@@ -49,14 +57,22 @@ export function About({ profile }: Props) {
                 Soft Skills:
               </div>
               <div className="flex flex-wrap flex-col md:flex-row gap-2">
-                {profile.softSkills.map((skill, i) => (
-                  <Badge
-                    key={i}
-                    variant="outline"
-                    className="hover:bg-emerald-100 hover:text-emerald-800 dark:hover:bg-emerald-900 dark:hover:text-emerald-100 cursor-default transition-all active:hover focus:text-sm hover:text-sm"
-                  >
-                    {skill}
-                  </Badge>
+                {profile.softSkills.map((item, i) => (
+                  <Tooltip key={i}>
+                    <TooltipTrigger>
+                      <Badge
+                        variant="outline"
+                        className="hover:bg-emerald-100 hover:text-emerald-800 dark:hover:bg-emerald-900 dark:hover:text-emerald-100 cursor-default transition-all active:hover focus:text-sm hover:text-sm"
+                      >
+                        {item.skill}
+                      </Badge>
+                    </TooltipTrigger>
+                    {item.description && (
+                      <TooltipContent>
+                        <p>{item.description}</p>
+                      </TooltipContent>
+                    )}
+                  </Tooltip>
                 ))}
               </div>
             </div>

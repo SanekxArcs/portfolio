@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import type { CvProfile } from "@/components/cv/types";
 import { motion, Variants } from "motion/react";
+import { useUIStore } from "@/hooks/use-ui-store";
 
 type Props = {
   profile: CvProfile;
@@ -29,11 +30,13 @@ const containerVariants: Variants = {
 };
 
 export function Skills({ profile }: Props) {
+  const { isReducedMotion } = useUIStore();
+
   return (
     <motion.section
       id="skills"
       className="mb-20 scroll-mt-24"
-      initial="hidden"
+      initial={isReducedMotion ? "visible" : "hidden"}
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={containerVariants}

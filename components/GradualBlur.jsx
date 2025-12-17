@@ -1,5 +1,7 @@
+'use client';
 import React, { useEffect, useRef, useState, useMemo } from 'react';
 import * as math from 'mathjs';
+import { useUIStore } from '@/hooks/use-ui-store';
 
 const DEFAULT_CONFIG = {
   position: 'bottom',
@@ -102,6 +104,7 @@ const useIntersectionObserver = (ref, shouldObserve = false) => {
 };
 
 const GradualBlur = props => {
+  const isReducedMotion = useUIStore((state) => state.isReducedMotion);
   const containerRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -200,6 +203,56 @@ const GradualBlur = props => {
       return () => clearTimeout(t);
     }
   }, [isVisible, animated, onAnimationComplete, duration]);
+
+  if (isReducedMotion) {
+    const { position = 'bottom', height = '6rem', zIndex = 1000, className = '', style = {} } = props;
+    
+    const simpleStyle = {
+        position: 'absolute',
+        zIndex,
+        pointerEvents: 'none',
+        ...style
+    };
+
+    let maskImage = '';
+    
+    if (position === 'top') {
+        simpleStyle.top = 0;
+        simpleStyle.left = 0;
+        simpleStyle.right = 0;
+        simpleStyle.height = height;
+        maskImage = 'linear-gradient(to bottom, black, transparent)';
+    } else if (position === 'bottom') {
+        simpleStyle.bottom = 0;
+        simpleStyle.left = 0;
+        simpleStyle.right = 0;
+        simpleStyle.height = height;
+        maskImage = 'linear-gradient(to top, black, transparent)';
+    } else if (position === 'left') {
+        simpleStyle.left = 0;
+        simpleStyle.top = 0;
+        simpleStyle.bottom = 0;
+        simpleStyle.width = height;
+        maskImage = 'linear-gradient(to right, black, transparent)';
+    } else if (position === 'right') {
+        simpleStyle.right = 0;
+        simpleStyle.top = 0;
+        simpleStyle.bottom = 0;
+        simpleStyle.width = height;
+        maskImage = 'linear-gradient(to left, black, transparent)';
+    }
+
+    return (
+        <div 
+            className={`backdrop-blur-md ${className}`}
+            style={{
+                ...simpleStyle,
+                maskImage,
+                WebkitMaskImage: maskImage
+            }}
+        />
+    );
+  }
 
   return (
     <div

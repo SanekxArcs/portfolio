@@ -1,89 +1,90 @@
 export type CvContacts = {
-  email?: string;
-  phoneNumber?: string;
-  location?: string;
-  relocationReady?: boolean;
-  typeOfContract?: string[];
-  workAvailability?: string[];
-};
+  email?: string | null
+  phoneNumber?: string | null
+  location?: string | null
+  relocationReady?: boolean | null
+  typeOfContract?: string[] | null
+  workAvailability?: string[] | null
+}
 
 export type CvLink = {
-  link: string;
-  name: string;
-  title?: string;
-  iconName?: string;
-};
+  link: string | null
+  name: string | null
+  title?: string | null
+  iconName?: string | null
+}
 
 export type CvLanguage = {
-  language: string;
-  level?: string;
-};
+  language: string | null
+  level?: string | null
+}
 
 export type CvEducationItem = {
-  institution?: string;
-  specialization?: string;
-};
+  institution?: string | null
+  specialization?: string | null
+}
 
 export type CvProject = {
-  title: string;
-  description?: string;
-  features?: string[];
-  technologies?: string[];
-  url?: string;
-  urlToCode?: string;
-  imageUrls?: string[];
-  petProject?: boolean;
-  isPinned?: boolean;
-  nda?: boolean;
-};
+  title: string | null
+  description?: string | null
+  features?: string[] | null
+  technologies?: string[] | null
+  url?: string | null
+  urlToCode?: string | null
+  imageUrls?: (string | null)[] | null
+  petProject?: boolean | null
+  isPinned?: boolean | null
+  nda?: boolean | null
+}
 
 export type CvCourse = {
-  title: string;
-  platform?: string;
-  date?: string;
-  badges?: string[];
-  visibleOnCV?: boolean;
-};
+  title: string | null
+  platform?: string | null
+  date?: string | null
+  badges?: string[] | null
+  visibleOnCV?: boolean | null
+}
 
 export type CvWorkExperience = {
-  jobTitle: string;
-  jobTitle2?: string;
-  companyName?: string;
-  location?: string;
-  duration?: string;
-  type?: string;
-  description?: string[];
-  website?: string;
-  websiteName?: string;
-  print?: boolean;
-  isRelated?: boolean;
-};
+  jobTitle: string | null
+  jobTitle2?: string | null
+  companyName?: string | null
+  location?: string | null
+  duration?: string | null
+  type?: string | null
+  description?: string[] | null
+  website?: string | null
+  websiteName?: string | null
+  print?: boolean | null
+  isRelated?: boolean | null
+}
 
 export type CvProfile = {
-  _id: string;
-  name: string;
-  role: string;
-  about: string;
-  description?: string;
-  profilePhotoUrl?: string;
-  vcardQrUrl?: string;
-  vcardUrl?: string;
-  cvUrl?: string;
-  cvFileUrl?: string;
-  contacts?: CvContacts;
-  links: CvLink[];
-  languages?: CvLanguage[];
-  skillsFrontend?: string[];
-  skillsBackend?: string[];
-  skillsDevOps?: string[];
-  skillsOther?: string[];
-  softSkills?: string[];
-  interests?: string[];
-  education?: CvEducationItem[];
-  petProjects?: CvProject[];
-  commercialProjects?: CvProject[];
-  projects?: CvProject[];
-  courses?: CvCourse[];
+  _id: string
+  name: string | null
+  role: string | null
+  about: string | null
+  description?: string | null
+  logoUrl?: string | null
+  profilePhotoUrl?: string | null
+  vcardQrUrl?: string | null
+  vcardUrl?: string | null
+  cvUrl?: string | null
+  cvFileUrl?: string | null
+  contacts?: CvContacts | null
+  links: CvLink[] | null
+  languages?: CvLanguage[] | null
+  skillsFrontend?: string[] | null
+  skillsBackend?: string[] | null
+  skillsDevOps?: string[] | null
+  skillsOther?: string[] | null
+  softSkills?: {skill: string | null; description?: string | null}[] | null
+  interests?: string[] | null
+  education?: CvEducationItem[] | null
+  petProjects?: CvProject[] | null
+  commercialProjects?: CvProject[] | null
+  projects?: CvProject[] | null
+  courses?: CvCourse[] | null
 
-  workExperience?: CvWorkExperience[];
-};
+  workExperience?: CvWorkExperience[] | null
+}

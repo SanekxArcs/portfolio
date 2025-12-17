@@ -1,6 +1,7 @@
 'use client'
 import { useRef, useEffect, useState } from 'react';
 import { Renderer, Program, Triangle, Mesh } from 'ogl';
+import { useUIStore } from '@/hooks/use-ui-store';
 
 export type RaysOrigin =
   | 'top-center'
@@ -97,7 +98,9 @@ const LightRays: React.FC<LightRaysProps> = ({
   distortion = 0.0,
   className = ''
 }) => {
+  const isReducedMotion = useUIStore((state) => state.isReducedMotion);
   const containerRef = useRef<HTMLDivElement>(null);
+
   const uniformsRef = useRef<Uniforms | null>(null);
   const rendererRef = useRef<Renderer | null>(null);
   const mouseRef = useRef({ x: 0.5, y: 0.5 });
@@ -443,6 +446,8 @@ void main() {
       return () => window.removeEventListener('mousemove', handleMouseMove);
     }
   }, [followMouse]);
+
+  if (isReducedMotion) return null;
 
   return (
     <div

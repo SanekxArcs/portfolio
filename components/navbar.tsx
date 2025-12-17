@@ -5,9 +5,19 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
-import { Menu, X, User, Briefcase, Cpu, FolderGit2 } from "lucide-react";
+import {
+  Menu,
+  X,
+  User,
+  Briefcase,
+  Cpu,
+  FolderGit2,
+  Zap,
+  ZapOff,
+} from "lucide-react";
 import GradualBlur from "./GradualBlur";
 import { motion, AnimatePresence } from "motion/react";
+import { useUIStore } from "@/hooks/use-ui-store";
 
 const navLinks = [
   { href: "#about", label: "About", icon: User },
@@ -19,6 +29,7 @@ const navLinks = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const { isReducedMotion, toggleReducedMotion } = useUIStore();
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -66,11 +77,35 @@ export function Navbar() {
             </Link>
           ))}
           <div className="h-4 w-px bg-border" />
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleReducedMotion}
+            title={isReducedMotion ? "Enable animations" : "Reduce motion"}
+          >
+            {isReducedMotion ? (
+              <ZapOff className="w-4 h-4" />
+            ) : (
+              <Zap className="w-4 h-4" />
+            )}
+          </Button>
           <ModeToggle />
         </nav>
 
         {/* Mobile Menu Toggle */}
-        <div className="flex items-center gap-4 md:hidden">
+        <div className="flex items-center gap-2 md:hidden">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleReducedMotion}
+            title={isReducedMotion ? "Enable animations" : "Reduce motion"}
+          >
+            {isReducedMotion ? (
+              <ZapOff className="w-5 h-5" />
+            ) : (
+              <Zap className="w-5 h-5" />
+            )}
+          </Button>
           <ModeToggle />
           <Button
             variant="outline"

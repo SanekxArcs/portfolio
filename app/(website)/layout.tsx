@@ -7,6 +7,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Footer } from "@/components/footer";
 import Navbar from "@/components/navbar";
 import LightRays from "@/components/bg";
+import { ReducedMotionProvider } from "@/components/reduced-motion-provider";
+import { WelcomeToast } from "@/components/welcome-toast";
 
 const notoSans = Noto_Sans({ variable: "--font-sans" });
 
@@ -26,8 +28,6 @@ export const viewport: Viewport = {
   userScalable: false,
   colorScheme: "dark",
   themeColor: "black",
-  // Also supported but less commonly used
-  // interactiveWidget: 'resizes-visual',
 };
 
 export const metadata: Metadata = {
@@ -66,34 +66,37 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-emerald-950/5`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange={true}
-        >
-          <Navbar />
-          <main className="min-h-screen relative">
-            <div className="absolute h-screen top-0 -z-10 inset-x-0 overflow-hidden pointer-events-none mask-to-bottom">
-          <LightRays
-            raysOrigin="top-center"
-            raysColor="#00ffff"
-            raysSpeed={1.5}
-            lightSpread={0.8}
-            rayLength={1.2}
-            followMouse={true}
-            mouseInfluence={0.1}
-            noiseAmount={0.1}
-            distortion={0.05}
-            className="custom-rays"
-          />
-        </div>
-            {children}
-          </main>
-          <Footer />
-          <Toaster />
-          <SanityLive />
-        </ThemeProvider>
+        <ReducedMotionProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange={true}
+          >
+            <Navbar />
+            <main className="min-h-screen relative">
+              <div className="absolute h-screen top-0 -z-10 inset-x-0 overflow-hidden pointer-events-none mask-to-bottom">
+                <LightRays
+                  raysOrigin="top-center"
+                  raysColor="#00ffff"
+                  raysSpeed={1.5}
+                  lightSpread={0.8}
+                  rayLength={1.2}
+                  followMouse={true}
+                  mouseInfluence={0.1}
+                  noiseAmount={0.1}
+                  distortion={0.05}
+                  className="custom-rays"
+                />
+              </div>
+              {children}
+            </main>
+            <Footer />
+            <WelcomeToast />
+            <Toaster />
+            <SanityLive />
+          </ThemeProvider>
+        </ReducedMotionProvider>
       </body>
     </html>
   );

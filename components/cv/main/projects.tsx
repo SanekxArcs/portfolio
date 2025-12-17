@@ -19,6 +19,7 @@ import { ActionButton } from "../atoms/action-button";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { motion, Variants } from "motion/react";
+import { useUIStore } from "@/hooks/use-ui-store";
 
 type Props = {
   profile: CvProfile;
@@ -173,6 +174,7 @@ function ProjectCard({ project }: { project: CvProject }) {
 }
 
 export function Projects({ profile }: Props) {
+  const { isReducedMotion } = useUIStore();
   const projects = profile.projects || [];
 
   if (projects.length === 0) {
@@ -208,7 +210,7 @@ export function Projects({ profile }: Props) {
     <motion.section
       id="projects"
       className="mb-20 scroll-mt-24 space-y-12"
-      initial="hidden"
+      initial={isReducedMotion ? "visible" : "hidden"}
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={containerVariants}

@@ -12,7 +12,6 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error(error);
     toast.error("An unexpected error occurred.");
   }, [error]);
 

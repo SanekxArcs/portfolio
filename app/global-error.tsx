@@ -1,6 +1,8 @@
 'use client'
 
 import { Button } from "@/components/ui/button"
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 export default function GlobalError({
   error,
@@ -9,6 +11,9 @@ export default function GlobalError({
   error: Error & { digest?: string }
   reset: () => void
 }) {
+    useEffect(() => {
+      toast.error("An unexpected Global Error occurred.");
+    }, [error]);
   return (
     <html>
       <body>

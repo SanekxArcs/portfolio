@@ -14,245 +14,346 @@
 
 // Source: schema.json
 export type CvProfile = {
-  _id: string;
-  _type: "cvProfile";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  role?: string;
-  description?: string;
-  about?: string;
+  _id: string
+  _type: 'cvProfile'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name?: string
+  role?: string
+  description?: string
+  about?: string
   logo?: {
     asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-    };
-    media?: unknown;
-    _type: "file";
-  };
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+    }
+    media?: unknown
+    _type: 'file'
+  }
   profilePhoto?: {
     asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  cvUrl?: string;
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  cvUrl?: string
   cvFile?: {
     asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-    };
-    media?: unknown;
-    _type: "file";
-  };
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+    }
+    media?: unknown
+    _type: 'file'
+  }
   contacts?: {
-    email?: string;
-    phoneNumber?: string;
-    location?: string;
-    relocationReady?: boolean;
-    typeOfContract?: Array<string>;
-    workAvailability?: Array<string>;
-  };
+    email?: string
+    phoneNumber?: string
+    location?: string
+    relocationReady?: boolean
+    typeOfContract?: Array<string>
+    workAvailability?: Array<string>
+  }
   links?: Array<{
-    link?: string;
-    name?: string;
-    title?: string;
-    iconName?: string;
-    _key: string;
-  }>;
+    link?: string
+    name?: string
+    title?: string
+    iconName?: string
+    _key: string
+  }>
   languages?: Array<{
-    language?: string;
-    level?: string;
-    _key: string;
-  }>;
-  softSkills?: Array<string>;
-  skillsFrontend?: Array<string>;
-  skillsBackend?: Array<string>;
-  skillsDevOps?: Array<string>;
-  skillsOther?: Array<string>;
-  interests?: Array<string>;
+    language?: string
+    level?: string
+    _key: string
+  }>
+  softSkills?: Array<{
+    skill?: string
+    description?: string
+    _key: string
+  }>
+  skillsFrontend?: Array<string>
+  skillsBackend?: Array<string>
+  skillsDevOps?: Array<string>
+  skillsOther?: Array<string>
+  interests?: Array<string>
   education?: Array<{
-    institution?: string;
-    specialization?: string;
-    _key: string;
-  }>;
+    institution?: string
+    specialization?: string
+    _key: string
+  }>
   projects?: Array<{
-    petProject?: boolean;
-    isPinned?: boolean;
-    nda?: boolean;
-    title?: string;
-    description?: string;
+    petProject?: boolean
+    isPinned?: boolean
+    nda?: boolean
+    title?: string
+    description?: string
     image?: Array<{
       asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-      _key: string;
-    }>;
-    features?: Array<string>;
-    technologies?: Array<string>;
-    url?: string;
-    urlToCode?: string;
-    _key: string;
-  }>;
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+      _key: string
+    }>
+    features?: Array<string>
+    technologies?: Array<string>
+    url?: string
+    urlToCode?: string
+    _key: string
+  }>
   courses?: Array<{
-    title?: string;
-    platform?: string;
-    date?: string;
-    badges?: Array<string>;
-    visibleOnCV?: boolean;
-    _key: string;
-  }>;
+    title?: string
+    platform?: string
+    date?: string
+    badges?: Array<string>
+    visibleOnCV?: boolean
+    _key: string
+  }>
   workExperience?: Array<{
-    jobTitle?: string;
-    jobTitle2?: string;
-    companyName?: string;
-    location?: string;
-    duration?: string;
-    type?: string;
-    description?: Array<string>;
-    website?: string;
-    websiteName?: string;
-    isRelated?: boolean;
-    hideFromCV?: boolean;
-    _key: string;
-  }>;
-};
+    jobTitle?: string
+    jobTitle2?: string
+    companyName?: string
+    location?: string
+    duration?: string
+    type?: string
+    description?: Array<string>
+    website?: string
+    websiteName?: string
+    isRelated?: boolean
+    hideFromCV?: boolean
+    _key: string
+  }>
+}
 
 export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
+  _type: 'sanity.imageCrop'
+  top?: number
+  bottom?: number
+  left?: number
+  right?: number
+}
 
 export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
+  _type: 'sanity.imageHotspot'
+  x?: number
+  y?: number
+  height?: number
+  width?: number
+}
 
 export type SanityImagePaletteSwatch = {
-  _type: "sanity.imagePaletteSwatch";
-  background?: string;
-  foreground?: string;
-  population?: number;
-  title?: string;
-};
+  _type: 'sanity.imagePaletteSwatch'
+  background?: string
+  foreground?: string
+  population?: number
+  title?: string
+}
 
 export type SanityImagePalette = {
-  _type: "sanity.imagePalette";
-  darkMuted?: SanityImagePaletteSwatch;
-  lightVibrant?: SanityImagePaletteSwatch;
-  darkVibrant?: SanityImagePaletteSwatch;
-  vibrant?: SanityImagePaletteSwatch;
-  dominant?: SanityImagePaletteSwatch;
-  lightMuted?: SanityImagePaletteSwatch;
-  muted?: SanityImagePaletteSwatch;
-};
+  _type: 'sanity.imagePalette'
+  darkMuted?: SanityImagePaletteSwatch
+  lightVibrant?: SanityImagePaletteSwatch
+  darkVibrant?: SanityImagePaletteSwatch
+  vibrant?: SanityImagePaletteSwatch
+  dominant?: SanityImagePaletteSwatch
+  lightMuted?: SanityImagePaletteSwatch
+  muted?: SanityImagePaletteSwatch
+}
 
 export type SanityImageDimensions = {
-  _type: "sanity.imageDimensions";
-  height?: number;
-  width?: number;
-  aspectRatio?: number;
-};
+  _type: 'sanity.imageDimensions'
+  height?: number
+  width?: number
+  aspectRatio?: number
+}
 
 export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
-};
+  _type: 'sanity.imageMetadata'
+  location?: Geopoint
+  dimensions?: SanityImageDimensions
+  palette?: SanityImagePalette
+  lqip?: string
+  blurHash?: string
+  hasAlpha?: boolean
+  isOpaque?: boolean
+}
 
 export type SanityFileAsset = {
-  _id: string;
-  _type: "sanity.fileAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  source?: SanityAssetSourceData;
-};
+  _id: string
+  _type: 'sanity.fileAsset'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  originalFilename?: string
+  label?: string
+  title?: string
+  description?: string
+  altText?: string
+  sha1hash?: string
+  extension?: string
+  mimeType?: string
+  size?: number
+  assetId?: string
+  uploadId?: string
+  path?: string
+  url?: string
+  source?: SanityAssetSourceData
+}
 
 export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
-};
+  _type: 'sanity.assetSourceData'
+  name?: string
+  id?: string
+  url?: string
+}
 
 export type SanityImageAsset = {
-  _id: string;
-  _type: "sanity.imageAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  metadata?: SanityImageMetadata;
-  source?: SanityAssetSourceData;
-};
+  _id: string
+  _type: 'sanity.imageAsset'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  originalFilename?: string
+  label?: string
+  title?: string
+  description?: string
+  altText?: string
+  sha1hash?: string
+  extension?: string
+  mimeType?: string
+  size?: number
+  assetId?: string
+  uploadId?: string
+  path?: string
+  url?: string
+  metadata?: SanityImageMetadata
+  source?: SanityAssetSourceData
+}
 
 export type Geopoint = {
-  _type: "geopoint";
-  lat?: number;
-  lng?: number;
-  alt?: number;
-};
+  _type: 'geopoint'
+  lat?: number
+  lng?: number
+  alt?: number
+}
 
 export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
+  _type: 'slug'
+  current?: string
+  source?: string
+}
 
-export type AllSanitySchemaTypes = CvProfile | SanityImageCrop | SanityImageHotspot | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint | Slug;
-export declare const internalGroqTypeReferenceTo: unique symbol;
+export type AllSanitySchemaTypes =
+  | CvProfile
+  | SanityImageCrop
+  | SanityImageHotspot
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | SanityImageMetadata
+  | SanityFileAsset
+  | SanityAssetSourceData
+  | SanityImageAsset
+  | Geopoint
+  | Slug
+export declare const internalGroqTypeReferenceTo: unique symbol
+// Source: sanity/queries/queries.ts
+// Variable: CV_PROFILE_DATA
+// Query: *[_type == "cvProfile"][0]{  _id,  name,  role,  description,  about,  cvUrl,  "logoUrl": logo.asset->url,  "profilePhotoUrl": profilePhoto.asset->url,  "cvFileUrl": cvFile.asset->url,  contacts{    email,    phoneNumber,    location,    relocationReady,    typeOfContract,    workAvailability  },  links[]{    link,    name,    title,    iconName  },  languages[]{    language,    level  },  skillsFrontend,  skillsBackend,  skillsDevOps,  skillsOther,  softSkills[]{    skill,    description  },  interests,  education[]{    institution,    specialization  },  projects[]{    title,    description,    "imageUrls": image[].asset->url,    features,    technologies,    url,    urlToCode,    petProject,    isPinned,    nda  },  courses[]{    title,    platform,    date,    badges,    visibleOnCV  },  workExperience[]{    jobTitle,    jobTitle2,    companyName,    location,    duration,    type,    description,    website,    websiteName,    isRelated,    hideFromCV  }}
+export type CV_PROFILE_DATAResult = {
+  _id: string
+  name: string | null
+  role: string | null
+  description: string | null
+  about: string | null
+  cvUrl: string | null
+  logoUrl: string | null
+  profilePhotoUrl: string | null
+  cvFileUrl: string | null
+  contacts: {
+    email: string | null
+    phoneNumber: string | null
+    location: string | null
+    relocationReady: boolean | null
+    typeOfContract: Array<string> | null
+    workAvailability: Array<string> | null
+  } | null
+  links: Array<{
+    link: string | null
+    name: string | null
+    title: string | null
+    iconName: string | null
+  }> | null
+  languages: Array<{
+    language: string | null
+    level: string | null
+  }> | null
+  skillsFrontend: Array<string> | null
+  skillsBackend: Array<string> | null
+  skillsDevOps: Array<string> | null
+  skillsOther: Array<string> | null
+  softSkills: Array<{
+    skill: string | null
+    description: string | null
+  }> | null
+  interests: Array<string> | null
+  education: Array<{
+    institution: string | null
+    specialization: string | null
+  }> | null
+  projects: Array<{
+    title: string | null
+    description: string | null
+    imageUrls: Array<string | null> | null
+    features: Array<string> | null
+    technologies: Array<string> | null
+    url: string | null
+    urlToCode: string | null
+    petProject: boolean | null
+    isPinned: boolean | null
+    nda: boolean | null
+  }> | null
+  courses: Array<{
+    title: string | null
+    platform: string | null
+    date: string | null
+    badges: Array<string> | null
+    visibleOnCV: boolean | null
+  }> | null
+  workExperience: Array<{
+    jobTitle: string | null
+    jobTitle2: string | null
+    companyName: string | null
+    location: string | null
+    duration: string | null
+    type: string | null
+    description: Array<string> | null
+    website: string | null
+    websiteName: string | null
+    isRelated: boolean | null
+    hideFromCV: boolean | null
+  }> | null
+} | null
+
+// Query TypeMap
+import '@sanity/client'
+declare module '@sanity/client' {
+  interface SanityQueries {
+    '\n*[_type == "cvProfile"][0]{\n  _id,\n  name,\n  role,\n  description,\n  about,\n  cvUrl,\n  "logoUrl": logo.asset->url,\n  "profilePhotoUrl": profilePhoto.asset->url,\n  "cvFileUrl": cvFile.asset->url,\n  contacts{\n    email,\n    phoneNumber,\n    location,\n    relocationReady,\n    typeOfContract,\n    workAvailability\n  },\n  links[]{\n    link,\n    name,\n    title,\n    iconName\n  },\n  languages[]{\n    language,\n    level\n  },\n  skillsFrontend,\n  skillsBackend,\n  skillsDevOps,\n  skillsOther,\n  softSkills[]{\n    skill,\n    description\n  },\n  interests,\n  education[]{\n    institution,\n    specialization\n  },\n  projects[]{\n    title,\n    description,\n    "imageUrls": image[].asset->url,\n    features,\n    technologies,\n    url,\n    urlToCode,\n    petProject,\n    isPinned,\n    nda\n  },\n  courses[]{\n    title,\n    platform,\n    date,\n    badges,\n    visibleOnCV\n  },\n  workExperience[]{\n    jobTitle,\n    jobTitle2,\n    companyName,\n    location,\n    duration,\n    type,\n    description,\n    website,\n    websiteName,\n    isRelated,\n    hideFromCV\n  }\n}\n': CV_PROFILE_DATAResult
+  }
+}
