@@ -87,11 +87,11 @@ function ProjectCard({ project }: { project: CvProject }) {
                   key={index}
                   className="flex-[0_0_100%] min-w-0 relative aspect-video"
                 >
-                  {project.nda ? (
+                  {project.nda  ? (
                     <div className="flex justify-center text-muted text-8xl items-center bg-linear-to-t from-emerald-900 to-emerald-950 w-full h-full"></div>
                   ) : (
                     <Image
-                      src={url}
+                      src={url ?? ""}
                       alt={`${project.title} screenshot ${index + 1}`}
                       fill
                       className="object-cover"
