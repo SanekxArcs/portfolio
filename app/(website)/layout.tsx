@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Noto_Sans } from "next/font/google";
+import {GoogleAnalytics} from '@next/third-parties/google'
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { SanityLive } from "@/sanity/lib/live";
@@ -75,8 +76,8 @@ export default function RootLayout({
             disableTransitionOnChange={true}
           >
             <Navbar />
-            <main className="min-h-screen relative">
-              <div className="absolute h-screen top-0 -z-10 inset-x-0 overflow-hidden pointer-events-none mask-to-bottom">
+            <main className="relative min-h-screen">
+              <div className="mask-to-bottom pointer-events-none absolute inset-x-0 top-0 -z-10 h-screen overflow-hidden">
                 <LightRays
                   raysOrigin="top-center"
                   raysColor="#00ffff"
@@ -99,6 +100,7 @@ export default function RootLayout({
           </ThemeProvider>
         </ReducedMotionProvider>
       </body>
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || ''} />
     </html>
-  );
+  )
 }

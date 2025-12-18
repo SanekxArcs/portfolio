@@ -88,19 +88,41 @@ function ProjectCard({project}: {project: CvProject}) {
           </div>
         )}
         {(!project.imageUrls || project.imageUrls.length === 0) && (
-          <div className="relative aspect-video min-w-0 bg-muted overflow-hidden rounded-md border">
-            <div className="text-muted/50 dark:text-white/50 flex h-full w-full items-center justify-center bg-linear-to-t dark:from-emerald-900 from-emerald-100 text-center dark:to-emerald-950 to-emerald-700 text-2xl"><ImageOff className="mr-2" />NO IMAGE</div>
+          <div className="bg-muted relative aspect-video min-w-0 overflow-hidden rounded-md border">
+            <div className="text-muted/50 flex h-full w-full items-center justify-center bg-linear-to-t from-emerald-100 to-emerald-700 text-center text-2xl dark:from-emerald-900 dark:to-emerald-950 dark:text-white/50">
+              <ImageOff className="mr-2" />
+              NO IMAGE
+            </div>
           </div>
         )}
 
-        <div className="text-muted-foreground mt-auto flex-1 text-sm">{project.description}</div>
+        <div className="text-muted-foreground flex-1 text-sm">{project.description}</div>
 
-        <div className="mt-auto flex flex-wrap gap-2">
-          {project.technologies?.map((tech, i) => (
-            <Badge key={i} variant="outline" className="text-xs">
-              {tech}
-            </Badge>
-          ))}
+        {project.features && project.features.length > 0 && (
+          <div className="mt-auto flex flex-row gap-2">
+            <p className="text-md font-semibold tracking-tight">Features:</p>
+            <div className="mt-auto flex flex-wrap gap-2">
+              {project.features?.map((feature, i) => (
+                <Badge key={i} variant="outline" className="text-xs">
+                  <span className="lg:hidden">
+                  {feature.length > 30 ? `${feature.slice(0, 25)}...` : feature}
+                  </span>
+                  <span className="hidden lg:inline">{feature}</span>
+                </Badge>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className="mt-auto flex flex-row gap-2">
+          <p className="text-md font-semibold tracking-tight">Technologies:</p>
+          <div className="mt-auto flex flex-wrap gap-2">
+            {project.technologies?.map((tech, i) => (
+              <Badge key={i} variant="outline" className="text-xs">
+                {tech}
+              </Badge>
+            ))}
+          </div>
         </div>
       </CardContent>
       <CardFooter className="gap-2 pt-0">
@@ -196,11 +218,18 @@ export function Projects({profile}: Props) {
     >
       {commercialProjects.length > 0 && (
         <div className="space-y-8">
-          <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-100 dark:bg-emerald-900/30">
-              <Globe className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="flex size-12 items-center justify-center rounded-xl bg-emerald-100 dark:bg-emerald-900/30">
+                <Globe className="size-6 text-emerald-600 dark:text-emerald-400" />
+              </div>
+              <h2 className="text-3xl font-bold">Commercial Projects</h2>
             </div>
-            <h2 className="text-3xl font-bold">Commercial Projects</h2>
+
+            <Badge
+              variant="secondary"
+              className="text-muted-foreground font-bold"
+            >{`${commercialProjects.length}+`}</Badge>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {commercialProjects.map((project, index) => (
@@ -209,14 +238,19 @@ export function Projects({profile}: Props) {
           </div>
         </div>
       )}
-
       {petProjects.length > 0 && (
         <div className="space-y-8">
-          <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-100 dark:bg-purple-900/30">
-              <Code className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="flex size-12 items-center justify-center rounded-xl bg-purple-100 dark:bg-purple-900/30">
+                <Code className="size-6 text-purple-600 dark:text-purple-400" />
+              </div>
+              <h2 className="text-3xl font-bold">Pet Projects</h2>
             </div>
-            <h2 className="text-3xl font-bold">Pet Projects</h2>
+            <Badge
+              variant="secondary"
+              className="text-muted-foreground font-bold"
+            >{`${petProjects.length}+`}</Badge>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {petProjects.map((project, index) => (
