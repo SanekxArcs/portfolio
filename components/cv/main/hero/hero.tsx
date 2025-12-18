@@ -3,20 +3,20 @@
 import {useMemo} from 'react'
 import { motion, Variants, useReducedMotion } from "motion/react";
 import { useUIStore } from "@/hooks/use-ui-store";
-import { HeroAvailability } from "./hero/hero-availability";
-import { HeroInfo } from "./hero/hero-info";
-import { HeroActions } from "./hero/hero-actions";
-import { HeroSocials } from "./hero/hero-socials";
-import { HeroLanguages } from "./hero/hero-languages";
-import { HeroDetails } from "./hero/hero-details";
-import { HeroImage } from "./hero/hero-image";
-import { CvProfile } from '../types';
+import { HeroAvailability } from "./hero-availability";
+import { HeroInfo } from "./hero-info";
+import { HeroActions } from "./hero-actions";
+import { HeroSocials } from "./hero-socials";
+import { HeroLanguages } from "./hero-languages";
+import { HeroDetails } from "./hero-details";
+import { HeroImage } from "./hero-image";
+import { CvProfile } from '../../types';
 
 type Props = {
   profile: CvProfile;
 };
 
-export function MainHead({profile}: Props) {
+export function Hero({profile}: Props) {
   const {isReducedMotion} = useUIStore()
   const prefersReducedMotion = useReducedMotion()
   const shouldReduceMotion = isReducedMotion || prefersReducedMotion

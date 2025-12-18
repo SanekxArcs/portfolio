@@ -10,6 +10,7 @@ import LightRays from "@/components/bg";
 import { ReducedMotionProvider } from "@/components/reduced-motion-provider";
 import { WelcomeToast } from "@/components/welcome-toast";
 
+
 const notoSans = Noto_Sans({ variable: "--font-sans" });
 
 const geistSans = Geist({

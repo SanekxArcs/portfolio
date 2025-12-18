@@ -2,7 +2,7 @@
 import { motion, Variants } from "motion/react";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { ActionButton } from "@/components/cv/atoms/action-button";
-import { mainHeadConfig } from "../main-head.config";
+import {mainHeadConfig} from './hero.config'
 import type { CvProfile } from "@/components/cv/types";
 
 type Props = {

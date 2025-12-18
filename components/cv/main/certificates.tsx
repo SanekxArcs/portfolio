@@ -14,7 +14,7 @@ export function Certificates({ courses }: Props) {
   if (!courses?.length) return null
 
   return (
-    <section id="certification" className="cursor-default select-none scroll-m-16">
+    <section id="certification" className="cursor-default scroll-m-16">
       <SectionWrapper icon={<FileBadge2 className="mr-2" />} title="Certificates">
         <div className="grid gap-5">
           {courses.map((course, index) => (

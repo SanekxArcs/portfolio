@@ -349,11 +349,18 @@ export type CV_PROFILE_DATAResult = {
     hideFromCV: boolean | null
   }> | null
 } | null
+// Variable: NAVBAR_DATA
+// Query: *[_type == "cvProfile"][0]{  name,  "logoUrl": logo.asset->url}
+export type NAVBAR_DATAResult = {
+  name: string | null
+  logoUrl: string | null
+} | null
 
 // Query TypeMap
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
     '\n*[_type == "cvProfile"][0]{\n  _id,\n  name,\n  role,\n  description,\n  about,\n  cvUrl,\n  "logoUrl": logo.asset->url,\n  "profilePhotoUrl": profilePhoto.asset->url,\n  "cvFileUrl": cvFile.asset->url,\n  contacts{\n    email,\n    phoneNumber,\n    location,\n    relocationReady,\n    typeOfContract,\n    workAvailability\n  },\n  links[]{\n    link,\n    name,\n    title,\n    iconName\n  },\n  languages[]{\n    language,\n    level\n  },\n  skillsFrontend,\n  skillsBackend,\n  skillsDevOps,\n  skillsOther,\n  softSkills[]{\n    skill,\n    description\n  },\n  interests,\n  education[]{\n    institution,\n    specialization\n  },\n  projects[]{\n    title,\n    description,\n    "imageUrls": image[].asset->url,\n    features,\n    technologies,\n    url,\n    urlToCode,\n    petProject,\n    isPinned,\n    nda\n  },\n  courses[]{\n    title,\n    platform,\n    date,\n    badges,\n    visibleOnCV\n  },\n  workExperience[]{\n    jobTitle,\n    jobTitle2,\n    companyName,\n    location,\n    duration,\n    type,\n    description,\n    website,\n    websiteName,\n    isRelated,\n    hideFromCV\n  }\n}\n': CV_PROFILE_DATAResult
+    '\n*[_type == "cvProfile"][0]{\n  name,\n  "logoUrl": logo.asset->url\n}\n': NAVBAR_DATAResult
   }
 }

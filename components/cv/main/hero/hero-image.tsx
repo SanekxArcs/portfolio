@@ -1,7 +1,7 @@
 "use client";
 import { motion, Variants } from "motion/react";
 import Image from "next/image";
-import { mainHeadConfig } from "../main-head.config";
+import {mainHeadConfig} from './hero.config'
 import type { CvProfile } from "@/components/cv/types";
 
 type Props = {
@@ -21,37 +21,34 @@ export function HeroImage({ profile, variants, shouldReduceMotion }: Props) {
     .slice(0, 2)
 
   return (
-    <motion.div
-      className="relative hidden md:block group w-1/3 m-auto lg:mx-0"
-      variants={variants}
-    >
+    <motion.div className="group relative m-auto hidden w-1/3 md:block lg:mx-0" variants={variants}>
       {profile.logoUrl ? (
-        <div className="w-64 h-64 relative perspective-250">
+        <div className="perspective-250 relative h-64 w-64">
           <div
-            className={`w-full h-full transition-all duration-700 transform-3d ${
-              shouldReduceMotion ? "" : "group-hover:transform-[rotateX(180deg)]"
+            className={`h-full w-full transition-all duration-700 transform-3d ${
+              shouldReduceMotion ? '' : 'group-hover:transform-[rotateX(180deg)]'
             }`}
           >
             {/* Front: Logo */}
-            <div className="absolute inset-0 w-full h-full backface-hidden bg-transparent overflow-hidden flex justify-center items-center p-4">
+            <div className="absolute inset-0 flex h-full w-full items-center justify-center overflow-hidden bg-transparent p-4 backface-hidden">
               <div
                 role="img"
                 aria-label={image.logoAlt}
-                className="w-full h-full bg-black dark:bg-white transition-colors duration-300"
+                className="h-full w-full from-emerald-950 to-emerald-900 bg-linear-to-t dark:from-white dark:to-emerald-100 transition-colors duration-300"
                 style={{
                   maskImage: `url(${profile.logoUrl})`,
                   WebkitMaskImage: `url(${profile.logoUrl})`,
-                  maskSize: "contain",
-                  WebkitMaskSize: "contain",
-                  maskRepeat: "no-repeat",
-                  WebkitMaskRepeat: "no-repeat",
-                  maskPosition: "center",
-                  WebkitMaskPosition: "center",
+                  maskSize: 'contain',
+                  WebkitMaskSize: 'contain',
+                  maskRepeat: 'no-repeat',
+                  WebkitMaskRepeat: 'no-repeat',
+                  maskPosition: 'center',
+                  WebkitMaskPosition: 'center',
                 }}
               />
             </div>
             {/* Back: Profile Photo */}
-            <div className="absolute inset-0 w-full h-full backface-hidden transform-[rotateX(180deg)] rounded-2xl bg-linear-to-br from-secondary to-muted dark:from-primary dark:to-secondary overflow-hidden shadow-2xl flex justify-center items-center">
+            <div className="from-secondary to-muted dark:from-primary dark:to-secondary absolute inset-0 flex h-full w-full transform-[rotateX(180deg)] items-center justify-center overflow-hidden rounded-2xl bg-linear-to-br shadow-2xl backface-hidden">
               {profile.profilePhotoUrl ? (
                 <Image
                   src={profile.profilePhotoUrl}
@@ -61,7 +58,7 @@ export function HeroImage({ profile, variants, shouldReduceMotion }: Props) {
                   className="object-cover"
                 />
               ) : (
-                <div className="cursor-default absolute inset-0 flex items-center justify-center text-8xl font-bold text-primary/30">
+                <div className="text-primary/30 absolute inset-0 flex cursor-default items-center justify-center text-8xl font-bold">
                   {initials}
                 </div>
               )}
@@ -70,11 +67,9 @@ export function HeroImage({ profile, variants, shouldReduceMotion }: Props) {
         </div>
       ) : (
         <div
-          className={`w-64 h-64 rounded-2xl bg-linear-to-br from-secondary to-muted dark:from-primary dark:to-secondary overflow-hidden shadow-2xl ${
-            shouldReduceMotion
-              ? ""
-              : "transform group-hover:scale-105 group-hover:rotate-3"
-          } transition-all duration-500 relative flex justify-center items-center`}
+          className={`from-secondary to-muted dark:from-primary dark:to-secondary h-64 w-64 overflow-hidden rounded-2xl bg-linear-to-br shadow-2xl ${
+            shouldReduceMotion ? '' : 'transform group-hover:scale-105 group-hover:rotate-3'
+          } relative flex items-center justify-center transition-all duration-500`}
         >
           {profile.profilePhotoUrl ? (
             <Image
@@ -84,12 +79,12 @@ export function HeroImage({ profile, variants, shouldReduceMotion }: Props) {
               className="object-cover"
             />
           ) : (
-            <div className="cursor-default absolute inset-0 flex items-center justify-center text-8xl font-bold text-primary/30">
+            <div className="text-primary/30 absolute inset-0 flex cursor-default items-center justify-center text-8xl font-bold">
               {initials}
             </div>
           )}
         </div>
       )}
     </motion.div>
-  );
+  )
 }

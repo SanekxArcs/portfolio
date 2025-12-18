@@ -76,3 +76,10 @@ export const CV_PROFILE_DATA = defineQuery(`
   }
 }
 `);
+
+export const NAVBAR_DATA = defineQuery(`
+*[_type == "cvProfile"][0]{
+  name,
+  "logoUrl": logo.asset->url
+}
+`);

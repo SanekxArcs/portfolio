@@ -1,7 +1,7 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
 import { motion, Variants } from "motion/react";
-import { mainHeadConfig } from "../main-head.config";
+import {mainHeadConfig} from './hero.config'
 import type { CvProfile } from "@/components/cv/types";
 
 type Props = {

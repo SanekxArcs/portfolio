@@ -23,7 +23,9 @@ import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import { useState, useMemo } from "react";
 import { ActionButton } from "../atoms/action-button";
+import { HighlightedText } from "../atoms/highlighted-text";
 import { useUIStore } from "@/hooks/use-ui-store";
+import { getAllSkills } from "@/lib/cv-utils";
 
 type Props = {
   profile: CvProfile;
@@ -46,47 +48,6 @@ const itemVariants = {
     },
   },
 };
-
-function escapeRegExp(string: string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
-function HighlightedText({ text, skills }: { text: string; skills: string[] }) {
-  const parts = useMemo(() => {
-    if (!skills || skills.length === 0) return [text];
-
-    const sortedSkills = [...skills].sort((a, b) => b.length - a.length);
-    const pattern = new RegExp(
-      `(?<=^|[\\s.,;!?()"'])(${sortedSkills
-        .map(escapeRegExp)
-        .join("|")})(?=$|[\\s.,;!?()"'])`,
-      "gi"
-    );
-
-    return text.split(pattern);
-  }, [text, skills]);
-
-  return (
-    <span>
-      {parts.map((part, i) => {
-        const isSkill = skills.some(
-          (s) => s.toLowerCase() === part.toLowerCase()
-        );
-        if (isSkill) {
-          return (
-            <span
-              key={i}
-              className="group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors font-medium"
-            >
-              {part}
-            </span>
-          );
-        }
-        return part;
-      })}
-    </span>
-  );
-}
 
 function ExperienceCard({
   job,
@@ -196,7 +157,11 @@ function ExperienceCard({
                     )}
                   />
                   <span>
-                    <HighlightedText text={desc} skills={allSkills} />
+                    <HighlightedText
+                      text={desc}
+                      skills={allSkills}
+                      highlightClassName="group-hover:text-emerald-600 dark:group-hover:text-emerald-400"
+                    />
                   </span>
                 </li>
               ))}
@@ -224,14 +189,7 @@ function ExperienceCard({
 export function WorkExperience({ profile }: Props) {
   const [activeTab, setActiveTab] = useState("related");
 
-  const allSkills = useMemo(() => {
-    const skills = new Set<string>();
-    profile.skillsFrontend?.forEach((s) => skills.add(s));
-    profile.skillsBackend?.forEach((s) => skills.add(s));
-    profile.skillsDevOps?.forEach((s) => skills.add(s));
-    profile.skillsOther?.forEach((s) => skills.add(s));
-    return Array.from(skills);
-  }, [profile]);
+  const allSkills = useMemo(() => getAllSkills(profile), [profile]);
 
   if (!profile.workExperience || profile.workExperience.length === 0) {
     return null;

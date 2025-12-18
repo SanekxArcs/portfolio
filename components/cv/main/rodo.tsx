@@ -4,7 +4,7 @@ export function Rodo() {
   return (
     <div className="container mx-auto my-10 grid gap-2 px-4">
       <p className="text-muted-foreground select-all text-xs">
-        EN: I consent to the processing of my personal data as part of the recruitment process for the position I have applied for.
+        EU: I consent to the processing of my personal data as part of the recruitment process for the position I have applied for.
         I consent to the processing of my personal data contained in this application for the purpose of future recruitment by the company
         to which I have applied.
       </p>
