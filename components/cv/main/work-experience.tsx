@@ -66,63 +66,68 @@ function ExperienceCard({
       key={layoutId}
       layoutId={layoutId}
       variants={itemVariants}
-      initial={isReducedMotion ? "visible" : "hidden"}
+      initial={isReducedMotion ? 'visible' : 'hidden'}
       whileInView="visible"
       exit="exit"
-      viewport={{ once: true, margin: "0px 0px -100px 0px" }}
+      viewport={{once: true, margin: '0px 0px -100px 0px'}}
     >
       <Card
         className={cn(
-          "overflow-hidden border-2 transition-all hover:shadow-lg group",
+          'group relative overflow-hidden border-2 transition-all hover:shadow-lg',
           isRelated
-            ? "hover:border-emerald-500/50"
-            : "hover:border-gray-500/50 dark:hover:border-gray-700"
+            ? 'hover:border-emerald-500/20'
+            : 'hover:border-gray-500/20 dark:hover:border-gray-700',
         )}
       >
+        <div
+          className={cn(
+            'translate-y--8 absolute top-0 right-0 h-24 w-24 translate-x-8 opacity-[0.03] transition-transform duration-500 group-hover:scale-110 group-hover:opacity-[0.05]',
+            isRelated ? 'text-emerald-500' : 'text-gray-500',
+          )}
+        >
+          <Briefcase className="h-full w-full" />
+        </div>
         <CardHeader>
-          <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-2 gap-2">
+          <div className="mb-2 flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
             <div className="space-y-2">
               <CardTitle
                 className={cn(
-                  "text-xl flex items-start gap-2 transition-colors",
+                  'flex items-start gap-2 text-xl transition-colors',
                   isRelated
-                    ? "group-hover:text-emerald-600 dark:group-hover:text-emerald-400"
-                    : "group-hover:text-gray-600 dark:group-hover:text-gray-400"
+                    ? 'group-hover:text-emerald-600 dark:group-hover:text-emerald-400'
+                    : 'group-hover:text-gray-600 dark:group-hover:text-gray-400',
                 )}
               >
-                <Briefcase className="w-5 h-5 mt-1 shrink-0" />
-                <span className="flex items-center gap-2 flex-wrap">
+                <Briefcase className="mt-1 h-5 w-5 shrink-0" />
+                <span className="flex flex-wrap items-center gap-2">
                   {job.jobTitle}
                   {job.jobTitle2 && (
                     <>
-                      <ArrowRight className="w-4 h-4 text-muted-foreground" />
+                      <ArrowRight className="text-muted-foreground h-4 w-4" />
                       <span>{job.jobTitle2}</span>
                     </>
                   )}
                 </span>
               </CardTitle>
-              <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+              <div className="text-muted-foreground flex flex-wrap items-center gap-4 text-sm">
                 {job.companyName && (
-                  <span className="flex items-center gap-1 font-semibold text-foreground">
-                    <Building2 className="w-4 h-4 mr-2" />
+                  <span className="text-foreground flex items-center gap-1 font-semibold">
+                    <Building2 className="mr-2 h-4 w-4" />
                     {job.companyName}
                   </span>
                 )}
                 {job.location && (
                   <span className="flex items-center gap-1">
-                    <MapPin className="w-4 h-4  mr-2 md:mr-0" />
+                    <MapPin className="mr-2 h-4 w-4 md:mr-0" />
                     {job.location}
                   </span>
                 )}
               </div>
             </div>
-            <div className="flex flex-col items-start md:items-end gap-2 shrink-0">
+            <div className="flex shrink-0 flex-col items-start gap-2 md:items-end">
               {job.duration && (
-                <Badge
-                  variant="secondary"
-                  className="flex items-center gap-1 whitespace-nowrap"
-                >
-                  <Calendar className="w-3 h-3" />
+                <Badge variant="secondary" className="flex items-center gap-1 whitespace-nowrap">
+                  <Calendar className="h-3 w-3" />
                   {job.duration}
                 </Badge>
               )}
@@ -134,7 +139,7 @@ function ExperienceCard({
               {!isRelated && (
                 <Badge
                   variant="secondary"
-                  className="text-xs bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400"
+                  className="bg-gray-100 text-xs text-gray-600 dark:bg-gray-800 dark:text-gray-400"
                 >
                   Non-relevant
                 </Badge>
@@ -146,14 +151,11 @@ function ExperienceCard({
           {job.description && job.description.length > 0 && (
             <ul className="space-y-2">
               {job.description.map((desc, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-2 text-sm text-muted-foreground"
-                >
+                <li key={i} className="text-muted-foreground flex items-start gap-2 text-sm">
                   <ChevronRight
                     className={cn(
-                      "w-4 h-4 mt-0.5 shrink-0",
-                      isRelated ? "text-emerald-500" : "text-gray-400"
+                      'mt-0.5 h-4 w-4 shrink-0',
+                      isRelated ? 'text-emerald-500' : 'text-gray-400',
                     )}
                   />
                   <span>
@@ -172,18 +174,18 @@ function ExperienceCard({
           {job.website && (
             <ActionButton
               href={job.website}
-              label={job.websiteName || "Website"}
+              label={job.websiteName || 'Website'}
               icon={<Globe />}
               variant="link"
               size="sm"
-              className="h-auto p-0 gap-2 text-muted-foreground hover:text-foreground"
+              className="text-muted-foreground hover:text-foreground h-auto gap-2 p-0"
               external
             />
           )}
         </CardFooter>
       </Card>
     </motion.div>
-  );
+  )
 }
 
 export function WorkExperience({ profile }: Props) {
@@ -213,15 +215,15 @@ export function WorkExperience({ profile }: Props) {
 
   return (
     <section id="experience" className="mb-20 scroll-mt-24">
-      <div className="flex items-center gap-3 mb-8">
-        <div className="w-12 h-12 rounded-xl aspect-square bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
-          <Briefcase className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+      <div className="mb-8 flex items-center gap-3">
+        <div className="flex aspect-square h-12 w-12 items-center justify-center rounded-xl bg-emerald-100 dark:bg-emerald-900/30">
+          <Briefcase className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
         </div>
-        <h2 className="text-3xl font-bold">Experience</h2>
+        <h2 className="text-3xl font-bold">Work Experience</h2>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-3 mb-8">
+        <TabsList className="mb-8 grid w-full grid-cols-3">
           <TabsTrigger value="related">Related</TabsTrigger>
           <TabsTrigger value="all">Full History</TabsTrigger>
           <TabsTrigger value="notrelated">Not Related</TabsTrigger>
@@ -239,9 +241,9 @@ export function WorkExperience({ profile }: Props) {
                   />
                 ))
               ) : (
-                <motion.div className="text-center text-muted-foreground py-8">
-                  No specific related experience marked. Check &quot;All
-                  History&quot; to see full background.
+                <motion.div className="text-muted-foreground py-8 text-center">
+                  No specific related experience marked. Check &quot;All History&quot; to see full
+                  background.
                 </motion.div>
               )}
             </AnimatePresence>
@@ -249,5 +251,5 @@ export function WorkExperience({ profile }: Props) {
         </div>
       </Tabs>
     </section>
-  );
+  )
 }

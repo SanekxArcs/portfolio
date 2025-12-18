@@ -1,14 +1,12 @@
 "use client";
 
-import { Mail, Download } from "lucide-react";
 import type { CvProfile } from "@/components/cv/types";
-import { ActionButton } from "../atoms/action-button";
 
 type Props = {
   profile: CvProfile;
 };
 
-export function Cta({ profile }: Props) {
+export function Cta() {
   return (
     <section className="py-24 relative overflow-hidden group cursor-default">
       <div className="absolute inset-0 bg-emerald-950/5 dark:bg-emerald-950/20 group-hover:skew-y-0 duration-700 transition-transform -skew-y-3 transform origin-bottom-right" />
@@ -22,25 +20,6 @@ export function Cta({ profile }: Props) {
             opportunities. If you&apos;re interested in working together,
             let&apos;s have a chat.
           </p>
-          <div className="flex flex-wrap gap-4 justify-center pt-4">
-            {profile.contacts?.email && (
-              <ActionButton
-                href={`mailto:${profile.contacts.email}`}
-                icon={<Mail />}
-                label="Get in Touch"
-
-                className="transition-all duration-300"/>
-            )}
-            {profile.cvFileUrl && (
-              <ActionButton
-                href={profile.cvFileUrl}
-                download
-                icon={<Download />}
-                label="Download CV/Resume"
-                variant="outline"
-                className="transition-all duration-300"/>
-            )}
-          </div>
         </div>
       </div>
     </section>

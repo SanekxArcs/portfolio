@@ -38,6 +38,7 @@ export function NavbarClient({
 }) {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const [activeSection, setActiveSection] = React.useState<string>("");
   const { isReducedMotion, toggleReducedMotion } = useUIStore();
 
   const initials = React.useMemo(() => {
@@ -53,9 +54,38 @@ export function NavbarClient({
   React.useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      if (window.scrollY < 100) {
+        setActiveSection("");
+      }
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  React.useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -70% 0px",
+      threshold: 0,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    const sections = ["about", "experience", "skills", "projects"];
+    sections.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -107,16 +137,34 @@ export function NavbarClient({
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-muted-foreground hover:text-emerald-600 transition-colors flex items-center gap-2"
-            >
-              <link.icon className="w-4 h-4" />
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.href.replace("#", "");
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "text-sm font-medium transition-colors flex items-center gap-2 relative group/nav",
+                  isActive
+                    ? "text-emerald-600 dark:text-emerald-400"
+                    : "text-muted-foreground hover:text-emerald-600"
+                )}
+              >
+                <link.icon className={cn(
+                  "w-4 h-4 transition-transform duration-300",
+                  isActive ? "scale-110" : "group-hover/nav:scale-110"
+                )} />
+                {link.label}
+                {isActive && (
+                  <motion.div
+                    layoutId="activeNav"
+                    className="absolute -top-4.25 left-0 right-0 h-0.5 bg-emerald-600 dark:bg-emerald-400 rounded-full"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </Link>
+            );
+          })}
           <div className="h-4 w-px bg-border" />
           <ButtonGroup>
           <Button
@@ -136,9 +184,10 @@ export function NavbarClient({
         </nav>
 
         {/* Mobile Menu Toggle */}
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-4 md:hidden">
+          <ButtonGroup>
           <Button
-            variant="ghost"
+            variant="outline"
             size="icon"
             onClick={toggleReducedMotion}
             title={isReducedMotion ? "Enable animations" : "Reduce motion"}
@@ -150,6 +199,7 @@ export function NavbarClient({
             )}
           </Button>
           <ModeToggle />
+          </ButtonGroup>
           <Button
             variant="outline"
             size="icon"
@@ -174,17 +224,25 @@ export function NavbarClient({
             transition={{ duration: 0.3 }}
             className="md:hidden absolute top-full left-0 right-0 bg-transparent border-b shadow-lg p-4 flex flex-col justify-end items-end gap-4"
           >
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium p-2 hover:bg-muted rounded-md transition-colors flex items-center gap-2"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <link.icon className="w-4 h-4" />
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href.replace("#", "");
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "text-sm font-medium p-2 rounded-md transition-colors flex items-center gap-2 w-full justify-end",
+                    isActive
+                      ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                      : "hover:bg-muted"
+                  )}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <link.icon className="w-4 h-4" />
+                  {link.label}
+                </Link>
+              );
+            })}
             <GradualBlur
               target="parent"
               position="bottom"

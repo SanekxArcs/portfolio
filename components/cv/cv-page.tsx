@@ -49,7 +49,7 @@ export async function CvPage() {
         <Education profile={profile} />
         <Projects profile={profile} />
       </div>
-      <Cta profile={profile} />
+      <Cta />
     </>
   )
 }

@@ -1,92 +1,99 @@
-"use client";
+'use client'
 
-import { User } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import type { CvProfile } from "@/components/cv/types";
-import { motion, Variants } from "motion/react";
-import { useUIStore } from "@/hooks/use-ui-store";
-import { HighlightedText } from "../atoms/highlighted-text";
-import { useMemo } from "react";
-import { getAllSkills } from "@/lib/cv-utils";
+import {User, Speech} from 'lucide-react'
+import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card'
+import type {CvProfile} from '@/components/cv/types'
+import {motion, Variants} from 'motion/react'
+import {useUIStore} from '@/hooks/use-ui-store'
+import {HighlightedText} from '../atoms/highlighted-text'
+import {useMemo, useState} from 'react'
+import {getAllSkills} from '@/lib/cv-utils'
+import {cn} from '@/lib/utils'
 
 type Props = {
-  profile: CvProfile;
-};
+  profile: CvProfile
+}
 
 const containerVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: {opacity: 0, y: 20},
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.5,
       delay: 0.8,
-      ease: "easeOut",
+      ease: 'easeOut',
     },
   },
-};
+}
 
-export function About({ profile }: Props) {
-  const { isReducedMotion } = useUIStore();
-  const allSkills = useMemo(() => getAllSkills(profile), [profile]);
+export function About({profile}: Props) {
+  const {isReducedMotion} = useUIStore()
+  const allSkills = useMemo(() => getAllSkills(profile), [profile])
 
   return (
     <motion.section
       id="about"
       className="mb-20 scroll-mt-24"
-      initial={isReducedMotion ? "visible" : "hidden"}
+      initial={isReducedMotion ? 'visible' : 'hidden'}
       animate="visible"
       variants={containerVariants}
     >
-      <div className="flex items-center gap-3 mb-8">
-        <div className="size-12 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
-          <User className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+      <div className="mb-8 flex items-center gap-3">
+        <div className="flex size-12 items-center justify-center rounded-xl bg-emerald-100 dark:bg-emerald-900/30">
+          <User className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
         </div>
         <h2 className="text-3xl font-bold">About Me</h2>
       </div>
-      <Card className="overflow-hidden border-2 hover:border-emerald-500/50 transition-colors group">
-        <CardContent className="lg:px-8">
-          <p className="text-muted-foreground leading-relaxed mb-2 text-lg">
-            <HighlightedText
-              text={profile.about || ""}
-              skills={allSkills}
-              highlightClassName="group-hover:text-emerald-600 dark:group-hover:text-emerald-400"
-            />
-          </p>
-          {profile.softSkills && profile.softSkills.length > 0 && (
-            <div className="flex flex-col md:flex-row gap-2 mt-3 pt-3 border-t border-border/50">
-              <div className="font-semibold mr-2 w-fit h-full text-nowrap">
-                Soft Skills:
-              </div>
-              <div className="flex flex-wrap flex-col md:flex-row gap-2">
-                {profile.softSkills.map((item, i) => (
-                  <Tooltip key={i}>
-                    <TooltipTrigger>
-                      <Badge
-                        variant="outline"
-                        className="hover:bg-emerald-100 hover:text-emerald-800 dark:hover:bg-emerald-900 dark:hover:text-emerald-100 cursor-default transition-all active:hover focus:text-sm hover:text-sm"
-                      >
-                        {item.skill}
-                      </Badge>
-                    </TooltipTrigger>
-                    {item.description && (
-                      <TooltipContent>
-                        <p>{item.description}</p>
-                      </TooltipContent>
-                    )}
-                  </Tooltip>
-                ))}
-              </div>
+
+      <div className="grid grid-cols-1 gap-6">
+        <div className="">
+          <Card className="group relative h-full overflow-hidden border-2">
+            <div className="absolute right-0 top-0 h-24 w-24 translate-x-8 translate-y--8 text-emerald-500 opacity-[0.03] transition-transform duration-500 group-hover:scale-110 group-hover:opacity-[0.05]">
+              <User className="h-full w-full" />
             </div>
-          )}
-        </CardContent>
-      </Card>
+            <CardContent className="p-6 pt-0 lg:p-8 lg:pt-0">
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                <HighlightedText
+                  text={profile.about || ''}
+                  skills={allSkills}
+                  highlightClassName="group-hover:text-emerald-600 dark:group-hover:text-emerald-400"
+                />
+              </p>
+              {profile.softSkills && profile.softSkills.length > 0 && (
+                <>
+                  <div className=" mt-2 flex items-center justify-between gap-2 pt-2 pb-6 text-xl">
+                    <div className="flex items-center gap-2 text-xl">
+                      <Speech className="h-5 w-5 text-emerald-500" />
+                      Soft Skills
+                    </div>
+                  </div>
+                  <div className="space-y-2.5">
+                    {profile.softSkills.map((item, i) => (
+                      <motion.div
+                        key={i}
+                        initial={isReducedMotion ? {opacity: 1} : {opacity: 0, x: 10}}
+                        animate={{opacity: 1, x: 0}}
+                        transition={{delay: i * 0.1}}
+                        className="group/skill relative border-l-2 border-emerald-500/20 pl-4 transition-colors hover:border-emerald-500"
+                      >
+                        <div className="text-foreground font-bold transition-colors group-hover/skill:text-emerald-600 dark:group-hover/skill:text-emerald-400">
+                          {item.skill}
+                        </div>
+                        {item.description && (
+                          <p className="text-muted-foreground mt-1 text-sm leading-snug">
+                            {item.description}
+                          </p>
+                        )}
+                      </motion.div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </motion.section>
-  );
+  )
 }

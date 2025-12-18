@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import type { CvProfile } from "@/components/cv/types";
 import { motion, Variants } from "motion/react";
 import { useUIStore } from "@/hooks/use-ui-store";
+import { cn } from "@/lib/utils";
 
 type Props = {
   profile: CvProfile;
@@ -52,8 +53,11 @@ export function Education({ profile }: Props) {
         {profile.education?.map((edu, index) => (
           <Card
             key={index}
-            className="overflow-hidden md:last:col-span-2 border-2 hover:border-emerald-500/50 transition-colors group"
+            className="overflow-hidden md:first:col-span-2 md:nth-[2]:col-span-2   md:odd:last:col-span-2 border-2 hover:border-emerald-500/10 transition-colors group relative"
           >
+            <div className="absolute right-0 top-0 h-24 w-24 translate-x-8 translate-y--8 text-emerald-500 opacity-[0.03] transition-transform duration-500 group-hover:scale-110 group-hover:opacity-[0.05]">
+              <GraduationCap className="h-full w-full" />
+            </div>
             <CardHeader>
               <div className="flex items-start gap-2">
                 <GraduationCap className="w-5 h-5 text-muted-foreground group-hover:text-emerald-500 transition-colors shrink-0 mt-1" />
@@ -73,8 +77,11 @@ export function Education({ profile }: Props) {
         {profile.courses?.map((cert, index) => (
           <Card
             key={index}
-            className="overflow-hidden  md:last:col-span-2 border-2 hover:border-emerald-500/50 transition-colors group"
+            className="overflow-hidden  md:last:col-span-2 border-2 hover:border-emerald-500/10 transition-colors group relative"
           >
+            <div className="absolute right-0 top-0 h-24 w-24 translate-x-8 translate-y--8 text-emerald-500 opacity-[0.03] transition-transform duration-500 group-hover:scale-110 group-hover:opacity-[0.05]">
+              <Award className="h-full w-full" />
+            </div>
             <CardHeader>
               <div className="flex items-start justify-between gap-2">
                 <div className="flex items-start gap-2">

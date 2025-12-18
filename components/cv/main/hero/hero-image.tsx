@@ -25,16 +25,16 @@ export function HeroImage({ profile, variants, shouldReduceMotion }: Props) {
       {profile.logoUrl ? (
         <div className="perspective-250 relative h-64 w-64">
           <div
-            className={`h-full w-full transition-all duration-700 transform-3d ${
+            className={`size-full transition-all duration-700 transform-3d ${
               shouldReduceMotion ? '' : 'group-hover:transform-[rotateX(180deg)]'
             }`}
           >
             {/* Front: Logo */}
-            <div className="absolute inset-0 flex h-full w-full items-center justify-center overflow-hidden bg-transparent p-4 backface-hidden">
+            <div className="absolute inset-0 flex size-full items-center justify-center overflow-hidden bg-transparent backface-hidden">
               <div
                 role="img"
                 aria-label={image.logoAlt}
-                className="h-full w-full from-emerald-950 to-emerald-900 bg-linear-to-t dark:from-white dark:to-emerald-100 transition-colors duration-300"
+                className="size-full from-emerald-950 to-emerald-900 bg-linear-to-t dark:from-white dark:to-emerald-100 transition-colors duration-300"
                 style={{
                   maskImage: `url(${profile.logoUrl})`,
                   WebkitMaskImage: `url(${profile.logoUrl})`,
@@ -48,7 +48,7 @@ export function HeroImage({ profile, variants, shouldReduceMotion }: Props) {
               />
             </div>
             {/* Back: Profile Photo */}
-            <div className="from-secondary to-muted dark:from-primary dark:to-secondary absolute inset-0 flex h-full w-full transform-[rotateX(180deg)] items-center justify-center overflow-hidden rounded-2xl bg-linear-to-br shadow-2xl backface-hidden">
+            <div className="from-secondary to-muted dark:from-primary dark:to-secondary absolute inset-0 flex size-full transform-[rotateX(180deg)] items-center justify-center overflow-hidden rounded-2xl bg-linear-to-br shadow-2xl backface-hidden">
               {profile.profilePhotoUrl ? (
                 <Image
                   src={profile.profilePhotoUrl}
