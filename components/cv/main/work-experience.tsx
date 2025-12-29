@@ -13,6 +13,7 @@ import {Badge} from '@/components/ui/badge'
 import {useUIStore} from '@/hooks/use-ui-store'
 import {getAllSkills} from '@/lib/cv-utils'
 import {cn} from '@/lib/utils'
+import { useVibrationOnClick } from '@/hooks/use-vibration'
 
 type Props = {
   profile: CvProfile
@@ -176,6 +177,7 @@ function ExperienceCard({
 }
 
 export function WorkExperience({profile}: Props) {
+  const vibrate = useVibrationOnClick(40);
   const [activeTab, setActiveTab] = useState('related')
 
   const allSkills = useMemo(() => getAllSkills(profile), [profile])
@@ -206,9 +208,9 @@ export function WorkExperience({profile}: Props) {
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="mb-8 grid w-full grid-cols-3">
-          <TabsTrigger value="related">Related</TabsTrigger>
-          <TabsTrigger value="all">Full History</TabsTrigger>
-          <TabsTrigger value="notrelated">Not Related</TabsTrigger>
+          <TabsTrigger onClick={vibrate} value="related">Related</TabsTrigger>
+          <TabsTrigger onClick={vibrate} value="all">Full History</TabsTrigger>
+          <TabsTrigger onClick={vibrate} value="notrelated">Not Related</TabsTrigger>
         </TabsList>
         <div className="space-y-6">
           <div key={activeTab} className="space-y-6">

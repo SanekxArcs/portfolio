@@ -15,6 +15,7 @@ import {Button} from '@/components/ui/button'
 import {Badge} from '@/components/ui/badge'
 import {useUIStore} from '@/hooks/use-ui-store'
 import {cn} from '@/lib/utils'
+import { useVibrationOnClick } from '@/hooks/use-vibration'
 
 type Props = {
   profile: CvProfile
@@ -33,6 +34,8 @@ const containerVariants: Variants = {
 }
 
 function ProjectCard({project}: {project: CvProject}) {
+   const vibrate = useVibrationOnClick(40);
+   const vibrateTen = useVibrationOnClick(10);
   const [emblaRef, emblaApi] = useEmblaCarousel({loop: true})
   const [isHovered, setIsHovered] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
@@ -150,7 +153,9 @@ function ProjectCard({project}: {project: CvProject}) {
               {project.description && project.description.length > 120 && (
                 <Button
                   variant="link"
-                  onClick={() => setIsExpanded(!isExpanded)}
+                  onClick={() => {setIsExpanded(!isExpanded)
+                    vibrateTen()
+                  }}
                   className="px-0 text-xs font-semibold text-emerald-600 transition-colors hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300"
                 >
                   {isExpanded ? 'Show less' : 'Read more'}
@@ -211,9 +216,10 @@ function ProjectCard({project}: {project: CvProject}) {
                   <Button
                     className="flex-1"
                     size="lg"
-                    onClick={() =>
+                    onClick={() => {
                       toast.info('This project is under NDA. Live site is not available.')
-                    }
+                      vibrate()
+                    }}
                   >
                     <Globe /> Live Site
                   </Button>
@@ -235,9 +241,10 @@ function ProjectCard({project}: {project: CvProject}) {
                   <Button
                     className="flex-1"
                     size="lg"
-                    onClick={() =>
+                    onClick={() => {
                       toast.info('This project is under NDA. Live site is not available.')
-                    }
+                      vibrate()
+                    }}
                   >
                     <Code /> Code
                   </Button>

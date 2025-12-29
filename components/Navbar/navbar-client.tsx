@@ -10,8 +10,10 @@ import {ModeToggle} from '@/components/mode-toggle'
 import GradualBlur from '@/components/GradualBlur'
 import {ButtonGroup} from '@/components/ui/button-group'
 import {useUIStore} from '@/hooks/use-ui-store'
+import {useVibrationOnClick} from '@/hooks/use-vibration'
 import {useSnowfallStore} from '@/lib/snowfallStore'
 import {cn} from '@/lib/utils'
+import {toast} from 'sonner'
 
 const navLinks = [
   {href: '#about', label: 'About', icon: User},
@@ -26,6 +28,7 @@ export function NavbarClient({logoUrl, name}: {logoUrl?: string | null; name?: s
   const [activeSection, setActiveSection] = React.useState<string>('')
   const {isReducedMotion, toggleReducedMotion} = useUIStore()
   const {isEnabled, toggleSnowfall} = useSnowfallStore()
+  const vibrate = useVibrationOnClick(40)
 
   const initials = React.useMemo(() => {
     if (!name) return 'OD'
@@ -86,6 +89,10 @@ export function NavbarClient({logoUrl, name}: {logoUrl?: string | null; name?: s
           href="/"
           className="flex items-center text-xl font-bold tracking-tighter"
           aria-label="Home"
+          onClick={() => {
+            vibrate()
+            toast.success('You already on a home page!', {duration: 1000})
+          }}
         >
           <div
             className={cn(
@@ -130,6 +137,7 @@ export function NavbarClient({logoUrl, name}: {logoUrl?: string | null; name?: s
               <Link
                 key={link.href}
                 href={link.href}
+                onClick={vibrate}
                 className={cn(
                   'group/nav relative flex items-center gap-2 text-sm font-medium transition-colors',
                   isActive
@@ -139,7 +147,7 @@ export function NavbarClient({logoUrl, name}: {logoUrl?: string | null; name?: s
               >
                 <link.icon
                   className={cn(
-                    'h-4 w-4 transition-transform duration-300',
+                    'size-4 transition-transform duration-300',
                     isActive ? 'scale-110' : 'group-hover/nav:scale-110',
                   )}
                 />
@@ -156,22 +164,41 @@ export function NavbarClient({logoUrl, name}: {logoUrl?: string | null; name?: s
           })}
           <div className="bg-border h-4 w-px" />
           <ButtonGroup>
-            <Button variant="outline" className="relative" size="icon" onClick={toggleSnowfall}>
+            <Button
+              variant="outline"
+              className="relative"
+              size="icon"
+              onClick={() => {
+                toggleSnowfall()
+                vibrate()
+              }}
+               title={isReducedMotion ? 'Enable Snowfall' : 'Turn off Snowfall'}
+              aria-label={isReducedMotion ? 'Enable Snowfall' : 'Turn off Snowfall'}
+            >
               <SnowflakeIcon />
               {!isEnabled && (
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="h-4 w-0.25 rotate-45 bg-current" />
+                  <div className="border-px h-4 w-0.5 -rotate-45 border-r border-white bg-current dark:border-black" />
                 </div>
               )}
             </Button>
             <Button
               variant="outline"
               size="icon"
-              onClick={toggleReducedMotion}
+              className="relative"
+              onClick={() => {
+                toggleReducedMotion()
+                vibrate()
+              }}
               title={isReducedMotion ? 'Enable animations' : 'Reduce motion'}
               aria-label={isReducedMotion ? 'Enable animations' : 'Reduce motion'}
             >
-              {isReducedMotion ? <ZapOff className="h-4 w-4" /> : <Zap className="h-4 w-4" />}
+              <Zap />
+              {isReducedMotion && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="border-px h-4 w-0.5 -rotate-45 border-r border-white bg-current dark:border-black" />
+                </div>
+              )}
             </Button>
             <ModeToggle />
           </ButtonGroup>
@@ -180,38 +207,57 @@ export function NavbarClient({logoUrl, name}: {logoUrl?: string | null; name?: s
         {/* Mobile Menu Toggle */}
         <div className="flex items-center gap-4 md:hidden">
           <ButtonGroup>
-            <Button variant="outline" className="relative" size="icon" onClick={toggleSnowfall}>
+            <Button
+              variant="outline"
+              className="relative"
+              size="icon"
+              onClick={() => {
+                toggleSnowfall()
+                vibrate()
+              }}
+            >
               <SnowflakeIcon />
               {!isEnabled && (
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="h-4 w-0.25 rotate-45 bg-current" />
+                  <div className="border-px h-4 w-0.5 -rotate-45 border-r border-white bg-current dark:border-black" />
                 </div>
               )}
             </Button>
             <Button
               variant="outline"
               size="icon"
-              onClick={toggleReducedMotion}
+              className="relative"
+              onClick={() => {
+                toggleReducedMotion()
+                vibrate()
+              }}
               title={isReducedMotion ? 'Enable animations' : 'Reduce motion'}
               aria-label={isReducedMotion ? 'Enable animations' : 'Reduce motion'}
             >
-              {isReducedMotion ? <ZapOff className="h-5 w-5" /> : <Zap className="h-5 w-5" />}
+              <Zap />
+              {isReducedMotion && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="border-px h-4 w-0.5 -rotate-45 border-r border-white bg-current dark:border-black" />
+                </div>
+              )}
             </Button>
             <ModeToggle />
           </ButtonGroup>
           <Button
             variant="outline"
             size="icon"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => {
+              setIsMobileMenuOpen(!isMobileMenuOpen)
+              vibrate()
+            }}
             aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isMobileMenuOpen}
           >
-            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {isMobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </Button>
         </div>
       </div>
 
-      {/* Mobile Nav */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -233,9 +279,13 @@ export function NavbarClient({logoUrl, name}: {logoUrl?: string | null; name?: s
                       ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
                       : 'hover:bg-muted',
                   )}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false)
+                    vibrate()
+                    toast.success(`Go to ${link.label} section`, {duration: 1000})
+                  }}
                 >
-                  <link.icon className="h-4 w-4" />
+                  <link.icon className="size-4" />
                   {link.label}
                 </Link>
               )

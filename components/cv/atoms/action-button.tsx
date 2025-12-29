@@ -4,6 +4,7 @@ import {Spoiler} from 'spoiled'
 
 import {Button} from '@/components/ui/button'
 import {cn} from '@/lib/utils'
+import { useVibrationOnClick } from '@/hooks/use-vibration'
 
 interface ActionButtonProps {
   href: string
@@ -32,6 +33,7 @@ export function ActionButton({
   props,
   spoiler = false,
 }: ActionButtonProps) {
+    const vibrate = useVibrationOnClick(50);
   const buttonContent = (
     <>
       {React.cloneElement(icon as React.ReactElement<React.SVGProps<SVGSVGElement>>, {
@@ -55,6 +57,7 @@ export function ActionButton({
         rel="noopener noreferrer"
         className={cn(`group/button cursor-pointer`, classLink)}
         download={download}
+        onClick={vibrate}
         {...props}
       >
         <Button
@@ -76,6 +79,7 @@ export function ActionButton({
       href={href}
       className={cn(`group/button cursor-pointer`, classLink)}
       download={download}
+      onClick={vibrate}
       {...props}
     >
       <Button
