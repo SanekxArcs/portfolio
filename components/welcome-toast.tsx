@@ -31,6 +31,25 @@ export function WelcomeToast() {
         localStorage.setItem('has-visited-portfolio', 'true')
       }
 
+      const now = new Date()
+      const isBirthdaySeason = now.getMonth() === 0 && [9, 10, 11].includes(now.getDate())
+      if (isBirthdaySeason) {
+        const birthdayMessages: Record<number, string> = {
+          9: ' 🎂 Tomorrow is my birthday!',
+          10: ' 🎂 Today is my birthday!',
+          11: ' 🎂 Yesterday was my birthday!',
+        }
+        message += birthdayMessages[now.getDate()]
+
+        if (!shouldShowReducedMessage && now.getDate() === 10) {
+          confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: {y: 0.6},
+          })
+        }
+      }
+
       if (shouldShowReducedMessage) {
         toast.info(title, {
           description: `${message} I noticed you prefer reduced motion. You can enable animations by clicking the lightning icon in the navbar.`,
@@ -43,7 +62,7 @@ export function WelcomeToast() {
         })
       }
     }, 100)
-  }, [])
+  }, [isReducedMotion])
 
   useEffect(() => {
     if (prevReducedMotion.current === null) {
