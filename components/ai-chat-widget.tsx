@@ -37,7 +37,7 @@ export function AiChatWidget() {
 
   // Generate session ID on mount
   useEffect(() => {
-    const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
     setSessionId(newSessionId);
   }, []);
 
@@ -115,11 +115,11 @@ export function AiChatWidget() {
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error sending message:", error);
       const errorMessage: Message = {
         role: "assistant",
-        content: `Sorry, I encountered an error: ${error.message}. Please try again.`,
+        content: `Sorry, I encountered an error: ${error instanceof Error ? error.message : 'Unknown error'}. Please try again.`,
         timestamp: new Date().toISOString(),
       };
       setMessages((prev) => [...prev, errorMessage]);

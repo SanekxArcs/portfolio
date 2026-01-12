@@ -66,7 +66,12 @@ Remember: Your goal is to sell this person as an employee or their services. Be 
     });
 
     // Build conversation history for context
-    const conversationHistory = chatHistory.map((msg: any) => ({
+    interface ChatMessage {
+      role: string;
+      content: string;
+    }
+    
+    const conversationHistory = (chatHistory as ChatMessage[]).map((msg) => ({
       role: msg.role === "assistant" ? "model" : "user",
       parts: [{ text: msg.content }],
     }));
@@ -136,10 +141,10 @@ Remember: Your goal is to sell this person as an employee or their services. Be 
       response: aiResponse,
       timestamp: assistantMessage.timestamp,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Chat API error:", error);
     return NextResponse.json(
-      { error: error.message || "Failed to process chat message" },
+      { error: error instanceof Error ? error.message : "Failed to process chat message" },
       { status: 500 }
     );
   }
