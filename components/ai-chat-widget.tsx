@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Bot, X, Send, Loader2 } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -226,13 +227,32 @@ export function AiChatWidget() {
                       }`}
                     >
                       <div
-                        className={`max-w-[80%] rounded-lg px-4 py-2 wrap-break-word ${
+                        className={`max-w-[80%] rounded-lg px-4 py-2 break-words ${
                           message.role === "user"
                             ? "bg-cyan-500 text-white"
                             : "bg-muted"
                         }`}
                       >
-                        <p className="text-sm whitespace-pre-wrap wrap-break-word">{message.content}</p>
+                        {message.role === "assistant" ? (
+                          <div className="text-sm prose prose-sm dark:prose-invert max-w-none">
+                            <ReactMarkdown
+                              components={{
+                                p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                                ul: ({ children }) => <ul className="list-disc ml-4 mb-2">{children}</ul>,
+                                ol: ({ children }) => <ol className="list-decimal ml-4 mb-2">{children}</ol>,
+                                li: ({ children }) => <li className="mb-1">{children}</li>,
+                                strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+                                em: ({ children }) => <em className="italic">{children}</em>,
+                                code: ({ children }) => <code className="bg-black/10 dark:bg-white/10 px-1 py-0.5 rounded text-xs">{children}</code>,
+                                pre: ({ children }) => <pre className="bg-black/10 dark:bg-white/10 p-2 rounded text-xs overflow-x-auto">{children}</pre>,
+                              }}
+                            >
+                              {message.content}
+                            </ReactMarkdown>
+                          </div>
+                        ) : (
+                          <p className="text-sm whitespace-pre-wrap break-words">{message.content}</p>
+                        )}
                         <p className="text-xs opacity-70 mt-1">
                           {new Date(message.timestamp).toLocaleTimeString()}
                         </p>
