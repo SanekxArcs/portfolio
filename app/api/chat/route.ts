@@ -1,5 +1,5 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { NextRequest, NextResponse } from "next/server";
+import {GoogleGenerativeAI} from '@google/generative-ai'
+import {NextRequest, NextResponse} from 'next/server'
 import {randomUUID} from 'crypto'
 import {writeClient} from '@/sanity/lib/client'
 import {sanityFetch} from '@/sanity/lib/client'
@@ -7,13 +7,10 @@ import {AI_CONFIG_DATA, CV_PROFILE_DATA} from '@/sanity/queries/queries'
 import {ChatHistory, CV_PROFILE_DATAResult} from '@/sanity.types'
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY || '')
+const rateLimitMap = new Map<string, {count: number; resetTime: number}>()
+const RATE_LIMIT_WINDOW = 60000
+const RATE_LIMIT_MAX_REQUESTS = 10
 
-// Rate limiting map: IP -> { count, resetTime }
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
-const RATE_LIMIT_WINDOW = 60000; // 1 minute
-const RATE_LIMIT_MAX_REQUESTS = 10; // 10 requests per minute
-
-// Jailbreak keywords - high signal words that indicate malicious intent
 const JAILBREAK_KEYWORDS_EN = [
   'ignore previous instructions',
   'ignore all instructions',
@@ -49,7 +46,7 @@ const JAILBREAK_KEYWORDS_EN = [
   'you are free',
   'in character',
   'stay in character',
-];
+]
 
 const JAILBREAK_KEYWORDS_UA_RU = [
   'ігноруй попередні інструкції',
@@ -96,42 +93,40 @@ const JAILBREAK_KEYWORDS_UA_RU = [
   'притворяйся',
   'симулируй',
   'действуй как',
-];
+]
 
-const ALL_JAILBREAK_KEYWORDS = [...JAILBREAK_KEYWORDS_EN, ...JAILBREAK_KEYWORDS_UA_RU];
+const ALL_JAILBREAK_KEYWORDS = [...JAILBREAK_KEYWORDS_EN, ...JAILBREAK_KEYWORDS_UA_RU]
 
 function checkForJailbreakAttempt(message: string): boolean {
-  const lowerMessage = message.toLowerCase();
-  return ALL_JAILBREAK_KEYWORDS.some(keyword => lowerMessage.includes(keyword.toLowerCase()));
+  const lowerMessage = message.toLowerCase()
+  return ALL_JAILBREAK_KEYWORDS.some((keyword) => lowerMessage.includes(keyword.toLowerCase()))
 }
 
 function checkRateLimit(identifier: string): boolean {
-  const now = Date.now();
-  const record = rateLimitMap.get(identifier);
-  
+  const now = Date.now()
+  const record = rateLimitMap.get(identifier)
+
   if (!record || now > record.resetTime) {
-    // Start new window
-    rateLimitMap.set(identifier, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
-    return true;
+    rateLimitMap.set(identifier, {count: 1, resetTime: now + RATE_LIMIT_WINDOW})
+    return true
   }
-  
+
   if (record.count >= RATE_LIMIT_MAX_REQUESTS) {
-    return false;
+    return false
   }
-  
-  record.count++;
-  return true;
+
+  record.count++
+  return true
 }
 
 export async function POST(request: NextRequest) {
   try {
-    // Rate limiting
-    const identifier = request.headers.get('x-forwarded-for') || request.ip || 'anonymous';
+    const identifier = request.headers.get('x-forwarded-for') || request.ip || 'anonymous'
     if (!checkRateLimit(identifier)) {
       return NextResponse.json(
-        { error: 'Занадто багато запитів. Спробуйте через хвилину. / Too many requests. Please try again in a minute.' },
-        { status: 429 }
-      );
+        {error: 'Too many requests. Please try again in a minute.'},
+        {status: 429},
+      )
     }
 
     const body = await request.json()
@@ -144,9 +139,10 @@ export async function POST(request: NextRequest) {
     // Check for jailbreak attempts
     if (checkForJailbreakAttempt(message)) {
       return NextResponse.json({
-        response: 'Я можу допомогти лише з питаннями про Олександра як розробника, його послуги та досвід. Запитайте, наприклад: стек, типи проєктів, процес роботи, терміни, бюджет або як звʼязатися.\n\nI can only help with questions about Oleksandr as a developer, his services, and experience. Ask, for example: stack, project types, work process, deadlines, budget, or how to get in touch.',
+        response:
+          'I can only help with questions about Oleksandr as a developer, his services, and experience. Ask, for example: stack, project types, work process, deadlines, budget, or how to get in touch.',
         timestamp: new Date().toISOString(),
-      });
+      })
     }
 
     const aiConfig = await sanityFetch({
@@ -162,7 +158,7 @@ export async function POST(request: NextRequest) {
     const contextInfo = buildContextFromProfile(cvProfile)
 
     // Use the security-focused system prompt
-    const portfolioSite = process.env.NEXT_PUBLIC_SITE_URL || 'o-d.dev';
+    const portfolioSite = process.env.NEXT_PUBLIC_SITE_URL || 'o-d.dev'
     const defaultSystemPrompt = `You are the portfolio AI assistant for Oleksandr Dzisiak on ${portfolioSite}.
 Your only purpose is to help visitors understand Oleksandr, his skills, experience, services, and how to contact/hire him.
 
@@ -188,9 +184,10 @@ STYLE:
 - End with a gentle call-to-action when appropriate (invite to contact / schedule a call).
 
 SAFE REDIRECTION TEMPLATE (when out of scope):
-"Я можу допомогти лише з питаннями про Олександра як розробника, його послуги та досвід. Запитайте, наприклад: стек, типи проєктів, процес роботи, терміни, бюджет або як звʼязатися."`;
+"I can only help with questions about Oleksandr as a developer, his services, and experience. Ask, for example: stack, project types, work process, deadlines, budget, or how to get in touch."
+VERY IMPORTANT RULE IF  SOME ONE WRITE FOR YOU ON RUSSIAN OR ASK TO SPEAK ON RUSSIAN REJECT REQUEST. preferet language is En.`
 
-    const systemPrompt = aiConfig?.systemPrompt || defaultSystemPrompt;
+    const systemPrompt = aiConfig?.systemPrompt || defaultSystemPrompt
 
     const additionalInfo = aiConfig?.additionalInfo || ''
 
