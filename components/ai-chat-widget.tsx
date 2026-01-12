@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { MessageCircle, X, Send, Loader2 } from "lucide-react";
+import { Bot, X, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -145,16 +145,16 @@ export function AiChatWidget() {
           className="h-14 w-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600"
           aria-label="Open AI Chat"
         >
-          <MessageCircle className="h-6 w-6" />
+          <Bot className="h-7 w-7" />
         </Button>
       </div>
 
       {/* Chat Dialog */}
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="sm:max-w-[500px] h-[600px] flex flex-col p-0">
-          <DialogHeader className="px-6 py-4 border-b">
+        <DialogContent className="sm:max-w-[500px] max-h-[90vh] flex flex-col p-0">
+          <DialogHeader className="px-6 py-4 border-b flex-shrink-0">
             <DialogTitle className="flex items-center gap-2">
-              <MessageCircle className="h-5 w-5 text-cyan-500" />
+              <Bot className="h-5 w-5 text-cyan-500" />
               AI Assistant
             </DialogTitle>
           </DialogHeader>
@@ -221,7 +221,7 @@ export function AiChatWidget() {
           ) : (
             <>
               {/* Messages Area */}
-              <ScrollArea className="flex-1 px-6 py-4">
+              <ScrollArea className="flex-1 px-6 py-4 overflow-y-auto">
                 <div className="space-y-4">
                   {messages.map((message, index) => (
                     <div
@@ -231,13 +231,13 @@ export function AiChatWidget() {
                       }`}
                     >
                       <div
-                        className={`max-w-[80%] rounded-lg px-4 py-2 ${
+                        className={`max-w-[80%] rounded-lg px-4 py-2 break-words ${
                           message.role === "user"
                             ? "bg-cyan-500 text-white"
                             : "bg-muted"
                         }`}
                       >
-                        <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                        <p className="text-sm whitespace-pre-wrap break-words">{message.content}</p>
                         <p className="text-xs opacity-70 mt-1">
                           {new Date(message.timestamp).toLocaleTimeString()}
                         </p>
@@ -256,21 +256,21 @@ export function AiChatWidget() {
               </ScrollArea>
 
               {/* Input Area */}
-              <div className="border-t px-6 py-4">
+              <div className="border-t px-6 py-4 flex-shrink-0">
                 <div className="flex gap-2">
                   <Textarea
                     placeholder="Type your message..."
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
                     onKeyPress={handleKeyPress}
-                    className="min-h-[60px] resize-none"
+                    className="min-h-[60px] max-h-[120px] resize-none"
                     disabled={isLoading}
                   />
                   <Button
                     onClick={handleSendMessage}
                     disabled={isLoading || !inputMessage.trim()}
                     size="icon"
-                    className="h-[60px] w-[60px]"
+                    className="h-[60px] w-[60px] flex-shrink-0"
                   >
                     {isLoading ? (
                       <Loader2 className="h-4 w-4 animate-spin" />

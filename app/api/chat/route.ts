@@ -61,7 +61,7 @@ Remember: Your goal is to sell this person as an employee or their services. Be 
 
     // Initialize the model
     const model = genAI.getGenerativeModel({ 
-      model: "gemini-1.5-flash",
+      model: "gemini-flash-lite-latest",
       systemInstruction: fullSystemPrompt,
     });
 
@@ -71,7 +71,16 @@ Remember: Your goal is to sell this person as an employee or their services. Be 
       content: string;
     }
     
-    const conversationHistory = (chatHistory as ChatMessage[]).map((msg) => ({
+    // Filter out the initial greeting message and ensure history starts with user
+    const filteredHistory = (chatHistory as ChatMessage[]).filter((msg, index) => {
+      // Skip the first message if it's from assistant (greeting)
+      if (index === 0 && msg.role === "assistant") {
+        return false;
+      }
+      return true;
+    });
+    
+    const conversationHistory = filteredHistory.map((msg) => ({
       role: msg.role === "assistant" ? "model" : "user",
       parts: [{ text: msg.content }],
     }));
