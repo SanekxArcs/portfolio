@@ -83,3 +83,12 @@ export const NAVBAR_DATA = defineQuery(`
   "logoUrl": logo.asset->url
 }
 `);
+
+export const AI_CONFIG_DATA = defineQuery(`
+*[_type == "aiConfig"][0]{
+  _id,
+  systemPrompt,
+  additionalInfo,
+  greetingMessage
+}
+`);

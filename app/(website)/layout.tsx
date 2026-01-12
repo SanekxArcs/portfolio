@@ -11,6 +11,7 @@ import LightRays from '@/components/LightRays'
 import {ReducedMotionProvider} from '@/components/reduced-motion-provider'
 import {WelcomeToast} from '@/components/welcome-toast'
 import {SnowfallEffect} from '@/components/snowfall'
+import {AiChatWidget} from '@/components/ai-chat-widget'
 
 import './globals.css'
 
@@ -98,6 +99,7 @@ export default function RootLayout({
             </main>
             <Footer />
             <WelcomeToast />
+            <AiChatWidget />
             <Toaster />
             <SanityLive />
           </ThemeProvider>

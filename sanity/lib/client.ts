@@ -1,12 +1,21 @@
 import { createClient, QueryParams } from 'next-sanity'
 
-import { apiVersion, dataset, projectId } from '../env'
+import { apiVersion, dataset, projectId, token } from '../env'
 
 export const client = createClient({
   projectId,
   dataset,
   apiVersion,
   useCdn: false, // Set to false if statically generating pages, using ISR or tag-based revalidation
+})
+
+// Client with write token for server-side operations
+export const writeClient = createClient({
+  projectId,
+  dataset,
+  apiVersion,
+  useCdn: false,
+  token: process.env.SANITY_API_WRITE_TOKEN || token, // Use write token if available
 })
 
 export async function sanityFetch<const QueryString extends string>({
