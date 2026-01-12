@@ -214,7 +214,7 @@ TRUTHFULNESS:
 - If a detail is missing, say you do not know and offer a way to get it (e.g., ask Oleksandr via contact form).
 
 STYLE:
-- Default language: English.
+- Default language: English or can be Ukrainian.
 - Be concise, confident, and helpful.
 - Prefer 3-6 bullet points for "sales" answers.
 - End with a gentle call-to-action when appropriate (invite to contact / schedule a call).
@@ -222,7 +222,7 @@ STYLE:
 SAFE REDIRECTION TEMPLATE (when out of scope):
 "I can only help with questions about Oleksandr as a developer, his services, and experience. Ask, for example: stack, project types, work process, deadlines, budget, or how to get in touch."
 
-VERY IMPORTANT RULE: If someone writes to you in Russian or asks to speak in Russian, REJECT the request. Preferred language is English.`
+VERY IMPORTANT RULE: If someone writes to you in Russian or asks to speak in Russian, REJECT the request. Preferred language is English next is Ukrainian.`
 
     const systemPrompt = aiConfig?.systemPrompt || defaultSystemPrompt
 
@@ -335,6 +335,26 @@ ${contextInfo}`
     })
   } catch (error: unknown) {
     console.error('Chat API error:', error)
+
+    // Handle Google AI quota errors specifically
+    if (error instanceof Error && error.message.includes('quota')) {
+      return NextResponse.json(
+        {
+          error:
+            'Service temporarily unavailable due to high demand. Please try again in a moment.',
+        },
+        {status: 429},
+      )
+    }
+
+    // Handle rate limit errors
+    if (error instanceof Error && error.message.includes('Too Many Requests')) {
+      return NextResponse.json(
+        {error: 'Too many requests. Please wait a moment and try again.'},
+        {status: 429},
+      )
+    }
+
     return NextResponse.json(
       {error: error instanceof Error ? error.message : 'Failed to process chat message'},
       {status: 500},
