@@ -34,11 +34,22 @@ export function AiChatWidget() {
   const [greetingMessage, setGreetingMessage] = useState(
     "Hi! I'm an AI assistant here to tell you about my services. How can I help you today?"
   );
+  const [messageCount, setMessageCount] = useState(0);
+  const [messagesRemaining, setMessagesRemaining] = useState(15);
+  const [needsEmail, setNeedsEmail] = useState(false);
+  const [showEmailPrompt, setShowEmailPrompt] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Get or create sessionId from localStorage
   useEffect(() => {
-    const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
-    setSessionId(newSessionId);
+    const storedSessionId = localStorage.getItem('ai-chat-session-id');
+    if (storedSessionId) {
+      setSessionId(storedSessionId);
+    } else {
+      const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
+      setSessionId(newSessionId);
+      localStorage.setItem('ai-chat-session-id', newSessionId);
+    }
   }, []);
 
   useEffect(() => {
@@ -66,6 +77,26 @@ export function AiChatWidget() {
     }
     
     setShowContactForm(false);
+  };
+
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!contactInfo.email) {
+      alert("Please provide your email to continue chatting.");
+      return;
+    }
+    
+    setShowEmailPrompt(false);
+    setNeedsEmail(false);
+    
+    // Add a message confirming email received
+    const confirmMessage: Message = {
+      role: "assistant",
+      content: "Thank you for providing your email! You can now continue chatting. You have 5 more messages available.",
+      timestamp: new Date().toISOString(),
+    };
+    setMessages((prev) => [...prev, confirmMessage]);
   };
 
   const handleSendMessage = async () => {
@@ -101,6 +132,19 @@ export function AiChatWidget() {
       const data = await response.json();
 
       if (!response.ok) {
+        // Check if email is needed
+        if (response.status === 429 && data.needsEmail) {
+          setNeedsEmail(true);
+          setShowEmailPrompt(true);
+          const errorMessage: Message = {
+            role: "assistant",
+            content: data.error || "You've reached the message limit. Please provide your email to continue chatting.",
+            timestamp: new Date().toISOString(),
+          };
+          setMessages((prev) => [...prev, errorMessage]);
+          setIsLoading(false);
+          return;
+        }
         throw new Error(data.error || "Failed to get response");
       }
 
@@ -111,6 +155,14 @@ export function AiChatWidget() {
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
+      
+      // Update message count and remaining
+      if (data.messageCount !== undefined) {
+        setMessageCount(data.messageCount);
+      }
+      if (data.messagesRemaining !== undefined) {
+        setMessagesRemaining(data.messagesRemaining);
+      }
     } catch (error: unknown) {
       console.error("Error sending message:", error);
       const errorMessage: Message = {
@@ -214,6 +266,32 @@ export function AiChatWidget() {
                 </form>
               </div>
             </div>
+          ) : showEmailPrompt ? (
+            <div className="flex-1 p-6 overflow-y-auto">
+              <div className="space-y-4">
+                <p className="text-sm text-muted-foreground">
+                  You've reached your message limit. Please provide your email to get 5 more messages:
+                </p>
+                <form onSubmit={handleEmailSubmit} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="email-extra">Email *</Label>
+                    <Input
+                      id="email-extra"
+                      type="email"
+                      placeholder="your@email.com"
+                      value={contactInfo.email || ""}
+                      onChange={(e) =>
+                        setContactInfo({ ...contactInfo, email: e.target.value })
+                      }
+                      required
+                    />
+                  </div>
+                  <Button type="submit" className="w-full">
+                    Continue Chatting
+                  </Button>
+                </form>
+              </div>
+            </div>
           ) : (
             <>
               {/* Messages Area */}
@@ -272,6 +350,12 @@ export function AiChatWidget() {
 
               {/* Input Area */}
               <div className="border-t px-6 py-4 shrink-0">
+                {messagesRemaining <= 5 && messagesRemaining > 0 && (
+                  <div className="text-xs text-muted-foreground mb-2">
+                    {messagesRemaining} message{messagesRemaining !== 1 ? 's' : ''} remaining
+                    {!contactInfo.email && messagesRemaining <= 3 && " - Provide email for 5 more messages"}
+                  </div>
+                )}
                 <div className="flex gap-2">
                   <Textarea
                     placeholder="Type your message..."

@@ -7,9 +7,12 @@ import {AI_CONFIG_DATA, CV_PROFILE_DATA} from '@/sanity/queries/queries'
 import {ChatHistory, CV_PROFILE_DATAResult} from '@/sanity.types'
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY || '')
-const rateLimitMap = new Map<string, {count: number; resetTime: number}>()
-const RATE_LIMIT_WINDOW = 60000
-const RATE_LIMIT_MAX_REQUESTS = 10
+
+// User-based rate limiting (per sessionId)
+const userMessageCountMap = new Map<string, number>()
+const INITIAL_MESSAGE_LIMIT = 15
+const EXTRA_MESSAGE_LIMIT = 5
+const TOTAL_MESSAGE_LIMIT = INITIAL_MESSAGE_LIMIT + EXTRA_MESSAGE_LIMIT // 20 total
 
 const JAILBREAK_KEYWORDS_EN = [
   'ignore previous instructions',
@@ -102,38 +105,71 @@ function checkForJailbreakAttempt(message: string): boolean {
   return ALL_JAILBREAK_KEYWORDS.some((keyword) => lowerMessage.includes(keyword.toLowerCase()))
 }
 
-function checkRateLimit(identifier: string): boolean {
-  const now = Date.now()
-  const record = rateLimitMap.get(identifier)
+function getUserMessageCount(sessionId: string): number {
+  return userMessageCountMap.get(sessionId) || 0
+}
 
-  if (!record || now > record.resetTime) {
-    rateLimitMap.set(identifier, {count: 1, resetTime: now + RATE_LIMIT_WINDOW})
-    return true
+function incrementUserMessageCount(sessionId: string): number {
+  const currentCount = getUserMessageCount(sessionId)
+  const newCount = currentCount + 1
+  userMessageCountMap.set(sessionId, newCount)
+  return newCount
+}
+
+function checkMessageLimit(sessionId: string, hasEmail: boolean): { 
+  allowed: boolean; 
+  count: number; 
+  needsEmail: boolean;
+  message?: string;
+} {
+  const count = getUserMessageCount(sessionId)
+  
+  // If user has provided email, allow up to total limit
+  if (hasEmail) {
+    if (count >= TOTAL_MESSAGE_LIMIT) {
+      return {
+        allowed: false,
+        count,
+        needsEmail: false,
+        message: 'You have reached the maximum message limit. Please start a new conversation.',
+      }
+    }
+    return { allowed: true, count, needsEmail: false }
   }
-
-  if (record.count >= RATE_LIMIT_MAX_REQUESTS) {
-    return false
+  
+  // Without email, only allow initial limit
+  if (count >= INITIAL_MESSAGE_LIMIT) {
+    return {
+      allowed: false,
+      count,
+      needsEmail: true,
+      message: `You've reached ${INITIAL_MESSAGE_LIMIT} messages. Please provide your email to continue chatting (${EXTRA_MESSAGE_LIMIT} more messages available).`,
+    }
   }
-
-  record.count++
-  return true
+  
+  return { allowed: true, count, needsEmail: false }
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const identifier = request.headers.get('x-forwarded-for') || request.ip || 'anonymous'
-    if (!checkRateLimit(identifier)) {
-      return NextResponse.json(
-        {error: 'Too many requests. Please try again in a minute.'},
-        {status: 429},
-      )
-    }
-
     const body = await request.json()
     const {message, sessionId, userEmail, userPhone, userName, companyName, chatHistory = []} = body
 
     if (!message || !sessionId) {
       return NextResponse.json({error: 'Message and sessionId are required'}, {status: 400})
+    }
+
+    // Check message limit
+    const limitCheck = checkMessageLimit(sessionId, !!userEmail)
+    if (!limitCheck.allowed) {
+      return NextResponse.json(
+        {
+          error: limitCheck.message,
+          needsEmail: limitCheck.needsEmail,
+          messageCount: limitCheck.count,
+        },
+        {status: 429},
+      )
     }
 
     // Check for jailbreak attempts
@@ -178,14 +214,15 @@ TRUTHFULNESS:
 - If a detail is missing, say you do not know and offer a way to get it (e.g., ask Oleksandr via contact form).
 
 STYLE:
-- Default language: Ukrainian (English terms allowed).
+- Default language: English.
 - Be concise, confident, and helpful.
 - Prefer 3-6 bullet points for "sales" answers.
 - End with a gentle call-to-action when appropriate (invite to contact / schedule a call).
 
 SAFE REDIRECTION TEMPLATE (when out of scope):
 "I can only help with questions about Oleksandr as a developer, his services, and experience. Ask, for example: stack, project types, work process, deadlines, budget, or how to get in touch."
-VERY IMPORTANT RULE IF  SOME ONE WRITE FOR YOU ON RUSSIAN OR ASK TO SPEAK ON RUSSIAN REJECT REQUEST. preferet language is En.`
+
+VERY IMPORTANT RULE: If someone writes to you in Russian or asks to speak in Russian, REJECT the request. Preferred language is English.`
 
     const systemPrompt = aiConfig?.systemPrompt || defaultSystemPrompt
 
@@ -286,9 +323,15 @@ ${contextInfo}`
       })
     }
 
+    // Increment message count for this user
+    const newCount = incrementUserMessageCount(sessionId)
+    const hasEmail = !!userEmail
+
     return NextResponse.json({
       response: aiResponse,
       timestamp: assistantMessage.timestamp,
+      messageCount: newCount,
+      messagesRemaining: (hasEmail ? TOTAL_MESSAGE_LIMIT : INITIAL_MESSAGE_LIMIT) - newCount,
     })
   } catch (error: unknown) {
     console.error('Chat API error:', error)
