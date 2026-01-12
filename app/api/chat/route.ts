@@ -41,19 +41,18 @@ export async function POST(request: NextRequest) {
       tags: ["cvProfile"],
     });
 
-    if (!aiConfig?.systemPrompt) {
-      return NextResponse.json(
-        { error: "AI configuration not found. Please set up AI config in Sanity Studio." },
-        { status: 500 }
-      );
-    }
-
     // Build context for the AI
     const contextInfo = buildContextFromProfile(cvProfile);
     
-    const fullSystemPrompt = `${aiConfig.systemPrompt}
+    // Use default prompt if no config exists
+    const systemPrompt = aiConfig?.systemPrompt || 
+      "You are an AI assistant representing a talented professional. Answer questions about their skills, experience, and services in a professional and enthusiastic manner. Be friendly and try to showcase their strengths.";
+    
+    const additionalInfo = aiConfig?.additionalInfo || "";
+    
+    const fullSystemPrompt = `${systemPrompt}
 
-${aiConfig.additionalInfo ? `Additional Information: ${aiConfig.additionalInfo}` : ""}
+${additionalInfo ? `Additional Information: ${additionalInfo}` : ""}
 
 Context about the person you're representing:
 ${contextInfo}
@@ -61,7 +60,10 @@ ${contextInfo}
 Remember: Your goal is to sell this person as an employee or their services. Be professional, enthusiastic, and highlight their strengths.`;
 
     // Initialize the model
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ 
+      model: "gemini-1.5-flash",
+      systemInstruction: fullSystemPrompt,
+    });
 
     // Build conversation history for context
     const conversationHistory = chatHistory.map((msg: any) => ({
