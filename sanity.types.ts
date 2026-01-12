@@ -13,6 +13,38 @@
  */
 
 // Source: schema.json
+export type ChatHistory = {
+  _id: string
+  _type: 'chatHistory'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  sessionId?: string
+  userEmail?: string
+  userPhone?: string
+  userName?: string
+  companyName?: string
+  messages?: Array<{
+    role?: 'user' | 'assistant'
+    content?: string
+    timestamp?: string
+    _key: string
+  }>
+  createdAt?: string
+  updatedAt?: string
+}
+
+export type AiConfig = {
+  _id: string
+  _type: 'aiConfig'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  systemPrompt?: string
+  additionalInfo?: string
+  greetingMessage?: string
+}
+
 export type CvProfile = {
   _id: string
   _type: 'cvProfile'
@@ -259,6 +291,8 @@ export type Slug = {
 }
 
 export type AllSanitySchemaTypes =
+  | ChatHistory
+  | AiConfig
   | CvProfile
   | SanityImageCrop
   | SanityImageHotspot
@@ -355,6 +389,14 @@ export type NAVBAR_DATAResult = {
   name: string | null
   logoUrl: string | null
 } | null
+// Variable: AI_CONFIG_DATA
+// Query: *[_type == "aiConfig"][0]{  _id,  systemPrompt,  additionalInfo,  greetingMessage}
+export type AI_CONFIG_DATAResult = {
+  _id: string
+  systemPrompt: string | null
+  additionalInfo: string | null
+  greetingMessage: string | null
+} | null
 
 // Query TypeMap
 import '@sanity/client'
@@ -362,5 +404,6 @@ declare module '@sanity/client' {
   interface SanityQueries {
     '\n*[_type == "cvProfile"][0]{\n  _id,\n  name,\n  role,\n  description,\n  about,\n  cvUrl,\n  "logoUrl": logo.asset->url,\n  "profilePhotoUrl": profilePhoto.asset->url,\n  "cvFileUrl": cvFile.asset->url,\n  contacts{\n    email,\n    phoneNumber,\n    location,\n    relocationReady,\n    typeOfContract,\n    workAvailability\n  },\n  links[]{\n    link,\n    name,\n    title,\n    iconName\n  },\n  languages[]{\n    language,\n    level\n  },\n  skillsFrontend,\n  skillsBackend,\n  skillsDevOps,\n  skillsOther,\n  softSkills[]{\n    skill,\n    description\n  },\n  interests,\n  education[]{\n    institution,\n    specialization\n  },\n  projects[]{\n    title,\n    description,\n    "imageUrls": image[].asset->url,\n    features,\n    technologies,\n    url,\n    urlToCode,\n    petProject,\n    isPinned,\n    nda\n  },\n  courses[]{\n    title,\n    platform,\n    date,\n    badges,\n    visibleOnCV\n  },\n  workExperience[]{\n    jobTitle,\n    jobTitle2,\n    companyName,\n    location,\n    duration,\n    type,\n    description,\n    website,\n    websiteName,\n    isRelated,\n    hideFromCV\n  }\n}\n': CV_PROFILE_DATAResult
     '\n*[_type == "cvProfile"][0]{\n  name,\n  "logoUrl": logo.asset->url\n}\n': NAVBAR_DATAResult
+    '\n*[_type == "aiConfig"][0]{\n  _id,\n  systemPrompt,\n  additionalInfo,\n  greetingMessage\n}\n': AI_CONFIG_DATAResult
   }
 }

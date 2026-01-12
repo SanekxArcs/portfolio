@@ -35,21 +35,17 @@ export function AiChatWidget() {
   );
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Generate session ID on mount
   useEffect(() => {
     const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
     setSessionId(newSessionId);
   }, []);
 
-  // Scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Load greeting message when dialog opens
   useEffect(() => {
     if (isOpen && messages.length === 0) {
-      // Add initial greeting from AI
       setMessages([
         {
           role: "assistant",
@@ -63,7 +59,6 @@ export function AiChatWidget() {
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate at least one contact field is filled
     if (!contactInfo.email && !contactInfo.phone && !contactInfo.name) {
       alert("Please provide at least your email, phone, or name to start chatting.");
       return;
@@ -142,20 +137,20 @@ export function AiChatWidget() {
         <Button
           onClick={() => setIsOpen(true)}
           size="lg"
-          className="h-14 w-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600"
+          className="size-10 shadow-lg hover:shadow-xl transition-all duration-300 "
           aria-label="Open AI Chat"
         >
-          <Bot className="h-7 w-7" />
+          <Bot />
         </Button>
       </div>
 
       {/* Chat Dialog */}
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="sm:max-w-[500px] max-h-[90vh] flex flex-col p-0">
-          <DialogHeader className="px-6 py-4 border-b flex-shrink-0">
+        <DialogContent className="sm:max-w-125 max-h-[90vh] flex flex-col p-0">
+          <DialogHeader className="px-6 py-4 border-b shrink-0">
             <DialogTitle className="flex items-center gap-2">
-              <Bot className="h-5 w-5 text-cyan-500" />
-              AI Assistant
+              <Bot className="size-5 text-emerald-500" />
+              Aks AI about Oleksandr
             </DialogTitle>
           </DialogHeader>
 
@@ -163,14 +158,14 @@ export function AiChatWidget() {
             <div className="flex-1 p-6 overflow-y-auto">
               <div className="space-y-4">
                 <p className="text-sm text-muted-foreground">
-                  Before we start, please share at least one way for me to contact you:
+                  Before we start, please share at least one way for me to contact you, it`s can be even only name:
                 </p>
                 <form onSubmit={handleContactSubmit} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="name">Name or Company Name</Label>
+                    <Label htmlFor="name">Name</Label>
                     <Input
                       id="name"
-                      placeholder="Your name or company name"
+                      placeholder="Your name"
                       value={contactInfo.name || ""}
                       onChange={(e) =>
                         setContactInfo({ ...contactInfo, name: e.target.value })
@@ -213,7 +208,7 @@ export function AiChatWidget() {
                     />
                   </div>
                   <Button type="submit" className="w-full">
-                    Start Chat
+                    <Send /> Start Chat 
                   </Button>
                 </form>
               </div>
@@ -231,13 +226,13 @@ export function AiChatWidget() {
                       }`}
                     >
                       <div
-                        className={`max-w-[80%] rounded-lg px-4 py-2 break-words ${
+                        className={`max-w-[80%] rounded-lg px-4 py-2 wrap-break-word ${
                           message.role === "user"
                             ? "bg-cyan-500 text-white"
                             : "bg-muted"
                         }`}
                       >
-                        <p className="text-sm whitespace-pre-wrap break-words">{message.content}</p>
+                        <p className="text-sm whitespace-pre-wrap wrap-break-word">{message.content}</p>
                         <p className="text-xs opacity-70 mt-1">
                           {new Date(message.timestamp).toLocaleTimeString()}
                         </p>
@@ -256,21 +251,21 @@ export function AiChatWidget() {
               </ScrollArea>
 
               {/* Input Area */}
-              <div className="border-t px-6 py-4 flex-shrink-0">
+              <div className="border-t px-6 py-4 shrink-0">
                 <div className="flex gap-2">
                   <Textarea
                     placeholder="Type your message..."
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
                     onKeyPress={handleKeyPress}
-                    className="min-h-[60px] max-h-[120px] resize-none"
+                    className="min-h-15 max-h-30 resize-none"
                     disabled={isLoading}
                   />
                   <Button
                     onClick={handleSendMessage}
                     disabled={isLoading || !inputMessage.trim()}
                     size="icon"
-                    className="h-[60px] w-[60px] flex-shrink-0"
+                    className="size-15 shrink-0"
                   >
                     {isLoading ? (
                       <Loader2 className="h-4 w-4 animate-spin" />
