@@ -1,4 +1,5 @@
 import type {Metadata, Viewport} from 'next'
+import dynamic from 'next/dynamic'
 import {Geist, Geist_Mono, Noto_Sans} from 'next/font/google'
 
 import {GoogleAnalytics} from '@next/third-parties/google'
@@ -11,20 +12,30 @@ import LightRays from '@/components/LightRays'
 import {ReducedMotionProvider} from '@/components/reduced-motion-provider'
 import {WelcomeToast} from '@/components/welcome-toast'
 import {SnowfallEffect} from '@/components/snowfall'
-import {AiChatWidget} from '@/components/ai-chat-widget'
 
 import './globals.css'
 
-const notoSans = Noto_Sans({variable: '--font-sans'})
+const AiChatWidget = dynamic(
+  () => import('@/components/ai-chat-widget').then((m) => ({default: m.AiChatWidget})),
+  {ssr: false},
+)
+
+const notoSans = Noto_Sans({
+  variable: '--font-sans',
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
+  display: 'swap',
 })
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+  display: 'swap',
 })
 export const viewport: Viewport = {
   width: 'device-width',

@@ -165,3 +165,9 @@ body.reduce-motion *::after {
 ::view-transition-old(root) {
   z-index: -1;
 }
+
+/* Promote heavy animated elements to their own compositor layer */
+canvas {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}

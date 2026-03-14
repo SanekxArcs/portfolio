@@ -56,6 +56,7 @@ export function HeroImage({profile, variants, shouldReduceMotion}: Props) {
                   src={profile.profilePhotoUrl}
                   alt={profile.name ?? 'Profile Photo'}
                   fill
+                  priority
                   quality={100}
                   className="object-cover"
                 />
@@ -78,6 +79,7 @@ export function HeroImage({profile, variants, shouldReduceMotion}: Props) {
               src={profile.profilePhotoUrl}
               alt={profile.name ?? 'Profile Photo'}
               fill
+              priority
               className="object-cover"
             />
           ) : (

@@ -316,6 +316,12 @@ void main() {
         uniforms.rayDir.value = dir
       }
 
+      let resizeTimer: ReturnType<typeof setTimeout> | null = null
+      const debouncedResize = () => {
+        if (resizeTimer) clearTimeout(resizeTimer)
+        resizeTimer = setTimeout(updatePlacement, 150)
+      }
+
       const loop = (t: number) => {
         if (!rendererRef.current || !uniformsRef.current || !meshRef.current) {
           return
@@ -343,7 +349,7 @@ void main() {
         }
       }
 
-      window.addEventListener('resize', updatePlacement)
+      window.addEventListener('resize', debouncedResize)
       updatePlacement()
       animationIdRef.current = requestAnimationFrame(loop)
 
@@ -352,8 +358,12 @@ void main() {
           cancelAnimationFrame(animationIdRef.current)
           animationIdRef.current = null
         }
+        if (resizeTimer) {
+          clearTimeout(resizeTimer)
+          resizeTimer = null
+        }
 
-        window.removeEventListener('resize', updatePlacement)
+        window.removeEventListener('resize', debouncedResize)
 
         if (renderer) {
           try {
@@ -458,6 +468,7 @@ void main() {
     <div
       ref={containerRef}
       className={`pointer-events-none relative z-[3] h-full w-full overflow-hidden ${className}`.trim()}
+      style={{willChange: 'transform'}}
     />
   )
 }

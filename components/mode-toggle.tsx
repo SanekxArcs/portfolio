@@ -40,8 +40,8 @@ export function ModeToggle() {
           ],
         },
         {
-          duration: 500,
-          easing: 'ease-in',
+          duration: 400,
+          easing: 'ease-in-out',
           pseudoElement: '::view-transition-new(root)',
         },
       )
