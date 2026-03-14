@@ -213,6 +213,9 @@ export function AiChatWidget() {
                 <p className="text-sm text-muted-foreground">
                   Before we start, please share at least one way for me to contact you, it`s can be even only name:
                 </p>
+                <p className="text-xs text-muted-foreground bg-muted rounded-md px-3 py-2 border">
+                  📧 <strong>Phone number and email are optional</strong>, but at least one of them (or your name) must be provided.
+                </p>
                 <form onSubmit={handleContactSubmit} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="name">Name</Label>

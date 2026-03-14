@@ -31,7 +31,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  colorScheme: 'dark',
+  colorScheme: 'dark light',
   themeColor: 'black',
 }
 
@@ -74,9 +74,8 @@ export default function RootLayout({
         <ReducedMotionProvider>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange={true}
+            defaultTheme="dark"
+            enableSystem={false}
           >
             <Navbar />
             <main className="relative min-h-screen">
