@@ -152,10 +152,16 @@ body.reduce-motion *::after {
 }
 
 /* Smooth theme transition for full page */
-*,
-*::before,
-*::after {
-  transition-property: background-color, color, border-color, box-shadow, fill, stroke;
-  transition-duration: 0.35s;
-  transition-timing-function: ease;
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+::view-transition-old(root) {
+  z-index: -1;
 }

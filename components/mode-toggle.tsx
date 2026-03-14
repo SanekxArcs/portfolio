@@ -12,16 +12,48 @@ export function ModeToggle() {
   const vibrate = useVibrationOnClick(40)
   const isDark = resolvedTheme !== 'light'
 
-  const toggleTheme = () => {
-    setTheme(isDark ? 'light' : 'dark')
+  const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const newTheme = isDark ? 'light' : 'dark'
+    const x = e.clientX
+    const y = e.clientY
+
+    if (!('startViewTransition' in document)) {
+      setTheme(newTheme)
+      return
+    }
+
+    const transition = document.startViewTransition(() => {
+      setTheme(newTheme)
+    })
+
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y),
+    )
+
+    transition.ready.then(() => {
+      document.documentElement.animate(
+        {
+          clipPath: [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${endRadius}px at ${x}px ${y}px)`,
+          ],
+        },
+        {
+          duration: 500,
+          easing: 'ease-in',
+          pseudoElement: '::view-transition-new(root)',
+        },
+      )
+    })
   }
 
   return (
     <Button
       variant="outline"
       size="icon"
-      onClick={() => {
-        toggleTheme()
+      onClick={(e) => {
+        toggleTheme(e)
         vibrate()
       }}
       title='Toggle theme'

@@ -167,7 +167,7 @@ export function AiChatWidget() {
       console.error("Error sending message:", error);
       const errorMessage: Message = {
         role: "assistant",
-        content: `Sorry, I encountered an error: ${error instanceof Error ? error.message : 'Unknown error'}. Please try again.`,
+        content: "😴 Looks like the AI agent is taking a nap right now! Please reach out to Oleksandr directly — you can find his contact details on this page.",
         timestamp: new Date().toISOString(),
       };
       setMessages((prev) => [...prev, errorMessage]);
