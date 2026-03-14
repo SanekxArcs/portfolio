@@ -60,7 +60,7 @@
     "eslint-config-next": "16.0.10",
     "shadcn": "^3.6.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "5.9.3"
   },
   "overrides": {
     "jsdom": "27.3.0"

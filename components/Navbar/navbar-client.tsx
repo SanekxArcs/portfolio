@@ -3,7 +3,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import {motion, AnimatePresence} from 'motion/react'
-import {Menu, X, User, Briefcase, Cpu, FolderGit2, Zap, ZapOff, SnowflakeIcon} from 'lucide-react'
+import {Menu, X, User, Briefcase, Cpu, FolderGit2, Zap} from 'lucide-react'
 
 import {Button} from '@/components/ui/button'
 import {ModeToggle} from '@/components/mode-toggle'
@@ -11,7 +11,6 @@ import GradualBlur from '@/components/GradualBlur'
 import {ButtonGroup} from '@/components/ui/button-group'
 import {useUIStore} from '@/hooks/use-ui-store'
 import {useVibrationOnClick} from '@/hooks/use-vibration'
-import {useSnowfallStore} from '@/lib/snowfallStore'
 import {cn} from '@/lib/utils'
 import {toast} from 'sonner'
 
@@ -27,7 +26,6 @@ export function NavbarClient({logoUrl, name}: {logoUrl?: string | null; name?: s
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
   const [activeSection, setActiveSection] = React.useState<string>('')
   const {isReducedMotion, toggleReducedMotion} = useUIStore()
-  const {isEnabled, toggleSnowfall} = useSnowfallStore()
   const vibrate = useVibrationOnClick(40)
 
   const initials = React.useMemo(() => {
@@ -166,24 +164,6 @@ export function NavbarClient({logoUrl, name}: {logoUrl?: string | null; name?: s
           <ButtonGroup>
             <Button
               variant="outline"
-              className="relative"
-              size="icon"
-              onClick={() => {
-                toggleSnowfall()
-                vibrate()
-              }}
-               title={isReducedMotion ? 'Enable Snowfall' : 'Turn off Snowfall'}
-              aria-label={isReducedMotion ? 'Enable Snowfall' : 'Turn off Snowfall'}
-            >
-              <SnowflakeIcon />
-              {!isEnabled && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="border-px h-4 w-0.5 -rotate-45 border-r border-white bg-current dark:border-black" />
-                </div>
-              )}
-            </Button>
-            <Button
-              variant="outline"
               size="icon"
               className="relative"
               onClick={() => {
@@ -207,22 +187,6 @@ export function NavbarClient({logoUrl, name}: {logoUrl?: string | null; name?: s
         {/* Mobile Menu Toggle */}
         <div className="flex items-center gap-4 md:hidden">
           <ButtonGroup>
-            <Button
-              variant="outline"
-              className="relative"
-              size="icon"
-              onClick={() => {
-                toggleSnowfall()
-                vibrate()
-              }}
-            >
-              <SnowflakeIcon />
-              {!isEnabled && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="border-px h-4 w-0.5 -rotate-45 border-r border-white bg-current dark:border-black" />
-                </div>
-              )}
-            </Button>
             <Button
               variant="outline"
               size="icon"
