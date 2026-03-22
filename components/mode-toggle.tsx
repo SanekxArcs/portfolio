@@ -10,7 +10,22 @@ import {useVibrationOnClick} from '@/hooks/use-vibration'
 export function ModeToggle() {
   const {resolvedTheme, setTheme} = useTheme()
   const vibrate = useVibrationOnClick(40)
-  const isDark = resolvedTheme !== 'light'
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return (
+      <Button variant="outline" size="icon" disabled>
+        <div className="size-4" />
+        <span className="sr-only">Toggle theme</span>
+      </Button>
+    )
+  }
+
+  const isDark = resolvedTheme === 'dark'
 
   const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
     const newTheme = isDark ? 'light' : 'dark'
@@ -40,8 +55,8 @@ export function ModeToggle() {
           ],
         },
         {
-          duration: 500,
-          easing: 'ease-in',
+          duration: 400,
+          easing: 'ease-in-out',
           pseudoElement: '::view-transition-new(root)',
         },
       )

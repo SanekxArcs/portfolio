@@ -12,6 +12,8 @@
  * ---------------------------------------------------------------------------------
  */
 
+export declare const internalGroqTypeReferenceTo: unique symbol
+
 // Source: schema.json
 export type ChatHistory = {
   _id: string
@@ -45,6 +47,20 @@ export type AiConfig = {
   greetingMessage?: string
 }
 
+export type SanityFileAssetReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+}
+
+export type SanityImageAssetReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+}
+
 export type CvProfile = {
   _id: string
   _type: 'cvProfile'
@@ -56,22 +72,12 @@ export type CvProfile = {
   description?: string
   about?: string
   logo?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
-    }
+    asset?: SanityFileAssetReference
     media?: unknown
     _type: 'file'
   }
   profilePhoto?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
+    asset?: SanityImageAssetReference
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
@@ -79,12 +85,7 @@ export type CvProfile = {
   }
   cvUrl?: string
   cvFile?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
-    }
+    asset?: SanityFileAssetReference
     media?: unknown
     _type: 'file'
   }
@@ -130,12 +131,7 @@ export type CvProfile = {
     title?: string
     description?: string
     image?: Array<{
-      asset?: {
-        _ref: string
-        _type: 'reference'
-        _weak?: boolean
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-      }
+      asset?: SanityImageAssetReference
       media?: unknown
       hotspot?: SanityImageHotspot
       crop?: SanityImageCrop
@@ -221,6 +217,7 @@ export type SanityImageMetadata = {
   palette?: SanityImagePalette
   lqip?: string
   blurHash?: string
+  thumbHash?: string
   hasAlpha?: boolean
   isOpaque?: boolean
 }
@@ -293,6 +290,8 @@ export type Slug = {
 export type AllSanitySchemaTypes =
   | ChatHistory
   | AiConfig
+  | SanityFileAssetReference
+  | SanityImageAssetReference
   | CvProfile
   | SanityImageCrop
   | SanityImageHotspot
@@ -305,11 +304,11 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | Geopoint
   | Slug
-export declare const internalGroqTypeReferenceTo: unique symbol
+
 // Source: sanity/queries/queries.ts
 // Variable: CV_PROFILE_DATA
 // Query: *[_type == "cvProfile"][0]{  _id,  name,  role,  description,  about,  cvUrl,  "logoUrl": logo.asset->url,  "profilePhotoUrl": profilePhoto.asset->url,  "cvFileUrl": cvFile.asset->url,  contacts{    email,    phoneNumber,    location,    relocationReady,    typeOfContract,    workAvailability  },  links[]{    link,    name,    title,    iconName  },  languages[]{    language,    level  },  skillsFrontend,  skillsBackend,  skillsDevOps,  skillsOther,  softSkills[]{    skill,    description  },  interests,  education[]{    institution,    specialization  },  projects[]{    title,    description,    "imageUrls": image[].asset->url,    features,    technologies,    url,    urlToCode,    petProject,    isPinned,    nda  },  courses[]{    title,    platform,    date,    badges,    visibleOnCV  },  workExperience[]{    jobTitle,    jobTitle2,    companyName,    location,    duration,    type,    description,    website,    websiteName,    isRelated,    hideFromCV  }}
-export type CV_PROFILE_DATAResult = {
+export type CV_PROFILE_DATA_RESULT = {
   _id: string
   name: string | null
   role: string | null
@@ -383,15 +382,19 @@ export type CV_PROFILE_DATAResult = {
     hideFromCV: boolean | null
   }> | null
 } | null
+
+// Source: sanity/queries/queries.ts
 // Variable: NAVBAR_DATA
 // Query: *[_type == "cvProfile"][0]{  name,  "logoUrl": logo.asset->url}
-export type NAVBAR_DATAResult = {
+export type NAVBAR_DATA_RESULT = {
   name: string | null
   logoUrl: string | null
 } | null
+
+// Source: sanity/queries/queries.ts
 // Variable: AI_CONFIG_DATA
 // Query: *[_type == "aiConfig"][0]{  _id,  systemPrompt,  additionalInfo,  greetingMessage}
-export type AI_CONFIG_DATAResult = {
+export type AI_CONFIG_DATA_RESULT = {
   _id: string
   systemPrompt: string | null
   additionalInfo: string | null
@@ -402,8 +405,8 @@ export type AI_CONFIG_DATAResult = {
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
-    '\n*[_type == "cvProfile"][0]{\n  _id,\n  name,\n  role,\n  description,\n  about,\n  cvUrl,\n  "logoUrl": logo.asset->url,\n  "profilePhotoUrl": profilePhoto.asset->url,\n  "cvFileUrl": cvFile.asset->url,\n  contacts{\n    email,\n    phoneNumber,\n    location,\n    relocationReady,\n    typeOfContract,\n    workAvailability\n  },\n  links[]{\n    link,\n    name,\n    title,\n    iconName\n  },\n  languages[]{\n    language,\n    level\n  },\n  skillsFrontend,\n  skillsBackend,\n  skillsDevOps,\n  skillsOther,\n  softSkills[]{\n    skill,\n    description\n  },\n  interests,\n  education[]{\n    institution,\n    specialization\n  },\n  projects[]{\n    title,\n    description,\n    "imageUrls": image[].asset->url,\n    features,\n    technologies,\n    url,\n    urlToCode,\n    petProject,\n    isPinned,\n    nda\n  },\n  courses[]{\n    title,\n    platform,\n    date,\n    badges,\n    visibleOnCV\n  },\n  workExperience[]{\n    jobTitle,\n    jobTitle2,\n    companyName,\n    location,\n    duration,\n    type,\n    description,\n    website,\n    websiteName,\n    isRelated,\n    hideFromCV\n  }\n}\n': CV_PROFILE_DATAResult
-    '\n*[_type == "cvProfile"][0]{\n  name,\n  "logoUrl": logo.asset->url\n}\n': NAVBAR_DATAResult
-    '\n*[_type == "aiConfig"][0]{\n  _id,\n  systemPrompt,\n  additionalInfo,\n  greetingMessage\n}\n': AI_CONFIG_DATAResult
+    '\n*[_type == "cvProfile"][0]{\n  _id,\n  name,\n  role,\n  description,\n  about,\n  cvUrl,\n  "logoUrl": logo.asset->url,\n  "profilePhotoUrl": profilePhoto.asset->url,\n  "cvFileUrl": cvFile.asset->url,\n  contacts{\n    email,\n    phoneNumber,\n    location,\n    relocationReady,\n    typeOfContract,\n    workAvailability\n  },\n  links[]{\n    link,\n    name,\n    title,\n    iconName\n  },\n  languages[]{\n    language,\n    level\n  },\n  skillsFrontend,\n  skillsBackend,\n  skillsDevOps,\n  skillsOther,\n  softSkills[]{\n    skill,\n    description\n  },\n  interests,\n  education[]{\n    institution,\n    specialization\n  },\n  projects[]{\n    title,\n    description,\n    "imageUrls": image[].asset->url,\n    features,\n    technologies,\n    url,\n    urlToCode,\n    petProject,\n    isPinned,\n    nda\n  },\n  courses[]{\n    title,\n    platform,\n    date,\n    badges,\n    visibleOnCV\n  },\n  workExperience[]{\n    jobTitle,\n    jobTitle2,\n    companyName,\n    location,\n    duration,\n    type,\n    description,\n    website,\n    websiteName,\n    isRelated,\n    hideFromCV\n  }\n}\n': CV_PROFILE_DATA_RESULT
+    '\n*[_type == "cvProfile"][0]{\n  name,\n  "logoUrl": logo.asset->url\n}\n': NAVBAR_DATA_RESULT
+    '\n*[_type == "aiConfig"][0]{\n  _id,\n  systemPrompt,\n  additionalInfo,\n  greetingMessage\n}\n': AI_CONFIG_DATA_RESULT
   }
 }

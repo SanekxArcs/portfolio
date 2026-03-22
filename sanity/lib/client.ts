@@ -1,6 +1,6 @@
 import { createClient, QueryParams } from 'next-sanity'
 
-import { apiVersion, dataset, projectId, token } from '../env'
+import {apiVersion, dataset, projectId, token, writeToken} from '../env'
 
 export const client = createClient({
   projectId,
@@ -15,7 +15,7 @@ export const writeClient = createClient({
   dataset,
   apiVersion,
   useCdn: false,
-  token: process.env.SANITY_API_WRITE_TOKEN || token, // Use write token if available
+  token: writeToken || process.env.SANITY_API_WRITE_TOKEN, // Use write token if available
 })
 
 export async function sanityFetch<const QueryString extends string>({

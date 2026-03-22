@@ -7,24 +7,28 @@ import {SanityLive} from '@/sanity/lib/live'
 import {ThemeProvider} from '@/components/theme-provider'
 import {Footer} from '@/components/Footer/footer'
 import Navbar from '@/components/Navbar/navbar'
-import LightRays from '@/components/LightRays'
 import {ReducedMotionProvider} from '@/components/reduced-motion-provider'
 import {WelcomeToast} from '@/components/welcome-toast'
-import {SnowfallEffect} from '@/components/snowfall'
-import {AiChatWidget} from '@/components/ai-chat-widget'
+import {VisualEffects} from '@/components/visual-effects'
 
 import './globals.css'
 
-const notoSans = Noto_Sans({variable: '--font-sans'})
+const notoSans = Noto_Sans({
+  variable: '--font-sans',
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
+  display: 'swap',
 })
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+  display: 'swap',
 })
 export const viewport: Viewport = {
   width: 'device-width',
@@ -72,33 +76,14 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-emerald-950/5`}
       >
         <ReducedMotionProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem={false}
-          >
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
             <Navbar />
             <main className="relative min-h-screen">
-              <div className="mask-to-bottom pointer-events-none absolute inset-x-0 top-0 -z-10 h-screen overflow-hidden">
-                <LightRays
-                  raysOrigin="top-center"
-                  raysColor="#00ffff"
-                  raysSpeed={1.5}
-                  lightSpread={0.8}
-                  rayLength={1.2}
-                  followMouse={true}
-                  mouseInfluence={0.1}
-                  noiseAmount={0.1}
-                  distortion={0.05}
-                  className="custom-rays"
-                />
-                <SnowfallEffect />
-              </div>
+              <VisualEffects />
               {children}
             </main>
             <Footer />
             <WelcomeToast />
-            <AiChatWidget />
             <Toaster />
             <SanityLive />
           </ThemeProvider>

@@ -4,7 +4,7 @@ import {randomUUID} from 'crypto'
 import {writeClient} from '@/sanity/lib/client'
 import {sanityFetch} from '@/sanity/lib/client'
 import {AI_CONFIG_DATA, CV_PROFILE_DATA} from '@/sanity/queries/queries'
-import {ChatHistory, CV_PROFILE_DATAResult} from '@/sanity.types'
+import {ChatHistory, CV_PROFILE_DATA_RESULT} from '@/sanity.types'
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY || '')
 
@@ -157,6 +157,11 @@ export async function POST(request: NextRequest) {
 
     if (!message || !sessionId) {
       return NextResponse.json({error: 'Message and sessionId are required'}, {status: 400})
+    }
+
+    // Debug check: ensures the write client is functioning
+    if (!(writeClient as any).config().token) {
+      console.error('CRITICAL: writeClient is missing a token in POST /api/chat')
     }
 
     // Check message limit
@@ -362,7 +367,7 @@ ${contextInfo}`
   }
 }
 
-function buildContextFromProfile(profile: CV_PROFILE_DATAResult): string {
+function buildContextFromProfile(profile: CV_PROFILE_DATA_RESULT): string {
   if (!profile) return ''
 
   const sections = []

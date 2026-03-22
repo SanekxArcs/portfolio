@@ -259,7 +259,7 @@ export function NavbarClient({logoUrl, name}: {logoUrl?: string | null; name?: s
               position="bottom"
               height="100%"
               strength={2}
-              divCount={10}
+              divCount={4}
               curve="bezier"
               exponential={true}
               opacity={1}
@@ -273,7 +273,7 @@ export function NavbarClient({logoUrl, name}: {logoUrl?: string | null; name?: s
         position="top"
         height="6rem"
         strength={2}
-        divCount={5}
+        divCount={3}
         curve="bezier"
         exponential={true}
         opacity={1}
