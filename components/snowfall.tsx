@@ -21,8 +21,8 @@ export function SnowfallEffect() {
         pointerEvents: 'none',
         zIndex: 0,
       }}
-      snowflakeCount={150} // reduced from 200 to lower CPU/GPU usage
-      speed={[0.5, 1.5]}
+      snowflakeCount={80} // further reduced for better performance
+      speed={[0.5, 1.2]}
       wind={[-0.5, 0.5]}
       radius={[0.5, 3]}
       color="white"
