@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import {sanityFetch} from '@/sanity/lib/live'
 import {CV_PROFILE_DATA} from '@/sanity/queries/queries'
-import {CV_PROFILE_DATAResult} from '@/sanity.types'
+import {CV_PROFILE_DATA_RESULT} from '@/sanity.types'
 
 import {Hero} from '@/components/cv/main/hero/hero'
 import {About} from '@/components/cv/main/about'
@@ -13,7 +13,7 @@ import {Projects} from '@/components/cv/main/projects'
 import {Cta} from '@/components/cv/main/cta'
 
 export async function CvPage() {
-  let profile: CV_PROFILE_DATAResult | null = null
+  let profile: CV_PROFILE_DATA_RESULT | null = null
 
   try {
     const {data} = await sanityFetch({query: CV_PROFILE_DATA})

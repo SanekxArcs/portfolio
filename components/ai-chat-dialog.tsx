@@ -30,46 +30,35 @@ export default function AiChatDialog({
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [inputMessage, setInputMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [sessionId, setSessionId] = useState("");
-  const [showContactForm, setShowContactForm] = useState(true);
-  const [contactInfo, setContactInfo] = useState<ContactInfo>({});
   const [greetingMessage] = useState(
     "Hi! I'm an AI assistant here to tell you about my services. How can I help you today?"
   );
+  const [messages, setMessages] = useState<Message[]>(() => [
+    {
+      role: "assistant",
+      content: greetingMessage,
+      timestamp: new Date().toISOString(),
+    },
+  ]);
+  const [inputMessage, setInputMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  // This component only ever mounts client-side (dynamic import, ssr: false).
+  const [sessionId] = useState(() => {
+    const storedSessionId = localStorage.getItem('ai-chat-session-id');
+    if (storedSessionId) return storedSessionId;
+    const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
+    localStorage.setItem('ai-chat-session-id', newSessionId);
+    return newSessionId;
+  });
+  const [showContactForm, setShowContactForm] = useState(true);
+  const [contactInfo, setContactInfo] = useState<ContactInfo>({});
   const [messagesRemaining, setMessagesRemaining] = useState(15);
   const [showEmailPrompt, setShowEmailPrompt] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Get or create sessionId from localStorage
-  useEffect(() => {
-    const storedSessionId = localStorage.getItem('ai-chat-session-id');
-    if (storedSessionId) {
-      setSessionId(storedSessionId);
-    } else {
-      const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
-      setSessionId(newSessionId);
-      localStorage.setItem('ai-chat-session-id', newSessionId);
-    }
-  }, []);
-
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-
-  useEffect(() => {
-    if (open && messages.length === 0) {
-      setMessages([
-        {
-          role: "assistant",
-          content: greetingMessage,
-          timestamp: new Date().toISOString(),
-        },
-      ]);
-    }
-  }, [open, greetingMessage, messages.length]);
 
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();

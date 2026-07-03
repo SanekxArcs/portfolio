@@ -1,7 +1,5 @@
 import {
   Mail,
-  Github,
-  Linkedin,
   Phone,
   MapPin,
   Download,
@@ -9,10 +7,11 @@ import {
   Map,
   Banknote,
   BadgeCheck,
-  Facebook,
   Send,
   MessageCircle,
 } from "lucide-react";
+
+import {Github, Linkedin, Facebook} from "@/components/icons/brand-icons";
 
 export const mainHeadConfig = {
   availability: {

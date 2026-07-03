@@ -1,7 +1,5 @@
 import Link from 'next/link'
 import {
-  Github,
-  Linkedin,
   Mail,
   User,
   Briefcase,
@@ -10,13 +8,13 @@ import {
   Globe,
   MessageSquare,
   Send,
-  Facebook,
   MessageCircle,
 } from 'lucide-react'
 
+import {Github, Linkedin, Facebook} from '@/components/icons/brand-icons'
 import {client} from '@/sanity/lib/client'
 import {CV_PROFILE_DATA} from '@/sanity/queries/queries'
-import {CV_PROFILE_DATAResult} from '@/sanity.types'
+import {CV_PROFILE_DATA_RESULT} from '@/sanity.types'
 
 import {Rodo} from '@/components/cv/main/rodo'
 import {Button} from '@/components/ui/button'
@@ -25,7 +23,7 @@ import {HighlightedText} from '@/components/cv/atoms/highlighted-text'
 import {cn} from '@/lib/utils'
 
 export const Footer = async () => {
-  const profile = await client.fetch<CV_PROFILE_DATAResult>(CV_PROFILE_DATA)
+  const profile = await client.fetch<CV_PROFILE_DATA_RESULT>(CV_PROFILE_DATA)
   const currentYear = new Date().getFullYear()
 
   const allSkills = [

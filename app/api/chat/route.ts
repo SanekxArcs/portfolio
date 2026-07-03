@@ -4,7 +4,7 @@ import {randomUUID} from 'crypto'
 import {writeClient} from '@/sanity/lib/client'
 import {sanityFetch} from '@/sanity/lib/client'
 import {AI_CONFIG_DATA, CV_PROFILE_DATA} from '@/sanity/queries/queries'
-import {ChatHistory, CV_PROFILE_DATAResult} from '@/sanity.types'
+import {ChatHistory, CV_PROFILE_DATA_RESULT} from '@/sanity.types'
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY || '')
 
@@ -362,7 +362,7 @@ ${contextInfo}`
   }
 }
 
-function buildContextFromProfile(profile: CV_PROFILE_DATAResult): string {
+function buildContextFromProfile(profile: CV_PROFILE_DATA_RESULT): string {
   if (!profile) return ''
 
   const sections = []
