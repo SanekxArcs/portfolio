@@ -28,13 +28,6 @@ const itemVariants = {
       duration: 0.4,
     },
   },
-  exit: {
-    opacity: 0,
-    y: -20,
-    transition: {
-      duration: 0.3,
-    },
-  },
 }
 
 function ExperienceCard({
@@ -56,7 +49,6 @@ function ExperienceCard({
       variants={itemVariants}
       initial={isReducedMotion ? 'visible' : 'hidden'}
       whileInView="visible"
-      exit="exit"
       viewport={{once: true, margin: '0px 0px -100px 0px'}}
     >
       <Card
@@ -213,8 +205,15 @@ export function WorkExperience({profile}: Props) {
           <TabsTrigger onClick={vibrate} value="notrelated">Not Related</TabsTrigger>
         </TabsList>
         <div className="space-y-6">
-          <div key={activeTab} className="space-y-6">
-            <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{opacity: 0, y: 20}}
+              animate={{opacity: 1, y: 0}}
+              exit={{opacity: 0, y: -20}}
+              transition={{duration: 0.3}}
+              className="space-y-6"
+            >
               {displayedCards.length > 0 ? (
                 displayedCards.map((job, index) => (
                   <ExperienceCard
@@ -225,13 +224,13 @@ export function WorkExperience({profile}: Props) {
                   />
                 ))
               ) : (
-                <motion.div className="text-muted-foreground py-8 text-center">
+                <div className="text-muted-foreground py-8 text-center">
                   No specific related experience marked. Check &quot;All History&quot; to see full
                   background.
-                </motion.div>
+                </div>
               )}
-            </AnimatePresence>
-          </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </Tabs>
     </section>

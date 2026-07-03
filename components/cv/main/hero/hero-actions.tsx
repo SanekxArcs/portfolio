@@ -52,6 +52,7 @@ export function HeroActions({profile, variants}: Props) {
           <ActionButton
             href={`tel:${profile.contacts.phoneNumber}`}
             icon={<icons.Phone />}
+            label={profile.contacts.phoneNumber}
             spoiler
             variant="outline"
             className="text-muted-foreground rounded-l-none"
