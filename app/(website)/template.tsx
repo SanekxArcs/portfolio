@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "motion/react";
-
 import { useUIStore } from "@/hooks/use-ui-store";
 
 export default function Template({ children }: { children: React.ReactNode }) {
@@ -12,12 +10,8 @@ export default function Template({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-    >
+    <div className="animate-in fade-in slide-in-from-bottom-5 duration-500 ease-out">
       {children}
-    </motion.div>
+    </div>
   );
 }

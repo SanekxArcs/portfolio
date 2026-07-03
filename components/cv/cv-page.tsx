@@ -1,4 +1,3 @@
-import {toast} from 'sonner'
 import Link from 'next/link'
 
 import {sanityFetch} from '@/sanity/lib/live'
@@ -20,12 +19,10 @@ export async function CvPage() {
     const {data} = await sanityFetch({query: CV_PROFILE_DATA})
     profile = data
   } catch (error) {
-    toast.error('Failed to load CV profile data.')
     console.error('Failed to load CV profile data', error)
   }
 
   if (!profile) {
-    
     return (
       <div className="mx-auto max-w-3xl p-6 text-center">
         <h1 className="text-2xl font-semibold">CV not configured yet</h1>

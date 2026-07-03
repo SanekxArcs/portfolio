@@ -1,19 +1,17 @@
 'use client'
-import Snowfall from 'react-snowfall'
+import dynamic from 'next/dynamic'
 
 import {useSnowfallStore} from '@/lib/snowfallStore'
-import {cn} from '@/lib/utils'
+
+const Snowfall = dynamic(() => import('react-snowfall'), {ssr: false})
 
 export function SnowfallEffect() {
   const isEnabled = useSnowfallStore((state) => state.isEnabled)
 
+  if (!isEnabled) return null
+
   return (
-    <div
-      className={cn(
-        isEnabled ? 'opacity-100' : 'opacity-0',
-        'pointer-events-none transition-opacity duration-1000',
-      )}
-    >
+    <div className="pointer-events-none">
       <Snowfall
         style={{
           position: 'absolute',

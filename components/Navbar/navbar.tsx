@@ -1,11 +1,10 @@
-import {client} from '@/sanity/lib/client'
+import {sanityFetch} from '@/sanity/lib/live'
 import {NAVBAR_DATA} from '@/sanity/queries/queries'
-import {NAVBAR_DATAResult} from '@/sanity.types'
 
 import {NavbarClient} from './navbar-client'
 
 export async function Navbar() {
-  const data = await client.fetch<NAVBAR_DATAResult>(NAVBAR_DATA)
+  const {data} = await sanityFetch({query: NAVBAR_DATA})
 
   return <NavbarClient logoUrl={data?.logoUrl} name={data?.name} />
 }

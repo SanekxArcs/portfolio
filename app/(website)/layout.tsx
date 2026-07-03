@@ -1,5 +1,5 @@
 import type {Metadata, Viewport} from 'next'
-import {Geist, Geist_Mono, Noto_Sans} from 'next/font/google'
+import {Geist_Mono, Noto_Sans} from 'next/font/google'
 
 import {GoogleAnalytics} from '@next/third-parties/google'
 import {Toaster} from '@/components/ui/sonner'
@@ -7,7 +7,7 @@ import {SanityLive} from '@/sanity/lib/live'
 import {ThemeProvider} from '@/components/theme-provider'
 import {Footer} from '@/components/Footer/footer'
 import Navbar from '@/components/Navbar/navbar'
-import LightRays from '@/components/LightRays'
+import LightRays from '@/components/light-rays-lazy'
 import {ReducedMotionProvider} from '@/components/reduced-motion-provider'
 import {WelcomeToast} from '@/components/welcome-toast'
 import {SnowfallEffect} from '@/components/snowfall'
@@ -15,16 +15,16 @@ import {AiChatWidget} from '@/components/ai-chat-widget'
 
 import './globals.css'
 
-const notoSans = Noto_Sans({variable: '--font-sans'})
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
+const notoSans = Noto_Sans({
+  variable: '--font-sans',
+  subsets: ['latin', 'latin-ext'],
+  display: 'swap',
 })
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+  display: 'swap',
 })
 export const viewport: Viewport = {
   width: 'device-width',
@@ -68,9 +68,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={notoSans.variable} suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-emerald-950/5`}
-      >
+      <body className={`${geistMono.variable} antialiased dark:bg-emerald-950/5`}>
         <ReducedMotionProvider>
           <ThemeProvider
             attribute="class"

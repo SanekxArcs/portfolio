@@ -120,6 +120,7 @@ function ProjectCard({project}: {project: CvProject}) {
                         src={url ?? ''}
                         alt={`${project.title} screenshot ${index + 1}`}
                         fill
+                        sizes="(min-width: 768px) 480px, 100vw"
                         className="object-cover"
                       />
                     )}
