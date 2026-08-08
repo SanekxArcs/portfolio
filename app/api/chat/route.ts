@@ -236,7 +236,7 @@ Portfolio Facts:
 ${contextInfo}`
 
     const model = genAI.getGenerativeModel({
-      model: 'gemini-flash-lite-latest',
+      model: 'gemini-3.5-flash-lite',
       systemInstruction: fullSystemPrompt,
     })
 

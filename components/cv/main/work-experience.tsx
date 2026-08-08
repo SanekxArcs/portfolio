@@ -142,7 +142,7 @@ function ExperienceCard({
                     <HighlightedText
                       text={desc}
                       skills={allSkills}
-                      highlightClassName="group-hover:text-emerald-600 dark:group-hover:text-emerald-400"
+                      highlightClassName="touch-highlight group-hover:text-emerald-600 dark:group-hover:text-emerald-400"
                     />
                   </span>
                 </li>

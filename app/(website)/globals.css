@@ -140,6 +140,17 @@
   .mask-to-bottom {
     mask-image: linear-gradient(to bottom, black, transparent);
   }
+
+  /* Touch devices cannot trigger card hover, so keep experience skill words accented. */
+  @media (hover: none) {
+    .touch-highlight {
+      color: oklch(0.596 0.145 163.225);
+    }
+
+    .dark .touch-highlight {
+      color: oklch(0.765 0.177 163.223);
+    }
+  }
 }
 /* Reduced Motion */
 body.reduce-motion *,
