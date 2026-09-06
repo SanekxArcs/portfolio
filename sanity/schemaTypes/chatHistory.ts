@@ -4,6 +4,8 @@ export const chatHistory = defineType({
   name: "chatHistory",
   title: "Chat History",
   type: "document",
+  readOnly: true,
+  validation: Rule => Rule.custom(doc => doc?._id?.startsWith('private.') ? true : 'Chat records must use a private document ID.'),
   fields: [
     defineField({
       name: "sessionId",

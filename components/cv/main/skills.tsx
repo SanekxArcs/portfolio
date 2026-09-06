@@ -1,42 +1,15 @@
-'use client'
-
 import {LayoutTemplate, Server, Terminal, Cpu, Zap} from 'lucide-react'
-import {motion, Variants} from 'motion/react'
 
 import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card'
 import {Badge} from '@/components/ui/badge'
 import type {CvProfile} from '@/components/cv/types'
-import {useUIStore} from '@/hooks/use-ui-store'
 import {cn} from '@/lib/utils'
 
 type Props = {
   profile: CvProfile
 }
 
-const containerVariants: Variants = {
-  hidden: {opacity: 0},
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-}
-
-const itemVariants: Variants = {
-  hidden: {opacity: 0, y: 20},
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: 'easeOut',
-    },
-  },
-}
-
 export function Skills({profile}: Props) {
-  const {isReducedMotion} = useUIStore()
 
   const skillCategories = [
     {
@@ -90,13 +63,9 @@ export function Skills({profile}: Props) {
   }
 
   return (
-    <motion.section
+    <section
       id="skills"
       className="mb-20 scroll-mt-24"
-      initial={isReducedMotion ? 'visible' : 'hidden'}
-      whileInView="visible"
-      viewport={{once: true, margin: '-100px'}}
-      variants={containerVariants}
     >
       <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div className="space-y-2">
@@ -118,7 +87,7 @@ export function Skills({profile}: Props) {
           (category) =>
             category.skills &&
             category.skills.length > 0 && (
-              <motion.div key={category.title} variants={itemVariants}>
+              <div key={category.title}>
                 <Card
                   className={cn(
                     'group relative h-full overflow-hidden border-2 transition-all duration-300 hover:shadow-md',
@@ -173,10 +142,10 @@ export function Skills({profile}: Props) {
                     </div>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ),
         )}
       </div>
-    </motion.section>
+    </section>
   )
 }

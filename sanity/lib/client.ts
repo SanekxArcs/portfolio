@@ -1,27 +1,20 @@
 import { createClient, QueryParams } from 'next-sanity'
 
-import { apiVersion, dataset, projectId, token } from '../env'
+import { apiVersion, dataset, projectId } from '../env'
 
 export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: false, // Set to false if statically generating pages, using ISR or tag-based revalidation
-})
-
-// Client with write token for server-side operations
-export const writeClient = createClient({
-  projectId,
-  dataset,
-  apiVersion,
-  useCdn: false,
-  token: process.env.SANITY_API_WRITE_TOKEN || token, // Use write token if available
+  // Public CV content is regenerated at most hourly, so the Sanity CDN avoids
+  // an origin request when a Vercel revalidation happens.
+  useCdn: true,
 })
 
 export async function sanityFetch<const QueryString extends string>({
   query,
   params = {},
-  revalidate = 300, 
+  revalidate = 3600,
   tags = [],
 }: {
   query: QueryString
@@ -32,7 +25,7 @@ export async function sanityFetch<const QueryString extends string>({
   return client.fetch(query, params, {
     cache: 'force-cache', 
     next: {
-      revalidate: tags.length ? false : revalidate, 
+      revalidate,
       tags, 
     },
   })

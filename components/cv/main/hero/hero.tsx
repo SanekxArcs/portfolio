@@ -70,7 +70,7 @@ export function Hero({profile}: Props) {
   return (
     <motion.section
       className={`relative mt-15 mb-20 cursor-default pt-10 transition-all duration-1000`}
-      initial={shouldReduceMotion ? 'visible' : 'hidden'}
+      initial="visible"
       animate="visible"
       variants={containerVariants}
     >

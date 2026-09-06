@@ -1,14 +1,14 @@
 import { MetadataRoute } from 'next'
+import {siteUrl} from '@/lib/site'
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://o-d.dev' 
 
   return {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: '/studio/',
+      disallow: ['/studio', '/api/'],
     },
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: `${siteUrl}/sitemap.xml`,
   }
 }

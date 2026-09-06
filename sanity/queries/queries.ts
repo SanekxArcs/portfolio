@@ -3,6 +3,7 @@ import { defineQuery } from "next-sanity";
 export const CV_PROFILE_DATA = defineQuery(`
 *[_type == "cvProfile"][0]{
   _id,
+  _updatedAt,
   name,
   role,
   description,
@@ -43,13 +44,13 @@ export const CV_PROFILE_DATA = defineQuery(`
     specialization
   },
   projects[]{
-    title,
+    "title": select(nda == true => "Confidential project", title),
     description,
-    "imageUrls": image[].asset->url,
+    "imageUrls": select(nda == true => [], image[].asset->url),
     features,
     technologies,
-    url,
-    urlToCode,
+    "url": select(nda == true => null, url),
+    "urlToCode": select(nda == true => null, urlToCode),
     petProject,
     isPinned,
     nda
@@ -61,7 +62,7 @@ export const CV_PROFILE_DATA = defineQuery(`
     badges,
     visibleOnCV
   },
-  workExperience[]{
+  workExperience[hideFromCV != true]{
     jobTitle,
     jobTitle2,
     companyName,

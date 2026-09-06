@@ -2,7 +2,7 @@
 
 import {useEffect, useRef} from 'react'
 import {toast} from 'sonner'
-import confetti from 'canvas-confetti'
+
 
 import {useUIStore} from '@/hooks/use-ui-store'
 
@@ -42,11 +42,11 @@ export function WelcomeToast() {
         message += birthdayMessages[now.getDate()]
 
         if (!shouldShowReducedMessage && now.getDate() === 10) {
-          confetti({
+          void import('canvas-confetti').then(({default: confetti}) => confetti({
             particleCount: 150,
             spread: 70,
             origin: {y: 0.6},
-          })
+          }))
         }
       }
 
@@ -70,37 +70,7 @@ export function WelcomeToast() {
       return
     }
     if (prevReducedMotion.current === true && isReducedMotion === false) {
-      const duration = 1000
-      const animationEnd = Date.now() + duration
-      const defaults = {startVelocity: 30, spread: 360, ticks: 60, zIndex: 0}
-
-      const randomInRange = (min: number, max: number) => {
-        return Math.random() * (max - min) + min
-      }
-
-      const interval: NodeJS.Timeout = setInterval(function () {
-        const timeLeft = animationEnd - Date.now()
-
-        if (timeLeft <= 0) {
-          return clearInterval(interval)
-        }
-
-        const particleCount = 50 * (timeLeft / duration)
-
-        confetti({
-          ...defaults,
-          particleCount,
-          origin: {x: randomInRange(0.1, 0.3), y: Math.random() - 0.2},
-        })
-      }, 250)
-
-      toast.success('Animations Enabled!', {
-        description: 'Enjoy the experience! Page will reload in 3 seconds...',
-      })
-
-      setTimeout(() => {
-        window.location.reload()
-      }, 3000)
+      toast.success('Animations enabled')
     }
     prevReducedMotion.current = isReducedMotion
   }, [isReducedMotion])

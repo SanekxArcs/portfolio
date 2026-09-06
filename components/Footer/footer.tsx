@@ -12,18 +12,16 @@ import {
 } from 'lucide-react'
 
 import {Github, Linkedin, Facebook} from '@/components/icons/brand-icons'
-import {client} from '@/sanity/lib/client'
-import {CV_PROFILE_DATA} from '@/sanity/queries/queries'
-import {CV_PROFILE_DATA_RESULT} from '@/sanity.types'
+import {getProfile} from '@/sanity/lib/profile'
 
 import {Rodo} from '@/components/cv/main/rodo'
-import {Button} from '@/components/ui/button'
+import {buttonVariants} from '@/components/ui/button'
 import {ScrollToTop} from '@/components/scroll-to-top'
 import {HighlightedText} from '@/components/cv/atoms/highlighted-text'
 import {cn} from '@/lib/utils'
 
 export const Footer = async () => {
-  const profile = await client.fetch<CV_PROFILE_DATA_RESULT>(CV_PROFILE_DATA)
+  const profile = await getProfile()
   const currentYear = new Date().getFullYear()
 
   const allSkills = [
@@ -184,18 +182,13 @@ export const Footer = async () => {
               )}
               <div className="pt-2">
                 <Link
+                  className={cn(buttonVariants({variant: 'outline', size: 'sm'}), 'h-9 gap-2 border-emerald-500/20')}
                   href={
                     profile?.contacts?.phoneNumber ? `tel:${profile.contacts.phoneNumber}` : '#cta'
                   }
                 >
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="h-9 cursor-pointer gap-2 border-emerald-500/20 hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400"
-                  >
                     <MessageSquare className="h-4 w-4" />
                     Let&apos;s Talk
-                  </Button>
                 </Link>
               </div>
             </div>

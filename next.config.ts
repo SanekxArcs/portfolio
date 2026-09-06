@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
     root: __dirname,
   },
   images: {
+    loader: 'custom',
+    loaderFile: './sanity/lib/image-loader.ts',
     formats: ['image/avif', 'image/webp'],
     qualities: [25, 50, 75, 100],
     remotePatterns: [

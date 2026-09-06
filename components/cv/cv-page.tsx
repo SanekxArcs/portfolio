@@ -1,8 +1,7 @@
 import Link from 'next/link'
 
-import {sanityFetch} from '@/sanity/lib/live'
-import {CV_PROFILE_DATA} from '@/sanity/queries/queries'
-import {CV_PROFILE_DATA_RESULT} from '@/sanity.types'
+import {getProfile} from '@/sanity/lib/profile'
+import {siteUrl} from '@/lib/site'
 
 import {Hero} from '@/components/cv/main/hero/hero'
 import {About} from '@/components/cv/main/about'
@@ -13,14 +12,8 @@ import {Projects} from '@/components/cv/main/projects'
 import {Cta} from '@/components/cv/main/cta'
 
 export async function CvPage() {
-  let profile: CV_PROFILE_DATA_RESULT | null = null
-
-  try {
-    const {data} = await sanityFetch({query: CV_PROFILE_DATA})
-    profile = data
-  } catch (error) {
-    console.error('Failed to load CV profile data', error)
-  }
+  // Let ISR retain the last successful render on CMS errors instead of caching an empty CV.
+  const profile = await getProfile()
 
   if (!profile) {
     return (
@@ -40,6 +33,13 @@ export async function CvPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({
+        '@context': 'https://schema.org', '@type': 'ProfilePage', url: siteUrl,
+        mainEntity: {'@type': 'Person', name: profile.name, jobTitle: profile.role,
+          url: siteUrl, image: profile.profilePhotoUrl,
+          sameAs: profile.links?.map(link => link.link).filter(link => link?.startsWith('https://')),
+        },
+      }).replace(/</g, '\\u003c')}} />
       <div className="container mx-auto max-w-5xl cursor-default px-4 py-8">
         <Hero profile={profile} />
         <About profile={profile} />

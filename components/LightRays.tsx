@@ -115,7 +115,7 @@ const LightRays: React.FC<LightRaysProps> = ({
   const observerRef = useRef<IntersectionObserver | null>(null)
 
   useEffect(() => {
-    if (!containerRef.current) return
+    if (isReducedMotion || !containerRef.current) return
 
     observerRef.current = new IntersectionObserver(
       (entries) => {
@@ -133,10 +133,11 @@ const LightRays: React.FC<LightRaysProps> = ({
         observerRef.current = null
       }
     }
-  }, [])
+  }, [isReducedMotion])
 
   useEffect(() => {
-    if (!isVisible || !containerRef.current) return
+    if (isReducedMotion || !isVisible || !containerRef.current) return
+    let cancelled = false
 
     if (cleanupFunctionRef.current) {
       cleanupFunctionRef.current()
@@ -144,14 +145,14 @@ const LightRays: React.FC<LightRaysProps> = ({
     }
 
     const initializeWebGL = async () => {
-      if (!containerRef.current) return
+      if (cancelled || !containerRef.current) return
 
       await new Promise((resolve) => setTimeout(resolve, 10))
 
-      if (!containerRef.current) return
+      if (cancelled || !containerRef.current) return
 
       const renderer = new Renderer({
-        dpr: Math.min(window.devicePixelRatio, 2),
+        dpr: Math.min(window.devicePixelRatio, 1.5),
         alpha: true,
       })
       rendererRef.current = renderer
@@ -300,7 +301,7 @@ void main() {
       const updatePlacement = () => {
         if (!containerRef.current || !renderer) return
 
-        renderer.dpr = Math.min(window.devicePixelRatio, 2)
+        renderer.dpr = Math.min(window.devicePixelRatio, 1.5)
 
         const {clientWidth: wCSS, clientHeight: hCSS} = containerRef.current
         renderer.setSize(wCSS, hCSS)
@@ -377,15 +378,17 @@ void main() {
       }
     }
 
-    initializeWebGL()
+    void initializeWebGL().catch(() => { /* Decorative effect: keep the content usable without WebGL. */ })
 
     return () => {
+      cancelled = true
       if (cleanupFunctionRef.current) {
         cleanupFunctionRef.current()
         cleanupFunctionRef.current = null
       }
     }
   }, [
+    isReducedMotion,
     isVisible,
     raysOrigin,
     raysColor,

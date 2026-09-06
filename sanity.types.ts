@@ -15,6 +15,17 @@
 export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: schema.json
+export type PrivateArchive = {
+  _id: string
+  _type: 'privateArchive'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  sourceType?: string
+  archivedAt?: string
+  snapshot?: string
+}
+
 export type ChatHistory = {
   _id: string
   _type: 'chatHistory'
@@ -288,6 +299,7 @@ export type Slug = {
 }
 
 export type AllSanitySchemaTypes =
+  | PrivateArchive
   | ChatHistory
   | AiConfig
   | SanityFileAssetReference
@@ -307,9 +319,10 @@ export type AllSanitySchemaTypes =
 
 // Source: sanity/queries/queries.ts
 // Variable: CV_PROFILE_DATA
-// Query: *[_type == "cvProfile"][0]{  _id,  name,  role,  description,  about,  cvUrl,  "logoUrl": logo.asset->url,  "profilePhotoUrl": profilePhoto.asset->url,  "cvFileUrl": cvFile.asset->url,  contacts{    email,    phoneNumber,    location,    relocationReady,    typeOfContract,    workAvailability  },  links[]{    link,    name,    title,    iconName  },  languages[]{    language,    level  },  skillsFrontend,  skillsBackend,  skillsDevOps,  skillsOther,  softSkills[]{    skill,    description  },  interests,  education[]{    institution,    specialization  },  projects[]{    title,    description,    "imageUrls": image[].asset->url,    features,    technologies,    url,    urlToCode,    petProject,    isPinned,    nda  },  courses[]{    title,    platform,    date,    badges,    visibleOnCV  },  workExperience[]{    jobTitle,    jobTitle2,    companyName,    location,    duration,    type,    description,    website,    websiteName,    isRelated,    hideFromCV  }}
+// Query: *[_type == "cvProfile"][0]{  _id,  _updatedAt,  name,  role,  description,  about,  cvUrl,  "logoUrl": logo.asset->url,  "profilePhotoUrl": profilePhoto.asset->url,  "cvFileUrl": cvFile.asset->url,  contacts{    email,    phoneNumber,    location,    relocationReady,    typeOfContract,    workAvailability  },  links[]{    link,    name,    title,    iconName  },  languages[]{    language,    level  },  skillsFrontend,  skillsBackend,  skillsDevOps,  skillsOther,  softSkills[]{    skill,    description  },  interests,  education[]{    institution,    specialization  },  projects[]{    "title": select(nda == true => "Confidential project", title),    description,    "imageUrls": select(nda == true => [], image[].asset->url),    features,    technologies,    "url": select(nda == true => null, url),    "urlToCode": select(nda == true => null, urlToCode),    petProject,    isPinned,    nda  },  courses[]{    title,    platform,    date,    badges,    visibleOnCV  },  workExperience[hideFromCV != true]{    jobTitle,    jobTitle2,    companyName,    location,    duration,    type,    description,    website,    websiteName,    isRelated,    hideFromCV  }}
 export type CV_PROFILE_DATA_RESULT = {
   _id: string
+  _updatedAt: string
   name: string | null
   role: string | null
   description: string | null
@@ -350,13 +363,13 @@ export type CV_PROFILE_DATA_RESULT = {
     specialization: string | null
   }> | null
   projects: Array<{
-    title: string | null
+    title: string | 'Confidential project' | null
     description: string | null
-    imageUrls: Array<string | null> | null
+    imageUrls: Array<never> | Array<string | null> | null
     features: Array<string> | null
     technologies: Array<string> | null
-    url: string | null
-    urlToCode: string | null
+    url: null | string
+    urlToCode: null | string
     petProject: boolean | null
     isPinned: boolean | null
     nda: boolean | null
@@ -405,7 +418,7 @@ export type AI_CONFIG_DATA_RESULT = {
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
-    '\n*[_type == "cvProfile"][0]{\n  _id,\n  name,\n  role,\n  description,\n  about,\n  cvUrl,\n  "logoUrl": logo.asset->url,\n  "profilePhotoUrl": profilePhoto.asset->url,\n  "cvFileUrl": cvFile.asset->url,\n  contacts{\n    email,\n    phoneNumber,\n    location,\n    relocationReady,\n    typeOfContract,\n    workAvailability\n  },\n  links[]{\n    link,\n    name,\n    title,\n    iconName\n  },\n  languages[]{\n    language,\n    level\n  },\n  skillsFrontend,\n  skillsBackend,\n  skillsDevOps,\n  skillsOther,\n  softSkills[]{\n    skill,\n    description\n  },\n  interests,\n  education[]{\n    institution,\n    specialization\n  },\n  projects[]{\n    title,\n    description,\n    "imageUrls": image[].asset->url,\n    features,\n    technologies,\n    url,\n    urlToCode,\n    petProject,\n    isPinned,\n    nda\n  },\n  courses[]{\n    title,\n    platform,\n    date,\n    badges,\n    visibleOnCV\n  },\n  workExperience[]{\n    jobTitle,\n    jobTitle2,\n    companyName,\n    location,\n    duration,\n    type,\n    description,\n    website,\n    websiteName,\n    isRelated,\n    hideFromCV\n  }\n}\n': CV_PROFILE_DATA_RESULT
+    '\n*[_type == "cvProfile"][0]{\n  _id,\n  _updatedAt,\n  name,\n  role,\n  description,\n  about,\n  cvUrl,\n  "logoUrl": logo.asset->url,\n  "profilePhotoUrl": profilePhoto.asset->url,\n  "cvFileUrl": cvFile.asset->url,\n  contacts{\n    email,\n    phoneNumber,\n    location,\n    relocationReady,\n    typeOfContract,\n    workAvailability\n  },\n  links[]{\n    link,\n    name,\n    title,\n    iconName\n  },\n  languages[]{\n    language,\n    level\n  },\n  skillsFrontend,\n  skillsBackend,\n  skillsDevOps,\n  skillsOther,\n  softSkills[]{\n    skill,\n    description\n  },\n  interests,\n  education[]{\n    institution,\n    specialization\n  },\n  projects[]{\n    "title": select(nda == true => "Confidential project", title),\n    description,\n    "imageUrls": select(nda == true => [], image[].asset->url),\n    features,\n    technologies,\n    "url": select(nda == true => null, url),\n    "urlToCode": select(nda == true => null, urlToCode),\n    petProject,\n    isPinned,\n    nda\n  },\n  courses[]{\n    title,\n    platform,\n    date,\n    badges,\n    visibleOnCV\n  },\n  workExperience[hideFromCV != true]{\n    jobTitle,\n    jobTitle2,\n    companyName,\n    location,\n    duration,\n    type,\n    description,\n    website,\n    websiteName,\n    isRelated,\n    hideFromCV\n  }\n}\n': CV_PROFILE_DATA_RESULT
     '\n*[_type == "cvProfile"][0]{\n  name,\n  "logoUrl": logo.asset->url\n}\n': NAVBAR_DATA_RESULT
     '\n*[_type == "aiConfig"][0]{\n  _id,\n  systemPrompt,\n  additionalInfo,\n  greetingMessage\n}\n': AI_CONFIG_DATA_RESULT
   }

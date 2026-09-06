@@ -46,6 +46,7 @@ export type CvCourse = {
 }
 
 export type CvWorkExperience = {
+  hideFromCV?: boolean | null
   jobTitle: string | null
   jobTitle2?: string | null
   companyName?: string | null

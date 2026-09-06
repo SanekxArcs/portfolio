@@ -10,7 +10,6 @@ import {HighlightedText} from '@/components/cv/atoms/highlighted-text'
 import {ActionButton} from '@/components/cv/atoms/action-button'
 import {Tabs, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import {Badge} from '@/components/ui/badge'
-import {useUIStore} from '@/hooks/use-ui-store'
 import {getAllSkills} from '@/lib/cv-utils'
 import {cn} from '@/lib/utils'
 import { useVibrationOnClick } from '@/hooks/use-vibration'
@@ -39,7 +38,6 @@ function ExperienceCard({
   layoutId: string
   allSkills: string[]
 }) {
-  const {isReducedMotion} = useUIStore()
   const isRelated = job.isRelated
 
   return (
@@ -47,7 +45,7 @@ function ExperienceCard({
       key={layoutId}
       layoutId={layoutId}
       variants={itemVariants}
-      initial={isReducedMotion ? 'visible' : 'hidden'}
+      initial="visible"
       whileInView="visible"
       viewport={{once: true, margin: '0px 0px -100px 0px'}}
     >
@@ -178,16 +176,17 @@ export function WorkExperience({profile}: Props) {
     return null
   }
 
-  const relatedExperience = profile.workExperience.filter((job) => job.isRelated)
+  const visibleExperience = profile.workExperience.filter((job) => !job.hideFromCV)
+  const relatedExperience = visibleExperience.filter((job) => job.isRelated)
 
-  const notRelatedExperience = profile.workExperience.filter((job) => !job.isRelated)
+  const notRelatedExperience = visibleExperience.filter((job) => !job.isRelated)
 
   const displayedCards =
     activeTab === 'related'
       ? relatedExperience
       : activeTab === 'notrelated'
         ? notRelatedExperience
-        : profile.workExperience
+        : visibleExperience
 
   return (
     <section id="experience" className="mb-20 scroll-mt-24">
@@ -208,7 +207,7 @@ export function WorkExperience({profile}: Props) {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
-              initial={{opacity: 0, y: 20}}
+              initial={false}
               animate={{opacity: 1, y: 0}}
               exit={{opacity: 0, y: -20}}
               transition={{duration: 0.3}}

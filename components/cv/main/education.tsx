@@ -1,31 +1,14 @@
-'use client'
-
 import {GraduationCap, Award} from 'lucide-react'
-import {motion, Variants} from 'motion/react'
 
 import {Card, CardHeader, CardTitle} from '@/components/ui/card'
 import {Badge} from '@/components/ui/badge'
 import type {CvProfile} from '@/components/cv/types'
-import {useUIStore} from '@/hooks/use-ui-store'
 
 type Props = {
   profile: CvProfile
 }
 
-const containerVariants: Variants = {
-  hidden: {opacity: 0, y: 20},
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: 'easeOut',
-    },
-  },
-}
-
 export function Education({profile}: Props) {
-  const {isReducedMotion} = useUIStore()
 
   if (
     (!profile.education || profile.education.length === 0) &&
@@ -35,13 +18,9 @@ export function Education({profile}: Props) {
   }
 
   return (
-    <motion.section
+    <section
       id="education"
       className="mb-20 scroll-mt-24"
-      initial={isReducedMotion ? 'visible' : 'hidden'}
-      whileInView="visible"
-      viewport={{once: true, margin: '-100px'}}
-      variants={containerVariants}
     >
       <div className="mb-8 flex items-center gap-3">
         <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-100 dark:bg-emerald-900/30">
@@ -110,6 +89,6 @@ export function Education({profile}: Props) {
           </Card>
         ))}
       </div>
-    </motion.section>
+    </section>
   )
 }

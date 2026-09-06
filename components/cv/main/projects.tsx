@@ -1,10 +1,8 @@
 'use client'
 
-import {useEffect, useState} from 'react'
-import Image from 'next/image'
+import {useState} from 'react'
 import {toast} from 'sonner'
-import {Spoiler} from 'spoiled'
-import useEmblaCarousel from 'embla-carousel-react'
+import {ProjectImages} from '@/components/cv/project-images'
 import {motion, Variants, LayoutGroup} from 'motion/react'
 import {Globe, Code, Pin, ImageOff, Sparkles, Cpu, ChevronDown} from 'lucide-react'
 
@@ -13,7 +11,6 @@ import {ActionButton} from '@/components/cv/atoms/action-button'
 import type {CvProfile, CvProject} from '@/components/cv/types'
 import {Button} from '@/components/ui/button'
 import {Badge} from '@/components/ui/badge'
-import {useUIStore} from '@/hooks/use-ui-store'
 import {cn} from '@/lib/utils'
 import { useVibrationOnClick } from '@/hooks/use-vibration'
 
@@ -36,18 +33,7 @@ const containerVariants: Variants = {
 function ProjectCard({project}: {project: CvProject}) {
    const vibrate = useVibrationOnClick(40);
    const vibrateTen = useVibrationOnClick(10);
-  const [emblaRef, emblaApi] = useEmblaCarousel({loop: true})
-  const [isHovered, setIsHovered] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
-
-  useEffect(() => {
-    if (emblaApi && isHovered) {
-      const interval = setInterval(() => {
-        emblaApi.scrollNext()
-      }, 2000)
-      return () => clearInterval(interval)
-    }
-  }, [emblaApi, isHovered])
 
   return (
     <motion.div
@@ -60,8 +46,6 @@ function ProjectCard({project}: {project: CvProject}) {
     >
       <Card
         className="group relative flex h-full flex-col overflow-hidden border-2 transition-all hover:border-emerald-500/50 hover:shadow-lg odd:last:md:col-span-2"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
       >
         <div
           className={cn(
@@ -84,9 +68,7 @@ function ProjectCard({project}: {project: CvProject}) {
                     <Pin className="h-4 w-4 shrink-0 fill-emerald-500 text-emerald-500" />
                   )}
                   {project.nda ? (
-                    <Spoiler revealOn={false} density={0.2}>
-                      {project.title || 'Project details are protected by NDA.'}
-                    </Spoiler>
+                    <span>Confidential project</span>
                   ) : (
                     project.title
                   )}
@@ -101,42 +83,15 @@ function ProjectCard({project}: {project: CvProject}) {
           </CardHeader>
         </motion.div>
         <CardContent className="flex flex-1 flex-col gap-5">
-          {project.imageUrls && project.imageUrls.length > 0 && (
-            <motion.div
-              layout="position"
-              className="bg-muted overflow-hidden rounded-md border"
-              ref={emblaRef}
-            >
-              <div className="flex">
-                {project.imageUrls.map((url, index) => (
-                  <div key={index} className="relative aspect-video min-w-0 flex-[0_0_100%]">
-                    {project.nda ? (
-                      <div className="text-muted/50 flex h-full w-full items-center justify-center bg-linear-to-t from-emerald-100 to-emerald-700 text-center text-2xl dark:from-emerald-900 dark:to-emerald-950 dark:text-white/50">
-                        <ImageOff className="mr-2" />
-                        NDA PROTECTED
-                      </div>
-                    ) : (
-                      <Image
-                        src={url ?? ''}
-                        alt={`${project.title} screenshot ${index + 1}`}
-                        fill
-                        sizes="(min-width: 768px) 480px, 100vw"
-                        className="object-cover"
-                      />
-                    )}
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          )}
-          {(!project.imageUrls || project.imageUrls.length === 0) && (
+          {!project.nda && project.imageUrls?.some(Boolean) && <ProjectImages images={project.imageUrls.filter((url): url is string => !!url)} title={project.title || 'Project'} />}
+          {(project.nda || !project.imageUrls?.some(Boolean)) && (
             <motion.div
               layout="position"
               className="bg-muted relative aspect-video min-w-0 overflow-hidden rounded-md border"
             >
               <div className="text-muted/50 flex h-full w-full items-center justify-center bg-linear-to-t from-emerald-100 to-emerald-700 text-center text-2xl dark:from-emerald-900 dark:to-emerald-950 dark:text-white/50">
                 <ImageOff className="mr-2" />
-                NO IMAGE
+                {project.nda ? 'NDA PROTECTED' : 'NO IMAGE'}
               </div>
             </motion.div>
           )}
@@ -269,8 +224,7 @@ function ProjectCard({project}: {project: CvProject}) {
 }
 
 export function Projects({profile}: Props) {
-  const {isReducedMotion} = useUIStore()
-  const projects = profile.projects || []
+  const projects = [...(profile.projects || [])]
 
   if (projects.length === 0) {
     if (
@@ -304,7 +258,7 @@ export function Projects({profile}: Props) {
     <motion.section
       id="projects"
       className="mb-20 scroll-mt-24 space-y-12"
-      initial={isReducedMotion ? 'visible' : 'hidden'}
+      initial="visible"
       whileInView="visible"
       viewport={{once: true, margin: '-100px'}}
       variants={containerVariants}

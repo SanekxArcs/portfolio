@@ -3,7 +3,7 @@ import {Geist_Mono, Noto_Sans} from 'next/font/google'
 
 import {GoogleAnalytics} from '@next/third-parties/google'
 import {Toaster} from '@/components/ui/sonner'
-import {SanityLive} from '@/sanity/lib/live'
+import {siteUrl, siteTitle, siteDescription} from '@/lib/site'
 import {ThemeProvider} from '@/components/theme-provider'
 import {Footer} from '@/components/Footer/footer'
 import Navbar from '@/components/Navbar/navbar'
@@ -36,8 +36,10 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'Oleksandr Dzisiak',
-  description: 'Portfolio Website',
+  metadataBase: new URL(siteUrl),
+  alternates: {canonical: '/'},
+  title: siteTitle,
+  description: siteDescription,
   applicationName: 'O-D.DEV',
   appleWebApp: {
     capable: true,
@@ -50,8 +52,9 @@ export const metadata: Metadata = {
   keywords: ['portfolio', 'developer', 'web development'],
   authors: [{name: 'Oleksandr Dzisiak'}],
   openGraph: {
-    title: 'Oleksandr Dzisiak',
-    description: 'Portfolio Website',
+    title: siteTitle,
+    description: siteDescription,
+    url: siteUrl,
     type: 'website',
   },
   icons: {
@@ -98,11 +101,10 @@ export default function RootLayout({
             <WelcomeToast />
             <AiChatWidget />
             <Toaster />
-            <SanityLive />
           </ThemeProvider>
         </ReducedMotionProvider>
       </body>
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || ''} />
+      {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID} />}
     </html>
   )
 }

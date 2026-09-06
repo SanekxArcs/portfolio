@@ -42,14 +42,15 @@ export default function AiChatDialog({
   ]);
   const [inputMessage, setInputMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  // This component only ever mounts client-side (dynamic import, ssr: false).
-  const [sessionId] = useState(() => {
-    const storedSessionId = localStorage.getItem('ai-chat-session-id');
-    if (storedSessionId) return storedSessionId;
-    const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
-    localStorage.setItem('ai-chat-session-id', newSessionId);
-    return newSessionId;
-  });
+  const sessionReady = useRef<Promise<void> | null>(null);
+  const pendingRequest = useRef<{message: string; id: string} | null>(null);
+  useEffect(() => {
+    sessionReady.current = fetch('/api/chat', {cache: 'no-store'}).then(response => {
+      if (!response.ok) throw new Error('Chat is unavailable');
+    });
+    // Report initialization errors when the visitor actually tries to send.
+    void sessionReady.current.catch(() => {});
+  }, []);
   const [showContactForm, setShowContactForm] = useState(true);
   const [contactInfo, setContactInfo] = useState<ContactInfo>({});
   const [messagesRemaining, setMessagesRemaining] = useState(15);
@@ -99,11 +100,13 @@ export default function AiChatDialog({
       timestamp: new Date().toISOString(),
     };
 
+    if (pendingRequest.current?.message !== inputMessage) pendingRequest.current = {message: inputMessage, id: crypto.randomUUID()};
     setMessages((prev) => [...prev, userMessage]);
     setInputMessage("");
     setIsLoading(true);
 
     try {
+      await sessionReady.current;
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
@@ -111,12 +114,12 @@ export default function AiChatDialog({
         },
         body: JSON.stringify({
           message: inputMessage,
-          sessionId,
+          requestId: pendingRequest.current!.id,
           userEmail: contactInfo.email,
           userPhone: contactInfo.phone,
           userName: contactInfo.name,
           companyName: contactInfo.companyName,
-          chatHistory: messages,
+
         }),
       });
 
@@ -144,16 +147,18 @@ export default function AiChatDialog({
         timestamp: data.timestamp,
       };
 
+      pendingRequest.current = null;
       setMessages((prev) => [...prev, assistantMessage]);
 
       if (data.messagesRemaining !== undefined) {
         setMessagesRemaining(data.messagesRemaining);
       }
     } catch (error: unknown) {
+      setInputMessage(inputMessage);
       console.error("Error sending message:", error);
       const errorMessage: Message = {
         role: "assistant",
-        content: "😴 Looks like the AI agent is taking a nap right now! Please reach out to Oleksandr directly — you can find his contact details on this page.",
+        content: error instanceof Error ? error.message : "Chat is unavailable. Please contact Oleksandr directly.",
         timestamp: new Date().toISOString(),
       };
       setMessages((prev) => [...prev, errorMessage]);
@@ -163,7 +168,7 @@ export default function AiChatDialog({
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
       e.preventDefault();
       handleSendMessage();
     }
@@ -175,7 +180,7 @@ export default function AiChatDialog({
         <DialogHeader className="px-6 py-4 border-b shrink-0">
           <DialogTitle className="flex items-center gap-2">
             <Bot className="size-5 text-emerald-500" />
-            Aks AI about Oleksandr
+            Ask AI about Oleksandr
           </DialogTitle>
         </DialogHeader>
 
@@ -333,14 +338,17 @@ export default function AiChatDialog({
               )}
               <div className="flex gap-2">
                 <Textarea
+                  aria-label="Your message"
+                  maxLength={4000}
                   placeholder="Type your message..."
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
-                  onKeyPress={handleKeyPress}
+                  onKeyDown={handleKeyPress}
                   className="min-h-15 max-h-30 resize-none"
                   disabled={isLoading}
                 />
                 <Button
+                  aria-label="Send message"
                   onClick={handleSendMessage}
                   disabled={isLoading || !inputMessage.trim()}
                   size="icon"

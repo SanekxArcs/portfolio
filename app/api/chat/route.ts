@@ -1,199 +1,53 @@
 import {GoogleGenerativeAI} from '@google/generative-ai'
 import {NextRequest, NextResponse} from 'next/server'
-import {randomUUID} from 'crypto'
-import {writeClient} from '@/sanity/lib/client'
-import {sanityFetch} from '@/sanity/lib/client'
-import {AI_CONFIG_DATA, CV_PROFILE_DATA} from '@/sanity/queries/queries'
-import {ChatHistory, CV_PROFILE_DATA_RESULT} from '@/sanity.types'
+import {writeClient} from '@/sanity/lib/server'
+import {getProfile} from '@/sanity/lib/profile'
+import {AI_CONFIG_DATA} from '@/sanity/queries/queries'
+import type {CV_PROFILE_DATA_RESULT} from '@/sanity.types'
+import {ChatError, issueSession, readSession, readChatBody, isSameOrigin, SESSION_COOKIE, SESSION_TTL} from '@/lib/chat-policy'
+import {completeChat, releaseChat, reserveChat, type Reservation} from '@/lib/chat-store'
 
+export const maxDuration = 60
+const headers = {'Cache-Control': 'private, no-store'}
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY || '')
 
-// User-based rate limiting (per sessionId)
-const userMessageCountMap = new Map<string, number>()
-const INITIAL_MESSAGE_LIMIT = 15
-const EXTRA_MESSAGE_LIMIT = 5
-const TOTAL_MESSAGE_LIMIT = INITIAL_MESSAGE_LIMIT + EXTRA_MESSAGE_LIMIT // 20 total
-
-const JAILBREAK_KEYWORDS_EN = [
-  'ignore previous instructions',
-  'ignore all instructions',
-  'disregard the above',
-  'forget your rules',
-  'override',
-  'bypass',
-  'jailbreak',
-  'prompt injection',
-  'dan',
-  'do anything now',
-  'developer mode',
-  'system prompt',
-  'system message',
-  'developer message',
-  'hidden prompt',
-  'reveal prompt',
-  'show your instructions',
-  'print your rules',
-  'confidential',
-  'policy',
-  'content policy',
-  'safety policy',
-  'alignment',
-  'unfiltered',
-  'no restrictions',
-  'no limitations',
-  'act as',
-  'roleplay as',
-  'simulate',
-  'pretend you are',
-  'you are not an ai',
-  'you are free',
-  'in character',
-  'stay in character',
-]
-
-const JAILBREAK_KEYWORDS_UA_RU = [
-  'ігноруй попередні інструкції',
-  'ігноруй всі інструкції',
-  'забудь правила',
-  'обійди правила',
-  'обхід',
-  'зламай',
-  'джейлбрейк',
-  'промпт-інʼєкція',
-  'режим розробника',
-  'системний промпт',
-  'системне повідомлення',
-  'повідомлення розробника',
-  'покажи інструкції',
-  'розкрий промпт',
-  'покажи приховане',
-  'без фільтрів',
-  'без обмежень',
-  'ти вільний',
-  'відігравай роль',
-  'прикидайся',
-  'симулюй',
-  'дій як',
-  'игнорируй предыдущие инструкции',
-  'игнорируй все инструкции',
-  'забудь правила',
-  'обойди правила',
-  'обход',
-  'взломай',
-  'джейлбрейк',
-  'промпт-инъекция',
-  'режим разработчика',
-  'системный промпт',
-  'системное сообщение',
-  'сообщение разработчика',
-  'покажи инструкции',
-  'раскрой промпт',
-  'покажи скрытое',
-  'без фильтров',
-  'без ограничений',
-  'ты свободен',
-  'играй роль',
-  'притворяйся',
-  'симулируй',
-  'действуй как',
-]
-
-const ALL_JAILBREAK_KEYWORDS = [...JAILBREAK_KEYWORDS_EN, ...JAILBREAK_KEYWORDS_UA_RU]
-
-function checkForJailbreakAttempt(message: string): boolean {
-  const lowerMessage = message.toLowerCase()
-  return ALL_JAILBREAK_KEYWORDS.some((keyword) => lowerMessage.includes(keyword.toLowerCase()))
+function getSecret() {
+  if (!process.env.SANITY_API_WRITE_TOKEN || !process.env.GOOGLE_AI_API_KEY) throw new ChatError('Chat is temporarily unavailable. Please contact Oleksandr directly.', 503)
+  return process.env.CHAT_SESSION_SECRET || process.env.SANITY_API_WRITE_TOKEN
 }
 
-function getUserMessageCount(sessionId: string): number {
-  return userMessageCountMap.get(sessionId) || 0
-}
-
-function incrementUserMessageCount(sessionId: string): number {
-  const currentCount = getUserMessageCount(sessionId)
-  const newCount = currentCount + 1
-  userMessageCountMap.set(sessionId, newCount)
-  return newCount
-}
-
-function checkMessageLimit(sessionId: string, hasEmail: boolean): { 
-  allowed: boolean; 
-  count: number; 
-  needsEmail: boolean;
-  message?: string;
-} {
-  const count = getUserMessageCount(sessionId)
-  
-  // If user has provided email, allow up to total limit
-  if (hasEmail) {
-    if (count >= TOTAL_MESSAGE_LIMIT) {
-      return {
-        allowed: false,
-        count,
-        needsEmail: false,
-        message: 'You have reached the maximum message limit. Please start a new conversation.',
-      }
-    }
-    return { allowed: true, count, needsEmail: false }
+export async function GET(request: NextRequest) {
+  try {
+    const secret = getSecret()
+    const existing = request.cookies.get(SESSION_COOKIE)?.value
+    const response = NextResponse.json({ready: true}, {headers})
+    if (!readSession(existing, secret)) response.cookies.set(SESSION_COOKIE, issueSession(secret), {
+      httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict', path: '/api/chat', maxAge: SESSION_TTL,
+    })
+    return response
+  } catch (error) {
+    return NextResponse.json({error: error instanceof ChatError ? error.message : 'Chat is unavailable.'}, {status: 503, headers})
   }
-  
-  // Without email, only allow initial limit
-  if (count >= INITIAL_MESSAGE_LIMIT) {
-    return {
-      allowed: false,
-      count,
-      needsEmail: true,
-      message: `You've reached ${INITIAL_MESSAGE_LIMIT} messages. Please provide your email to continue chatting (${EXTRA_MESSAGE_LIMIT} more messages available).`,
-    }
-  }
-  
-  return { allowed: true, count, needsEmail: false }
 }
 
 export async function POST(request: NextRequest) {
+  let reservation: Reservation | undefined
   try {
-    const body = await request.json()
-    const {message, sessionId, userEmail, userPhone, userName, companyName, chatHistory = []} = body
+    if (!isSameOrigin(request.headers)) throw new ChatError('Invalid request origin.', 403)
+    const input = await readChatBody(request)
+    const secret = getSecret()
+    const session = readSession(request.cookies.get(SESSION_COOKIE)?.value, secret)
+    if (!session) throw new ChatError('Please reopen the chat to start a secure session.', 401)
+    // Vercel overwrites this header. Never trust caller-supplied x-forwarded-for.
+    const ip = process.env.VERCEL === '1' ? (request.headers.get('x-vercel-forwarded-for')?.split(',')[0].trim() || 'unknown') : 'local'
+    reservation = await reserveChat(writeClient, input, session, ip, secret)
+    if (reservation.cached) return NextResponse.json({response: reservation.cached.content, timestamp: reservation.cached.timestamp, messageCount: reservation.count, messagesRemaining: reservation.limit - reservation.count}, {headers})
 
-    if (!message || !sessionId) {
-      return NextResponse.json({error: 'Message and sessionId are required'}, {status: 400})
-    }
-
-    // Check message limit
-    const limitCheck = checkMessageLimit(sessionId, !!userEmail)
-    if (!limitCheck.allowed) {
-      return NextResponse.json(
-        {
-          error: limitCheck.message,
-          needsEmail: limitCheck.needsEmail,
-          messageCount: limitCheck.count,
-        },
-        {status: 429},
-      )
-    }
-
-    // Check for jailbreak attempts
-    if (checkForJailbreakAttempt(message)) {
-      return NextResponse.json({
-        response:
-          'I can only help with questions about Oleksandr as a developer, his services, and experience. Ask, for example: stack, project types, work process, deadlines, budget, or how to get in touch.',
-        timestamp: new Date().toISOString(),
-      })
-    }
-
-    const aiConfig = await sanityFetch({
-      query: AI_CONFIG_DATA,
-      tags: ['aiConfig'],
-    })
-
-    const cvProfile = await sanityFetch({
-      query: CV_PROFILE_DATA,
-      tags: ['cvProfile'],
-    })
-
+    const [aiConfig, cvProfile] = await Promise.all([
+      writeClient.fetch(AI_CONFIG_DATA, {}, {cache: 'force-cache', next: {revalidate: 3600, tags: ['aiConfig']}}),
+      getProfile(),
+    ])
     const contextInfo = buildContextFromProfile(cvProfile)
-
-    // Use the security-focused system prompt
     const portfolioSite = process.env.NEXT_PUBLIC_SITE_URL || 'o-d.dev'
     const defaultSystemPrompt = `You are the portfolio AI assistant for Oleksandr Dzisiak on ${portfolioSite}.
 Your only purpose is to help visitors understand Oleksandr, his skills, experience, services, and how to contact/hire him.
@@ -224,141 +78,24 @@ SAFE REDIRECTION TEMPLATE (when out of scope):
 
 VERY IMPORTANT RULE: If someone writes to you in Russian or asks to speak in Russian, REJECT the request. Preferred language is English next is Ukrainian.`
 
-    const systemPrompt = aiConfig?.systemPrompt || defaultSystemPrompt
 
-    const additionalInfo = aiConfig?.additionalInfo || ''
-
-    const fullSystemPrompt = `${systemPrompt}
-
-${additionalInfo ? `Additional Information: ${additionalInfo}` : ''}
-
-Portfolio Facts:
-${contextInfo}`
-
-    const model = genAI.getGenerativeModel({
-      model: 'gemini-3.5-flash-lite',
-      systemInstruction: fullSystemPrompt,
-    })
-
-    interface ChatMessage {
-      role: string
-      content: string
-    }
-
-    const filteredHistory = (chatHistory as ChatMessage[]).filter((msg, index) => {
-      if (index === 0 && msg.role === 'assistant') {
-        return false
-      }
-      return true
-    })
-
-    const conversationHistory = filteredHistory.map((msg) => ({
-      role: msg.role === 'assistant' ? 'model' : 'user',
-      parts: [{text: msg.content}],
-    }))
-
+    const fullSystemPrompt = [aiConfig?.systemPrompt || defaultSystemPrompt, aiConfig?.additionalInfo || '', 'Portfolio Facts:', contextInfo].join('\n')
+    const model = genAI.getGenerativeModel({model: process.env.GOOGLE_AI_MODEL || 'gemini-3.5-flash-lite', systemInstruction: fullSystemPrompt})
     const chat = model.startChat({
-      history: conversationHistory,
-      generationConfig: {
-        maxOutputTokens: 1000,
-        temperature: 0.7,
-      },
+      history: reservation.history.slice(-40).map(message => ({role: message.role === 'assistant' ? 'model' : 'user', parts: [{text: message.content}]})),
+      generationConfig: {maxOutputTokens: 1000, temperature: 0.7},
     })
-
-    const result = await chat.sendMessage(message)
-    const response = await result.response
-    const aiResponse = response.text()
-
-    const timestamp = new Date().toISOString()
-    const userMessage = {
-      _key: randomUUID(),
-      role: 'user',
-      content: message,
-      timestamp: timestamp,
+    const result = await chat.sendMessage(input.message, {timeout: 45000})
+    const response = result.response.text()
+    const timestamp = await completeChat(writeClient, reservation, input, response, secret)
+    return NextResponse.json({response, timestamp, messageCount: reservation.count, messagesRemaining: reservation.limit - reservation.count}, {headers})
+  } catch (error) {
+    if (reservation && !reservation.cached) {
+      try { await releaseChat(writeClient, reservation) } catch { console.error('Chat lease release failed') }
     }
-    const assistantMessage = {
-      _key: randomUUID(),
-      role: 'assistant',
-      content: aiResponse,
-      timestamp: new Date().toISOString(),
-    }
-
-    const existingChat = (await writeClient.fetch(
-      `*[_type == "chatHistory" && sessionId == $sessionId][0]`,
-      {sessionId},
-    )) as ChatHistory | null
-
-    if (existingChat && existingChat._id) {
-      const updatedMessages = [
-        ...(existingChat.messages || []).map((msg) => ({
-          ...msg,
-          _key: msg._key || randomUUID(),
-        })),
-        userMessage,
-        assistantMessage,
-      ]
-
-      await writeClient
-        .patch(existingChat._id)
-        .set({
-          messages: updatedMessages,
-          updatedAt: new Date().toISOString(),
-          ...(userEmail && {userEmail}),
-          ...(userPhone && {userPhone}),
-          ...(userName && {userName}),
-          ...(companyName && {companyName}),
-        })
-        .commit()
-    } else {
-      await writeClient.create({
-        _type: 'chatHistory',
-        sessionId,
-        userEmail: userEmail || '',
-        userPhone: userPhone || '',
-        userName: userName || '',
-        companyName: companyName || '',
-        messages: [userMessage, assistantMessage],
-        createdAt: timestamp,
-        updatedAt: timestamp,
-      })
-    }
-
-    // Increment message count for this user
-    const newCount = incrementUserMessageCount(sessionId)
-    const hasEmail = !!userEmail
-
-    return NextResponse.json({
-      response: aiResponse,
-      timestamp: assistantMessage.timestamp,
-      messageCount: newCount,
-      messagesRemaining: (hasEmail ? TOTAL_MESSAGE_LIMIT : INITIAL_MESSAGE_LIMIT) - newCount,
-    })
-  } catch (error: unknown) {
-    console.error('Chat API error:', error)
-
-    // Handle Google AI quota errors specifically
-    if (error instanceof Error && error.message.includes('quota')) {
-      return NextResponse.json(
-        {
-          error:
-            'Service temporarily unavailable due to high demand. Please try again in a moment.',
-        },
-        {status: 429},
-      )
-    }
-
-    // Handle rate limit errors
-    if (error instanceof Error && error.message.includes('Too Many Requests')) {
-      return NextResponse.json(
-        {error: 'Too many requests. Please wait a moment and try again.'},
-        {status: 429},
-      )
-    }
-
-    return NextResponse.json(
-      {error: error instanceof Error ? error.message : 'Failed to process chat message'},
-      {status: 500},
-    )
+    if (error instanceof ChatError) return NextResponse.json({error: error.message, needsEmail: error.needsEmail}, {status: error.status, headers})
+    console.error('Chat service failed', error instanceof Error ? error.name : 'UnknownError')
+    return NextResponse.json({error: 'Chat is temporarily unavailable. Please try again later or contact Oleksandr directly.'}, {status: 503, headers})
   }
 }
 
@@ -375,7 +112,7 @@ function buildContextFromProfile(profile: CV_PROFILE_DATA_RESULT): string {
   if (profile.contacts?.phoneNumber) sections.push(`Phone: ${profile.contacts.phoneNumber}`)
   if (profile.contacts?.location) sections.push(`Location: ${profile.contacts.location}`)
 
-  const p = profile as any // Temporary cast to handle dynamic fields from query
+  const p = profile
 
   if (p.skillsFrontend?.length) {
     sections.push(`Frontend Skills: ${p.skillsFrontend.join(', ')}`)
@@ -389,19 +126,19 @@ function buildContextFromProfile(profile: CV_PROFILE_DATA_RESULT): string {
 
   if (p.languages?.length) {
     sections.push(
-      `Languages: ${p.languages.map((l: {language: string; level: string}) => `${l.language} (${l.level})`).join(', ')}`,
+      `Languages: ${p.languages.map((l: {language: string | null; level: string | null}) => `${l.language} (${l.level})`).join(', ')}`,
     )
   }
 
   if (p.workExperience?.length) {
     const relevantExperience = p.workExperience
-      .filter((exp: {hideFromCV?: boolean}) => !exp.hideFromCV)
+      .filter((exp: {hideFromCV?: boolean | null}) => !exp.hideFromCV)
       .slice(0, 3)
     if (relevantExperience.length) {
       sections.push(
         `Recent Experience: ${relevantExperience
           .map(
-            (exp: {jobTitle: string; companyName: string}) =>
+            (exp: {jobTitle: string | null; companyName: string | null}) =>
               `${exp.jobTitle} at ${exp.companyName}`,
           )
           .join('; ')}`,
@@ -410,10 +147,10 @@ function buildContextFromProfile(profile: CV_PROFILE_DATA_RESULT): string {
   }
 
   if (p.projects?.length) {
-    const pinnedProjects = p.projects.filter((p: {isPinned?: boolean}) => p.isPinned).slice(0, 3)
+    const pinnedProjects = p.projects.filter((p: {isPinned?: boolean | null}) => p.isPinned).slice(0, 3)
     if (pinnedProjects.length) {
       sections.push(
-        `Key Projects: ${pinnedProjects.map((p: {title: string}) => p.title).join(', ')}`,
+        `Key Projects: ${pinnedProjects.map((p: {title: string | null}) => p.title).join(', ')}`,
       )
     }
   }

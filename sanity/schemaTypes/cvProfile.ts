@@ -257,6 +257,14 @@ export const cvProfile = defineType({
       name: "projects",
       title: "Projects",
       type: "array",
+      description: 'Only publish approved public details. NDA projects must not contain confidential titles, image uploads or URLs.',
+      validation: Rule => Rule.custom((projects) => {
+        const unsafe = (projects || []).some((value) => {
+          const project = value as {nda?: boolean; title?: string; image?: unknown[]; url?: string; urlToCode?: string}
+          return project.nda && (project.title !== 'Confidential project' || !!project.image?.length || !!project.url || !!project.urlToCode)
+        })
+        return unsafe ? 'NDA projects must use the title "Confidential project" and contain no images or URLs. Store private originals separately.' : true
+      }),
       of: [
         {
           type: "object",

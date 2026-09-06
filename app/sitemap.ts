@@ -1,12 +1,16 @@
 import { MetadataRoute } from 'next'
+import {siteUrl} from '@/lib/site'
+import {getProfile} from '@/sanity/lib/profile'
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://o-d.dev' 
+export const revalidate = 3600
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const profile = await getProfile()
 
   return [
     {
-      url: baseUrl,
-      lastModified: new Date(),
+      url: siteUrl,
+      lastModified: profile?._updatedAt,
       changeFrequency: 'monthly',
       priority: 1,
     },

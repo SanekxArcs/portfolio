@@ -1,8 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import {Spoiler} from 'spoiled'
-
-import {Button} from '@/components/ui/button'
+import {buttonVariants} from '@/components/ui/button'
 import {cn} from '@/lib/utils'
 import { useVibrationOnClick } from '@/hooks/use-vibration'
 
@@ -36,13 +34,13 @@ export function ActionButton({
     const vibrate = useVibrationOnClick(50);
   const buttonContent = (
     <>
-      {React.cloneElement(icon as React.ReactElement<React.SVGProps<SVGSVGElement>>, {
+      {React.isValidElement(icon) && React.cloneElement(icon as React.ReactElement<React.SVGProps<SVGSVGElement>>, {
         className: 'size-4 group-hover/button:scale-110 transition-all duration-300',
       })}
       {spoiler ? (
-        <Spoiler revealOn="hover" fps={1} accentColor={['black', 'white']}>
+        <span className="blur-sm transition-[filter] group-hover/button:blur-none group-focus/button:blur-none">
           {label}
-        </Spoiler>
+        </span>
       ) : (
         label || null
       )}
@@ -55,21 +53,12 @@ export function ActionButton({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={cn(`group/button cursor-pointer`, classLink)}
+        className={cn(buttonVariants({variant, size}), 'group/button cursor-pointer', classLink, className)}
         download={download}
         onClick={vibrate}
         {...props}
       >
-        <Button
-          variant={variant}
-          size={size}
-          className={cn(
-            'cursor-pointer transition-all duration-200 group-active/button:scale-90',
-            className,
-          )}
-        >
           {buttonContent}
-        </Button>
       </a>
     )
   }
@@ -77,21 +66,12 @@ export function ActionButton({
   return (
     <Link
       href={href}
-      className={cn(`group/button cursor-pointer`, classLink)}
+      className={cn(buttonVariants({variant, size}), 'group/button cursor-pointer', classLink, className)}
       download={download}
       onClick={vibrate}
       {...props}
     >
-      <Button
-        variant={variant}
-        size={size}
-        className={cn(
-          'cursor-pointer transition-all duration-200 group-active/button:scale-90',
-          className,
-        )}
-      >
         {buttonContent}
-      </Button>
     </Link>
   )
 }

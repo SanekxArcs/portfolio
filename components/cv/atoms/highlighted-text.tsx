@@ -1,7 +1,3 @@
-'use client'
-
-import {useMemo} from 'react'
-
 import {cn} from '@/lib/utils'
 
 function escapeRegExp(string: string) {
@@ -16,7 +12,7 @@ type Props = {
 }
 
 export function HighlightedText({text, skills, className, highlightClassName}: Props) {
-  const parts = useMemo(() => {
+  const parts = (() => {
     if (!skills || skills.length === 0) return [text]
 
     const sortedSkills = [...skills].sort((a, b) => b.length - a.length)
@@ -26,7 +22,7 @@ export function HighlightedText({text, skills, className, highlightClassName}: P
     )
 
     return text.split(pattern)
-  }, [text, skills])
+  })()
 
   return (
     <span className={className}>
