@@ -269,7 +269,13 @@
     "work": "Projekty i realizacje",
     "experience": "Doświadczenie i CV",
     "contact": "Porozmawiajmy o projekcie lub współpracy",
-    "description": "O.D. EMPOWER — niezależne studio Oleksandra Dzisiaka. Przemyślane strony, aplikacje webowe i integracje. Poznaj usługi, realizacje i doświadczenie."
+    "description": "O.D. EMPOWER — niezależne studio Oleksandra Dzisiaka. Przemyślane strony, aplikacje webowe i integracje. Poznaj usługi, realizacje i doświadczenie.",
+    "descriptions": {
+      "services": "Poznaj strony internetowe, landing pages, aplikacje webowe, integracje i automatyzację od O.D. EMPOWER. Omów projekt bezpośrednio z Oleksandrem Dzisiakiem.",
+      "work": "Zobacz strony, aplikacje webowe, rozszerzenia przeglądarki i własne produkty Oleksandra Dzisiaka wraz z opisem, funkcjami i technologiami.",
+      "experience": "Poznaj doświadczenie Oleksandra Dzisiaka w tworzeniu aplikacji, jego umiejętności techniczne, historię pracy i CV.",
+      "contact": "Opowiedz Oleksandrowi Dzisiakowi o stronie, aplikacji lub integracji albo skontaktuj się w sprawie współpracy deweloperskiej z O.D. EMPOWER."
+    }
   },
   "notFound": {
     "title": "Ta strona zmieniła orbitę.",

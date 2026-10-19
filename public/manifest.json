@@ -1,13 +1,12 @@
 {
   "name": "O.D. EMPOWER - Oleksandr Dzisiak Portfolio",
   "short_name": "O.D. EMPOWER",
-  "description": "Portfolio Website - Oleksandr Dzisiak",
+  "description": "O.D. EMPOWER — websites, web applications, and digital experiences by Oleksandr Dzisiak",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#059669",
-  "orientation": "portrait-primary",
+  "background_color": "#0d1210",
+  "theme_color": "#0d1210",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -34,13 +33,5 @@
       "purpose": "maskable"
     }
   ],
-  "categories": ["productivity"],
-  "screenshots": [
-    {
-      "src": "/web-app-manifest-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "form_factor": "wide"
-    }
-  ]
+  "categories": ["business", "portfolio"]
 }

@@ -9,7 +9,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/work',
     '/experience',
     '/contact',
-    ...getProjects('en').map((project) => '/work/' + project.slug),
+    ...getProjects('en')
+      .filter((project) => !project.nda)
+      .map((project) => '/work/' + project.slug),
   ]
   return paths.flatMap((path) =>
     locales.map((locale) => ({

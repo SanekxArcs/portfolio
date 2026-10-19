@@ -269,7 +269,13 @@
     "work": "Projects & selected work",
     "experience": "Experience & CV",
     "contact": "Start a project or discuss a role",
-    "description": "O.D. EMPOWER — the independent development studio of Oleksandr Dzisiak. Thoughtful websites, web applications and integrations. Explore services, work and experience."
+    "description": "O.D. EMPOWER — the independent development studio of Oleksandr Dzisiak. Thoughtful websites, web applications and integrations. Explore services, work and experience.",
+    "descriptions": {
+      "services": "Explore websites, landing pages, web applications, integrations and automation by O.D. EMPOWER. Discuss your goals directly with developer Oleksandr Dzisiak.",
+      "work": "Browse websites, web applications, browser extensions and independent products built by Oleksandr Dzisiak, with project context, features and technical details.",
+      "experience": "Explore Oleksandr Dzisiak’s full-stack development experience, technical skills, work history and CV for development teams and recruiters.",
+      "contact": "Tell Oleksandr Dzisiak about a website, application or integration project, or get in touch about a development role with O.D. EMPOWER."
+    }
   },
   "notFound": {
     "title": "This page took a different orbit.",

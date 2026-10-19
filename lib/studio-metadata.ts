@@ -7,8 +7,12 @@ export function studioMetadata(
   path = '',
   key: 'home' | 'services' | 'work' | 'experience' | 'contact' = 'home',
   name?: string,
+  descriptionOverride?: string,
 ): Metadata {
   const d = getDictionary(locale)
+  const description =
+    descriptionOverride ??
+    (key === 'home' ? d.meta.description : d.meta.descriptions[key])
   const title =
     (name ??
       (key === 'experience'
@@ -16,7 +20,7 @@ export function studioMetadata(
         : d.meta[key])) + ' — O.D. EMPOWER'
   return {
     title,
-    description: d.meta.description,
+    description,
     alternates: {
       canonical: siteUrl + '/' + locale + path,
       languages: {
@@ -31,7 +35,7 @@ export function studioMetadata(
     },
     openGraph: {
       title,
-      description: d.meta.description,
+      description,
       url: siteUrl + '/' + locale + path,
       siteName: 'O.D. EMPOWER',
       type: 'website',
@@ -43,7 +47,7 @@ export function studioMetadata(
     twitter: {
       card: 'summary_large_image',
       title,
-      description: d.meta.description,
+      description,
     },
   }
 }

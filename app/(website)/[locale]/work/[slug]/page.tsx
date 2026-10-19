@@ -15,14 +15,20 @@ export async function generateMetadata({params}: Props) {
   if (!isLocale(locale)) return {}
   const project = getProjects(locale).find((item) => item.slug === slug)
   if (!project) return {}
-  return studioMetadata(
+  const metadata = studioMetadata(
     locale,
     '/work/' + slug,
     'work',
     project.nda
       ? getDictionary(locale).work.ndaTitle
       : (project.title ?? undefined),
+    project.nda
+      ? getDictionary(locale).work.nda
+      : project.description?.split(/(?<=[.!?])\s/u)[0],
   )
+  return project.nda
+    ? {...metadata, robots: {index: false, follow: true}}
+    : metadata
 }
 export default async function Page({params}: Props) {
   const {locale, slug} = await params
