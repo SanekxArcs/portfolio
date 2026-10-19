@@ -1,0 +1,328 @@
+[
+  {
+    "description": "Solar Sense to wielostronicowa aplikacja prezentująca rozwiązania fotowoltaiczne i realizacje firmy. Powstała od podstaw — od identyfikacji marki przez interfejs po architekturę treści. Łączy informacje, wizualną narrację i animacje, tworząc profesjonalną obecność firmy energetycznej online.",
+    "features": [
+      "Dynamiczny kalkulator",
+      "Galeria",
+      "Wielostronicowa aplikacja SPA",
+      "Responsywny design",
+      "Walidacja po stronie klienta",
+      "Interaktywność"
+    ]
+  },
+  {
+    "description": "Dedykowana platforma zarządzania dla VDG Solar, usprawniająca prace z zakresu elektrotechniki. Początkowo projekt własny, rozwinął się w komercyjne MVP do zarządzania zasobami, kalkulacji kosztów i generowania faktur. Integracja z Google Sheets zapewnia synchronizację danych, aktualizacje online i import zbiorczy.",
+    "features": [
+      "Aplikacja PWA",
+      "Integracja z Google Sheets",
+      "Zarządzanie magazynem",
+      "Zarządzanie sprzętem",
+      "Kalkulacja kosztów firmy",
+      "Generowanie faktur",
+      "Wyszukiwanie i filtry"
+    ]
+  },
+  {
+    "description": "Responsywny landing page firmowy zrealizowany jako część większej witryny. Celem było precyzyjne odwzorowanie projektu graficznego, semantyczny HTML i płynna interakcja przed przekazaniem do dalszego rozwoju przez zespół klienta.",
+    "features": [
+      "Precyzyjne odwzorowanie projektu",
+      "Responsywny design",
+      "Interakcje",
+      "Semantyczny kod",
+      "Podstawy SEO"
+    ]
+  },
+  {
+    "description": "Pełna strona firmowa dla firmy z branży energii odnawialnej. Projekt obejmował branding, UI/UX oraz kompletną realizację od podstaw. Prezentuje rozwiązania energetyczne, studia przypadków i osiągnięcia firmy w wydajnej, dopracowanej wizualnie witrynie.",
+    "features": [
+      "System blogowy",
+      "Prezentacja produktów",
+      "Studia przypadków",
+      "Optymalizacja SEO",
+      "Wysoka wydajność",
+      "Responsywna aplikacja SPA",
+      "Interaktywne animacje"
+    ]
+  },
+  {
+    "description": "Dwujęzyczny landing page wizytówkowy dla firmy zajmującej się legalizacją pobytu cudzoziemców w Polsce. Stworzony od podstaw z przejrzystym, responsywnym interfejsem i płynnymi animacjami. Obsługuje język ukraiński i białoruski, dostosowując treść do odbiorców.",
+    "features": [
+      "Wiele języków",
+      "Animacje przy przewijaniu",
+      "Formularz kontaktowy",
+      "Wydajność i SEO",
+      "Responsywny układ"
+    ]
+  },
+  {
+    "description": "Responsywna strona firmowa na WordPress, szeroko dostosowana na podstawie szablonu. Projekt obejmował dopasowanie designu do marki, dodanie treści i materiałów, sekcje dynamiczne, funkcje interaktywne i konfigurację CMS do samodzielnego zarządzania przez klienta.",
+    "features": [
+      "Pełne dostosowanie szablonu",
+      "Responsywny design",
+      "Integracja CMS",
+      "Formularz i slider",
+      "Optymalizacja wydajności"
+    ]
+  },
+  {
+    "description": "Strona firmowa zbudowana w całości na podstawie projektu graficznego, z czystą, semantyczną architekturą HTML. Łączy responsywność, dostępność i płynną interakcję, zapewniając spójny wygląd i działanie na różnych urządzeniach.",
+    "features": [
+      "Precyzyjne wdrożenie designu",
+      "Responsywny układ",
+      "Interaktywny interfejs",
+      "Semantyczny HTML",
+      "Slider",
+      "Okno modalne"
+    ]
+  },
+  {
+    "description": "Przebudowana witryna e-commerce, ukierunkowana na wygodę użytkowników i elastyczność zarządzania. Prace obejmowały nowy interfejs, dostosowanie do różnych urządzeń i integrację panelu WordPress do łatwego zarządzania treścią.",
+    "features": [
+      "Redesign i poprawa UX",
+      "Pełna responsywność",
+      "Semantyczny kod",
+      "Integracja panelu administracyjnego"
+    ]
+  },
+  {
+    "description": "Portal informacyjny i społecznościowy dla rodziców. Zbudowany z myślą o użyteczności i responsywności, z zarządzaniem treścią w WordPress, forum oraz akordeonami, oknami modalnymi i formularzami kontaktowymi.",
+    "features": [
+      "Pełna responsywność",
+      "Panel administracyjny",
+      "Funkcje społecznościowe",
+      "Forum",
+      "Akordeon",
+      "Okno modalne"
+    ]
+  },
+  {
+    "description": "Indywidualnie zaprojektowana strona wizytówkowa dla stowarzyszenia prawniczego. Obejmuje autorski design i wdrożenie w WordPress z responsywnym układem, podstawami SEO, blogiem i integracją CRM do obsługi zapytań klientów.",
+    "features": [
+      "Autorski design",
+      "CRM i blog",
+      "Responsywny układ",
+      "Czysty, semantyczny kod"
+    ]
+  },
+  {
+    "description": "Platforma społecznościowa dla graczy The Crew Motorfest do udostępniania i odkrywania ustawień tuningu pojazdów. Łączy graczy poprzez konfiguracje oparte na danych, parametry osiągów oraz uporządkowane ustawienia samochodów, łodzi i samolotów.",
+    "features": [
+      "Baza ustawień tworzona przez społeczność",
+      "PWA",
+      "Zaawansowane wyszukiwanie",
+      "Tworzenie i udostępnianie ustawień",
+      "Oceny społeczności w czasie rzeczywistym",
+      "Aktualizacje na żywo"
+    ]
+  },
+  {
+    "description": "Minimalistyczna platforma dla par do codziennego dzielenia się miłymi wiadomościami i wsparciem. Umożliwia wysyłanie krótkich, spersonalizowanych notatek i przypomnień, tworząc mały rytuał bliskości.",
+    "features": [
+      "Łączenie pary",
+      "Dwukierunkowe wiadomości",
+      "Zarządzanie przez partnerów",
+      "PWA",
+      "Historia",
+      "Animowane konfetti",
+      "Mikrointerakcje"
+    ]
+  },
+  {
+    "description": "Modułowy zestaw czterech niezależnych rozszerzeń VS Code usprawniających codzienną pracę programisty. Każde ma jedno zadanie: od szybkiego uruchamiania skryptów po przełączanie środowisk, dzięki czemu pracę można dopasować do własnych potrzeb.",
+    "features": [
+      "Uruchamianie skryptów",
+      "Konwerter jednostek viewportu",
+      "Zapisane fragmenty poleceń",
+      "Przełączanie środowisk"
+    ]
+  },
+  {
+    "description": "Rozszerzenie Chrome wspierające pracę programisty dzięki nazwom gałęzi, komunikatom commitów i szacowaniu czasu generowanym z AI oraz inteligentnemu rozpoznawaniu stron. Łączy ClickUp, GitLab, Mattermost i Google Meet w zautomatyzowany przepływ pracy.",
+    "features": [
+      "Generowanie nazw gałęzi",
+      "Integracja Mattermost",
+      "Przełączanie trybu DND",
+      "Inteligentne wyszukiwanie",
+      "Debugowanie responsywności w czasie rzeczywistym"
+    ]
+  },
+  {
+    "description": "Lekka aplikacja zegara cyfrowego, działająca również offline i zaprojektowana z myślą o skupieniu. Pokazuje godziny, minuty i sekundy na pełnym ekranie, z możliwością zmiany kolorów, czcionek i stylu — bez reklam.",
+    "features": [
+      "Czas w czasie rzeczywistym",
+      "Personalizacja",
+      "Pełny ekran",
+      "Bez rozpraszania",
+      "Obsługa offline",
+      "Płynne animacje"
+    ]
+  },
+  {
+    "description": "Aplikacja przeglądarkowa do konwersji PNG, AVIF, JPEG i GIF na WebP z podglądem i regulacją jakości. Wszystko odbywa się lokalnie, bez wysyłania plików, z naciskiem na szybkość, prywatność i prostotę.",
+    "features": [
+      "Wiele formatów",
+      "Kontrola jakości",
+      "Konwersja zbiorcza",
+      "Przeciągnij i upuść",
+      "Offline i prywatnie"
+    ]
+  },
+  {
+    "description": "Aplikacja dla kawiarni i barów do zarządzania dynamicznym menu. Goście mogą sprawdzić bieżącą ofertę i kolejne dni, a administratorzy tworzyć, edytować i planować menu wraz ze szczegółami produktów, zdjęciami i okresami dostępności.",
+    "features": [
+      "Personalizacja motywu i interfejsu",
+      "Responsywny design",
+      "Panel administracyjny",
+      "Dynamiczne menu"
+    ]
+  },
+  {
+    "description": "Aplikacja do tworzenia i udostępniania profesjonalnych CV w układzie A4 gotowym do druku. Pierwotnie projekt do własnego użytku, rozwinął się w konfigurowalny generator szablonów z projektowaniem, podglądem i drukowaniem w przeglądarce.",
+    "features": [
+      "Układ A4",
+      "Inteligentny tryb druku",
+      "Dynamiczna edycja",
+      "Responsywny design",
+      "Wielokrotne użycie"
+    ]
+  },
+  {
+    "description": "Pierwszy prototyp platformy, która później stała się TunerFest. Prosta aplikacja pobierająca i prezentująca ustawienia pojazdów z Google Sheets, umożliwiająca przeglądanie, wyszukiwanie i porównywanie bez ręcznej konfiguracji.",
+    "features": [
+      "Integracja Google Sheets",
+      "Wyszukiwanie",
+      "Lekka aplikacja",
+      "Gotowość do PWA i pracy offline"
+    ]
+  },
+  {
+    "description": "Aplikacja wykorzystująca AI do analizy i kategoryzacji zakładek przeglądarki. Użytkownik eksportuje je do HTML, przesyła plik, a narzędzie porządkuje linki, sprawdza adresy URL i grupuje je według przeznaczenia.",
+    "features": [
+      "Kategoryzacja AI",
+      "Walidacja linków",
+      "Wczytywanie i parsowanie",
+      "Organizacja wizualna",
+      "Szybka, lekka aplikacja"
+    ]
+  },
+  {
+    "description": "Aplikacja do odkrywania filmów, zintegrowana z API The Movie Database (TMDB). Pozwala przeglądać kolekcje, szczegóły i filtrować wyniki według gatunków lub kategorii w przejrzystym, responsywnym interfejsie.",
+    "features": [
+      "Lista filmów",
+      "Szczegóły filmów",
+      "Kategorie i filtry",
+      "Stany ładowania i błędów"
+    ]
+  },
+  {
+    "description": "Duża komercyjna platforma e-commerce dla europejskiej firmy z branży energii odnawialnej. Celem było wsparcie sprzedaży i pozyskiwania zapytań na rynku UE przez wydajny sklep z SEO i headless CMS. Mój wkład obejmował frontend i architekturę systemu, łączące treść, produkty i proces zakupowy.",
+    "features": [
+      "Frontend Next.js",
+      "Headless WordPress CMS",
+      "Integracja Shopware",
+      "Wielokrotnie używane UI",
+      "Zarządzanie stanem",
+      "Śledzenie zapytań"
+    ]
+  },
+  {
+    "description": "Wydajna strona one-page na premierę produktu na rynku UE. Powstała w małym zespole, z naciskiem na motion design, interaktywną narrację i konwersję. Łączy płynne animacje, responsywność i precyzję wykonania.",
+    "features": [
+      "Nowoczesne animowane UI",
+      "Responsywny układ",
+      "Optymalizacja obrazów",
+      "SEO i dostępność",
+      "Szybki proces realizacji"
+    ]
+  },
+  {
+    "description": "Wizualny, animowany landing page dla kampanii międzynarodowej marki produktowej. Zrealizowany zespołowo od designu do publikacji, z interakcjami opartymi na przewijaniu, motion designem i zoptymalizowanymi mediami.",
+    "features": [
+      "Animacje przy przewijaniu",
+      "Optymalizacja multimediów",
+      "Nacisk na wydajność",
+      "Responsywny design",
+      "Precyzja wykonania",
+      "Tailwind i system wariantów",
+      "Szybka realizacja"
+    ]
+  },
+  {
+    "description": "Duża platforma e-commerce w Nuxt 4 i Vue 3 dla europejskiej marki handlowej. Bezpośrednia integracja Shopware API, obsługa wielu języków, rozbudowane moduły treści i płynne animacje tworzą wydajny sklep headless nastawiony na skalowalność, SEO i utrzymanie.",
+    "features": [
+      "Architektura headless",
+      "Dynamiczny CMS i katalog",
+      "Wiele języków",
+      "Wydajne animacje",
+      "Zoptymalizowany build"
+    ]
+  },
+  {
+    "description": "Projekt własny do organizacji i monitorowania cyklicznych wydatków, takich jak streaming, członkostwa i rachunki. Zapewnia przejrzysty widok miesięcznych kosztów, terminów odnowienia i historii płatności.",
+    "features": [
+      "Przejrzysty dashboard",
+      "Śledzenie cyklicznych płatności",
+      "Walidacja formularzy",
+      "Zarządzanie danymi",
+      "Responsywny design",
+      "Motywy",
+      "PWA"
+    ]
+  },
+  {
+    "description": "Lokalna aplikacja desktopowa do mierzenia czasu pracy. Kompaktowy, pływający widżet łączy równoległe liczniki zadań, przerwy, planowanie i edytowalną oś dnia z opcjonalną pomocą AI przy dopracowywaniu zadań.",
+    "features": [
+      "Równoległe liczniki i planowanie zadań",
+      "Edytowalna historia, kopie zapasowe i eksport do kalendarza",
+      "Lokalna baza SQLite i opcjonalna pomoc Gemini"
+    ]
+  },
+  {
+    "description": "Rozszerzenie, które pomaga uporządkować rosnącą kolekcję zakładek. Gemini podpowiada foldery, wyszukuje według znaczenia i proponuje przenoszenie wielu zakładek, a podgląd zmian i cofanie pozostawiają kontrolę użytkownikowi.",
+    "features": [
+      "Sugestie folderów AI i wyszukiwanie semantyczne",
+      "Porządkowanie zbiorcze i usuwanie duplikatów",
+      "Przegląd proponowanych zmian i cofanie działań"
+    ]
+  },
+  {
+    "description": "Rozszerzenie AI do pracy z tekstem bez opuszczania strony. Zaznacz tekst, wybierz działanie z menu kontekstowego i sprawdź poprawki językowe, przeredagowanie, tłumaczenie lub propozycję odpowiedzi.",
+    "features": [
+      "Korekta, zmiana tonu i tłumaczenie",
+      "Działania na zaznaczonym tekście z menu kontekstowego",
+      "Konfigurowalne prompty i dostawcy AI"
+    ]
+  },
+  {
+    "description": "Ukraińska drużynowa gra słowna działająca bezpośrednio w Google Meet. Uczestnicy rozmowy dzielą się na zespoły i grają na czas: od objaśniania słów po debaty i improwizowane scenki.",
+    "features": [
+      "Pięć trybów zabawy i rundy na czas",
+      "Własne słowa, tematy i udostępnianie przez JSON",
+      "Lokalny zapis bez zakładania konta"
+    ]
+  },
+  {
+    "description": "Aplikacja do ćwiczenia czytania dla dzieci, oparta na własnych tekstach i poziomie czytelnika. Łączy bibliotekę tekstów, sesje czytania, pytania sprawdzające zrozumienie i śledzenie postępów.",
+    "features": [
+      "Biblioteka tekstów i poziomy czytania",
+      "Sesje czytania i pytania do tekstu",
+      "Śledzenie postępów i udostępnianie pakietów tekstów"
+    ]
+  },
+  {
+    "description": "Lekka aplikacja w zasobniku Windows pokazująca aktywny język klawiatury przy wskaźniku myszy. Śledzi układ aktywnego okna i pozwala dopasować położenie, wygląd poszczególnych języków oraz opcjonalne kursory.",
+    "features": [
+      "Etykieta aktywnego języka przy wskaźniku",
+      "Kolory dla języków i regulowane położenie",
+      "Lokalne narzędzie Windows bez połączeń sieciowych"
+    ]
+  },
+  {
+    "description": "Aplikacja do nauki matematyki przez zabawę dla dzieci od siódmego roku życia, z osobnymi widokami dziecka i rodzica. Krótkie ćwiczenia, śledzenie postępów i ustawienia treningu pomagają budować regularny nawyk nauki.",
+    "features": [
+      "Osobne widoki dziecka i rodzica",
+      "Ćwiczenia arytmetyczne i śledzenie postępów",
+      "Dane lokalne dostępne offline i integracja z Convex"
+    ]
+  }
+]

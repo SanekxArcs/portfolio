@@ -1,0 +1,75 @@
+*[_type == "cvProfile"][0]{
+  _id,
+  _updatedAt,
+  name,
+  role,
+  description,
+  about,
+  cvUrl,
+  "logoUrl": logo.asset->url,
+  "profilePhotoUrl": profilePhoto.asset->url,
+  "cvFileUrl": cvFile.asset->url,
+  contacts{
+    email,
+    phoneNumber,
+    location,
+    relocationReady,
+    typeOfContract,
+    workAvailability
+  },
+  links[]{
+    link,
+    name,
+    title,
+    iconName
+  },
+  languages[]{
+    language,
+    level
+  },
+  skillsFrontend,
+  skillsBackend,
+  skillsDevOps,
+  skillsOther,
+  softSkills[]{
+    skill,
+    description
+  },
+  interests,
+  education[]{
+    institution,
+    specialization
+  },
+  projects[]{
+    "title": select(nda == true => "Confidential project", title),
+    description,
+    "imageUrls": select(nda == true => [], image[].asset->url),
+    features,
+    technologies,
+    "url": select(nda == true => null, url),
+    "urlToCode": select(nda == true => null, urlToCode),
+    petProject,
+    isPinned,
+    nda
+  },
+  courses[]{
+    title,
+    platform,
+    date,
+    badges,
+    visibleOnCV
+  },
+  workExperience[hideFromCV != true]{
+    jobTitle,
+    jobTitle2,
+    companyName,
+    location,
+    duration,
+    type,
+    description,
+    website,
+    websiteName,
+    isRelated,
+    hideFromCV
+  }
+}

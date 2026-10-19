@@ -15,13 +15,13 @@ export function HeroLanguages({profile, variants}: Props) {
   if (!profile.languages || profile.languages.length === 0) return null
 
   return (
-    <motion.div className="mb-4 flex flex-wrap gap-4" variants={variants}>
+    <motion.div className="hero-languages flex flex-wrap gap-2" aria-label="Languages" variants={variants}>
       {profile.languages.map((lang, i) => (
         <Badge key={i} variant="outline" className="bg-background/50 gap-1.5 pl-1.5 text-xs">
-          <FlagIcon languageCode={lang.language || ''} />
+          <FlagIcon languageCode={lang.language?.trim() || ''} />
           <span>
-            {lang.language}
-            {lang.level && <span className="text-muted-foreground ml-1">- {lang.level}</span>}
+            {lang.language?.trim().toLowerCase() === 'poland' ? 'Polish' : lang.language}
+            {lang.level && <span className="text-muted-foreground ml-1">· {lang.level}</span>}
           </span>
         </Badge>
       ))}

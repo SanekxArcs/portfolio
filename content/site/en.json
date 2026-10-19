@@ -1,0 +1,284 @@
+{
+  "nav": {
+    "home": "Home",
+    "work": "Work",
+    "services": "Services",
+    "experience": "Experience",
+    "contact": "Let's talk",
+    "menu": "Open navigation",
+    "close": "Close navigation",
+    "language": "Language",
+    "theme": "Change theme",
+    "motion": "Reduce motion",
+    "skip": "Skip to content"
+  },
+  "hero": {
+    "eyebrow": "Independent development studio",
+    "line1": "Thoughtful websites",
+    "line2": "Practical web products",
+    "intro": "I'm Oleksandr. I bring design and development together to build useful digital experiences — for your business, or as part of your team",
+    "primary": "Start a project",
+    "secondary": "Explore my experience",
+    "caption": "A little curiosity goes a long way",
+    "scroll": "Scroll to explore",
+    "location": "Based in Poland · Working across borders",
+    "specialty": "Design-minded. Development-driven"
+  },
+  "clients": {
+    "label": "Client experience",
+    "title": "Brands I’ve worked with",
+    "intro": "A selection of clients I’ve worked with across my professional experience — and many more along the way",
+    "showAll": "Explore all clients",
+    "showLess": "Show fewer clients",
+    "visit": "Visit website"
+  },
+  "home": {
+    "workLabel": "01 / Selected work",
+    "workTitle": "Real ideas. Brought to life.",
+    "workIntro": "A selection of business websites and independent products. Different challenges, the same attention to detail.",
+    "allWork": "Explore all work",
+    "servicesLabel": "02 / What I do",
+    "servicesTitle": "From the first idea to the final detail.",
+    "allServices": "Explore services",
+    "aboutLabel": "04 / The person behind the pixels",
+    "aboutTitle": "A studio approach. A personal connection",
+    "aboutText": "I'm Oleksandr Dzisiak, a full-stack developer and Solutions Engineer. I connect business needs with practical software, thoughtful interfaces and clear communication.",
+    "aboutLink": "Get to know my experience",
+    "hiring": "Building your team?",
+    "hiringText": "Explore my work history, technical skills and CV — all in one place.",
+    "aboutRole": "Developer / Problem solver / Curious human"
+  },
+  "services": {
+    "label": "Services",
+    "title": "Your next idea deserves a good build.",
+    "intro": "A website that explains your business. A tool that makes work easier. An integration that connects the pieces. Let's find the right approach for what you need.",
+    "include": "What we can work on",
+    "discuss": "Discuss this service",
+    "items": [
+      {
+        "id": "websites",
+        "title": "Websites & landing pages",
+        "text": "A considered online presence that makes your business easy to understand and your next step easy to take.",
+        "deliverables": [
+          "Business websites and campaign pages",
+          "Responsive interfaces and purposeful motion",
+          "Content structure and SEO foundations"
+        ]
+      },
+      {
+        "id": "applications",
+        "title": "Web applications & tools",
+        "text": "Turn a workflow or product idea into software that people can actually use, with room to grow.",
+        "deliverables": [
+          "Customer-facing products and MVPs",
+          "Internal dashboards and business tools",
+          "User flows, interfaces and data integration"
+        ]
+      },
+      {
+        "id": "integrations",
+        "title": "Integrations & automation",
+        "text": "Connect your systems and reduce repetitive work with APIs, practical automation and AI-assisted workflows.",
+        "deliverables": [
+          "API connections and data workflows",
+          "Custom calculators and document generation",
+          "Automation and AI-assisted tools"
+        ]
+      },
+      {
+        "id": "improvements",
+        "title": "Make good products better",
+        "text": "Give an existing website or application a more useful interface and a stronger technical foundation.",
+        "deliverables": [
+          "Interface and responsive design improvements",
+          "Performance and accessibility improvements",
+          "Refactoring and maintainable components"
+        ]
+      }
+    ],
+    "faqTitle": "A few things you might be wondering.",
+    "faq": [
+      {
+        "q": "How much will my project cost?",
+        "a": "It depends on the scope, content, integrations and level of design. Tell me what you have in mind, and we can discuss an approach and an estimate before work begins."
+      },
+      {
+        "q": "Can you improve an existing website?",
+        "a": "Yes. Share your current website and what is getting in the way. We can look at the interface, performance, content structure or a specific feature."
+      },
+      {
+        "q": "Do I need a finished specification?",
+        "a": "No. A short explanation of your business, the problem and what you want to achieve is a useful starting point."
+      },
+      {
+        "q": "Who will I work with?",
+        "a": "You'll speak directly with me, Oleksandr. O.D. EMPOWER is my independent development studio, so the person discussing the project is also the person building it."
+      }
+    ]
+  },
+  "process": {
+    "label": "03 / Working together",
+    "title": "Clear steps. Open conversation.",
+    "items": [
+      {
+        "title": "Understand",
+        "text": "We start with your goals, your audience and the problem worth solving."
+      },
+      {
+        "title": "Shape",
+        "text": "We discuss the scope, priorities, technical approach and estimate."
+      },
+      {
+        "title": "Build",
+        "text": "Design and development come together, with room for feedback along the way."
+      },
+      {
+        "title": "Launch",
+        "text": "We check the details, prepare the release and discuss what comes next."
+      }
+    ]
+  },
+  "work": {
+    "label": "Selected work & experiments",
+    "title": "Built to do something useful.",
+    "intro": "Commercial projects, independent products and the tools I build out of curiosity. Explore the context, the features and the technology behind them.",
+    "all": "All work",
+    "commercial": "Commercial work",
+    "independent": "Independent projects",
+    "confidential": "Confidential work",
+    "view": "Explore project",
+    "back": "All projects",
+    "overview": "The project",
+    "features": "What it includes",
+    "stack": "Built with",
+    "gallery": "A closer look",
+    "visit": "Visit website",
+    "code": "View source",
+    "related": "Next to explore",
+    "nda": "Client identity, images and links are private. The overview describes only the publicly shareable work.",
+    "ndaTitle": "Confidential project",
+    "imageAlt": "Project screenshot",
+    "attribution": "Project context and implementation details from my portfolio. Commercial work may include contributions made with a team; this is not a studio client endorsement.",
+    "empty": "No projects in this category.",
+    "mobilePreview": "Mobile website preview",
+    "extension": "View extension",
+    "watchDemo": "Watch the demo"
+  },
+  "experience": {
+    "label": "For teams & recruiters",
+    "title": "A developer who sees the bigger picture.",
+    "intro": "From interfaces and integrations to the business problem behind them. Here's the experience, technical background and curiosity I bring to a team.",
+    "download": "Download CV",
+    "view": "View CV",
+    "cvLanguage": "CV in English",
+    "contact": "Talk about a role",
+    "about": "A little about me",
+    "history": "Experience, in context.",
+    "earlier": "Earlier experience",
+    "skills": "A toolkit, not a limit.",
+    "frontend": "Frontend",
+    "backend": "Backend & data",
+    "devops": "Tools & delivery",
+    "other": "Other skills",
+    "strengths": "How I work",
+    "education": "Education",
+    "courses": "Courses & recognition",
+    "interests": "Beyond the day-to-day",
+    "languages": "Languages",
+    "glance": "At a glance",
+    "location": "Based in",
+    "relocation": "Relocation",
+    "relocationYes": "Open to relocation",
+    "relocationNo": "Not currently relocating",
+    "availability": "Availability",
+    "contract": "Collaboration",
+    "projects": "Projects & technical work",
+    "role": "Full-stack Developer",
+    "present": "Present",
+    "remote": "Remote",
+    "fulltime": "Full-time",
+    "parttime": "Part-time",
+    "native": "Native",
+    "poland": "Poland",
+    "ukrainian": "Ukrainian",
+    "polish": "Polish",
+    "english": "English",
+    "website": "Company website",
+    "contractType": "Contract",
+    "courseTitles": "Official course titles are shown in their original language."
+  },
+  "contact": {
+    "label": "Let's talk",
+    "title": "Have something in mind?",
+    "intro": "A new website, a product idea or a role on your team. Tell me a little about it, and let's start a conversation.",
+    "project": "I have a project",
+    "hiring": "I'm hiring",
+    "name": "Your name",
+    "email": "Your email",
+    "type": "What do you need?",
+    "brief": "A little about it",
+    "briefProject": "What are you building, who is it for, and what would you like to achieve?",
+    "briefHiring": "Tell me about the role, your team and the type of collaboration.",
+    "budget": "Budget (optional)",
+    "timeline": "Timeline (optional)",
+    "unknown": "Not sure yet",
+    "submit": "Compose an email",
+    "note": "This opens your email app with your brief. Nothing is sent or stored by this website.",
+    "direct": "Prefer a direct conversation?",
+    "emailAction": "Send an email",
+    "phoneAction": "Call Oleksandr",
+    "social": "Find me elsewhere",
+    "otherType": "Something else",
+    "roleType": "A role or collaboration",
+    "subjectProject": "Project enquiry — O.D. EMPOWER",
+    "subjectHiring": "Hiring enquiry — O.D. EMPOWER",
+    "invalid": "Please add your name, a valid email and a short brief.",
+    "ready": "Your email draft is ready. If your email app didn't open, use the email button alongside this form.",
+    "back": "Back to the form",
+    "copy": "Copy brief",
+    "copied": "Brief copied",
+    "copyError": "Please select and copy your brief below.",
+    "preview": "Your enquiry",
+    "available": "Let's discuss the right next step."
+  },
+  "cta": {
+    "label": "The next thing starts with a conversation",
+    "title": "Let's build something worth putting out there.",
+    "button": "Tell me about your project",
+    "secondary": "Or explore my experience"
+  },
+  "footer": {
+    "text": "Thoughtful websites, practical products. Built by Oleksandr Dzisiak.",
+    "top": "Back to top",
+    "rights": "Independent by design.",
+    "built": "Designed & developed by Oleksandr",
+    "email": "Send email",
+    "phone": "Call me"
+  },
+  "identity": {
+    "photo": "View profile photo",
+    "logo": "View logo",
+    "meet": "Click to meet me",
+    "return": "Click to return to logo",
+    "tap": "Tap to meet me",
+    "tapReturn": "Tap to return"
+  },
+  "meta": {
+    "home": "Independent web development studio",
+    "services": "Websites, applications & integrations",
+    "work": "Projects & selected work",
+    "experience": "Experience & CV",
+    "contact": "Start a project or discuss a role",
+    "description": "O.D. EMPOWER — the independent development studio of Oleksandr Dzisiak. Thoughtful websites, web applications and integrations. Explore services, work and experience."
+  },
+  "notFound": {
+    "title": "This page took a different orbit.",
+    "text": "The page you're looking for isn't here. Let's get you back to something useful.",
+    "back": "Back to home"
+  },
+  "error": {
+    "title": "Something interrupted the connection.",
+    "text": "Please try loading this page again.",
+    "retry": "Try again"
+  }
+}

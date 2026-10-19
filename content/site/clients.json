@@ -1,0 +1,158 @@
+[
+  {
+    "name": "8a",
+    "url": "https://8a.pl/",
+    "featured": true,
+    "linked": true
+  },
+  {
+    "name": "Many Mornings",
+    "url": "https://manymornings.pl/",
+    "featured": true,
+    "linked": true
+  },
+  {
+    "name": "Dekoria",
+    "url": "https://dekoria.pl/",
+    "featured": true,
+    "linked": true
+  },
+  {
+    "name": "Geekay",
+    "url": "https://www.geekay.com/",
+    "featured": true,
+    "linked": true
+  },
+  {
+    "name": "Cefarm24",
+    "url": "https://www.cefarm24.pl/",
+    "featured": true,
+    "linked": true
+  },
+  {
+    "name": "Focus Garden",
+    "url": "https://focusgarden.pl/",
+    "featured": true,
+    "linked": true
+  },
+  {
+    "name": "Barron",
+    "url": "https://barron.com/",
+    "featured": true,
+    "linked": true
+  },
+  {
+    "name": "HIFI international",
+    "url": "https://nova.hifi.lu/",
+    "featured": true,
+    "linked": false
+  },
+  {
+    "name": "Zumnorde",
+    "url": "https://www.zumnorde.de/",
+    "featured": false,
+    "linked": true
+  },
+  {
+    "name": "Pancernik",
+    "url": "https://pancernik.pl/",
+    "featured": false,
+    "linked": true
+  },
+  {
+    "name": "PROMAG",
+    "url": "https://e-promag.pl/",
+    "featured": false,
+    "linked": true
+  },
+  {
+    "name": "VAPE",
+    "url": "https://vape.co.uk/",
+    "featured": false,
+    "linked": true
+  },
+  {
+    "name": "Massi",
+    "url": "https://massi.pl/pl/",
+    "featured": false,
+    "linked": true
+  },
+  {
+    "name": "4wall",
+    "url": "https://4wall.pl/",
+    "featured": false,
+    "linked": true
+  },
+  {
+    "name": "Korallo",
+    "url": "https://korallo.pl/",
+    "featured": false,
+    "linked": true
+  },
+  {
+    "name": "SeliGift",
+    "url": "https://www.seligift.com/",
+    "featured": false,
+    "linked": true
+  },
+  {
+    "name": "VERK",
+    "url": "https://verk.sklep.pl/",
+    "featured": false,
+    "linked": true
+  },
+  {
+    "name": "XXLgastro",
+    "url": "https://xxlgastro.pro/",
+    "featured": false,
+    "linked": true
+  },
+  {
+    "name": "8stars",
+    "url": "https://8stars.com/",
+    "featured": false,
+    "linked": true
+  },
+  {
+    "name": "Supersportowy",
+    "url": "https://supersportowy.pl/",
+    "featured": false,
+    "linked": true
+  },
+  {
+    "name": "Internetowa Hurtownia",
+    "url": "https://internetowa-hurtownia.pl/main-eng.html",
+    "featured": false,
+    "linked": true
+  },
+  {
+    "name": "Labera",
+    "url": "https://labera.pl/",
+    "featured": false,
+    "linked": true
+  },
+  {
+    "name": "XXLinox",
+    "url": "https://xxlinox.com/",
+    "featured": false,
+    "linked": false
+  },
+  {
+    "name": "Cefarm",
+    "url": "https://cefarm.pl/",
+    "featured": false,
+    "linked": false
+  },
+  {
+    "name": "Multilek",
+    "url": "https://multilek.pl/",
+    "featured": false,
+    "linked": false
+  },
+  {
+    "name": "Aptenet",
+    "url": "https://aptenet.pl/",
+    "featured": false,
+    "linked": false
+  }
+]

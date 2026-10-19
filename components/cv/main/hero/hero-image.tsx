@@ -1,92 +1,108 @@
 'use client'
-import {motion, Variants} from 'motion/react'
+
+import {useState} from 'react'
 import Image from 'next/image'
-
+import {motion, type Variants} from 'motion/react'
+import {MousePointer2} from 'lucide-react'
 import type {CvProfile} from '@/components/cv/types'
+import {HeroLogoScene} from './hero-logo-scene'
 
-import {mainHeadConfig} from './hero.config'
-
+type IdentityLabels = {
+  photo: string
+  logo: string
+  meet: string
+  return: string
+  tap: string
+  tapReturn: string
+}
+const defaultLabels: IdentityLabels = {
+  photo: 'View profile photo',
+  logo: 'View logo',
+  meet: 'Click to meet me',
+  return: 'Click to return to logo',
+  tap: 'Tap to meet me',
+  tapReturn: 'Tap to return',
+}
 type Props = {
   profile: CvProfile
   variants: Variants
   shouldReduceMotion: boolean
+  labels?: IdentityLabels
 }
 
-export function HeroImage({profile, variants, shouldReduceMotion}: Props) {
-  const {image} = mainHeadConfig
-
-  const initials = (profile.name || '')
-    .split(' ')
-    .map((n) => n[0])
-    .join('')
-    .toUpperCase()
-    .slice(0, 2)
+export function HeroImage({
+  profile,
+  variants,
+  shouldReduceMotion,
+  labels = defaultLabels,
+}: Props) {
+  const [showPhoto, setShowPhoto] = useState(false)
+  const [photoLoaded, setPhotoLoaded] = useState(false)
+  const photoVisible = showPhoto && photoLoaded
 
   return (
-    <motion.div className="group relative m-auto hidden w-1/3 md:block lg:mx-0" variants={variants}>
-      {profile.logoUrl ? (
-        <div className="perspective-250 relative h-64 w-64">
-          <div
-            className={`size-full transition-all duration-700 transform-3d ${
-              shouldReduceMotion ? '' : 'group-hover:transform-[rotateX(180deg)]'
-            }`}
-          >
-            {/* Front: Logo */}
-            <div className="absolute inset-0 flex size-full items-center justify-center overflow-hidden bg-transparent backface-hidden">
-              <div
-                role="img"
-                aria-label={image.logoAlt}
-                className="size-full bg-linear-to-t from-emerald-950 to-emerald-900 transition-colors duration-300 dark:from-white dark:to-emerald-100"
-                style={{
-                  maskImage: `url(${profile.logoUrl})`,
-                  WebkitMaskImage: `url(${profile.logoUrl})`,
-                  maskSize: 'contain',
-                  WebkitMaskSize: 'contain',
-                  maskRepeat: 'no-repeat',
-                  WebkitMaskRepeat: 'no-repeat',
-                  maskPosition: 'center',
-                  WebkitMaskPosition: 'center',
-                }}
-              />
-            </div>
-            {/* Back: Profile Photo */}
-            <div className="from-secondary to-muted dark:from-primary dark:to-secondary absolute inset-0 flex size-full transform-[rotateX(180deg)] items-center justify-center overflow-hidden rounded-2xl bg-linear-to-br shadow-2xl backface-hidden">
-              {profile.profilePhotoUrl ? (
-                <Image
-                  src={profile.profilePhotoUrl}
-                  alt={profile.name ?? 'Profile Photo'}
-                  fill
-                  sizes="256px"
-                  className="object-cover"
-                />
-              ) : (
-                <div className="text-primary/30 absolute inset-0 flex cursor-default items-center justify-center text-8xl font-bold">
-                  {initials}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div
-          className={`from-secondary to-muted dark:from-primary dark:to-secondary h-64 w-64 overflow-hidden rounded-2xl bg-linear-to-br shadow-2xl ${
-            shouldReduceMotion ? '' : 'transform group-hover:scale-105 group-hover:rotate-3'
-          } relative flex items-center justify-center transition-all duration-500`}
+    <motion.div className="hero-identity" variants={variants}>
+      <HeroLogoScene
+        reducedMotion={shouldReduceMotion}
+        photoVisible={photoVisible}
+      />
+      {profile.profilePhotoUrl && (
+        <button
+          className="hero-identity-trigger"
+          type="button"
+          onClick={() => setShowPhoto((value) => !value)}
+          aria-label={showPhoto ? labels.logo : labels.photo}
+          aria-controls="hero-profile-portrait"
+          aria-pressed={showPhoto}
         >
-          {profile.profilePhotoUrl ? (
-            <Image
-              src={profile.profilePhotoUrl}
-              alt={profile.name ?? 'Profile Photo'}
-              fill
-              sizes="256px"
-              className="object-cover"
-            />
-          ) : (
-            <div className="text-primary/30 absolute inset-0 flex cursor-default items-center justify-center text-8xl font-bold">
-              {initials}
-            </div>
-          )}
-        </div>
+          <span className="hero-portrait-anchor" aria-hidden={!photoVisible}>
+            <motion.span
+              id="hero-profile-portrait"
+              className="hero-portrait"
+              initial={false}
+              animate={
+                photoVisible
+                  ? {
+                      opacity: 1,
+                      scale: 1,
+                      rotateY: 360,
+                      y: 0,
+                      filter: 'blur(0px)',
+                    }
+                  : {
+                      opacity: 0,
+                      scale: 0.8,
+                      rotateY: 0,
+                      y: 12,
+                      filter: 'blur(6px)',
+                    }
+              }
+              transition={{
+                duration: shouldReduceMotion ? 0 : 0.85,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              <Image
+                src={profile.profilePhotoUrl}
+                alt=""
+                fill
+                priority
+                sizes="(max-width: 760px) 120px, 240px"
+                className="object-cover"
+                onLoad={() => setPhotoLoaded(true)}
+              />
+            </motion.span>
+          </span>
+          <span className="hero-identity-hint" aria-hidden="true">
+            <MousePointer2 size={12} />
+            <span className="hero-identity-hint-desktop">
+              {showPhoto ? labels.return : labels.meet}
+            </span>
+            <span className="hero-identity-hint-touch">
+              {showPhoto ? labels.tapReturn : labels.tap}
+            </span>
+          </span>
+        </button>
       )}
     </motion.div>
   )

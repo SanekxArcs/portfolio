@@ -19,7 +19,7 @@ export const mainHeadConfig = {
     immediately: "Immediately",
   },
   actions: {
-    saveCv: "Save CV",
+    saveCv: "Download CV",
     viewCv: "View CV",
   },
   socials: {

@@ -19,7 +19,7 @@ export function HeroAvailability({profile, variants}: Props) {
     <motion.div className="mb-4 inline-block" variants={variants}>
       <Badge
         variant="secondary"
-        className="animate-pulse bg-emerald-200/80 p-2.5 text-sm font-medium dark:bg-emerald-950/80"
+        className="text-emerald-800 dark:text-emerald-200 bg-emerald-200/80 p-2.5 text-sm font-medium dark:bg-emerald-950/80"
       >
         <icons.BadgeCheck className="mr-1 text-emerald-600" />
         {profile.contacts?.workAvailability &&

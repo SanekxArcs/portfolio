@@ -1,60 +1,24 @@
 'use client'
-import {motion, Variants} from 'motion/react'
-
-import {ActionButton} from '@/components/cv/atoms/action-button'
-
+import {motion, type Variants} from 'motion/react'
+import {MapPin, MoveUpRight, Clock3, BriefcaseBusiness} from 'lucide-react'
 import type {CvProfile} from '@/components/cv/types'
 
-import {mainHeadConfig} from './hero.config'
-
-type Props = {
-  profile: CvProfile
-  variants: Variants
-}
+type Props = {profile: CvProfile; variants: Variants}
+const timeCommitment = /^(?:part[\s-]?time|full[\s-]?time)$/i
 
 export function HeroDetails({profile, variants}: Props) {
-  const {icons, contact, urls} = mainHeadConfig
-
-  return (
-    <motion.div className="mb-4 flex flex-row flex-wrap gap-2" variants={variants}>
-      {profile.contacts?.location && (
-        <ActionButton
-          href={urls.mapsWarsaw}
-          icon={<icons.MapPin />}
-          label={profile.contacts.location}
-          variant="link"
-          size="sm"
-          className="text-muted-foreground"
-        />
-      )}
-      {typeof profile.contacts?.relocationReady === 'boolean' && (
-        <ActionButton
-          icon={<icons.Map className="h-4 w-4" />}
-          href={urls.maps}
-          size="sm"
-          variant="link"
-          label={
-            profile.contacts.relocationReady
-              ? contact.relocation.ready
-              : contact.relocation.notReady
-          }
-          className="text-muted-foreground flex items-center gap-2"
-        />
-      )}
-      {profile.contacts?.typeOfContract && (
-        <ActionButton
-          href={urls.b2bSearch}
-          variant="link"
-          size="sm"
-          icon={<icons.Banknote className="h-4 w-4" />}
-          label={
-            Array.isArray(profile.contacts.typeOfContract)
-              ? profile.contacts.typeOfContract.join(', ')
-              : profile.contacts.typeOfContract
-          }
-          className="text-muted-foreground flex items-center gap-2"
-        />
-      )}
-    </motion.div>
-  )
+  const contacts = profile.contacts
+  const options = [...new Set((contacts?.typeOfContract ?? []).map(value => value.trim()).filter(Boolean))]
+  const availability = options.filter(value => timeCommitment.test(value))
+  const contracts = options.filter(value => !timeCommitment.test(value))
+  const facts = [
+    ...(contacts?.location ? [{label: 'Based in', value: contacts.location, icon: MapPin}] : []),
+    ...(typeof contacts?.relocationReady === 'boolean' ? [{label: 'Relocation', value: contacts.relocationReady ? 'Open to relocation' : 'Not considering relocation', icon: MoveUpRight}] : []),
+    ...(availability.length ? [{label: 'Availability', value: availability.join(' / '), icon: Clock3}] : []),
+    ...(contracts.length ? [{label: 'Contract', value: contracts.join(' / '), icon: BriefcaseBusiness}] : []),
+  ]
+  if (!facts.length) return null
+  return <motion.dl className="hero-facts" variants={variants}>
+    {facts.map(({label, value, icon: Icon}) => <div className="hero-fact" key={label}><dt><Icon size={13} aria-hidden="true" />{label}</dt><dd>{value}</dd></div>)}
+  </motion.dl>
 }

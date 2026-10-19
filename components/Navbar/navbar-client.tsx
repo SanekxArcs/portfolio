@@ -6,12 +6,13 @@ import {motion, AnimatePresence} from 'motion/react'
 import {Menu, X, User, Briefcase, Cpu, FolderGit2, Zap} from 'lucide-react'
 
 import {Button} from '@/components/ui/button'
+import {BrandMark} from '@/components/brand-mark'
 import {ModeToggle} from '@/components/mode-toggle'
 import GradualBlur from '@/components/GradualBlur'
 import {ButtonGroup} from '@/components/ui/button-group'
 import {useUIStore} from '@/hooks/use-ui-store'
 import {useVibrationOnClick} from '@/hooks/use-vibration'
-import {cn} from '@/lib/utils'
+import {cn} from 'cn'
 import {toast} from 'sonner'
 
 const navLinks = [
@@ -21,22 +22,12 @@ const navLinks = [
   {href: '#projects', label: 'Projects', icon: FolderGit2},
 ]
 
-export function NavbarClient({logoUrl, name}: {logoUrl?: string | null; name?: string | null}) {
+export function NavbarClient({logoUrl}: {logoUrl?: string | null}) {
   const [isScrolled, setIsScrolled] = React.useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
   const [activeSection, setActiveSection] = React.useState<string>('')
   const {isReducedMotion, toggleReducedMotion} = useUIStore()
   const vibrate = useVibrationOnClick(40)
-
-  const initials = React.useMemo(() => {
-    if (!name) return 'OD'
-    return name
-      .split(' ')
-      .map((n) => n[0])
-      .join('')
-      .toUpperCase()
-      .slice(0, 2)
-  }, [name])
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -92,31 +83,7 @@ export function NavbarClient({logoUrl, name}: {logoUrl?: string | null; name?: s
             toast.success('You already on a home page!', {duration: 1000})
           }}
         >
-          <div
-            className={cn(
-              'relative flex size-8 items-center justify-center overflow-hidden',
-              logoUrl ? 'bg-transparent' : 'rounded-lg bg-emerald-600 text-white',
-            )}
-          >
-            {logoUrl ? (
-              <div
-                role="img"
-                className="h-full w-full bg-linear-to-t from-emerald-950 to-emerald-900 transition-colors duration-300 dark:from-white dark:to-emerald-100"
-                style={{
-                  maskImage: `url(${logoUrl})`,
-                  WebkitMaskImage: `url(${logoUrl})`,
-                  maskSize: 'contain',
-                  WebkitMaskSize: 'contain',
-                  maskRepeat: 'no-repeat',
-                  WebkitMaskRepeat: 'no-repeat',
-                  maskPosition: 'center',
-                  WebkitMaskPosition: 'center',
-                }}
-              />
-            ) : (
-              initials
-            )}
-          </div>
+          <BrandMark logoUrl={logoUrl} />
           <span
             className={cn(
               'inline-block transition-opacity',

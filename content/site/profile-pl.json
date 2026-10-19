@@ -1,0 +1,183 @@
+{
+  "role": "Full-stack Developer",
+  "description": "Tworzę kompletne produkty webowe — od responsywnych interfejsów po API, integracje i procesy wspierane przez AI. Łączę potrzeby biznesowe z praktycznym oprogramowaniem, przemyślanym designem i techniczną realizacją.",
+  "about": "Jestem full-stack developerem z ponad 5-letnim doświadczeniem w tworzeniu stron i aplikacji, obecnie pracuję jako Solutions Engineer. Biorę odpowiedzialność od zrozumienia problemu po wdrożenie i dostarczenie rozwiązania, stawiając na jasną komunikację i łatwe w utrzymaniu oprogramowanie.\nRozwijam pracę z AI i procesami opartymi na agentach. Dwa razy z rzędu otrzymałem również wyróżnienie Spotlight Employee w swojej firmie.",
+  "interests": [
+    "Uczenie maszynowe",
+    "Innowacje technologiczne",
+    "Modelowanie 3D",
+    "Gry"
+  ],
+  "education": [
+    "Elektrotechnika i elektroenergetyka",
+    "Eksploatacja zautomatyzowanych urządzeń energetycznych w elektrowniach"
+  ],
+  "softSkills": [
+    {
+      "skill": "Dokumentacja techniczna i komunikacja",
+      "description": "Przygotowałem obszerną dokumentację API oraz pliki README i JSDoc używane przez 7 programistów; skróciłem wdrożenie nowego członka zespołu."
+    },
+    {
+      "skill": "Inicjatywa i samodzielność",
+      "description": "Samodzielnie zidentyfikowałem wąskie gardło wydajności i wdrożyłem optymalizację, która przyspieszyła ładowanie strony o 35%."
+    },
+    {
+      "skill": "Empatia i myślenie o użytkowniku",
+      "description": "Promowałem standardy dostępności, ograniczając liczbę skarg użytkowników."
+    },
+    {
+      "skill": "Elastyczność i rozwój",
+      "description": "Pomyślnie przeniosłem duży projekt z React do Vue (Nuxt)."
+    },
+    {
+      "skill": "Analityczne rozwiązywanie problemów",
+      "description": "Zdiagnozowałem i usunąłem krytyczny błąd produkcyjny."
+    },
+    {
+      "skill": "Dzielenie się wiedzą",
+      "description": "Prowadzę warsztaty dla zespołu poświęcone nowym, interesującym zagadnieniom."
+    },
+    {
+      "skill": "Dbałość o wydajność",
+      "description": "Z własnej inicjatywy refaktoryzowałem starsze komponenty, zmniejszając rozmiar pakietu i poprawiając Core Web Vitals."
+    }
+  ],
+  "work": [
+    {
+      "jobTitle": "Konsultant Solutions Engineer",
+      "duration": "Wrzesień 2026 – obecnie",
+      "location": "Zdalnie",
+      "type": "Kontrakt",
+      "description": [
+        "Doradztwo klientom e-commerce w zakresie integracji wyszukiwania i rekomendacji SaaS",
+        "Rekomendowanie dobrych praktyk przetwarzania i walidacji feedów produktowych",
+        "Wsparcie klientów w planowaniu wdrożeń technicznych i określaniu wymagań",
+        "Doradztwo w zakresie rozwiązań backendowych i frontendowych zgodnych z systemami projektowymi klientów"
+      ]
+    },
+    {
+      "jobTitle": "Konsultant ds. integracji",
+      "duration": "Marzec 2026 – wrzesień 2026",
+      "location": "Zdalnie",
+      "type": "Kontrakt",
+      "description": [
+        "Doradztwo klientom e-commerce w zakresie integracji wyszukiwania i rekomendacji SaaS",
+        "Rekomendowanie dobrych praktyk przetwarzania i walidacji feedów produktowych",
+        "Wsparcie klientów w planowaniu wdrożeń technicznych i określaniu wymagań",
+        "Rekomendowanie sposobów dostosowania frontendu do systemów projektowych klientów"
+      ]
+    },
+    {
+      "jobTitle": "Mid Frontend Developer",
+      "duration": "Czerwiec 2025 – marzec 2026",
+      "location": "Warszawa",
+      "type": "Kontrakt",
+      "description": [
+        "Tworzenie wielokrotnego użytku, dostępnych interfejsów dla największej platformy e-commerce w Niemczech z użyciem Storybook, styled-components i Framer Motion",
+        "Dostarczenie 3 stron produktowych nastawionych na konwersję i zoptymalizowanych pod kątem Core Web Vitals",
+        "Budowa MVP sklepu od podstaw w Nuxt 4, UnoCSS i Shopware oraz dodanie mikrofrontendu Next.js"
+      ]
+    },
+    {
+      "jobTitle": "Full-stack Developer",
+      "duration": "Sierpień 2024 – luty 2025",
+      "location": "Warszawa",
+      "type": "Kontrakt",
+      "description": [
+        "Opracowanie i uruchomienie strony firmowej z użyciem Next.js 15, Tailwind CSS 4.0 i Sanity CMS",
+        "Integracja Sanity do zarządzania treścią stron produktowych, bloga i realizacji",
+        "Tworzenie kalkulatorów usprawniających wewnętrzne procesy"
+      ]
+    },
+    {
+      "jobTitle": "Full-stack Developer",
+      "duration": "Wrzesień 2023 – styczeń 2025",
+      "location": "Warszawa",
+      "type": "Pełny etat",
+      "description": [
+        "Zaprojektowanie od podstaw dedykowanego systemu Enterprise Resource Management (ERM)",
+        "Budowa intuicyjnych, responsywnych interfejsów z komponentami Shadcn UI, upraszczających wprowadzanie i wizualizację danych"
+      ]
+    },
+    {
+      "jobTitle": "Frontend Developer",
+      "duration": "Kwiecień 2023 – sierpień 2023",
+      "location": "Warszawa",
+      "type": "Pełny etat",
+      "description": [
+        "Budowa wielostronicowej witryny firmy w React, prezentującej usługi i realizacje",
+        "Opracowanie złożonego kalkulatora z Google Sheets jako źródłem danych, usprawniającego ich przetwarzanie",
+        "Budowa generatora PDF automatycznie tworzącego spersonalizowane dokumenty na podstawie danych i obliczeń"
+      ]
+    },
+    {
+      "jobTitle": "Junior Frontend Developer",
+      "duration": "Lipiec 2022 – marzec 2023",
+      "location": "Warszawa",
+      "type": "Pełny etat",
+      "description": [
+        "Utrzymanie i rozwój strony WordPress z użyciem HTML, CSS i JavaScript z dbałością o wydajność",
+        "Rozwiązywanie błędów frontendu i wdrażanie funkcji poprawiających wygodę użytkowania i działanie strony",
+        "Monitorowanie i analiza ruchu w Google Analytics w celu zrozumienia zachowań użytkowników i wydajności witryny"
+      ]
+    },
+    {
+      "jobTitle": "Elektryk",
+      "jobTitle2": "Inżynier elektryk",
+      "duration": "Luty 2020 – lipiec 2022",
+      "location": "Polska",
+      "type": "Pełny etat",
+      "description": [
+        "Instalacja i utrzymanie elektrowni słonecznych oraz domowych instalacji elektrycznych, naprawy i przebudowy zapewniające 99% dostępności. Współpraca z zespołem przy prawidłowym działaniu urządzeń. Opracowanie procedur monitorowania, które poprawiły pracę urządzeń o 20%."
+      ]
+    },
+    {
+      "jobTitle": "Junior Frontend Developer",
+      "duration": "Styczeń 2019 – listopad 2019",
+      "location": "Kijów",
+      "type": "Pełny etat",
+      "description": [
+        "Tworzenie i utrzymanie stron WordPress dla klientów z użyciem HTML, CSS i JavaScript",
+        "Zapewnienie zgodności z różnymi przeglądarkami i urządzeniami poprzez testowanie i debugowanie",
+        "Wdrożenie optymalizacji wydajności i SEO, dzięki którym wyniki Google PageSpeed przekroczyły 90 na wszystkich urządzeniach"
+      ]
+    },
+    {
+      "jobTitle": "Wsparcie IT",
+      "jobTitle2": "Kierownik działu",
+      "duration": "Styczeń 2018 – listopad 2018",
+      "location": "Ukraina, Dnipro",
+      "type": "Pełny etat",
+      "description": [
+        "Rozpoczęcie pracy we wsparciu IT i awans na kierownika działu dzięki dobrym wynikom; rozwój umiejętności organizacji, zarządzania personelem i prowadzenia spotkań",
+        "Organizacja dokumentacji, zarządzanie zaopatrzeniem i optymalizacja kosztów. Sprawne delegowanie zadań i podnoszenie produktywności zespołu. Aktualizacja strony firmy w Wix.com",
+        "Tworzenie i utrzymanie strony firmy w Wix.com, umożliwiające łatwe aktualizacje osobom nietechnicznym. Zarządzanie treścią, dodawanie funkcji i zapewnianie sprawnego działania"
+      ]
+    },
+    {
+      "jobTitle": "Magazynier",
+      "jobTitle2": "Kierownik działu",
+      "duration": "Luty 2017 – grudzień 2017",
+      "location": "SPB",
+      "type": "Pełny etat",
+      "description": [
+        "Samodzielne opracowanie systemu sortowania, numerowania i zestawień, który skrócił czas przetwarzania o 30% i przyczynił się do awansu",
+        "Zarządzanie zadaniami 9-osobowego zespołu obejmującego opiekunów klientów, magazynierów, kurierów i dział napraw",
+        "Optymalizacja wysyłki zmniejszająca czas i koszty o 20%. Usprawnienie rekrutacji obniżające rotację o 15%. Poprawa efektywności przez reagowanie na potrzeby pracowników i rozwiązywanie problemów",
+        "Oferta stanowiska kierownika oddziału regionalnego w uznaniu bardzo dobrych wyników i umiejętności zarządzania"
+      ]
+    },
+    {
+      "jobTitle": "Pracownik działu instalacji odsalania",
+      "duration": "Sierpień 2014 – styczeń 2017",
+      "location": "Ukraina, Netiszyn",
+      "type": "Pełny etat",
+      "description": [
+        "Monitorowanie i utrzymanie urządzeń instalacji odsalania, zapewniające wydajność i ograniczenie przestojów o 15%",
+        "Prowadzenie procesów uzdatniania wody zgodnie z normami bezpieczeństwa i jakości",
+        "Realizacja zadań operacyjnych według instrukcji pracy, wspierająca efektywność zakładu",
+        "Wykonywanie dodatkowych zadań objętych NDA na rzecz bezpiecznej i sprawnej pracy instalacji odsalania"
+      ]
+    }
+  ]
+}

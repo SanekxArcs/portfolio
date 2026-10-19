@@ -11,7 +11,7 @@ import {ActionButton} from '@/components/cv/atoms/action-button'
 import type {CvProfile, CvProject} from '@/components/cv/types'
 import {Button} from '@/components/ui/button'
 import {Badge} from '@/components/ui/badge'
-import {cn} from '@/lib/utils'
+import {cn} from 'cn'
 import { useVibrationOnClick } from '@/hooks/use-vibration'
 
 type Props = {

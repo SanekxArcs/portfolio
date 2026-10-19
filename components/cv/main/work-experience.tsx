@@ -11,7 +11,7 @@ import {ActionButton} from '@/components/cv/atoms/action-button'
 import {Tabs, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import {Badge} from '@/components/ui/badge'
 import {getAllSkills} from '@/lib/cv-utils'
-import {cn} from '@/lib/utils'
+import {cn} from 'cn'
 import { useVibrationOnClick } from '@/hooks/use-vibration'
 
 type Props = {
