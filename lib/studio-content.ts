@@ -38,6 +38,7 @@ export function getLocalizedProfile(locale: Locale): CvProfile {
     description: translation.description,
     about: translation.about,
     softSkills: translation.softSkills,
+    skillsOther: translation.skillsOther,
     interests: translation.interests,
     education: profile.education.map((item, index) => ({
       ...item,

@@ -13,72 +13,72 @@
     "skip": "Przejdź do treści"
   },
   "hero": {
-    "eyebrow": "Niezależne studio webowe",
-    "line1": "Przemyślane strony",
-    "line2": "Praktyczne aplikacje",
-    "intro": "Jestem Oleksandr. Łączę projektowanie z programowaniem, tworząc użyteczne rozwiązania cyfrowe — dla Twojej firmy lub jako część Twojego zespołu",
+    "eyebrow": "Niezależny programista · O.D. EMPOWER",
+    "line1": "Tworzę strony",
+    "line2": "i aplikacje internetowe",
+    "intro": "Jestem Oleksandr, programista mieszkający w Polsce. Tworzę strony i aplikacje dla firm. Wspieram też zespoły w pracy nad ich projektami",
     "primary": "Porozmawiajmy o projekcie",
     "secondary": "Poznaj moje doświadczenie",
-    "caption": "Odrobina ciekawości otwiera nowe możliwości",
+    "caption": "Kliknij lub dotknij logo, żeby mnie poznać",
     "scroll": "Przewiń i odkryj",
-    "location": "Z Polski · Ponad granicami",
-    "specialty": "Z wyczuciem designu. Z pasją do kodu"
+    "location": "Mieszkam w Polsce · Pracuję zdalnie",
+    "specialty": "Projektowanie, kod i wszystko pomiędzy"
   },
   "clients": {
     "label": "Doświadczenie z klientami",
     "title": "Marki, z którymi pracowałem",
-    "intro": "Wybrani klienci, z którymi współpracowałem w ramach mojego doświadczenia zawodowego — i wiele innych marek",
+    "intro": "Pracowałem przy projektach dla tych klientów w ramach pracy i współpracy z zespołami",
     "showAll": "Zobacz wszystkich klientów",
     "showLess": "Pokaż mniej klientów",
     "visit": "Odwiedź stronę"
   },
   "home": {
     "workLabel": "01 / Wybrane realizacje",
-    "workTitle": "Prawdziwe pomysły. Gotowe rozwiązania.",
-    "workIntro": "Strony firmowe i niezależne produkty. Różne wyzwania, ta sama dbałość o szczegóły.",
+    "workTitle": "Kilka rzeczy, które zrobiłem",
+    "workIntro": "Strony dla klientów, projekty zespołowe i produkty, które stworzyłem samodzielnie",
     "allWork": "Zobacz wszystkie realizacje",
     "servicesLabel": "02 / W czym pomagam",
-    "servicesTitle": "Od pierwszego pomysłu po ostatni szczegół.",
+    "servicesTitle": "Co mogę dla Ciebie zbudować",
     "allServices": "Poznaj usługi",
-    "aboutLabel": "04 / Człowiek za projektem",
-    "aboutTitle": "Podejście studia. Osobisty kontakt",
-    "aboutText": "Jestem Oleksandr Dzisiak, full-stack developer i Solutions Engineer. Łączę potrzeby biznesowe z praktycznym oprogramowaniem, przemyślanymi interfejsami i jasną komunikacją.",
+    "aboutLabel": "04 / O mnie",
+    "aboutTitle": "Małe studio. Bezpośredni kontakt",
+    "aboutText": "Jestem Oleksandr Dzisiak, full-stack developer i Solutions Engineer. Gdy piszesz do O.D. EMPOWER, rozmawiasz ze mną — osobą, która zaplanuje i zbuduje Twój projekt.",
     "aboutLink": "Poznaj moje doświadczenie",
     "hiring": "Rozbudowujesz zespół?",
-    "hiringText": "Historia pracy, umiejętności techniczne i CV — wszystko w jednym miejscu.",
-    "aboutRole": "Programista / Rozwiązuję problemy / Odkrywam nowe"
+    "hiringText": "Zobacz moje doświadczenie, umiejętności i CV.",
+    "aboutRole": "Full-stack developer / Solutions Engineer"
   },
   "services": {
     "label": "Usługi",
-    "title": "Twój pomysł zasługuje na dobre wykonanie.",
-    "intro": "Strona, która przedstawia Twój biznes. Narzędzie, które ułatwia pracę. Integracja, która łączy systemy. Znajdźmy podejście dopasowane do Twoich potrzeb.",
+    "title": "Strony, aplikacje i integracje",
+    "intro": "Mogę zbudować stronę, która wyjaśni, czym zajmuje się Twoja firma, narzędzie dla zespołu lub połączenie między używanymi systemami. Opowiedz, czego potrzebujesz, a wspólnie ustalimy zakres.",
     "include": "Nad czym możemy pracować",
     "discuss": "Porozmawiajmy o tej usłudze",
     "items": [
       {
         "id": "websites",
         "title": "Strony internetowe i landing pages",
-        "text": "Przemyślana obecność online, dzięki której klienci zrozumieją Twoją ofertę i łatwo wykonają kolejny krok.",
+        "text": "Strona, która jasno przedstawia ofertę i ułatwia klientom kontakt lub zakup.",
         "deliverables": [
           "Strony firmowe i strony kampanii",
-          "Responsywne interfejsy i celowe animacje",
-          "Struktura treści i podstawy SEO"
+          "Układ na telefon i komputer oraz animacje tam, gdzie pomagają",
+          "Struktura stron i podstawowa konfiguracja SEO"
         ]
       },
       {
         "id": "applications",
         "title": "Aplikacje i narzędzia webowe",
-        "text": "Zamień proces lub pomysł na produkt w oprogramowanie, z którego wygodnie się korzysta i które można rozwijać.",
+        "text": "Aplikacja dla klientów lub wewnętrzne narzędzie, które ułatwi pracę zespołowi.",
         "deliverables": [
           "Produkty dla klientów i MVP",
           "Panele i wewnętrzne narzędzia biznesowe",
-          "Ścieżki użytkownika, interfejsy i integracja danych"
+          "Ekrany, formularze i połączenia danych"
         ]
       },
       {
         "id": "integrations",
         "title": "Integracje i automatyzacja",
-        "text": "Połącz systemy i ogranicz powtarzalną pracę dzięki API, automatyzacji i narzędziom wspieranym przez AI.",
+        "text": "Połącz używane narzędzia i zautomatyzuj zadania, które zespół wykonuje codziennie.",
         "deliverables": [
           "Połączenia API i przepływy danych",
           "Kalkulatory i generowanie dokumentów",
@@ -88,19 +88,19 @@
       {
         "id": "improvements",
         "title": "Rozwój istniejących produktów",
-        "text": "Zadbaj o użyteczniejszy interfejs i mocniejsze fundamenty techniczne swojej strony lub aplikacji.",
+        "text": "Popraw to, co utrudnia korzystanie z obecnej strony lub aplikacji — od niewygodnych ekranów po wolne ładowanie.",
         "deliverables": [
-          "Ulepszenia interfejsu i responsywności",
-          "Poprawa wydajności i dostępności",
-          "Refaktoryzacja i łatwe w utrzymaniu komponenty"
+          "Czytelniejsze ekrany i układ mobilny",
+          "Szybsze ładowanie i poprawki dostępności",
+          "Porządkowanie kodu i komponenty do ponownego użycia"
         ]
       }
     ],
-    "faqTitle": "Kilka pytań, które mogą Cię interesować.",
+    "faqTitle": "Częste pytania",
     "faq": [
       {
         "q": "Ile będzie kosztował mój projekt?",
-        "a": "To zależy od zakresu, treści, integracji i projektu graficznego. Opisz swój pomysł, a przed rozpoczęciem pracy omówimy podejście i wycenę."
+        "a": "To zależy od tego, co trzeba zbudować. Wyślij krótki opis, a po doprecyzowaniu szczegółów przygotuję wycenę."
       },
       {
         "q": "Czy możesz ulepszyć istniejącą stronę?",
@@ -112,36 +112,36 @@
       },
       {
         "q": "Z kim będę współpracować?",
-        "a": "Bezpośrednio ze mną, Oleksandrem. O.D. EMPOWER to moje niezależne studio, więc osoba omawiająca projekt jest też osobą, która go tworzy."
+        "a": "Ze mną, Oleksandrem. Prowadzę O.D. EMPOWER i sam zajmuję się programowaniem."
       }
     ]
   },
   "process": {
     "label": "03 / Współpraca",
-    "title": "Jasne etapy. Otwarta rozmowa.",
+    "title": "Jak będziemy pracować",
     "items": [
       {
         "title": "Poznajemy potrzeby",
-        "text": "Zaczynamy od Twoich celów, odbiorców i problemu, który warto rozwiązać."
+        "text": "Opowiadasz, czego potrzebujesz, kto będzie z tego korzystać i co dziś nie działa."
       },
       {
         "title": "Ustalamy kierunek",
-        "text": "Omawiamy zakres, priorytety, podejście techniczne i wycenę."
+        "text": "Ustalamy, co zbudować najpierw, jak to zrobić i ile to będzie kosztować."
       },
       {
         "title": "Tworzymy",
-        "text": "Łączymy projektowanie z programowaniem, uwzględniając Twoje uwagi po drodze."
+        "text": "Buduję rozwiązanie i pokazuję postępy, żeby był czas na Twoje uwagi."
       },
       {
         "title": "Uruchamiamy",
-        "text": "Sprawdzamy szczegóły, przygotowujemy publikację i omawiamy kolejne kroki."
+        "text": "Testujemy, publikujemy i ustalamy, co będzie wymagać dalszego wsparcia."
       }
     ]
   },
   "work": {
     "label": "Realizacje i eksperymenty",
-    "title": "Projekty, które czemuś służą.",
-    "intro": "Realizacje komercyjne, niezależne produkty i narzędzia tworzone z ciekawości. Poznaj ich kontekst, funkcje i technologię.",
+    "title": "Projekty, przy których pracowałem",
+    "intro": "Prace dla klientów, projekty zespołowe i moje własne narzędzia. Przy każdym opisuję, do czego służy i nad czym pracowałem.",
     "all": "Wszystkie",
     "commercial": "Komercyjne",
     "independent": "Niezależne projekty",
@@ -154,7 +154,7 @@
     "gallery": "Z bliska",
     "visit": "Odwiedź stronę",
     "code": "Zobacz kod",
-    "related": "Odkryj kolejny projekt",
+    "related": "Następny projekt",
     "nda": "Tożsamość klienta, zdjęcia i linki są poufne. Opis obejmuje wyłącznie informacje dopuszczone do publikacji.",
     "ndaTitle": "Projekt poufny",
     "imageAlt": "Zrzut ekranu projektu",
@@ -166,16 +166,16 @@
   },
   "experience": {
     "label": "Dla zespołów i rekruterów",
-    "title": "Programista, który widzi szerszy kontekst.",
-    "intro": "Od interfejsów i integracji po stojące za nimi potrzeby biznesowe. Oto doświadczenie, umiejętności i ciekawość, które wnoszę do zespołu.",
+    "title": "Moje doświadczenie w programowaniu",
+    "intro": "Pracowałem nad stronami, aplikacjami, integracjami i wsparciem technicznym dla klientów. Tu znajdziesz historię mojej pracy i konkretne zadania.",
     "download": "Pobierz CV",
     "view": "Zobacz CV",
     "cvLanguage": "CV po angielsku",
     "contact": "Porozmawiajmy o współpracy",
     "about": "Kilka słów o mnie",
-    "history": "Doświadczenie z kontekstem.",
+    "history": "Gdzie pracowałem",
     "earlier": "Wcześniejsze doświadczenie",
-    "skills": "Narzędzia, nie ograniczenia.",
+    "skills": "Technologie, z którymi pracowałem",
     "frontend": "Frontend",
     "backend": "Backend i dane",
     "devops": "Narzędzia i wdrożenia",
@@ -209,8 +209,8 @@
   },
   "contact": {
     "label": "Porozmawiajmy",
-    "title": "Masz coś na myśli?",
-    "intro": "Nowa strona, pomysł na produkt lub rola w Twoim zespole. Opowiedz mi o tym i zacznijmy rozmowę.",
+    "title": "Opowiedz, czego potrzebujesz",
+    "intro": "Potrzebujesz strony, aplikacji albo programisty w zespole? Wyślij mi kilka szczegółów, a odpowiem.",
     "project": "Mam projekt",
     "hiring": "Szukam programisty",
     "name": "Twoje imię",
@@ -224,7 +224,7 @@
     "unknown": "Jeszcze nie wiem",
     "submit": "Przygotuj email",
     "note": "Otworzy się Twój program pocztowy z treścią zapytania. Strona niczego nie wysyła ani nie zapisuje.",
-    "direct": "Wolisz bezpośrednią rozmowę?",
+    "direct": "Wolisz skontaktować się bezpośrednio?",
     "emailAction": "Napisz email",
     "phoneAction": "Zadzwoń do Oleksandra",
     "social": "Znajdź mnie również tutaj",
@@ -239,18 +239,18 @@
     "copied": "Treść skopiowana",
     "copyError": "Zaznacz i skopiuj treść poniżej.",
     "preview": "Twoje zapytanie",
-    "available": "Porozmawiajmy o kolejnym kroku."
+    "available": "Możesz do mnie napisać lub zadzwonić."
   },
   "cta": {
-    "label": "Kolejny krok zaczyna się od rozmowy",
-    "title": "Stwórzmy coś, co warto pokazać światu.",
+    "label": "Masz projekt?",
+    "title": "Opowiedz mi, nad czym pracujesz",
     "button": "Opowiedz o swoim projekcie",
     "secondary": "Lub poznaj moje doświadczenie"
   },
   "footer": {
-    "text": "Przemyślane strony, praktyczne produkty. Tworzone przez Oleksandra Dzisiaka.",
+    "text": "Strony i aplikacje internetowe Oleksandra Dzisiaka.",
     "top": "Na górę",
-    "rights": "Niezależność z założenia.",
+    "rights": "Niezależny programista mieszkający w Polsce.",
     "built": "Projekt i wykonanie: Oleksandr",
     "email": "Napisz email",
     "phone": "Zadzwoń"
@@ -264,12 +264,12 @@
     "tapReturn": "Dotknij, aby wrócić"
   },
   "meta": {
-    "home": "Niezależne studio webowe",
+    "home": "Strony i aplikacje Oleksandra Dzisiaka",
     "services": "Strony, aplikacje i integracje",
     "work": "Projekty i realizacje",
     "experience": "Doświadczenie i CV",
     "contact": "Porozmawiajmy o projekcie lub współpracy",
-    "description": "O.D. EMPOWER — niezależne studio Oleksandra Dzisiaka. Przemyślane strony, aplikacje webowe i integracje. Poznaj usługi, realizacje i doświadczenie.",
+    "description": "Oleksandr Dzisiak tworzy strony, aplikacje internetowe i integracje pod marką O.D. EMPOWER. Zobacz projekty, usługi i doświadczenie.",
     "descriptions": {
       "services": "Poznaj strony internetowe, landing pages, aplikacje webowe, integracje i automatyzację od O.D. EMPOWER. Omów projekt bezpośrednio z Oleksandrem Dzisiakiem.",
       "work": "Zobacz strony, aplikacje webowe, rozszerzenia przeglądarki i własne produkty Oleksandra Dzisiaka wraz z opisem, funkcjami i technologiami.",
@@ -278,12 +278,12 @@
     }
   },
   "notFound": {
-    "title": "Ta strona zmieniła orbitę.",
-    "text": "Nie ma tu strony, której szukasz. Wróćmy do czegoś przydatnego.",
+    "title": "Nie ma tu tej strony",
+    "text": "Link może być nieaktualny albo adres strony się zmienił. Możesz wrócić na stronę główną.",
     "back": "Wróć na stronę główną"
   },
   "error": {
-    "title": "Coś przerwało połączenie.",
+    "title": "Nie udało się wczytać strony",
     "text": "Spróbuj ponownie załadować tę stronę.",
     "retry": "Spróbuj ponownie"
   }

@@ -196,6 +196,7 @@ export function HomePage({locale}: {locale: Locale}) {
 							<h1 id="studio-hero-heading">
 								<MotionText text={d.hero.line1} />
 								<br />
+								{' '}
 								<em>
 									<MotionText text={d.hero.line2} />
 								</em>

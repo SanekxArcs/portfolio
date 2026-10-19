@@ -1,7 +1,7 @@
 {
   "_id": "022224b1-79ab-4ecb-9c46-d1c32dedbe1f",
   "_updatedAt": "2026-10-18T23:19:27Z",
-  "about": "I’m a full-stack developer with 5+ years of experience, currently working as a Solutions Engineer. I take ownership from understanding the problem through implementation and delivery, with a focus on clear communication and maintainable software.\nI’m expanding my work into AI and agent-driven workflows. I’ve also been recognized twice in a row as a Spotlight Employee at my company.",
+  "about": "I've worked on websites and web apps for over five years. These days I work as a Solutions Engineer, helping clients plan integrations and solve implementation problems. I still enjoy building things myself, from interfaces to internal tools.\nI care about clear answers, useful documentation and code that someone else can maintain. I've recently been exploring AI tools and agent workflows. I've also received the Spotlight Employee award twice.",
   "contacts": {
     "email": "oleksandr.dzisiak@gmail.com",
     "location": "Poland",
@@ -124,7 +124,7 @@
   ],
   "cvFileUrl": "/content/01650e55e734624a156c55963e90e18cf4d254ef.pdf",
   "cvUrl": "https://docs.google.com/document/d/1AtD3nabbCMupe03k914wvlceHTF70_34X5NQDPS3iz4",
-  "description": "I build complete web products - from responsive interfaces to APIs, integrations, and AI-powered workflows. I turn business needs into practical software, bringing thoughtful design and technical implementation together.",
+  "description": "I build websites and web apps, from the interface to the API behind it. I also help teams connect their existing tools and make routine work easier.",
   "education": [
     {
       "institution": "National Technical University of Ukraine 'Igor Sikorsky Kyiv Polytechnic Institute",
@@ -180,14 +180,14 @@
   "profilePhotoUrl": "/content/e2323b63e4e0ce712697cacb4acafcf04587ce4b-3016x3016.jpg",
   "projects": [
     {
-      "description": "Solar Sense is a multi‑page web application designed to present solar‑energy solutions and company projects. The site was created from scratch - including branding, UI layout, and content architecture - to serve as a professional online presence for a renewable‑energy company. It combines informative sections, visual storytelling, and dynamic animations to enhance engagement.",
+      "description": "A website for a solar energy company, built from the branding and page structure through to the finished interface. It explains the company’s services and shows completed projects.",
       "features": [
-        "Dynamic Calculator",
+        "Solar cost calculator",
         "Gallery Page",
-        "Multi‑Page SPA",
+        "Multi-page website",
         "Responsive Design",
-        "Client Validation",
-        "Interactivity"
+        "Form validation",
+        "Interactive sections"
       ],
       "imageUrls": [
         "/content/316a0668f71476373b1bf1f87f26849f3da98747-2860x1816.png",
@@ -212,14 +212,14 @@
       "urlToCode": "https://github.com/SanekxArcs/solarsense"
     },
     {
-      "description": "ERM System is a custom‑built management platform created for VDG Solar to streamline electrical engineering operations. Originally started as a personal pet project, it evolved into a commercial MVP used for managing resources, calculating costs, and generating invoices. The system integrates directly with Google Sheets for data synchronization and supports both online updates and batch imports.",
+      "description": "A management tool for VDG Solar. It started as my own project and became a commercial MVP for tracking resources, calculating costs and generating invoices. It also exchanges data with Google Sheets.",
       "features": [
         "PWA Application",
         "Google Sheets Integration",
         "Store management",
         "Equipment management",
-        "Firm costs calculation",
-        "Invoice Generatorgeneration",
+        "Company cost calculations",
+        "Invoice generator",
         "Search & Filters"
       ],
       "imageUrls": [
@@ -243,13 +243,13 @@
       "urlToCode": "https://github.com/SanekxArcs/vdg-app-demo"
     },
     {
-      "description": "UWP Digital is a responsive, pixel‑perfect corporate landing page built as part of a larger website project. The goal was to implement the design with precision, ensuring clean structure, semantic HTML, and smooth interactivity before handing off to the client team for further development.",
+      "description": "A landing page built from a supplied design as part of a larger website. I implemented the responsive layout and interactions, then handed it to the client’s team for further development.",
       "features": [
-        "Pixel‑Perfect Layout",
+        "Layout from supplied design",
         "Responsive Design",
-        "Interactive",
-        "Clean Semantics",
-        "SEO‑friendly"
+        "Interactive elements",
+        "Semantic HTML",
+        "Search-friendly markup"
       ],
       "imageUrls": [
         "/content/ad9593b224f145c20813b7d8553f34d38ae2c8a6-1702x1080.webp",
@@ -268,14 +268,14 @@
       "urlToCode": null
     },
     {
-      "description": "Renewable Energy Corporate Website - Feigin Electric is a full‑scale corporate website built to represent a renewable‑energy company online. The project covered branding, UI/UX design, and complete development from the ground up. It showcases the company’s smart‑energy solutions, case studies, and achievements through a performant, visually refined single‑page experience.",
+      "description": "A company website for Feigin Electric. I worked on the brand, design and development, with pages for its energy solutions and completed projects.",
       "features": [
         "Blog System",
         "Product Showcase",
         "Case Studies",
-        "SEO Optimized",
-        "High Performance",
-        "Responsive SPA",
+        "Search-friendly structure",
+        "Page-speed work",
+        "Responsive pages",
         "Interactive Animations"
       ],
       "imageUrls": [
@@ -300,12 +300,12 @@
       "urlToCode": "https://github.com/SanekxArcs/feigin-electric"
     },
     {
-      "description": "Liberty Immigration is a bilingual business‑card style landing page created for a company specializing in the legalization of foreigners in Poland. The site was built entirely from scratch with a clean, responsive design and smooth element animations. It supports two languages - Ukrainian and Belarusian - offering an accessible and localized experience for targeted audiences.",
+      "description": "A landing page for a company helping foreigners with residence procedures in Poland. I built it in Ukrainian and Belarusian, with a layout that works on phones and desktops.",
       "features": [
         "Multilingual Support",
         "Scroll Animations",
         "Contact form",
-        "Performance & SEO",
+        "Page speed and search basics",
         "Responsive Layout"
       ],
       "imageUrls": [
@@ -327,13 +327,13 @@
       "urlToCode": "https://github.com/SanekxArcs/liberty-immigration"
     },
     {
-      "description": "Fun Quest is a responsive company website built on WordPress and customized extensively from a base template. The project involved adapting the original design to match the client’s brand and filling the site with content and media assets. It includes dynamic sections, interactive features, and a fully configured CMS for client self‑management.",
+      "description": "A WordPress site for Fun Quest. I adapted a template to the company’s brand, added its content and set up editing so the client could update the site.",
       "features": [
-        "Full Template Customization",
+        "WordPress template changes",
         "Responsive Design",
-        "CMS Integration",
+        "WordPress content editing",
         "Contact Form & Slider",
-        "Performance Optimization"
+        "Page-speed improvements"
       ],
       "imageUrls": [
         "/content/bf84856af81ae78566a26fb1c6eb2cbd7befb773-1704x1080.webp"
@@ -354,11 +354,11 @@
       "urlToCode": null
     },
     {
-      "description": "Belavtodor UA is a corporate website built entirely from a designer’s layout, developed with clean and semantic HTML architecture. The project focuses on responsive design, accessibility, and smooth interactivity through modern front‑end components, ensuring visual and functional consistency across all devices.",
+      "description": "A company site built from a designer’s layouts. I implemented the pages with responsive HTML and the interactive elements needed across devices.",
       "features": [
-        "Pixel‑Perfect Implementation",
+        "Layout from supplied design",
         "Responsive Layout",
-        "Interactive UI",
+        "Interactive elements",
         "Semantic Markup",
         "Slider",
         "Modal"
@@ -382,12 +382,12 @@
       "urlToCode": null
     },
     {
-      "description": "Eco‑Smart is a redesigned e‑commerce website focused on improving user experience and administrative flexibility. The project involved creating a fresh, modern interface, optimizing responsiveness across all devices, and integrating a WordPress‑based admin panel for easy content management.",
+      "description": "A redesign of an online store. I worked on the interface across screen sizes and connected WordPress so the client could update the content.",
       "features": [
-        "Redesign & UX Update",
-        "Fully Responsive",
-        "Semantic Codebase",
-        "Admin Panel Integration"
+        "Store redesign",
+        "Mobile and desktop layouts",
+        "Semantic HTML",
+        "Content editing panel"
       ],
       "imageUrls": [
         "/content/43d49c432867ee0e4853a760ab985131556ce948-1711x1080.webp"
@@ -406,11 +406,11 @@
       "urlToCode": null
     },
     {
-      "description": "Club Smart Mam is a modern news and community portal built for parents, focused on usability and responsive design. The site includes dynamic content management through WordPress, a discussion forum for user interaction, and on-page features such as accordions, modals, and contact forms - all crafted for accessibility and seamless navigation across devices.",
+      "description": "A news and community site for parents, built with WordPress. It includes a discussion forum, contact forms and interactive page sections.",
       "features": [
-        "Fully Responsive",
+        "Mobile and desktop layouts",
         "Admin Panel",
-        "Community Interaction",
+        "Community forum",
         "Forum",
         "Accordion",
         "Modal"
@@ -434,12 +434,12 @@
       "urlToCode": null
     },
     {
-      "description": "Plenum is a custom‑designed business card website created for a legal association. The project involved developing a unique, modern visual design and implementing it as a responsive, SEO‑friendly WordPress site. It includes a blog section and CRM integration to help manage client interactions and inquiries effectively.",
+      "description": "A website for a legal association, with a blog and a CRM connection for client enquiries. I designed and built the responsive WordPress site.",
       "features": [
         "Custom Design",
         "Integrated CRM & Blog",
         "Responsive Layout",
-        "Clean & Semantic Code"
+        "Semantic HTML"
       ],
       "imageUrls": [
         "/content/fa3e18edbafaf7623603514beb68d6a6931f5c81-1698x1080.webp"
@@ -460,11 +460,11 @@
       "urlToCode": null
     },
     {
-      "description": "TunerFest is a community-driven platform built for The Crew Motorfest players to share and discover high-performance vehicle tuning setups. Designed to enhance collaboration and competition, it connects gamers through data-driven tuning, performance metrics, and curated setups across cars, boats, and planes.",
+      "description": "A place for The Crew Motorfest players to share and find vehicle tuning setups. Players can browse settings and compare performance information for cars, boats and planes.",
       "features": [
-        "Massive community-generated tuning database",
+        "Player-submitted tuning setups",
         "PWA",
-        "Advanced search",
+        "Search and filters",
         "Tune creation and sharing",
         "Real-time community ratings",
         "Live Updates"
@@ -493,11 +493,11 @@
       "urlToCode": null
     },
     {
-      "description": "Love Notes is a minimalist web platform for couples to share daily love messages and emotional support. It helps partners send short personalized notes and reminders, creating a small ritual of affection and connection in their everyday life.",
+      "description": "A small app for couples to exchange daily notes. It supports personal messages and reminders without turning a simple habit into a complicated tool.",
       "features": [
-        "Connection for couple",
+        "Shared space for two",
         "Two-way note sharing",
-        "Partner-managed",
+        "Shared access",
         "PWA",
         "History",
         "Animated confetti",
@@ -526,10 +526,10 @@
       "urlToCode": "https://github.com/SanekxArcs/love-notes"
     },
     {
-      "description": "Description:\n\nA modular collection of four independent VS Code extensions built to streamline daily developer workflows. Each extension focuses on a single responsibility - from fast script execution to easy environment switching - enabling a more efficient and customizable coding experience.",
+      "description": "Four separate VS Code extensions for everyday development tasks, including running scripts and switching environments. Each extension does one job.",
       "features": [
         "Script Runner",
-        "Viewport Converter ",
+        "Viewport unit converter",
         "Saved terminal snippets",
         "Env Switcher"
       ],
@@ -553,13 +553,13 @@
       "urlToCode": "https://github.com/SanekxArcs/my-vscode-extention"
     },
     {
-      "description": "AI-Powered Workflow Extension\nClickUp Helper Tool is an advanced Chrome extension that enhances development workflows with AI-generated branch names, commit messages, time estimations, and intelligent page detection. It bridges productivity tools - ClickUp, GitLab, Mattermost, and Google Meet-into one unified, automated experience for seamless coding, communication, and task management.",
+      "description": "A Chrome extension that connects parts of my development workflow. It can suggest branch names, commit messages and time estimates, with links to ClickUp, GitLab, Mattermost and Google Meet.",
       "features": [
-        "Creates meaningful branch names",
+        "Branch name suggestions",
         "Mattermost Integration",
         "Real-time DND toggles",
-        "Smart Auto-Search",
-        "Real-time responsive debugging"
+        "Page-aware search",
+        "Responsive layout checks"
       ],
       "imageUrls": [
         "/content/e871b55aaf12f53a352073bdb52ed6ae2f98c3a3-460x501.png",
@@ -583,14 +583,14 @@
       "urlToCode": "https://github.com/SanekxArcs/clickup-helper-tool"
     },
     {
-      "description": "Cusemit is a lightweight, offline-ready digital clock app built for focus and simplicity. It displays real-time hours, minutes, and seconds on a clean fullscreen interface, fully customizable with your preferred colors, fonts, and styles - no ads, just pure aesthetic utility.",
+      "description": "An offline-capable fullscreen clock. You can change the colours, fonts and layout, then leave it open while you work.",
       "features": [
-        "Real-time digital time",
+        "Live clock",
         "Customizable",
         "Fullscreen",
-        "Distraction-free",
+        "Fullscreen mode",
         "Offline support",
-        "Smooth animations"
+        "Clock animations"
       ],
       "imageUrls": [
         "/content/d9b741f6addca957ac14e675fcfe32594ed98c4c-1699x1257.png"
@@ -611,13 +611,13 @@
       "urlToCode": "https://github.com/SanekxArcs/cusemit"
     },
     {
-      "description": "Fast, private, and modern client-side image conversion.\nA fully client-side web application that converts popular image formats (PNG, AVIF, JPEG, GIF) into efficient WebP files with real-time previews and adjustable quality. Built for speed, privacy, and simplicity - all conversions happen locally in your browser, no uploads required.",
+      "description": "A browser tool that converts PNG, AVIF, JPEG and GIF files to WebP. You can preview the result and adjust quality; files stay on your device.",
       "features": [
-        "Multi-Format Support",
-        "Quality Control",
+        "PNG, AVIF, JPEG and GIF input",
+        "Adjustable output quality",
         "Batch Conversion",
         "Drag & Drop Interface",
-        "Offline & Private"
+        "Local conversion without uploads"
       ],
       "imageUrls": [
         "/content/a4b369b0be065d9b7c521ef30bc63c5718c32085-1077x674.png",
@@ -639,7 +639,7 @@
       "urlToCode": "https://github.com/SanekxArcs/converter"
     },
     {
-      "description": "Dynamic Café & Bar Menu Platform\nU‑Beci is a full‑featured web application designed for cafés and bars to manage and display dynamic daily menus. Customers can view the current day’s offerings and check upcoming selections, while administrators can easily create, edit, and schedule menus - complete with product details, images, and availability periods.",
+      "description": "A menu app for cafés and bars. Customers can see today’s menu and upcoming dishes, while staff can edit items, photos and availability dates.",
       "features": [
         "Theme & UI Customization",
         "Responsive Design",
@@ -670,13 +670,13 @@
       "urlToCode": null
     },
     {
-      "description": "A sleek web application for creating and sharing professional resumes online, designed to perfectly replicate an A4 printable layout. Originally built for personal use, it evolved into a customizable template generator that others can use to design, preview, and print polished resumes directly from their browser.",
+      "description": "A browser-based CV builder with an A4 print layout. It began as a tool for my own résumé and grew into a reusable template editor.",
       "features": [
         "A4‑Style Layout",
-        "Smart Print Mode",
-        "Dynamic Editing",
+        "Print layout",
+        "Edit and preview",
         "Responsive Design",
-        "Reusability"
+        "Reusable templates"
       ],
       "imageUrls": [
         "/content/f0ca4b000ba2429d0549bd021b434589bd81dc7f-1182x1265.png",
@@ -701,12 +701,12 @@
       "urlToCode": "https://github.com/SanekxArcs/cv-resume-v1"
     },
     {
-      "description": "Motorfest is the initial prototype of what later evolved into TunerFest. It’s a simple web application that fetches and displays vehicle tuning setups directly from a connected Google Sheets document. Built as a quick, data-driven viewer, it allowed users to browse, search, and compare tuning settings without requiring manual configuration.",
+      "description": "The first prototype of TunerFest. It reads vehicle tuning setups from Google Sheets so players can browse, search and compare them.",
       "features": [
         "Google Sheets Integration",
         "Search Functionality",
-        "Lightweight",
-        "Offline-Friendly (PWA Ready)"
+        "Simple interface",
+        "Offline support"
       ],
       "imageUrls": [
         "/content/761ae968524ecf403b73e216ec434396bb6902aa-1706x917.png"
@@ -728,13 +728,13 @@
       "urlToCode": "https://github.com/SanekxArcs/motorfest"
     },
     {
-      "description": "AI Bookmark Sorter is a modern web application that uses AI to automatically analyze and categorize browser bookmarks. Users can export their bookmarks as an HTML file, upload them to the app, and let AI tidy up their digital library - organizing links, testing URLs, and grouping them by purpose or",
+      "description": "A tool for sorting browser bookmarks. You upload an exported HTML file, and AI suggests categories while the app checks links and groups them.",
       "features": [
         "AI Categorization",
         "Link Validation",
         "Upload & Parse",
-        "Visual Organization",
-        "Lightweight & Fast"
+        "Bookmark groups",
+        "Browser-based workflow"
       ],
       "imageUrls": [
         "/content/78d11c7e3eaed91b5a10387e620587d149313805-1709x511.png"
@@ -756,9 +756,9 @@
       "urlToCode": "https://github.com/SanekxArcs/AI-Bookmark-Sorter"
     },
     {
-      "description": "A simple and modern web application for exploring and discovering movies. The app connects to The Movie Database (TMDB) API and allows users to browse movie collections, view detailed information, and filter results by genres or categories - all presented in a clean and responsive interface.",
+      "description": "A movie browser using The Movie Database API. You can browse collections, open film details and filter by genre.",
       "features": [
-        "Movie List:",
+        "Movie list",
         "Movie Details",
         "Categories & Filters",
         "Loading & Error States"
@@ -782,7 +782,7 @@
       "urlToCode": "https://github.com/SanekxArcs/movie-db-test-task"
     },
     {
-      "description": "A large‑scale commercial e‑commerce platform developed for a European renewable energy company. The project’s goal was to boost online sales and lead generation across the EU market through a performant, SEO‑optimized storefront integrated with a headless CMS. I contributed to front‑end development and system architecture, helping to unify content, product data, and checkout logic into a seamless user experience.",
+      "description": "An online store for a renewable energy company. I worked with a team on the front end and the connection between content, products and checkout.",
       "features": [
         "Next.js‑Powered Front‑End",
         "Headless WordPress CMS",
@@ -810,13 +810,13 @@
       "urlToCode": null
     },
     {
-      "description": "A modern, high‑performance one‑page website built for a branded product launch in the EU market. Developed collaboratively in a small team, the project focused on motion design, interactive storytelling, and conversion optimization. The landing page delivers smooth animations, responsive layout, and pixel‑perfect visuals for maximum visual impact and user engagement.",
+      "description": "A one-page product launch site built with a small team. I worked on responsive layouts and animations that support the product story.",
       "features": [
-        "Modern Animated UI",
+        "Page animations",
         "Responsive Layout",
         "Image Optimization Pipeline",
         "SEO & Accessibility",
-        "Rapid Development"
+        "Team delivery"
       ],
       "imageUrls": [],
       "isPinned": false,
@@ -836,15 +836,15 @@
       "urlToCode": null
     },
     {
-      "description": "A highly visual, animated landing page created for an international product brand’s marketing campaign. Developed collaboratively from design to deployment, the site emphasizes smooth scroll‑based interactions, motion design, and optimized media performance. It serves as a fast, responsive, and visually immersive microsite tailored for high‑end product presentation.",
+      "description": "A campaign landing page for an international product brand. Our team built scroll-based interactions and prepared the images and video for fast loading.",
       "features": [
         "Scroll‑Based Animations",
-        "Optimized Visual Pipeline",
-        "Performance Focus",
+        "Compressed images and video",
+        "Page-speed work",
         "Responsive Layout",
-        "Pixel Precision",
+        "Layout from supplied design",
         "Tailwind & Variants System",
-        "Rapid Delivery"
+        "Team delivery"
       ],
       "imageUrls": [],
       "isPinned": false,
@@ -864,13 +864,13 @@
       "urlToCode": null
     },
     {
-      "description": "E‑Commerce Platform — Vue/Nuxt Ecosystem\nA large‑scale e‑commerce platform developed using the modern Nuxt 4 and Vue 3 ecosystem, serving as a high‑performance storefront for a European retail brand. The application integrates directly with Shopware API for product management and supports multilingual functionality, advanced content modules, and smooth animation transitions. Built with scalability, SEO, and maintainability in mind, this project represents a next‑generation approach to headless commerce.",
+      "description": "An online store built with Vue, Nuxt and Shopware. I worked on the storefront, product data integration, multilingual content and page transitions.",
       "features": [
-        "Full Headless Architecture",
-        "Dynamic CMS & Catalog",
-        "Multilingual Suppor",
-        "High‑Performance Animations",
-        "Optimized Build"
+        "Headless storefront",
+        "CMS and product catalogue",
+        "Multiple languages",
+        "Page transitions",
+        "Build and deployment setup"
       ],
       "imageUrls": [],
       "isPinned": false,
@@ -891,9 +891,9 @@
       "urlToCode": null
     },
     {
-      "description": "Subscription Tracker is a personal side project designed to help users organize and monitor recurring expenses such as streaming services, memberships, or utility plans. The app provides a clear overview of total monthly spending, renewal dates, and payment histories — all in a simple, visually engaging interface.",
+      "description": "A personal tool for tracking subscriptions and other recurring costs. It shows monthly spending, renewal dates and payment history in one place.",
       "features": [
-        "Smart Dashboard",
+        "Spending overview",
         "Recurring Payment Tracking",
         "Form Validation",
         "Data Management",
@@ -1074,7 +1074,7 @@
       "isPinned": false
     }
   ],
-  "role": "Full Stack Developer",
+  "role": "Full-stack developer",
   "skillsBackend": [
     "Node.js",
     "PostgreSQL",
@@ -1121,55 +1121,55 @@
   ],
   "skillsOther": [
     "Agile/Scrum",
-    "Unit Testing",
-    "Performance Optimization",
+    "Unit testing",
+    "Web performance",
     "UX",
     "UI",
     "SEO",
     "Accessibility",
-    "Analyses",
+    "Data analysis",
     "Marketing",
-    "System Design",
-    "AI Prompt Engineer"
+    "System design",
+    "AI-assisted development"
   ],
   "softSkills": [
     {
-      "description": "Created comprehensive API documentation and README files or JSDoc used by 7 developers; reduced onboarding time for new team member",
-      "skill": "Technical Documentation & Communication"
+      "description": "Wrote API documentation, READMEs and JSDoc used by seven developers and helped a new teammate get started.",
+      "skill": "Documentation and communication"
     },
     {
-      "description": "Identified performance bottleneck unprompted; implemented optimization resulting in 35% faster page load without management request",
-      "skill": "Initiative & Self-Direction"
+      "description": "Found a page-load bottleneck and made the page 35% faster.",
+      "skill": "Taking initiative"
     },
     {
-      "description": "Advocated for accessibility standards, reduced user complaints",
-      "skill": "Empathy & User-Centric Thinking"
+      "description": "Raised accessibility issues and worked on fixes that reduced user complaints.",
+      "skill": "Accessibility"
     },
     {
-      "description": "Successfully migrated major project from React to Vue(Nuxt)",
-      "skill": "Adaptability & Growth Mindset"
+      "description": "Moved a large project from React to Vue and Nuxt.",
+      "skill": "Learning new tools"
     },
     {
-      "description": "Debugged critical production issue",
-      "skill": "Analytical Problem-Solving"
+      "description": "Investigated and fixed a production issue.",
+      "skill": "Debugging"
     },
     {
-      "description": "Making a workshops for my team members about new interesting topics",
-      "skill": "Knowledge Sharing"
+      "description": "Ran workshops for teammates on new tools and topics.",
+      "skill": "Sharing knowledge"
     },
     {
-      "description": "Proactively refactored legacy components; reduced bundle size and improved Core Web Vitals",
-      "skill": "Performance Optimization Mindset"
+      "description": "Refactored older components to reduce bundle size and improve Core Web Vitals.",
+      "skill": "Performance"
     }
   ],
   "workExperience": [
     {
       "companyName": "Luigi's Box",
       "description": [
-        "Consulted on SaaS search and recommendation solution integration strategies for e-commerce clients",
-        "Advised on product feed processing and validation best practices",
-        "Guided clients through technical implementation planning and requirements",
-        "Recommended back-end and front-end approaches to align with client design systems"
+        "Help e-commerce clients plan search and recommendation integrations",
+        "Review product feeds and explain validation issues",
+        "Turn client requirements into implementation steps",
+        "Advise on back-end and front-end integration choices"
       ],
       "duration": "September 2026 – Present",
       "hideFromCV": false,
@@ -1184,10 +1184,10 @@
     {
       "companyName": "Luigi's Box",
       "description": [
-        "Consulted on SaaS search and recommendation solution integration strategies for e-commerce clients",
-        "Advised on product feed processing and validation best practices",
-        "Guided clients through technical implementation planning and requirements",
-        "Recommended front-end customization approaches to align with client design systems"
+        "Helped e-commerce clients integrate search and recommendations",
+        "Reviewed product-feed processing and validation",
+        "Worked with clients to define technical requirements",
+        "Advised on front-end changes that fit their design systems"
       ],
       "duration": "March 2026 - September 2026",
       "hideFromCV": false,
@@ -1202,9 +1202,9 @@
     {
       "companyName": "TWNTY Ventures",
       "description": [
-        "Built reusable, accessible UI for Germany’s largest e‑commerce using Storybook, styled‑components, and Framer Motion",
-        "Delivered 3 high‑converting product landing pages, optimized for performance (Core Web Vitals)",
-        "Built an e‑shop MVP from scratch with Nuxt 4, UnoCSS, and Shopware; added a Next.js micro‑frontend"
+        "Built reusable, accessible UI components for a large German e-commerce platform",
+        "Built three product landing pages and worked on their loading performance",
+        "Built a shop MVP with Nuxt, UnoCSS and Shopware, plus a Next.js micro-frontend"
       ],
       "duration": "June 2025 - March 2026",
       "hideFromCV": false,
@@ -1219,9 +1219,9 @@
     {
       "companyName": "Feigin Electric Sp. z o.o.",
       "description": [
-        "Developed and launched the corporate website using Next.js 15, Tailwind CSS 4.0, and Sanity CMS",
-        "Integrated Sanity for dynamic content management across product pages, blog, and case studies",
-        "Created calculation tools to enhance internal workflow efficiency"
+        "Built and launched the company website with Next.js, Tailwind CSS and Sanity",
+        "Set up content editing for product pages, blog posts and case studies",
+        "Built calculators for internal work"
       ],
       "duration": " Aug 2024 - Feb 2025",
       "hideFromCV": false,
@@ -1236,8 +1236,8 @@
     {
       "companyName": "Maciej Szypszak Investments",
       "description": [
-        "Engineered a custom Enterprise Resource Management (ERM) system from the ground up",
-        "Built intuitive and responsive user interfaces using Shadcn UI components, focusing on simplifying data entry and visualization"
+        "Built an ERM system for managing electrical engineering work",
+        "Made data-entry and reporting screens with responsive UI components"
       ],
       "duration": "Sep 2023 - Jan 2025",
       "hideFromCV": false,
@@ -1252,9 +1252,9 @@
     {
       "companyName": "Solar Sense Krzysztof Gutter",
       "description": [
-        "Developed the company's multi-page website using React, focusing on presenting services and project information effectively",
-        "Engineered a complex calculation tool, leveraging Google Sheets for data management, to streamline data processing",
-        "Built a PDF generation tool to automatically create customized documents based on processed data and calculations"
+        "Built a multi-page React website for the company",
+        "Built a calculator that uses Google Sheets as a data source",
+        "Built a PDF generator for documents based on the calculator results"
       ],
       "duration": "Apr 2023 - Aug 2023",
       "hideFromCV": false,
@@ -1269,9 +1269,9 @@
     {
       "companyName": "Best Solution Eco",
       "description": [
-        "Managed and enhanced the company's WordPress website using HTML, CSS, and JavaScript, ensuring optimal performance",
-        "Identified and resolved front end bugs, and implemented new features to improve user experience and site functionality",
-        "Monitored and analyzed website traffic using Google Analytics, providing insights into user behavior and site performance"
+        "Maintained and extended the company WordPress site",
+        "Fixed front-end bugs and added new features",
+        "Used Google Analytics to review site traffic"
       ],
       "duration": "Jul 2022 - Mar 2023",
       "hideFromCV": false,
@@ -1286,7 +1286,7 @@
     {
       "companyName": "BANKIER GROUP sp. z o.o.",
       "description": [
-        "Installed and maintained solar power plants and residential electrical systems, repairing faults and rebuilding systems to ensure 99% operational uptime. Collaborated with team members to guarantee the proper functioning of all devices and equipment. Developed detailed monitoring procedures, enhancing device operation by 20%"
+        "Installed and maintained solar power and residential electrical systems, repaired faults and wrote monitoring procedures."
       ],
       "duration": "Feb 2020 – Jul 2022",
       "hideFromCV": false,
@@ -1301,9 +1301,9 @@
     {
       "companyName": "A&A Web and App development",
       "description": [
-        "Developed and maintained multiple client WordPress websites using HTML, CSS, and JavaScript",
-        "Ensured cross-browser and cross-device compatibility through rigorous testing and debugging",
-        "Implemented performance and SEO optimizations, resulting in Google PageSpeed scores exceeding more than 90 on all devices"
+        "Built and maintained client WordPress sites with HTML, CSS and JavaScript",
+        "Tested them across browsers and devices",
+        "Improved page speed and search visibility"
       ],
       "duration": "Jan 2019 - Nov 2019",
       "hideFromCV": false,
@@ -1318,9 +1318,9 @@
     {
       "companyName": "Dnipro Opera and Ballet Theatre",
       "description": [
-        "Started as IT Support and promoted to Department Manager due to high performance, developing skills in organization, personnel management, and meetings",
-        "Organized documentation, managed office supplies, and optimized costs, setting new performance standards for the team. Delegated tasks efficiently, improving team productivity. Updated the company's website using Wix.com",
-        "Developed and maintained the company's website using Wix.com, ensuring ease of updates for non-programmers. Managed content updates, added new features, and ensured efficient website operation"
+        "Started in IT support and later managed the department",
+        "Organised documentation, supplies and team tasks",
+        "Updated the company website in Wix so non-technical colleagues could maintain it"
       ],
       "duration": "Jan 2018 – Nov 2018",
       "hideFromCV": false,
@@ -1335,10 +1335,10 @@
     {
       "companyName": "AKS!",
       "description": [
-        "Initiated and developed an advanced system for sorting, numbering, and tabulation, improving performance and reducing processing time by 30%, leading to a promotion.",
-        "Managed and delegated tasks to a team of 9, including account managers, storekeepers, couriers, and the repair department, ensuring efficient operations",
-        "Optimized logistics for sending goods, reducing time and costs by 20%. Improved recruitment processes, reducing turnover by 15%. Enhanced team efficiency by addressing employee needs and solving problems effectively",
-        "Offered the position of head of the regional department due to exceptional performance, demonstrating strong leadership and management skills"
+        "Built a system for sorting and tracking goods",
+        "Managed tasks for a nine-person team across sales, warehouse, delivery and repairs",
+        "Improved shipping and hiring processes",
+        "Was offered a regional department manager role"
       ],
       "duration": "Feb 2017 – Dec 2017",
       "hideFromCV": false,
@@ -1353,10 +1353,9 @@
     {
       "companyName": "Khmelnitsk nuclear power plant",
       "description": [
-        "Monitored and maintained desalination plant hardware, ensuring optimal performance and reducing downtime by 15%.",
-        "Conducted water treatment processes, ensuring compliance with safety and quality standards.",
-        "Executed various operational tasks as per prescribed work instructions, contributing to overall plant efficiency.",
-        "Performed additional tasks under NDA, contributing to the secure and efficient operation of the desalination plant."
+        "Monitored and maintained desalination equipment",
+        "Carried out water treatment under safety and quality procedures",
+        "Followed operating instructions and completed additional confidential work"
       ],
       "duration": "Aug 2014 – Jan 2017",
       "hideFromCV": false,

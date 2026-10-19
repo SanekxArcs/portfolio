@@ -1,7 +1,7 @@
 {
-  "role": "Full-stack Developer",
-  "description": "Tworzę kompletne produkty webowe — od responsywnych interfejsów po API, integracje i procesy wspierane przez AI. Łączę potrzeby biznesowe z praktycznym oprogramowaniem, przemyślanym designem i techniczną realizacją.",
-  "about": "Jestem full-stack developerem z ponad 5-letnim doświadczeniem w tworzeniu stron i aplikacji, obecnie pracuję jako Solutions Engineer. Biorę odpowiedzialność od zrozumienia problemu po wdrożenie i dostarczenie rozwiązania, stawiając na jasną komunikację i łatwe w utrzymaniu oprogramowanie.\nRozwijam pracę z AI i procesami opartymi na agentach. Dwa razy z rzędu otrzymałem również wyróżnienie Spotlight Employee w swojej firmie.",
+  "role": "Programista full-stack",
+  "description": "Tworzę strony i aplikacje internetowe — od interfejsu po API. Pomagam też zespołom łączyć używane narzędzia i usprawniać powtarzalną pracę.",
+  "about": "Od ponad pięciu lat pracuję nad stronami i aplikacjami internetowymi. Obecnie jako Solutions Engineer pomagam klientom planować integracje i rozwiązywać problemy przy wdrożeniu. Nadal lubię sam budować rzeczy — od interfejsów po narzędzia wewnętrzne.\nZależy mi na jasnych odpowiedziach, przydatnej dokumentacji i kodzie, który ktoś inny będzie mógł utrzymać. Ostatnio poznaję narzędzia AI i pracę z agentami. Dwukrotnie otrzymałem też wyróżnienie Spotlight Employee.",
   "interests": [
     "Uczenie maszynowe",
     "Innowacje technologiczne",
@@ -14,32 +14,32 @@
   ],
   "softSkills": [
     {
-      "skill": "Dokumentacja techniczna i komunikacja",
-      "description": "Przygotowałem obszerną dokumentację API oraz pliki README i JSDoc używane przez 7 programistów; skróciłem wdrożenie nowego członka zespołu."
+      "skill": "Dokumentacja i komunikacja",
+      "description": "Przygotowałem dokumentację API, README i JSDoc używane przez siedmiu programistów oraz pomogłem nowej osobie wdrożyć się do zespołu."
     },
     {
-      "skill": "Inicjatywa i samodzielność",
-      "description": "Samodzielnie zidentyfikowałem wąskie gardło wydajności i wdrożyłem optymalizację, która przyspieszyła ładowanie strony o 35%."
+      "skill": "Inicjatywa",
+      "description": "Znalazłem przyczynę wolnego ładowania strony i przyspieszyłem ją o 35%."
     },
     {
-      "skill": "Empatia i myślenie o użytkowniku",
-      "description": "Promowałem standardy dostępności, ograniczając liczbę skarg użytkowników."
+      "skill": "Dostępność",
+      "description": "Zgłaszałem problemy z dostępnością i pracowałem nad poprawkami, po których było mniej skarg użytkowników."
     },
     {
-      "skill": "Elastyczność i rozwój",
-      "description": "Pomyślnie przeniosłem duży projekt z React do Vue (Nuxt)."
+      "skill": "Nauka nowych narzędzi",
+      "description": "Przeniosłem duży projekt z React do Vue i Nuxt."
     },
     {
-      "skill": "Analityczne rozwiązywanie problemów",
-      "description": "Zdiagnozowałem i usunąłem krytyczny błąd produkcyjny."
+      "skill": "Debugowanie",
+      "description": "Znalazłem i naprawiłem błąd na działającej stronie."
     },
     {
       "skill": "Dzielenie się wiedzą",
-      "description": "Prowadzę warsztaty dla zespołu poświęcone nowym, interesującym zagadnieniom."
+      "description": "Prowadziłem warsztaty dla zespołu o nowych narzędziach i tematach."
     },
     {
-      "skill": "Dbałość o wydajność",
-      "description": "Z własnej inicjatywy refaktoryzowałem starsze komponenty, zmniejszając rozmiar pakietu i poprawiając Core Web Vitals."
+      "skill": "Wydajność",
+      "description": "Poprawiałem starsze komponenty, zmniejszając rozmiar pakietu i poprawiając Core Web Vitals."
     }
   ],
   "work": [
@@ -49,10 +49,10 @@
       "location": "Zdalnie",
       "type": "Kontrakt",
       "description": [
-        "Doradztwo klientom e-commerce w zakresie integracji wyszukiwania i rekomendacji SaaS",
-        "Rekomendowanie dobrych praktyk przetwarzania i walidacji feedów produktowych",
-        "Wsparcie klientów w planowaniu wdrożeń technicznych i określaniu wymagań",
-        "Doradztwo w zakresie rozwiązań backendowych i frontendowych zgodnych z systemami projektowymi klientów"
+        "Pomagam klientom e-commerce planować integracje wyszukiwania i rekomendacji",
+        "Sprawdzam feedy produktowe i wyjaśniam problemy z walidacją",
+        "Przekładam wymagania klientów na kroki wdrożenia",
+        "Doradzam przy wyborze rozwiązań backendowych i frontendowych"
       ]
     },
     {
@@ -61,10 +61,10 @@
       "location": "Zdalnie",
       "type": "Kontrakt",
       "description": [
-        "Doradztwo klientom e-commerce w zakresie integracji wyszukiwania i rekomendacji SaaS",
-        "Rekomendowanie dobrych praktyk przetwarzania i walidacji feedów produktowych",
-        "Wsparcie klientów w planowaniu wdrożeń technicznych i określaniu wymagań",
-        "Rekomendowanie sposobów dostosowania frontendu do systemów projektowych klientów"
+        "Pomagałem klientom e-commerce integrować wyszukiwanie i rekomendacje",
+        "Sprawdzałem przetwarzanie i walidację feedów produktowych",
+        "Ustalałem z klientami wymagania techniczne",
+        "Doradzałem przy zmianach frontendu zgodnych z ich systemami projektowymi"
       ]
     },
     {
@@ -73,9 +73,9 @@
       "location": "Warszawa",
       "type": "Kontrakt",
       "description": [
-        "Tworzenie wielokrotnego użytku, dostępnych interfejsów dla największej platformy e-commerce w Niemczech z użyciem Storybook, styled-components i Framer Motion",
-        "Dostarczenie 3 stron produktowych nastawionych na konwersję i zoptymalizowanych pod kątem Core Web Vitals",
-        "Budowa MVP sklepu od podstaw w Nuxt 4, UnoCSS i Shopware oraz dodanie mikrofrontendu Next.js"
+        "Tworzyłem dostępne komponenty dla dużej niemieckiej platformy e-commerce",
+        "Zbudowałem trzy strony produktowe i poprawiałem ich szybkość ładowania",
+        "Zbudowałem MVP sklepu w Nuxt, UnoCSS i Shopware oraz mikrofrontend Next.js"
       ]
     },
     {
@@ -84,9 +84,9 @@
       "location": "Warszawa",
       "type": "Kontrakt",
       "description": [
-        "Opracowanie i uruchomienie strony firmowej z użyciem Next.js 15, Tailwind CSS 4.0 i Sanity CMS",
-        "Integracja Sanity do zarządzania treścią stron produktowych, bloga i realizacji",
-        "Tworzenie kalkulatorów usprawniających wewnętrzne procesy"
+        "Zbudowałem i uruchomiłem stronę firmy w Next.js, Tailwind CSS i Sanity",
+        "Przygotowałem edycję treści stron produktów, bloga i realizacji",
+        "Stworzyłem kalkulatory do pracy wewnętrznej"
       ]
     },
     {
@@ -95,8 +95,8 @@
       "location": "Warszawa",
       "type": "Pełny etat",
       "description": [
-        "Zaprojektowanie od podstaw dedykowanego systemu Enterprise Resource Management (ERM)",
-        "Budowa intuicyjnych, responsywnych interfejsów z komponentami Shadcn UI, upraszczających wprowadzanie i wizualizację danych"
+        "Zbudowałem system ERM do zarządzania pracą elektrotechniczną",
+        "Przygotowałem responsywne ekrany do wprowadzania danych i raportowania"
       ]
     },
     {
@@ -105,9 +105,9 @@
       "location": "Warszawa",
       "type": "Pełny etat",
       "description": [
-        "Budowa wielostronicowej witryny firmy w React, prezentującej usługi i realizacje",
-        "Opracowanie złożonego kalkulatora z Google Sheets jako źródłem danych, usprawniającego ich przetwarzanie",
-        "Budowa generatora PDF automatycznie tworzącego spersonalizowane dokumenty na podstawie danych i obliczeń"
+        "Zbudowałem wielostronicową stronę firmy w React",
+        "Stworzyłem kalkulator korzystający z danych w Google Sheets",
+        "Zbudowałem generator dokumentów PDF na podstawie wyników kalkulatora"
       ]
     },
     {
@@ -116,9 +116,9 @@
       "location": "Warszawa",
       "type": "Pełny etat",
       "description": [
-        "Utrzymanie i rozwój strony WordPress z użyciem HTML, CSS i JavaScript z dbałością o wydajność",
-        "Rozwiązywanie błędów frontendu i wdrażanie funkcji poprawiających wygodę użytkowania i działanie strony",
-        "Monitorowanie i analiza ruchu w Google Analytics w celu zrozumienia zachowań użytkowników i wydajności witryny"
+        "Utrzymywałem i rozwijałem stronę firmy na WordPress",
+        "Naprawiałem błędy frontendu i dodawałem funkcje",
+        "Analizowałem ruch strony w Google Analytics"
       ]
     },
     {
@@ -128,7 +128,7 @@
       "location": "Polska",
       "type": "Pełny etat",
       "description": [
-        "Instalacja i utrzymanie elektrowni słonecznych oraz domowych instalacji elektrycznych, naprawy i przebudowy zapewniające 99% dostępności. Współpraca z zespołem przy prawidłowym działaniu urządzeń. Opracowanie procedur monitorowania, które poprawiły pracę urządzeń o 20%."
+        "Montowałem i serwisowałem instalacje fotowoltaiczne i domowe instalacje elektryczne, usuwałem usterki i opracowywałem procedury monitorowania."
       ]
     },
     {
@@ -137,9 +137,9 @@
       "location": "Kijów",
       "type": "Pełny etat",
       "description": [
-        "Tworzenie i utrzymanie stron WordPress dla klientów z użyciem HTML, CSS i JavaScript",
-        "Zapewnienie zgodności z różnymi przeglądarkami i urządzeniami poprzez testowanie i debugowanie",
-        "Wdrożenie optymalizacji wydajności i SEO, dzięki którym wyniki Google PageSpeed przekroczyły 90 na wszystkich urządzeniach"
+        "Tworzyłem i utrzymywałem strony WordPress dla klientów",
+        "Testowałem je w różnych przeglądarkach i na różnych urządzeniach",
+        "Poprawiałem szybkość stron i ich widoczność w wyszukiwarkach"
       ]
     },
     {
@@ -149,9 +149,9 @@
       "location": "Ukraina, Dnipro",
       "type": "Pełny etat",
       "description": [
-        "Rozpoczęcie pracy we wsparciu IT i awans na kierownika działu dzięki dobrym wynikom; rozwój umiejętności organizacji, zarządzania personelem i prowadzenia spotkań",
-        "Organizacja dokumentacji, zarządzanie zaopatrzeniem i optymalizacja kosztów. Sprawne delegowanie zadań i podnoszenie produktywności zespołu. Aktualizacja strony firmy w Wix.com",
-        "Tworzenie i utrzymanie strony firmy w Wix.com, umożliwiające łatwe aktualizacje osobom nietechnicznym. Zarządzanie treścią, dodawanie funkcji i zapewnianie sprawnego działania"
+        "Zacząłem we wsparciu IT, a później kierowałem działem",
+        "Organizowałem dokumentację, zaopatrzenie i pracę zespołu",
+        "Aktualizowałem stronę firmy w Wix, aby inni pracownicy mogli łatwo ją utrzymywać"
       ]
     },
     {
@@ -161,10 +161,10 @@
       "location": "SPB",
       "type": "Pełny etat",
       "description": [
-        "Samodzielne opracowanie systemu sortowania, numerowania i zestawień, który skrócił czas przetwarzania o 30% i przyczynił się do awansu",
-        "Zarządzanie zadaniami 9-osobowego zespołu obejmującego opiekunów klientów, magazynierów, kurierów i dział napraw",
-        "Optymalizacja wysyłki zmniejszająca czas i koszty o 20%. Usprawnienie rekrutacji obniżające rotację o 15%. Poprawa efektywności przez reagowanie na potrzeby pracowników i rozwiązywanie problemów",
-        "Oferta stanowiska kierownika oddziału regionalnego w uznaniu bardzo dobrych wyników i umiejętności zarządzania"
+        "Zbudowałem system do sortowania i ewidencji towarów",
+        "Organizowałem pracę dziewięcioosobowego zespołu",
+        "Usprawniałem wysyłkę towarów i rekrutację",
+        "Otrzymałem propozycję kierowania regionalnym działem"
       ]
     },
     {
@@ -173,11 +173,23 @@
       "location": "Ukraina, Netiszyn",
       "type": "Pełny etat",
       "description": [
-        "Monitorowanie i utrzymanie urządzeń instalacji odsalania, zapewniające wydajność i ograniczenie przestojów o 15%",
-        "Prowadzenie procesów uzdatniania wody zgodnie z normami bezpieczeństwa i jakości",
-        "Realizacja zadań operacyjnych według instrukcji pracy, wspierająca efektywność zakładu",
-        "Wykonywanie dodatkowych zadań objętych NDA na rzecz bezpiecznej i sprawnej pracy instalacji odsalania"
+        "Nadzorowałem i utrzymywałem urządzenia stacji odsalania",
+        "Prowadziłem procesy uzdatniania wody zgodnie z procedurami bezpieczeństwa",
+        "Wykonywałem zadania operacyjne i dodatkowe prace objęte poufnością"
       ]
     }
+  ],
+  "skillsOther": [
+    "Agile/Scrum",
+    "Testy jednostkowe",
+    "Wydajność stron",
+    "UX",
+    "UI",
+    "SEO",
+    "Dostępność",
+    "Analiza danych",
+    "Marketing",
+    "Projektowanie systemów",
+    "Rozwój wspierany przez AI"
   ]
 }
