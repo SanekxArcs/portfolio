@@ -1,0 +1,95 @@
+{
+  "fps": 30,
+  "durationInFrames": 1155,
+  "bpm": 120,
+  "voice": "pl-PL-MarekNeural",
+  "scenes": [
+    {
+      "id": "opening",
+      "minimumSeconds": 6,
+      "headline": "Potrzebujesz strony?",
+      "voiceover": "Potrzebujesz strony? A może aplikacji dopasowanej do pracy Twojego zespołu?",
+      "from": 0,
+      "duration": 195,
+      "voiceSeconds": 5.373,
+      "voiceOffset": 12
+    },
+    {
+      "id": "websites",
+      "minimumSeconds": 5.5,
+      "headline": "Dobre pierwsze wrażenie",
+      "voiceover": "Tworzę strony, które jasno przedstawiają Twoją firmę.",
+      "from": 195,
+      "duration": 165,
+      "voiceSeconds": 3.324,
+      "voiceOffset": 12
+    },
+    {
+      "id": "applications",
+      "minimumSeconds": 5.5,
+      "headline": "Narzędzia do Twojej pracy",
+      "voiceover": "Aplikacje dla klientów. I narzędzia do codziennej pracy Twojego zespołu.",
+      "from": 360,
+      "duration": 195,
+      "voiceSeconds": 5.218,
+      "voiceOffset": 12
+    },
+    {
+      "id": "connections",
+      "minimumSeconds": 5.5,
+      "headline": "Mniej ręcznej pracy",
+      "voiceover": "Łączę systemy, żeby mniej czasu zajmowało Ci przenoszenie danych.",
+      "from": 555,
+      "duration": 165,
+      "voiceSeconds": 3.734,
+      "voiceOffset": 12
+    },
+    {
+      "id": "personal",
+      "minimumSeconds": 6.5,
+      "headline": "Jeden programista. Bez pośredników.",
+      "voiceover": "Jestem Twoim programistą. Pracujemy razem, od pierwszego szkicu do uruchomienia.",
+      "speechParts": [
+        {
+          "text": "Jestem Twoim programistą.",
+          "rate": "-8%",
+          "pauseAfter": 0.2
+        },
+        {
+          "text": "Pracujemy razem, od pierwszego szkicu do uruchomienia.",
+          "rate": "-5%"
+        }
+      ],
+      "from": 720,
+      "duration": 195,
+      "voiceSeconds": 5.223,
+      "voiceOffset": 12
+    },
+    {
+      "id": "closing",
+      "minimumSeconds": 8,
+      "headline": "Opowiedz mi o swoim projekcie",
+      "voiceover": "Opowiedz mi o swoim projekcie. O.D. EMPOWER. Porozmawiajmy.",
+      "speechParts": [
+        {
+          "text": "Opowiedz mi o swoim projekcie.",
+          "rate": "-8%",
+          "pauseAfter": 0.28
+        },
+        {
+          "text": "O de. Empałer.",
+          "rate": "-10%",
+          "pauseAfter": 0.32
+        },
+        {
+          "text": "Porozmawiajmy.",
+          "rate": "-8%"
+        }
+      ],
+      "from": 915,
+      "duration": 240,
+      "voiceSeconds": 6.199,
+      "voiceOffset": 12
+    }
+  ]
+}

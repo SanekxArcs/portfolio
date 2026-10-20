@@ -1,0 +1,64 @@
+{
+  "opening": {
+    "fingerprint": "46cfdb08654d7366a28f8e022f5baaf2c5ea775db50241b3df38769e106c2708",
+    "voice": "en-US-AndrewMultilingualNeural",
+    "source": "existing voice file"
+  },
+  "websites": {
+    "fingerprint": "9f19fbd076876616195046ca9000b27d9eb76ad980ffb3638ac11b881e7c7c92",
+    "voice": "en-US-AndrewMultilingualNeural",
+    "source": "existing voice file"
+  },
+  "applications": {
+    "fingerprint": "2f408824d6738ac03290da71376e09a960527cc76e35877602967f617ddf2591",
+    "voice": "en-US-AndrewMultilingualNeural",
+    "source": "existing voice file"
+  },
+  "connections": {
+    "fingerprint": "ff9f18c75baf0dede0e1126280f742067b1adb4c1eef13d4454d7691a6fc35ba",
+    "voice": "en-US-AndrewMultilingualNeural",
+    "source": "existing voice file"
+  },
+  "personal": {
+    "fingerprint": "271113f027b5b1399fb9de2406fda0755614fa323f32a3dccb18ba2f6229c94c",
+    "voice": "en-US-AndrewMultilingualNeural",
+    "parts": [
+      {
+        "text": "I'm your developer.",
+        "rate": "-16%",
+        "seconds": 1.265,
+        "pauseAfter": 0.2
+      },
+      {
+        "text": "We'll work together, from the first sketch to launch.",
+        "rate": "-10%",
+        "seconds": 3.222,
+        "pauseAfter": 0
+      }
+    ]
+  },
+  "closing": {
+    "fingerprint": "f88cbf3f1373afcdf87892dd549b722515198b61480ee3504efb3d5c5d39ed93",
+    "voice": "en-US-AndrewMultilingualNeural",
+    "parts": [
+      {
+        "text": "Tell me about your project.",
+        "rate": "-15%",
+        "seconds": 1.664,
+        "pauseAfter": 0.28
+      },
+      {
+        "text": "Oh Dee Empower.",
+        "rate": "-20%",
+        "seconds": 1.52,
+        "pauseAfter": 0.32
+      },
+      {
+        "text": "Let's talk.",
+        "rate": "-15%",
+        "seconds": 0.775,
+        "pauseAfter": 0
+      }
+    ]
+  }
+}

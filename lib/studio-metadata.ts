@@ -18,6 +18,13 @@ export function studioMetadata(
       (key === 'experience'
         ? 'Oleksandr Dzisiak — ' + d.meta[key]
         : d.meta[key])) + ' — O.D. EMPOWER'
+  const image = {
+    url: `${siteUrl}/${locale}/share-image`,
+    width: 1200,
+    height: 630,
+    type: 'image/png',
+    alt: `O.D. EMPOWER — ${d.hero.line1} ${d.hero.line2}`,
+  }
   return {
     title,
     description,
@@ -37,6 +44,7 @@ export function studioMetadata(
       title,
       description,
       url: siteUrl + '/' + locale + path,
+      images: [image],
       siteName: 'O.D. EMPOWER',
       type: 'website',
       locale: ({en: 'en_US', pl: 'pl_PL', uk: 'uk_UA'} as const)[locale],
@@ -46,8 +54,10 @@ export function studioMetadata(
     },
     twitter: {
       card: 'summary_large_image',
+      images: [image],
       title,
       description,
     },
   }
 }
+
