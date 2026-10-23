@@ -1,0 +1,72 @@
+{
+  "name": "O.D. EMPOWER — Let's build it",
+  "fps": 30,
+  "voice": "en-US-AndrewMultilingualNeural",
+  "rate": "-10%",
+  "bpm": 120,
+  "scenes": [
+    {
+      "id": "opening",
+      "minimumSeconds": 6,
+      "headline": "Need a website?",
+      "voiceover": "Need a website? Or an app that fits how your team works?"
+    },
+    {
+      "id": "websites",
+      "minimumSeconds": 5.5,
+      "headline": "A clear first impression",
+      "voiceover": "I design and build sites that explain what your business does."
+    },
+    {
+      "id": "applications",
+      "minimumSeconds": 5.5,
+      "headline": "Built around your work",
+      "voiceover": "Web apps for your customers. And tools for your own team."
+    },
+    {
+      "id": "connections",
+      "minimumSeconds": 5.5,
+      "headline": "Less busywork",
+      "voiceover": "I connect your systems, so you spend less time moving things around."
+    },
+    {
+      "id": "personal",
+      "minimumSeconds": 6.5,
+      "headline": "One developer. Direct contact.",
+      "voiceover": "I'm your developer. We'll work together, from the first sketch to launch.",
+      "speechParts": [
+        {
+          "text": "I'm your developer.",
+          "rate": "-16%",
+          "pauseAfter": 0.2
+        },
+        {
+          "text": "We'll work together, from the first sketch to launch.",
+          "rate": "-10%"
+        }
+      ]
+    },
+    {
+      "id": "closing",
+      "minimumSeconds": 7,
+      "headline": "Tell me what you're building",
+      "voiceover": "Tell me about your project. O.D. EMPOWER. Let's talk.",
+      "speechParts": [
+        {
+          "text": "Tell me about your project.",
+          "rate": "-15%",
+          "pauseAfter": 0.28
+        },
+        {
+          "text": "Oh Dee Empower.",
+          "rate": "-20%",
+          "pauseAfter": 0.32
+        },
+        {
+          "text": "Let's talk.",
+          "rate": "-15%"
+        }
+      ]
+    }
+  ]
+}

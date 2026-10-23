@@ -41,3 +41,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# Local migration backups contain unpublished content and private conversations.
+/.local-backups/
+/dist/

@@ -1,0 +1,195 @@
+{
+  "role": "Programista full-stack",
+  "description": "Tworzę strony i aplikacje internetowe — od interfejsu po API. Pomagam też zespołom łączyć używane narzędzia i usprawniać powtarzalną pracę.",
+  "about": "Od ponad pięciu lat pracuję nad stronami i aplikacjami internetowymi. Obecnie jako Solutions Engineer pomagam klientom planować integracje i rozwiązywać problemy przy wdrożeniu. Nadal lubię sam budować rzeczy — od interfejsów po narzędzia wewnętrzne.\nZależy mi na jasnych odpowiedziach, przydatnej dokumentacji i kodzie, który ktoś inny będzie mógł utrzymać. Ostatnio poznaję narzędzia AI i pracę z agentami. Dwukrotnie otrzymałem też wyróżnienie Spotlight Employee.",
+  "interests": [
+    "Uczenie maszynowe",
+    "Innowacje technologiczne",
+    "Modelowanie 3D",
+    "Gry"
+  ],
+  "education": [
+    "Elektrotechnika i elektroenergetyka",
+    "Eksploatacja zautomatyzowanych urządzeń energetycznych w elektrowniach"
+  ],
+  "softSkills": [
+    {
+      "skill": "Dokumentacja i komunikacja",
+      "description": "Przygotowałem dokumentację API, README i JSDoc używane przez siedmiu programistów oraz pomogłem nowej osobie wdrożyć się do zespołu."
+    },
+    {
+      "skill": "Inicjatywa",
+      "description": "Znalazłem przyczynę wolnego ładowania strony i przyspieszyłem ją o 35%."
+    },
+    {
+      "skill": "Dostępność",
+      "description": "Zgłaszałem problemy z dostępnością i pracowałem nad poprawkami, po których było mniej skarg użytkowników."
+    },
+    {
+      "skill": "Nauka nowych narzędzi",
+      "description": "Przeniosłem duży projekt z React do Vue i Nuxt."
+    },
+    {
+      "skill": "Debugowanie",
+      "description": "Znalazłem i naprawiłem błąd na działającej stronie."
+    },
+    {
+      "skill": "Dzielenie się wiedzą",
+      "description": "Prowadziłem warsztaty dla zespołu o nowych narzędziach i tematach."
+    },
+    {
+      "skill": "Wydajność",
+      "description": "Poprawiałem starsze komponenty, zmniejszając rozmiar pakietu i poprawiając Core Web Vitals."
+    }
+  ],
+  "work": [
+    {
+      "jobTitle": "Konsultant Solutions Engineer",
+      "duration": "Wrzesień 2026 – obecnie",
+      "location": "Zdalnie",
+      "type": "Kontrakt",
+      "description": [
+        "Pomagam klientom e-commerce planować integracje wyszukiwania i rekomendacji",
+        "Sprawdzam feedy produktowe i wyjaśniam problemy z walidacją",
+        "Przekładam wymagania klientów na kroki wdrożenia",
+        "Doradzam przy wyborze rozwiązań backendowych i frontendowych"
+      ]
+    },
+    {
+      "jobTitle": "Konsultant ds. integracji",
+      "duration": "Marzec 2026 – wrzesień 2026",
+      "location": "Zdalnie",
+      "type": "Kontrakt",
+      "description": [
+        "Pomagałem klientom e-commerce integrować wyszukiwanie i rekomendacje",
+        "Sprawdzałem przetwarzanie i walidację feedów produktowych",
+        "Ustalałem z klientami wymagania techniczne",
+        "Doradzałem przy zmianach frontendu zgodnych z ich systemami projektowymi"
+      ]
+    },
+    {
+      "jobTitle": "Mid Frontend Developer",
+      "duration": "Czerwiec 2025 – marzec 2026",
+      "location": "Warszawa",
+      "type": "Kontrakt",
+      "description": [
+        "Tworzyłem dostępne komponenty dla dużej niemieckiej platformy e-commerce",
+        "Zbudowałem trzy strony produktowe i poprawiałem ich szybkość ładowania",
+        "Zbudowałem MVP sklepu w Nuxt, UnoCSS i Shopware oraz mikrofrontend Next.js"
+      ]
+    },
+    {
+      "jobTitle": "Full-stack Developer",
+      "duration": "Sierpień 2024 – luty 2025",
+      "location": "Warszawa",
+      "type": "Kontrakt",
+      "description": [
+        "Zbudowałem i uruchomiłem stronę firmy w Next.js, Tailwind CSS i Sanity",
+        "Przygotowałem edycję treści stron produktów, bloga i realizacji",
+        "Stworzyłem kalkulatory do pracy wewnętrznej"
+      ]
+    },
+    {
+      "jobTitle": "Full-stack Developer",
+      "duration": "Wrzesień 2023 – styczeń 2025",
+      "location": "Warszawa",
+      "type": "Pełny etat",
+      "description": [
+        "Zbudowałem system ERM do zarządzania pracą elektrotechniczną",
+        "Przygotowałem responsywne ekrany do wprowadzania danych i raportowania"
+      ]
+    },
+    {
+      "jobTitle": "Frontend Developer",
+      "duration": "Kwiecień 2023 – sierpień 2023",
+      "location": "Warszawa",
+      "type": "Pełny etat",
+      "description": [
+        "Zbudowałem wielostronicową stronę firmy w React",
+        "Stworzyłem kalkulator korzystający z danych w Google Sheets",
+        "Zbudowałem generator dokumentów PDF na podstawie wyników kalkulatora"
+      ]
+    },
+    {
+      "jobTitle": "Junior Frontend Developer",
+      "duration": "Lipiec 2022 – marzec 2023",
+      "location": "Warszawa",
+      "type": "Pełny etat",
+      "description": [
+        "Utrzymywałem i rozwijałem stronę firmy na WordPress",
+        "Naprawiałem błędy frontendu i dodawałem funkcje",
+        "Analizowałem ruch strony w Google Analytics"
+      ]
+    },
+    {
+      "jobTitle": "Elektryk",
+      "jobTitle2": "Inżynier elektryk",
+      "duration": "Luty 2020 – lipiec 2022",
+      "location": "Polska",
+      "type": "Pełny etat",
+      "description": [
+        "Montowałem i serwisowałem instalacje fotowoltaiczne i domowe instalacje elektryczne, usuwałem usterki i opracowywałem procedury monitorowania."
+      ]
+    },
+    {
+      "jobTitle": "Junior Frontend Developer",
+      "duration": "Styczeń 2019 – listopad 2019",
+      "location": "Kijów",
+      "type": "Pełny etat",
+      "description": [
+        "Tworzyłem i utrzymywałem strony WordPress dla klientów",
+        "Testowałem je w różnych przeglądarkach i na różnych urządzeniach",
+        "Poprawiałem szybkość stron i ich widoczność w wyszukiwarkach"
+      ]
+    },
+    {
+      "jobTitle": "Wsparcie IT",
+      "jobTitle2": "Kierownik działu",
+      "duration": "Styczeń 2018 – listopad 2018",
+      "location": "Ukraina, Dnipro",
+      "type": "Pełny etat",
+      "description": [
+        "Zacząłem we wsparciu IT, a później kierowałem działem",
+        "Organizowałem dokumentację, zaopatrzenie i pracę zespołu",
+        "Aktualizowałem stronę firmy w Wix, aby inni pracownicy mogli łatwo ją utrzymywać"
+      ]
+    },
+    {
+      "jobTitle": "Magazynier",
+      "jobTitle2": "Kierownik działu",
+      "duration": "Luty 2017 – grudzień 2017",
+      "location": "SPB",
+      "type": "Pełny etat",
+      "description": [
+        "Zbudowałem system do sortowania i ewidencji towarów",
+        "Organizowałem pracę dziewięcioosobowego zespołu",
+        "Usprawniałem wysyłkę towarów i rekrutację",
+        "Otrzymałem propozycję kierowania regionalnym działem"
+      ]
+    },
+    {
+      "jobTitle": "Pracownik działu instalacji odsalania",
+      "duration": "Sierpień 2014 – styczeń 2017",
+      "location": "Ukraina, Netiszyn",
+      "type": "Pełny etat",
+      "description": [
+        "Nadzorowałem i utrzymywałem urządzenia stacji odsalania",
+        "Prowadziłem procesy uzdatniania wody zgodnie z procedurami bezpieczeństwa",
+        "Wykonywałem zadania operacyjne i dodatkowe prace objęte poufnością"
+      ]
+    }
+  ],
+  "skillsOther": [
+    "Agile/Scrum",
+    "Testy jednostkowe",
+    "Wydajność stron",
+    "UX",
+    "UI",
+    "SEO",
+    "Dostępność",
+    "Analiza danych",
+    "Marketing",
+    "Projektowanie systemów",
+    "Rozwój wspierany przez AI"
+  ]
+}

@@ -3,7 +3,7 @@ import {LayoutTemplate, Server, Terminal, Cpu, Zap} from 'lucide-react'
 import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card'
 import {Badge} from '@/components/ui/badge'
 import type {CvProfile} from '@/components/cv/types'
-import {cn} from '@/lib/utils'
+import {cn} from 'cn'
 
 type Props = {
   profile: CvProfile

@@ -6,19 +6,20 @@ import {
   Cpu,
   FolderGit2,
   Globe,
-  MessageSquare,
+  Phone,
   Send,
   MessageCircle,
 } from 'lucide-react'
 
 import {Github, Linkedin, Facebook} from '@/components/icons/brand-icons'
-import {getProfile} from '@/sanity/lib/profile'
+import {BrandMark} from '@/components/brand-mark'
+import {getProfile} from '@/lib/content'
 
 import {Rodo} from '@/components/cv/main/rodo'
 import {buttonVariants} from '@/components/ui/button'
 import {ScrollToTop} from '@/components/scroll-to-top'
 import {HighlightedText} from '@/components/cv/atoms/highlighted-text'
-import {cn} from '@/lib/utils'
+import {cn} from 'cn'
 
 export const Footer = async () => {
   const profile = await getProfile()
@@ -40,17 +41,8 @@ export const Footer = async () => {
 
   const socialLinks = profile?.links || []
 
-  const initials = profile?.name
-    ? profile.name
-        .split(' ')
-        .map((n) => n[0])
-        .join('')
-        .toUpperCase()
-        .slice(0, 2)
-    : 'OD'
-
   return (
-    <footer className="bg-background/95 relative cursor-default overflow-hidden border-t pt-16 pb-8">
+    <footer className="bg-background/95 relative z-10 cursor-default overflow-hidden border-t pt-16 pb-8">
       {/* Decorative Background Icon */}
       <div className="pointer-events-none absolute -top-20 -right-20 opacity-[0.03] transition-transform duration-500 group-hover:scale-110">
         <Globe className="h-96 w-96" />
@@ -61,33 +53,7 @@ export const Footer = async () => {
           {/* Brand Section */}
           <div className="space-y-4 lg:col-span-2">
             <div className="flex items-center gap-2">
-              <div
-                className={cn(
-                  'relative flex h-8 w-8 items-center justify-center overflow-hidden',
-                  profile?.logoUrl
-                    ? 'bg-transparent'
-                    : 'rounded-lg bg-emerald-600 font-bold text-white',
-                )}
-              >
-                {profile?.logoUrl ? (
-                  <div
-                    role="img"
-                    className="h-full w-full bg-linear-to-t from-emerald-950 to-emerald-900 transition-colors duration-300 dark:from-white dark:to-emerald-100"
-                    style={{
-                      maskImage: `url(${profile.logoUrl})`,
-                      WebkitMaskImage: `url(${profile.logoUrl})`,
-                      maskSize: 'contain',
-                      WebkitMaskSize: 'contain',
-                      maskRepeat: 'no-repeat',
-                      WebkitMaskRepeat: 'no-repeat',
-                      maskPosition: 'center',
-                      WebkitMaskPosition: 'center',
-                    }}
-                  />
-                ) : (
-                  initials
-                )}
-              </div>
+              <BrandMark logoUrl={profile?.logoUrl} />
               <span className="cursor-default text-xl font-bold tracking-tighter">
                 {profile?.name || 'Oleksandr Dzisiak'}
               </span>
@@ -162,33 +128,26 @@ export const Footer = async () => {
             <h3 className="text-foreground text-sm font-bold tracking-wider uppercase">
               Get in Touch
             </h3>
-            <div className="space-y-3">
+            <div className="flex flex-wrap items-center gap-3">
               {profile?.contacts?.location && (
-                <div className="text-muted-foreground flex items-start gap-3 text-sm">
+                <div className="text-muted-foreground flex basis-full items-start gap-3 text-sm">
                   <Globe className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
                   <span>{profile.contacts.location}</span>
                 </div>
               )}
               {profile?.contacts?.email && (
-                <div className="text-muted-foreground flex items-start gap-3 text-sm">
-                  <Mail className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
-                  <Link
-                    href={`mailto:${profile.contacts.email}`}
-                    className="hover:text-foreground transition-colors"
-                  >
-                    {profile.contacts.email}
-                  </Link>
-                </div>
+                <Link href={`mailto:${profile.contacts.email}`} className={cn(buttonVariants({variant: 'outline', size: 'icon'}), 'size-9 border-emerald-500/20')} aria-label="Email me" title="Email me"><Mail className="size-4" /></Link>
               )}
-              <div className="pt-2">
+              <div className="flex">
                 <Link
-                  className={cn(buttonVariants({variant: 'outline', size: 'sm'}), 'h-9 gap-2 border-emerald-500/20')}
+                  className={cn(buttonVariants({variant: 'outline', size: 'icon'}), 'size-9 border-emerald-500/20')}
+                  aria-label="Call me"
+                  title="Call me"
                   href={
                     profile?.contacts?.phoneNumber ? `tel:${profile.contacts.phoneNumber}` : '#cta'
                   }
                 >
-                    <MessageSquare className="h-4 w-4" />
-                    Let&apos;s Talk
+                    <Phone className="h-4 w-4" />
                 </Link>
               </div>
             </div>
@@ -201,7 +160,7 @@ export const Footer = async () => {
             <div className="text-muted-foreground flex items-center gap-2 text-sm">
               <span>© {currentYear}</span>
               <span className="hidden md:inline">•</span>
-              <span>Built with Next.js & Sanity</span>
+              <span>Built with Next.js & TypeScript</span>
             </div>
 
             <div className="flex items-center gap-6">

@@ -1,0 +1,18 @@
+# Standalone film sources and render dependencies do not belong in the site.
+studio-video/
+
+# Keep local/private data excluded when this file replaces .gitignore rules.
+.git/
+node_modules/
+.next/
+.local-backups/
+.sanity/
+.vercel/
+.env*
+!.env.local.example
+out/
+dist/
+build/
+coverage/
+*.pem
+*.tsbuildinfo

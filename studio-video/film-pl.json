@@ -1,0 +1,65 @@
+{
+  "name": "O.D. EMPOWER — Porozmawiajmy",
+  "fps": 30,
+  "voice": "pl-PL-MarekNeural",
+  "rate": "-5%",
+  "bpm": 120,
+  "scenes": [
+    {
+      "id": "opening",
+      "minimumSeconds": 6,
+      "headline": "Potrzebujesz strony?",
+      "voiceover": "Potrzebujesz strony? A może aplikacji dopasowanej do pracy Twojego zespołu?"
+    },
+    {
+      "id": "websites",
+      "minimumSeconds": 5.5,
+      "headline": "Dobre pierwsze wrażenie",
+      "voiceover": "Tworzę strony, które jasno przedstawiają Twoją firmę."
+    },
+    {
+      "id": "applications",
+      "minimumSeconds": 5.5,
+      "headline": "Narzędzia do Twojej pracy",
+      "voiceover": "Aplikacje dla klientów. I narzędzia do codziennej pracy Twojego zespołu."
+    },
+    {
+      "id": "connections",
+      "minimumSeconds": 5.5,
+      "headline": "Mniej ręcznej pracy",
+      "voiceover": "Łączę systemy, żeby mniej czasu zajmowało Ci przenoszenie danych."
+    },
+    {
+      "id": "personal",
+      "minimumSeconds": 6.5,
+      "headline": "Jeden programista. Bez pośredników.",
+      "voiceover": "Jestem Twoim programistą. Pracujemy razem, od pierwszego szkicu do uruchomienia.",
+      "speechParts": [
+        {
+          "text": "Jestem Twoim programistą.",
+          "rate": "-8%",
+          "pauseAfter": 0.2
+        },
+        {
+          "text": "Pracujemy razem, od pierwszego szkicu do uruchomienia.",
+          "rate": "-5%"
+        }
+      ]
+    },
+    {
+      "id": "closing",
+      "minimumSeconds": 8,
+      "headline": "Opowiedz mi o swoim projekcie",
+      "voiceover": "Opowiedz mi o swoim projekcie. O.D. EMPOWER. Porozmawiajmy.",
+      "speechParts": [
+        {
+          "text": "Opowiedz mi o swoim projekcie.",
+          "rate": "-8%",
+          "pauseAfter": 0.28
+        },
+        { "text": "O de. Empałer.", "rate": "-10%", "pauseAfter": 0.32 },
+        { "text": "Porozmawiajmy.", "rate": "-8%" }
+      ]
+    }
+  ]
+}

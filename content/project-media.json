@@ -1,0 +1,174 @@
+{
+  "solar-sense": {
+    "desktop": "/content/project-solar-sense-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://solarsense.o-d.dev/",
+    "view": "Hero section crop",
+    "mobile": "/content/project-solar-sense-mobile.webp",
+    "detail": "/content/project-solar-sense-detail.webp",
+    "detailWidth": 1440,
+    "detailHeight": 1000
+  },
+  "erm-system": {
+    "desktop": "/content/project-erm-system-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://vdg-erm.o-d.dev",
+    "mobile": "/content/project-erm-system-mobile.webp",
+    "detail": "/content/project-erm-system-detail.webp",
+    "resolvedUrl": "https://vdg-erm.o-d.dev/",
+    "detailWidth": 1440,
+    "detailHeight": 1000
+  },
+  "feigin-electric": {
+    "desktop": "/content/project-feigin-electric-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://feiginelectric.o-d.dev/",
+    "mobile": "/content/project-feigin-electric-mobile.webp",
+    "detail": "/content/project-feigin-electric-detail.webp",
+    "detailWidth": 1440,
+    "detailHeight": 1000
+  },
+  "liberty-immigration": {
+    "desktop": "/content/project-liberty-immigration-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://liberty-immigration.o-d.dev",
+    "mobile": "/content/project-liberty-immigration-mobile.webp",
+    "detail": "/content/project-liberty-immigration-detail.webp",
+    "resolvedUrl": "https://liberty-immigration.o-d.dev/",
+    "detailWidth": 1440,
+    "detailHeight": 1000
+  },
+  "fun-quest": {
+    "desktop": "/content/project-fun-quest-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://fq.ua/",
+    "view": "Rooms section",
+    "mobile": "/content/project-fun-quest-mobile.webp",
+    "detail": "/content/project-fun-quest-detail.webp",
+    "detailWidth": 1440,
+    "detailHeight": 1000
+  },
+  "club-smart-mam": {
+    "desktop": "/content/project-club-smart-mam-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://www.smartmama.com.ua/",
+    "mobile": "/content/project-club-smart-mam-mobile.webp",
+    "detail": "/content/project-club-smart-mam-detail.webp",
+    "resolvedUrl": "https://smartmama.com.ua/",
+    "detailWidth": 1440,
+    "detailHeight": 1000
+  },
+  "plenum": {
+    "desktop": "/content/project-plenum-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://plenum.com.ua/uk/#pll_switcher",
+    "mobile": "/content/project-plenum-mobile.webp",
+    "detail": "/content/project-plenum-detail.webp",
+    "detailWidth": 1440,
+    "detailHeight": 1000
+  },
+  "tunerfest": {
+    "desktop": "/content/project-tunerfest-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://tunerfest.app/",
+    "mobile": "/content/project-tunerfest-mobile.webp",
+    "detail": "/content/project-tunerfest-detail.webp",
+    "detailWidth": 1440,
+    "detailHeight": 1000
+  },
+  "love-notes": {
+    "desktop": "/content/project-love-notes-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://love.o-d.dev/",
+    "mobile": "/content/project-love-notes-mobile.webp",
+    "detail": "/content/project-love-notes-detail.webp",
+    "resolvedUrl": "https://love-notes.o-d.dev/",
+    "detailWidth": 1440,
+    "detailHeight": 1000
+  },
+  "cusemit": {
+    "desktop": "/content/project-cusemit-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://cusemit.o-d.dev/"
+  },
+  "webp-converter": {
+    "desktop": "/content/project-webp-converter-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://convert.o-d.dev/",
+    "mobile": "/content/project-webp-converter-mobile.webp"
+  },
+  "digital-resume": {
+    "desktop": "/content/project-digital-resume-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://old-cv.o-d.dev/",
+    "view": "Main content panel; contact sidebar excluded",
+    "detail": "/content/project-digital-resume-detail.webp",
+    "detailWidth": 826,
+    "detailHeight": 930
+  },
+  "ai-bookmark-sorter": {
+    "desktop": "/content/project-ai-bookmark-sorter-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://ai-bookmark-sorter.vercel.app/",
+    "mobile": "/content/project-ai-bookmark-sorter-mobile.webp"
+  },
+  "movie-browser": {
+    "desktop": "/content/project-movie-browser-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://movies.o-d.dev/",
+    "mobile": "/content/project-movie-browser-mobile.webp",
+    "detail": "/content/project-movie-browser-detail.webp",
+    "detailWidth": 1440,
+    "detailHeight": 1000
+  },
+  "subscription-tracker": {
+    "desktop": "/content/project-subscription-tracker-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://ex-traker.netlify.app/",
+    "mobile": "/content/project-subscription-tracker-mobile.webp"
+  },
+  "work-buddy": {
+    "desktop": "/content/project-work-buddy-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://github.com/SanekxArcs/work-track-app",
+    "kind": "desktop",
+    "video": "/content/work-buddy-promo.mp4",
+    "view": "Poster extracted from the user-supplied 90-second promotional video"
+  },
+  "gemini-bookmark-manager": {
+    "desktop": "/content/project-gemini-bookmark-manager-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://chromewebstore.google.com/detail/gemini-bookmark-manager/bncacagpbpilhncmlmlfihkpkcnpilff",
+    "kind": "extension"
+  },
+  "fix-errors-ai": {
+    "desktop": "/content/project-fix-errors-ai-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://chromewebstore.google.com/detail/fix-errors-ai/ajciieiekaghgpjemofeemhfmiihgbao",
+    "kind": "extension"
+  },
+  "kontrlve": {
+    "desktop": "/content/project-kontrlve-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://chromewebstore.google.com/detail/kontrlve/gpjnkbnncpbdkckbgpdpefaeaomjpgph",
+    "kind": "extension"
+  },
+  "chytayko": {
+    "desktop": "/content/project-chytayko-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://reading-trening.vercel.app/",
+    "kind": "website"
+  },
+  "language-cursor": {
+    "desktop": "/content/project-language-cursor-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://github.com/SanekxArcs/cursor-lang",
+    "kind": "desktop"
+  },
+  "math-master": {
+    "desktop": "/content/project-math-master-desktop.webp",
+    "capturedOn": "2026-10-19",
+    "sourceUrl": "https://karina-math.vercel.app/",
+    "kind": "website"
+  }
+}

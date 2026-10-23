@@ -1,0 +1,307 @@
+{
+  "nav": {
+    "home": "Strona główna",
+    "work": "Realizacje",
+    "services": "Usługi",
+    "experience": "Doświadczenie",
+    "contact": "Porozmawiajmy",
+    "menu": "Otwórz nawigację",
+    "close": "Zamknij nawigację",
+    "language": "Język",
+    "theme": "Zmień motyw",
+    "motion": "Ogranicz animacje",
+    "skip": "Przejdź do treści"
+  },
+  "hero": {
+    "eyebrow": "Niezależny programista · O.D. EMPOWER",
+    "line1": "Tworzę strony",
+    "line2": "i aplikacje internetowe",
+    "intro": "Jestem Oleksandr, programista mieszkający w Polsce. Tworzę strony i aplikacje dla firm. Wspieram też zespoły w pracy nad ich projektami",
+    "primary": "Porozmawiajmy o projekcie",
+    "secondary": "Poznaj moje doświadczenie",
+    "caption": "Przeciągnij logo, żeby je obrócić, kliknij, żeby mnie poznać",
+    "scroll": "Przewiń i odkryj",
+    "location": "Mieszkam w Polsce · Pracuję zdalnie",
+    "specialty": "Projektowanie, kod i wszystko pomiędzy"
+  },
+  "clients": {
+    "label": "Doświadczenie z klientami",
+    "title": "Marki, z którymi pracowałem",
+    "intro": "Pracowałem przy projektach dla tych klientów w ramach pracy i współpracy z zespołami",
+    "showAll": "Zobacz wszystkich klientów",
+    "showLess": "Pokaż mniej klientów",
+    "visit": "Odwiedź stronę"
+  },
+  "home": {
+    "workLabel": "01 / Wybrane realizacje",
+    "workTitle": "Kilka rzeczy, które zrobiłem",
+    "workIntro": "Strony dla klientów, projekty zespołowe i produkty, które stworzyłem samodzielnie",
+    "allWork": "Zobacz wszystkie realizacje",
+    "servicesLabel": "02 / W czym pomagam",
+    "servicesTitle": "Co mogę dla Ciebie zbudować",
+    "allServices": "Poznaj usługi",
+    "aboutLabel": "04 / O mnie",
+    "aboutTitle": "Małe studio. Bezpośredni kontakt",
+    "aboutText": "Jestem Oleksandr Dzisiak, full-stack developer i Solutions Engineer. Gdy piszesz do O.D. EMPOWER, rozmawiasz ze mną, osobą, która zaplanuje i zbuduje Twój projekt.",
+    "aboutLink": "Poznaj moje doświadczenie",
+    "hiring": "Rozbudowujesz zespół?",
+    "hiringText": "Zobacz moje doświadczenie, umiejętności i CV.",
+    "aboutRole": "Full-stack developer / Solutions Engineer"
+  },
+  "services": {
+    "label": "Usługi",
+    "title": "Strony, aplikacje i integracje",
+    "intro": "Mogę zbudować stronę, która wyjaśni, czym zajmuje się Twoja firma, narzędzie dla zespołu lub połączenie między używanymi systemami. Opowiedz, czego potrzebujesz, a wspólnie ustalimy zakres.",
+    "include": "Nad czym możemy pracować",
+    "discuss": "Porozmawiajmy o tej usłudze",
+    "items": [
+      {
+        "id": "websites",
+        "title": "Strony internetowe i landing pages",
+        "text": "Strona, która jasno przedstawia ofertę i ułatwia klientom kontakt lub zakup.",
+        "deliverables": [
+          "Strony firmowe i strony kampanii",
+          "Układ na telefon i komputer oraz animacje tam, gdzie pomagają",
+          "Struktura stron i podstawowa konfiguracja SEO"
+        ]
+      },
+      {
+        "id": "applications",
+        "title": "Aplikacje i narzędzia webowe",
+        "text": "Aplikacja dla klientów lub wewnętrzne narzędzie, które ułatwi pracę zespołowi.",
+        "deliverables": [
+          "Produkty dla klientów i MVP",
+          "Panele i wewnętrzne narzędzia biznesowe",
+          "Ekrany, formularze i połączenia danych"
+        ]
+      },
+      {
+        "id": "integrations",
+        "title": "Integracje i automatyzacja",
+        "text": "Połącz używane narzędzia i zautomatyzuj zadania, które zespół wykonuje codziennie.",
+        "deliverables": [
+          "Połączenia API i przepływy danych",
+          "Kalkulatory i generowanie dokumentów",
+          "Automatyzacja i narzędzia z AI"
+        ]
+      },
+      {
+        "id": "improvements",
+        "title": "Rozwój istniejących produktów",
+        "text": "Popraw to, co utrudnia korzystanie z obecnej strony lub aplikacji, od niewygodnych ekranów po wolne ładowanie.",
+        "deliverables": [
+          "Czytelniejsze ekrany i układ mobilny",
+          "Szybsze ładowanie i poprawki dostępności",
+          "Porządkowanie kodu i komponenty do ponownego użycia"
+        ]
+      }
+    ],
+    "faqTitle": "Częste pytania",
+    "faq": [
+      {
+        "q": "Ile będzie kosztował mój projekt?",
+        "a": "To zależy od tego, co trzeba zbudować. Wyślij krótki opis, a po doprecyzowaniu szczegółów przygotuję wycenę."
+      },
+      {
+        "q": "Czy możesz ulepszyć istniejącą stronę?",
+        "a": "Tak. Pokaż obecną stronę i opowiedz, co wymaga zmiany. Możemy przyjrzeć się interfejsowi, wydajności, strukturze treści lub konkretnej funkcji."
+      },
+      {
+        "q": "Czy potrzebuję gotowej specyfikacji?",
+        "a": "Nie. Na początek wystarczy krótki opis firmy, problemu i tego, co chcesz osiągnąć."
+      },
+      {
+        "q": "Z kim będę współpracować?",
+        "a": "Ze mną, Oleksandrem. Prowadzę O.D. EMPOWER i sam zajmuję się programowaniem."
+      }
+    ]
+  },
+  "process": {
+    "label": "03 / Współpraca",
+    "title": "Jak będziemy pracować",
+    "items": [
+      {
+        "title": "Poznajemy potrzeby",
+        "text": "Opowiadasz, czego potrzebujesz, kto będzie z tego korzystać i co dziś nie działa."
+      },
+      {
+        "title": "Ustalamy kierunek",
+        "text": "Ustalamy, co zbudować najpierw, jak to zrobić i ile to będzie kosztować."
+      },
+      {
+        "title": "Tworzymy",
+        "text": "Buduję rozwiązanie i pokazuję postępy, żeby był czas na Twoje uwagi."
+      },
+      {
+        "title": "Uruchamiamy",
+        "text": "Testujemy, publikujemy i ustalamy, co będzie wymagać dalszego wsparcia."
+      }
+    ]
+  },
+  "work": {
+    "label": "Realizacje i eksperymenty",
+    "title": "Projekty, przy których pracowałem",
+    "intro": "Prace dla klientów, projekty zespołowe i moje własne narzędzia. Przy każdym opisuję, do czego służy i nad czym pracowałem.",
+    "all": "Wszystkie",
+    "commercial": "Komercyjne",
+    "independent": "Niezależne projekty",
+    "confidential": "Projekty poufne",
+    "view": "Poznaj projekt",
+    "back": "Wszystkie projekty",
+    "overview": "O projekcie",
+    "features": "Co zawiera",
+    "stack": "Technologie",
+    "gallery": "Z bliska",
+    "visit": "Odwiedź stronę",
+    "code": "Zobacz kod",
+    "related": "Następny projekt",
+    "nda": "Tożsamość klienta, zdjęcia i linki są poufne. Opis obejmuje wyłącznie informacje dopuszczone do publikacji.",
+    "ndaTitle": "Projekt poufny",
+    "imageAlt": "Zrzut ekranu projektu",
+    "attribution": "Kontekst i szczegóły realizacji z mojego portfolio. Projekty komercyjne mogą obejmować pracę zespołową; nie jest to rekomendacja klientów dla studia.",
+    "empty": "Brak projektów w tej kategorii.",
+    "mobilePreview": "Podgląd strony na telefonie",
+    "extension": "Zobacz rozszerzenie",
+    "watchDemo": "Obejrzyj demo"
+  },
+  "experience": {
+    "label": "Dla zespołów i rekruterów",
+    "title": "Moje doświadczenie w programowaniu",
+    "intro": "Pracowałem nad stronami, aplikacjami, integracjami i wsparciem technicznym dla klientów. Tu znajdziesz historię mojej pracy i konkretne zadania.",
+    "download": "Pobierz CV",
+    "view": "Zobacz CV",
+    "cvLanguage": "CV po angielsku",
+    "contact": "Porozmawiajmy o współpracy",
+    "about": "Kilka słów o mnie",
+    "history": "Gdzie pracowałem",
+    "earlier": "Wcześniejsze doświadczenie",
+    "skills": "Technologie, z którymi pracowałem",
+    "frontend": "Frontend",
+    "backend": "Backend i dane",
+    "devops": "Narzędzia i wdrożenia",
+    "other": "Pozostałe umiejętności",
+    "strengths": "Jak pracuję",
+    "education": "Wykształcenie",
+    "courses": "Kursy i wyróżnienia",
+    "interests": "Poza codzienną pracą",
+    "languages": "Języki",
+    "glance": "W skrócie",
+    "location": "Lokalizacja",
+    "relocation": "Relokacja",
+    "relocationYes": "Gotowość do relokacji",
+    "relocationNo": "Obecnie bez relokacji",
+    "availability": "Dostępność",
+    "contract": "Forma współpracy",
+    "projects": "Projekty i szczegóły techniczne",
+    "role": "Full-stack Developer",
+    "present": "Obecnie",
+    "remote": "Zdalnie",
+    "fulltime": "Pełny etat",
+    "parttime": "Część etatu",
+    "native": "Ojczysty",
+    "poland": "Polska",
+    "ukrainian": "Ukraiński",
+    "polish": "Polski",
+    "english": "Angielski",
+    "website": "Strona firmy",
+    "contractType": "Kontrakt",
+    "courseTitles": "Oficjalne nazwy kursów pozostają w języku oryginalnym."
+  },
+  "contact": {
+    "label": "Porozmawiajmy",
+    "title": "Opowiedz, czego potrzebujesz",
+    "intro": "Potrzebujesz strony, aplikacji albo programisty w zespole? Wyślij mi kilka szczegółów, a odpowiem.",
+    "project": "Mam projekt",
+    "hiring": "Szukam programisty",
+    "name": "Twoje imię",
+    "email": "Twój email",
+    "type": "Czego potrzebujesz?",
+    "brief": "Kilka słów o pomyśle",
+    "briefProject": "Co chcesz zbudować, dla kogo i jaki cel chcesz osiągnąć?",
+    "briefHiring": "Opowiedz o stanowisku, zespole i formie współpracy.",
+    "budget": "Budżet (opcjonalnie)",
+    "timeline": "Termin (opcjonalnie)",
+    "unknown": "Jeszcze nie wiem",
+    "submit": "Przygotuj email",
+    "note": "Otworzy się Twój program pocztowy z treścią zapytania. Strona niczego nie wysyła ani nie zapisuje.",
+    "direct": "Wolisz skontaktować się bezpośrednio?",
+    "emailAction": "Napisz email",
+    "phoneAction": "Zadzwoń do Oleksandra",
+    "social": "Znajdź mnie również tutaj",
+    "otherType": "Coś innego",
+    "roleType": "Stanowisko lub współpraca",
+    "subjectProject": "Zapytanie o projekt — O.D. EMPOWER",
+    "subjectHiring": "Zapytanie o współpracę — O.D. EMPOWER",
+    "invalid": "Podaj imię, poprawny email i krótki opis.",
+    "ready": "Szkic wiadomości jest gotowy. Jeśli program pocztowy się nie otworzył, użyj przycisku email obok formularza.",
+    "back": "Wróć do formularza",
+    "copy": "Kopiuj treść",
+    "copied": "Treść skopiowana",
+    "copyError": "Zaznacz i skopiuj treść poniżej.",
+    "preview": "Twoje zapytanie",
+    "available": "Możesz do mnie napisać lub zadzwonić."
+  },
+  "cta": {
+    "label": "Masz projekt?",
+    "title": "Opowiedz mi, nad czym pracujesz",
+    "button": "Opowiedz o swoim projekcie",
+    "secondary": "Lub poznaj moje doświadczenie"
+  },
+  "footer": {
+    "text": "Strony i aplikacje internetowe Oleksandra Dzisiaka.",
+    "top": "Na górę",
+    "rights": "Niezależny programista mieszkający w Polsce.",
+    "built": "Projekt i wykonanie: Oleksandr",
+    "email": "Napisz email",
+    "phone": "Zadzwoń",
+    "heading": "Masz coś na myśli?",
+    "localTime": "Mój czas lokalny",
+    "anyTime": "Możesz pisać do mnie o każdej porze",
+    "copy": "Kopiuj e-mail",
+    "copied": "E-mail skopiowany",
+    "write": "Otwórz w aplikacji pocztowej"
+  },
+  "player": {
+    "play": "Odtwórz",
+    "pause": "Pauza",
+    "replay": "Obejrzyj ponownie",
+    "mute": "Wycisz",
+    "unmute": "Włącz dźwięk",
+    "fullscreen": "Pełny ekran",
+    "exitFullscreen": "Zamknij pełny ekran",
+    "seek": "Postęp wideo",
+    "of": "z"
+  },
+  "identity": {
+    "photo": "Pokaż zdjęcie profilowe",
+    "logo": "Pokaż logo",
+    "meet": "Kliknij, aby mnie poznać",
+    "return": "Kliknij, aby wrócić do logo",
+    "tap": "Dotknij, aby mnie poznać",
+    "tapReturn": "Dotknij, aby wrócić"
+  },
+  "meta": {
+    "home": "Strony i aplikacje Oleksandra Dzisiaka",
+    "services": "Strony, aplikacje i integracje",
+    "work": "Projekty i realizacje",
+    "experience": "Doświadczenie i CV",
+    "contact": "Porozmawiajmy o projekcie lub współpracy",
+    "description": "Oleksandr Dzisiak tworzy strony, aplikacje internetowe i integracje pod marką O.D. EMPOWER. Zobacz projekty, usługi i doświadczenie.",
+    "descriptions": {
+      "services": "Poznaj strony internetowe, landing pages, aplikacje webowe, integracje i automatyzację od O.D. EMPOWER. Omów projekt bezpośrednio z Oleksandrem Dzisiakiem.",
+      "work": "Zobacz strony, aplikacje webowe, rozszerzenia przeglądarki i własne produkty Oleksandra Dzisiaka wraz z opisem, funkcjami i technologiami.",
+      "experience": "Poznaj doświadczenie Oleksandra Dzisiaka w tworzeniu aplikacji, jego umiejętności techniczne, historię pracy i CV.",
+      "contact": "Opowiedz Oleksandrowi Dzisiakowi o stronie, aplikacji lub integracji albo skontaktuj się w sprawie współpracy deweloperskiej z O.D. EMPOWER."
+    }
+  },
+  "notFound": {
+    "title": "Nie ma tu tej strony",
+    "text": "Link może być nieaktualny albo adres strony się zmienił. Możesz wrócić na stronę główną.",
+    "back": "Wróć na stronę główną"
+  },
+  "error": {
+    "title": "Nie udało się wczytać strony",
+    "text": "Spróbuj ponownie załadować tę stronę.",
+    "retry": "Spróbuj ponownie"
+  }
+}

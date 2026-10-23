@@ -1,0 +1,200 @@
+[
+  {
+    "id": "work-buddy",
+    "slug": "work-buddy",
+    "sourceIndex": 26,
+    "featured": true
+  },
+  {
+    "id": "gemini-bookmark-manager",
+    "slug": "gemini-bookmark-manager",
+    "sourceIndex": 27,
+    "featured": false
+  },
+  {
+    "id": "fix-errors-ai",
+    "slug": "fix-errors-ai",
+    "sourceIndex": 28,
+    "featured": false
+  },
+  {
+    "id": "kontrlve",
+    "slug": "kontrlve",
+    "sourceIndex": 29,
+    "featured": false
+  },
+  {
+    "id": "chytayko",
+    "slug": "chytayko",
+    "sourceIndex": 30,
+    "featured": false
+  },
+  {
+    "id": "language-cursor",
+    "slug": "language-cursor",
+    "sourceIndex": 31,
+    "featured": false
+  },
+  {
+    "id": "math-master",
+    "slug": "math-master",
+    "sourceIndex": 32,
+    "featured": false
+  },
+  {
+    "id": "solar-sense",
+    "slug": "solar-sense",
+    "sourceIndex": 0,
+    "featured": true
+  },
+  {
+    "id": "erm-system",
+    "slug": "erm-system",
+    "sourceIndex": 1,
+    "featured": false
+  },
+  {
+    "id": "uwp-digital",
+    "slug": "uwp-digital",
+    "sourceIndex": 2,
+    "featured": false
+  },
+  {
+    "id": "feigin-electric",
+    "slug": "feigin-electric",
+    "sourceIndex": 3,
+    "featured": false
+  },
+  {
+    "id": "liberty-immigration",
+    "slug": "liberty-immigration",
+    "sourceIndex": 4,
+    "featured": false
+  },
+  {
+    "id": "fun-quest",
+    "slug": "fun-quest",
+    "sourceIndex": 5,
+    "featured": false
+  },
+  {
+    "id": "belavtodor",
+    "slug": "belavtodor",
+    "sourceIndex": 6,
+    "featured": false
+  },
+  {
+    "id": "eco-smart",
+    "slug": "eco-smart",
+    "sourceIndex": 7,
+    "featured": false
+  },
+  {
+    "id": "club-smart-mam",
+    "slug": "club-smart-mam",
+    "sourceIndex": 8,
+    "featured": false
+  },
+  {
+    "id": "plenum",
+    "slug": "plenum",
+    "sourceIndex": 9,
+    "featured": false
+  },
+  {
+    "id": "tunerfest",
+    "slug": "tunerfest",
+    "sourceIndex": 10,
+    "featured": true
+  },
+  {
+    "id": "love-notes",
+    "slug": "love-notes",
+    "sourceIndex": 11,
+    "featured": false
+  },
+  {
+    "id": "vscode-extensions",
+    "slug": "vscode-extensions",
+    "sourceIndex": 12,
+    "featured": false
+  },
+  {
+    "id": "clickup-helper",
+    "slug": "clickup-helper",
+    "sourceIndex": 13,
+    "featured": false
+  },
+  {
+    "id": "cusemit",
+    "slug": "cusemit",
+    "sourceIndex": 14,
+    "featured": false
+  },
+  {
+    "id": "webp-converter",
+    "slug": "webp-converter",
+    "sourceIndex": 15,
+    "featured": false
+  },
+  {
+    "id": "u-beci",
+    "slug": "u-beci",
+    "sourceIndex": 16,
+    "featured": false
+  },
+  {
+    "id": "digital-resume",
+    "slug": "digital-resume",
+    "sourceIndex": 17,
+    "featured": false
+  },
+  {
+    "id": "tunerfest-alpha",
+    "slug": "tunerfest-alpha",
+    "sourceIndex": 18,
+    "featured": false
+  },
+  {
+    "id": "ai-bookmark-sorter",
+    "slug": "ai-bookmark-sorter",
+    "sourceIndex": 19,
+    "featured": false
+  },
+  {
+    "id": "movie-browser",
+    "slug": "movie-browser",
+    "sourceIndex": 20,
+    "featured": false
+  },
+  {
+    "id": "confidential-commerce",
+    "slug": "confidential-commerce",
+    "sourceIndex": 21,
+    "featured": false
+  },
+  {
+    "id": "confidential-launch",
+    "slug": "confidential-launch",
+    "sourceIndex": 22,
+    "featured": false
+  },
+  {
+    "id": "confidential-campaign",
+    "slug": "confidential-campaign",
+    "sourceIndex": 23,
+    "featured": false
+  },
+  {
+    "id": "confidential-nuxt-commerce",
+    "slug": "confidential-nuxt-commerce",
+    "sourceIndex": 24,
+    "featured": false
+  },
+  {
+    "id": "subscription-tracker",
+    "slug": "subscription-tracker",
+    "sourceIndex": 25,
+    "featured": false
+  }
+]

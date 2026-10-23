@@ -61,6 +61,7 @@ export type CvWorkExperience = {
 }
 
 export type CvProfile = {
+  _updatedAt?: string | null
   _id: string
   name: string | null
   role: string | null

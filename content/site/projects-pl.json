@@ -1,0 +1,328 @@
+[
+  {
+    "description": "Strona firmy zajmującej się energią słoneczną. Pracowałem od identyfikacji marki i układu treści po gotowy interfejs, który przedstawia usługi i zrealizowane projekty.",
+    "features": [
+      "Kalkulator kosztów fotowoltaiki",
+      "Galeria",
+      "Wielostronicowa witryna",
+      "Układ na telefon i komputer",
+      "Sprawdzanie danych formularzy",
+      "Interaktywne sekcje"
+    ]
+  },
+  {
+    "description": "Narzędzie do zarządzania pracą w VDG Solar. Zaczęło się jako mój projekt, a później stało się komercyjnym MVP do ewidencji zasobów, obliczania kosztów i wystawiania faktur. Wymienia też dane z Google Sheets.",
+    "features": [
+      "Aplikacja PWA",
+      "Integracja z Google Sheets",
+      "Zarządzanie magazynem",
+      "Zarządzanie sprzętem",
+      "Kalkulacja kosztów firmy",
+      "Generowanie faktur",
+      "Wyszukiwanie i filtry"
+    ]
+  },
+  {
+    "description": "Landing page zbudowany według dostarczonego projektu jako część większej strony. Przygotowałem responsywny układ i interakcje, a potem przekazałem go zespołowi klienta.",
+    "features": [
+      "Układ według projektu graficznego",
+      "Układ na telefon i komputer",
+      "Elementy interaktywne",
+      "Semantyczny kod",
+      "Podstawy SEO"
+    ]
+  },
+  {
+    "description": "Strona firmy Feigin Electric. Pracowałem nad identyfikacją, projektem i kodem, w tym nad prezentacją rozwiązań energetycznych i wykonanych realizacji.",
+    "features": [
+      "System blogowy",
+      "Prezentacja produktów",
+      "Studia przypadków",
+      "Optymalizacja SEO",
+      "Praca nad szybkością strony",
+      "Responsywna aplikacja SPA",
+      "Interaktywne animacje"
+    ]
+  },
+  {
+    "description": "Landing page firmy pomagającej cudzoziemcom w legalizacji pobytu w Polsce. Zbudowałem go po ukraińsku i białorusku, z układem działającym na telefonach i komputerach.",
+    "features": [
+      "Wiele języków",
+      "Animacje przy przewijaniu",
+      "Formularz kontaktowy",
+      "Wydajność i SEO",
+      "Responsywny układ"
+    ]
+  },
+  {
+    "description": "Strona Fun Quest na WordPress. Dopasowałem szablon do marki, dodałem treści i przygotowałem edycję, aby klient mógł sam aktualizować witrynę.",
+    "features": [
+      "Zmiany w szablonie WordPress",
+      "Układ na telefon i komputer",
+      "Integracja CMS",
+      "Formularz i slider",
+      "Optymalizacja wydajności"
+    ]
+  },
+  {
+    "description": "Strona firmy zbudowana według makiet projektanta. Wdrożyłem responsywne strony HTML i elementy interaktywne działające na różnych urządzeniach.",
+    "features": [
+      "Precyzyjne wdrożenie designu",
+      "Responsywny układ",
+      "Interaktywny interfejs",
+      "Semantyczny HTML",
+      "Slider",
+      "Okno modalne"
+    ]
+  },
+  {
+    "description": "Przebudowa sklepu internetowego. Pracowałem nad interfejsem na różnych ekranach i połączyłem go z WordPress, aby klient mógł aktualizować treści.",
+    "features": [
+      "Redesign i poprawa UX",
+      "Układ na telefon i komputer",
+      "Semantyczny kod",
+      "Integracja panelu administracyjnego"
+    ]
+  },
+  {
+    "description": "Portal informacyjny i społecznościowy dla rodziców na WordPress. Zawiera forum, formularze kontaktowe i interaktywne sekcje stron.",
+    "features": [
+      "Układ na telefon i komputer",
+      "Panel administracyjny",
+      "Funkcje społecznościowe",
+      "Forum",
+      "Akordeon",
+      "Okno modalne"
+    ]
+  },
+  {
+    "description": "Strona stowarzyszenia prawniczego z blogiem i połączeniem z CRM do obsługi zapytań. Zaprojektowałem i zbudowałem ją na WordPress.",
+    "features": [
+      "Autorski design",
+      "CRM i blog",
+      "Responsywny układ",
+      "Czysty, semantyczny kod"
+    ]
+  },
+  {
+    "description": "Miejsce, w którym gracze The Crew Motorfest mogą udostępniać i wyszukiwać ustawienia pojazdów. Mogą przeglądać konfiguracje i porównywać dane o samochodach, łodziach i samolotach.",
+    "features": [
+      "Ustawienia dodawane przez graczy",
+      "PWA",
+      "Wyszukiwanie i filtry",
+      "Tworzenie i udostępnianie ustawień",
+      "Oceny społeczności w czasie rzeczywistym",
+      "Aktualizacje na żywo"
+    ]
+  },
+  {
+    "description": "Mała aplikacja dla par do wymiany codziennych wiadomości. Pozwala wysyłać osobiste notatki i przypomnienia bez zbędnych funkcji.",
+    "features": [
+      "Wspólna przestrzeń dla dwojga",
+      "Dwukierunkowe wiadomości",
+      "Wspólny dostęp",
+      "PWA",
+      "Historia",
+      "Animowane konfetti",
+      "Mikrointerakcje"
+    ]
+  },
+  {
+    "description": "Cztery osobne rozszerzenia VS Code do codziennych zadań, w tym uruchamiania skryptów i zmiany środowisk. Każde ma jedno zadanie.",
+    "features": [
+      "Uruchamianie skryptów",
+      "Konwerter jednostek viewportu",
+      "Zapisane fragmenty poleceń",
+      "Przełączanie środowisk"
+    ]
+  },
+  {
+    "description": "Rozszerzenie Chrome łączące części mojej pracy programistycznej. Podpowiada nazwy gałęzi, treść commitów i szacunki czasu oraz współpracuje z ClickUp, GitLab, Mattermost i Google Meet.",
+    "features": [
+      "Generowanie nazw gałęzi",
+      "Integracja Mattermost",
+      "Przełączanie trybu DND",
+      "Inteligentne wyszukiwanie",
+      "Debugowanie responsywności w czasie rzeczywistym"
+    ]
+  },
+  {
+    "description": "Zegar pełnoekranowy działający również offline. Można zmienić kolory, czcionki i układ, a potem zostawić go otwartego podczas pracy.",
+    "features": [
+      "Zegar na żywo",
+      "Personalizacja",
+      "Pełny ekran",
+      "Tryb pełnoekranowy",
+      "Obsługa offline",
+      "Animacje zegara"
+    ]
+  },
+  {
+    "description": "Narzędzie w przeglądarce do konwersji PNG, AVIF, JPEG i GIF na WebP. Można obejrzeć wynik i ustawić jakość; pliki pozostają na urządzeniu.",
+    "features": [
+      "Pliki PNG, AVIF, JPEG i GIF",
+      "Regulacja jakości wyniku",
+      "Konwersja zbiorcza",
+      "Przeciągnij i upuść",
+      "Konwersja bez wysyłania plików"
+    ]
+  },
+  {
+    "description": "Aplikacja z menu dla kawiarni i barów. Goście widzą dzisiejsze oraz planowane dania, a obsługa może edytować pozycje, zdjęcia i terminy dostępności.",
+    "features": [
+      "Personalizacja motywu i interfejsu",
+      "Układ na telefon i komputer",
+      "Panel administracyjny",
+      "Dynamiczne menu"
+    ]
+  },
+  {
+    "description": "Edytor CV w przeglądarce z układem A4 do druku. Powstał na potrzeby mojego CV, a później rozwinąłem go w edytor szablonów.",
+    "features": [
+      "Układ A4",
+      "Układ do druku",
+      "Edycja i podgląd",
+      "Układ na telefon i komputer",
+      "Szablony do ponownego użycia"
+    ]
+  },
+  {
+    "description": "Pierwszy prototyp TunerFest. Pobiera ustawienia pojazdów z Google Sheets, aby gracze mogli je przeglądać, wyszukiwać i porównywać.",
+    "features": [
+      "Integracja Google Sheets",
+      "Wyszukiwanie",
+      "Prosty interfejs",
+      "Obsługa offline"
+    ]
+  },
+  {
+    "description": "Narzędzie do porządkowania zakładek. Po wgraniu pliku HTML AI proponuje kategorie, a aplikacja sprawdza linki i je grupuje.",
+    "features": [
+      "Kategoryzacja AI",
+      "Walidacja linków",
+      "Wczytywanie i parsowanie",
+      "Grupy zakładek",
+      "Praca w przeglądarce"
+    ]
+  },
+  {
+    "description": "Przeglądarka filmów korzystająca z API The Movie Database. Pozwala przeglądać kolekcje, otwierać szczegóły filmów i filtrować je według gatunku.",
+    "features": [
+      "Lista filmów",
+      "Szczegóły filmów",
+      "Kategorie i filtry",
+      "Stany ładowania i błędów"
+    ]
+  },
+  {
+    "description": "Sklep internetowy dla firmy z branży energii odnawialnej. Pracowałem z zespołem nad frontendem oraz połączeniem treści, produktów i koszyka.",
+    "features": [
+      "Frontend Next.js",
+      "Headless WordPress CMS",
+      "Integracja Shopware",
+      "Wielokrotnie używane UI",
+      "Zarządzanie stanem",
+      "Śledzenie zapytań"
+    ]
+  },
+  {
+    "description": "Jednostronicowa witryna na premierę produktu, zbudowana w małym zespole. Pracowałem nad responsywnym układem i animacjami wspierającymi prezentację produktu.",
+    "features": [
+      "Animacje stron",
+      "Responsywny układ",
+      "Optymalizacja obrazów",
+      "SEO i dostępność",
+      "Praca zespołowa"
+    ]
+  },
+  {
+    "description": "Landing page kampanii międzynarodowej marki. Zespół przygotował interakcje oparte na przewijaniu oraz obrazy i wideo zoptymalizowane pod kątem ładowania.",
+    "features": [
+      "Animacje przy przewijaniu",
+      "Optymalizacja multimediów",
+      "Praca nad szybkością strony",
+      "Układ na telefon i komputer",
+      "Układ według projektu graficznego",
+      "Tailwind i system wariantów",
+      "Praca zespołowa"
+    ]
+  },
+  {
+    "description": "Sklep internetowy zbudowany w Vue, Nuxt i Shopware. Pracowałem nad witryną, integracją danych produktów, wielojęzycznymi treściami i przejściami między stronami.",
+    "features": [
+      "Architektura headless",
+      "Dynamiczny CMS i katalog",
+      "Wiele języków",
+      "Przejścia między stronami",
+      "Konfiguracja budowania i wdrożenia"
+    ]
+  },
+  {
+    "description": "Osobiste narzędzie do śledzenia subskrypcji i innych stałych kosztów. W jednym miejscu pokazuje miesięczne wydatki, terminy odnowienia i historię płatności.",
+    "features": [
+      "Zestawienie wydatków",
+      "Śledzenie cyklicznych płatności",
+      "Walidacja formularzy",
+      "Zarządzanie danymi",
+      "Układ na telefon i komputer",
+      "Motywy",
+      "PWA"
+    ]
+  },
+  {
+    "description": "Lokalna aplikacja desktopowa do mierzenia czasu pracy. Kompaktowy, pływający widżet łączy równoległe liczniki zadań, przerwy, planowanie i edytowalną oś dnia z opcjonalną pomocą AI przy dopracowywaniu zadań.",
+    "features": [
+      "Równoległe liczniki i planowanie zadań",
+      "Edytowalna historia, kopie zapasowe i eksport do kalendarza",
+      "Lokalna baza SQLite i opcjonalna pomoc Gemini"
+    ]
+  },
+  {
+    "description": "Rozszerzenie, które pomaga uporządkować rosnącą kolekcję zakładek. Gemini podpowiada foldery, wyszukuje według znaczenia i proponuje przenoszenie wielu zakładek, a podgląd zmian i cofanie pozostawiają kontrolę użytkownikowi.",
+    "features": [
+      "Sugestie folderów AI i wyszukiwanie semantyczne",
+      "Porządkowanie zbiorcze i usuwanie duplikatów",
+      "Przegląd proponowanych zmian i cofanie działań"
+    ]
+  },
+  {
+    "description": "Rozszerzenie AI do pracy z tekstem bez opuszczania strony. Zaznacz tekst, wybierz działanie z menu kontekstowego i sprawdź poprawki językowe, przeredagowanie, tłumaczenie lub propozycję odpowiedzi.",
+    "features": [
+      "Korekta, zmiana tonu i tłumaczenie",
+      "Działania na zaznaczonym tekście z menu kontekstowego",
+      "Konfigurowalne prompty i dostawcy AI"
+    ]
+  },
+  {
+    "description": "Ukraińska drużynowa gra słowna działająca bezpośrednio w Google Meet. Uczestnicy rozmowy dzielą się na zespoły i grają na czas: od objaśniania słów po debaty i improwizowane scenki.",
+    "features": [
+      "Pięć trybów zabawy i rundy na czas",
+      "Własne słowa, tematy i udostępnianie przez JSON",
+      "Lokalny zapis bez zakładania konta"
+    ]
+  },
+  {
+    "description": "Aplikacja do ćwiczenia czytania dla dzieci, oparta na własnych tekstach i poziomie czytelnika. Łączy bibliotekę tekstów, sesje czytania, pytania sprawdzające zrozumienie i śledzenie postępów.",
+    "features": [
+      "Biblioteka tekstów i poziomy czytania",
+      "Sesje czytania i pytania do tekstu",
+      "Śledzenie postępów i udostępnianie pakietów tekstów"
+    ]
+  },
+  {
+    "description": "Lekka aplikacja w zasobniku Windows pokazująca aktywny język klawiatury przy wskaźniku myszy. Śledzi układ aktywnego okna i pozwala dopasować położenie, wygląd poszczególnych języków oraz opcjonalne kursory.",
+    "features": [
+      "Etykieta aktywnego języka przy wskaźniku",
+      "Kolory dla języków i regulowane położenie",
+      "Lokalne narzędzie Windows bez połączeń sieciowych"
+    ]
+  },
+  {
+    "description": "Aplikacja do nauki matematyki przez zabawę dla dzieci od siódmego roku życia, z osobnymi widokami dziecka i rodzica. Krótkie ćwiczenia, śledzenie postępów i ustawienia treningu pomagają budować regularny nawyk nauki.",
+    "features": [
+      "Osobne widoki dziecka i rodzica",
+      "Ćwiczenia arytmetyczne i śledzenie postępów",
+      "Dane lokalne dostępne offline i integracja z Convex"
+    ]
+  }
+]

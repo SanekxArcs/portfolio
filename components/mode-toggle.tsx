@@ -7,10 +7,13 @@ import {useTheme} from 'next-themes'
 import {Button} from '@/components/ui/button'
 import {useVibrationOnClick} from '@/hooks/use-vibration'
 
+const subscribeToHydration = () => () => {}
+
 export function ModeToggle() {
   const {resolvedTheme, setTheme} = useTheme()
   const vibrate = useVibrationOnClick(40)
-  const isDark = resolvedTheme !== 'light'
+  const hydrated = React.useSyncExternalStore(subscribeToHydration, () => true, () => false)
+  const isDark = !hydrated || resolvedTheme !== 'light'
 
   const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
     const newTheme = isDark ? 'light' : 'dark'
