@@ -6,7 +6,6 @@ studio-video/
 node_modules/
 .next/
 .local-backups/
-.sanity/
 .vercel/
 .env*
 !.env.local.example

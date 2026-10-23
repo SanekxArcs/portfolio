@@ -16,7 +16,6 @@ Open http://localhost:3000/en (or /pl and /uk). The root remembers an explicitly
 ## Content and assets
 
 - `content/profile.json`: editable copy of the published portfolio content.
-- `lib/content.ts`: shared content access boundary for page, navigation, footer and sitemap.
 - `public/content/`: local copies of the assets used by the public portfolio.
 - `public/logo.svg`: original O-D brand mark used by the interactive scene.
 
@@ -25,9 +24,7 @@ The UI preserves icon-only email and phone links, CV access, light/dark themes, 
 ## Redesign and migration
 
 - [Two-audience design and implementation plan](docs/two-path-portfolio-plan.md)
-- [Sanity backup and recovery notes](docs/sanity-retirement.md)
-
-The embedded Sanity Studio and CMS runtime have been retired. Full source/data backups remain locally in the ignored `.local-backups/` folder, separate from public content. The old AI assistant is paused until durable storage and its usage protections are restored.
+The former CMS has been removed. Its last data exports remain locally in the ignored `.local-backups/` folder, separate from public content. The old AI assistant is paused until durable storage and its usage protections are restored.
 
 ## Checks
 
@@ -37,11 +34,9 @@ npx tsc --noEmit
 npm run build
 ```
 
-`npm run backup:sanity` is an optional read-only legacy export using server-side Sanity credentials. It does not modify the remote dataset and refuses to overwrite edited local profile content. It is not part of development or builds.
-
 ## Implemented frontend
 
-One shared homepage leads to services, a filterable work gallery with 26 project pages per language, a dedicated experience/CV page, and a project/hiring enquiry composer. The form opens the visitor's email app and provides a copyable draft; it does not submit or store enquiries.
+One shared homepage leads to services, a filterable work gallery with 33 project pages per language, a dedicated experience/CV page, and a project/hiring enquiry composer. The form opens the visitor's email app and provides a copyable draft; it does not submit or store enquiries.
 
 - `content/site/{en,pl,uk}.json`: translated UI, studio copy, services, process, FAQ, contact and metadata.
 - `content/site/profile-{pl,uk}.json`: translated biography, work history, strengths and interests.
