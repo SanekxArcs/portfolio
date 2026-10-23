@@ -34,7 +34,11 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   colorScheme: 'dark light',
-  themeColor: '#0d1210',
+  // Matches the page ground in each theme.
+  themeColor: [
+    {media: '(prefers-color-scheme: dark)', color: '#0d1210'},
+    {media: '(prefers-color-scheme: light)', color: '#f7f8f4'},
+  ],
 }
 export const dynamicParams = false
 
@@ -53,10 +57,6 @@ export async function generateMetadata({
     metadataBase: new URL(siteUrl),
     applicationName: 'O.D. EMPOWER',
     authors: [{name: 'Oleksandr Dzisiak'}],
-    icons: {
-      icon: '/web-app-manifest-192x192.png',
-      apple: '/web-app-manifest-192x192.png',
-    },
     manifest: '/manifest.json',
     formatDetection: {telephone: false},
   }

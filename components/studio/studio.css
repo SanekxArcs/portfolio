@@ -608,7 +608,7 @@ body.reduce-motion .studio-header-plate {
   gap: 4px;
   padding-top: 20px;
 }
-.project-card-meta h3 {
+.project-card-meta :is(h2, h3) {
   font-size: 25px;
 }
 .project-tech {
@@ -655,8 +655,11 @@ body.reduce-motion .studio-header-plate {
   flex-shrink: 0;
   color: var(--studio-green);
 }
-.service-heading h3 {
+/* Same size at either heading level (h2 on the services page, h3 under a section). */
+.service-heading :is(h2, h3) {
   max-width: 280px;
+  font-size: 23px;
+  letter-spacing: -0.025em;
 }
 .service-description {
   color: var(--muted-foreground);
@@ -938,7 +941,7 @@ body.reduce-motion .studio-header-plate {
 .studio-work-grid .studio-project-image {
   padding: 18px 22px 0;
 }
-.studio-work-grid .project-card-meta h3 {
+.studio-work-grid .project-card-meta :is(h2, h3) {
   font-size: 21px;
 }
 .studio-case-intro {
@@ -1563,7 +1566,7 @@ body .portfolio-scene-backdrop .hero-scene-layer {
   .service-heading {
     gap: 14px;
   }
-  .service-heading h3 {
+  .service-heading :is(h2, h3) {
     font-size: 21px;
   }
   .studio-career-hero {
@@ -1729,7 +1732,7 @@ body .portfolio-scene-backdrop .hero-scene-layer {
   .project-card-meta {
     padding-top: 16px;
   }
-  .project-card-meta h3 {
+  .project-card-meta :is(h2, h3) {
     font-size: 22px;
   }
   .project-tech {
@@ -1750,7 +1753,7 @@ body .portfolio-scene-backdrop .hero-scene-layer {
     grid-column: 2;
     gap: 12px;
   }
-  .service-heading h3 {
+  .service-heading :is(h2, h3) {
     font-size: 22px;
     max-width: 100%;
   }
@@ -2849,7 +2852,7 @@ body.reduce-motion .studio-project-image:hover .project-browser {
   transition: opacity 0.3s ease;
   pointer-events: none;
 }
-.studio-service .service-heading h3 {
+.studio-service .service-heading :is(h2, h3) {
   transition: color 0.25s ease;
 }
 .studio-service .service-heading > svg {
@@ -2863,7 +2866,7 @@ body.reduce-motion .studio-project-image:hover .project-browser {
 .studio-service:focus-visible::before {
   opacity: 1;
 }
-.studio-service:focus-visible .service-heading h3 {
+.studio-service:focus-visible .service-heading :is(h2, h3) {
   color: var(--studio-green);
 }
 .studio-service:focus-visible .service-arrow {
@@ -2876,7 +2879,7 @@ body.reduce-motion .studio-project-image:hover .project-browser {
   .studio-service:hover::before {
     opacity: 1;
   }
-  .studio-service:hover .service-heading h3 {
+  .studio-service:hover .service-heading :is(h2, h3) {
     color: var(--studio-green);
   }
   .studio-service:hover .service-heading > svg {
@@ -2889,7 +2892,7 @@ body.reduce-motion .studio-project-image:hover .project-browser {
 }
 @media (prefers-reduced-motion: reduce) {
   .studio-service::before,
-  .studio-service .service-heading h3,
+  .studio-service .service-heading :is(h2, h3),
   .studio-service .service-heading > svg,
   .studio-service .service-arrow,
   .studio-service .service-arrow svg {

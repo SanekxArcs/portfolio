@@ -79,10 +79,13 @@ export function ServiceList({
   locale,
   d,
   detailed = false,
+  heading: Heading = 'h3',
 }: {
   locale: Locale
   d: Dictionary
   detailed?: boolean
+  /** h2 where the list sits straight under the page h1, h3 under a section heading. */
+  heading?: 'h2' | 'h3'
 }) {
   return (
     <div
@@ -103,9 +106,9 @@ export function ServiceList({
             </span>
             <div className="service-heading">
               <Icon size={26} strokeWidth={1.2} />
-              <h3>
+              <Heading>
                 <MotionText text={item.title} />
-              </h3>
+              </Heading>
             </div>
             <div className="service-description">
               <p>
@@ -336,7 +339,7 @@ export function ServicesPage({locale}: {locale: Locale}) {
         intro={d.services.intro}
       />
       <section className="studio-wrap">
-        <ServiceList locale={locale} d={d} detailed />
+        <ServiceList locale={locale} d={d} detailed heading="h2" />
       </section>
       <Process d={d} />
       <section className="studio-section studio-wrap studio-faq">

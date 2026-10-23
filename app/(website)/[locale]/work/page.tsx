@@ -5,6 +5,7 @@ import {isLocale} from '@/lib/i18n/locales'
 import {studioMetadata} from '@/lib/studio-metadata'
 import {PageIntro, StudioCta} from '@/components/studio/pages'
 import {WorkGrid} from '@/components/studio/work-grid'
+import {JsonLd, pageGraph} from '@/lib/structured-data'
 type Props = {params: Promise<{locale: string}>}
 export async function generateMetadata({params}: Props) {
   const {locale} = await params
@@ -13,14 +14,16 @@ export async function generateMetadata({params}: Props) {
 export default async function Page({params}: Props) {
   const {locale} = await params
   if (!isLocale(locale)) notFound()
-  const d = getDictionary(locale)
+  const d = getDictionary(locale),
+    projects = getProjects(locale)
   return (
     <>
+      <JsonLd data={pageGraph(locale, 'work', projects)} />
       <PageIntro
         title={d.work.title}
         intro={d.work.intro}
       />
-      <WorkGrid projects={getProjects(locale)} locale={locale} d={d} />
+      <WorkGrid projects={projects} locale={locale} d={d} />
       <StudioCta locale={locale} d={d} />
     </>
   )

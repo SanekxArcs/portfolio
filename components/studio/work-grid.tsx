@@ -95,7 +95,7 @@ export function WorkGrid({
                   layout: {duration: reduced ? 0 : 0.45, ease: smoothEase},
                 }}
               >
-                <ProjectCard project={project} locale={locale} d={d} />
+                <ProjectCard project={project} locale={locale} d={d} heading="h2" />
               </motion.div>
             ))}
           </AnimatePresence>

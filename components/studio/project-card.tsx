@@ -11,11 +11,13 @@ export function ProjectCard({
   locale,
   d,
   large = false,
+  heading: Heading = 'h3',
 }: {
   project: StudioProject
   locale: Locale
   d: Dictionary
   large?: boolean
+  heading?: 'h2' | 'h3'
 }) {
   const title = project.nda ? d.work.ndaTitle : project.title
   return (
@@ -44,11 +46,11 @@ export function ProjectCard({
       </Link>
       <div className="project-card-meta">
         <div>
-          <h3>
+          <Heading>
             <Link href={`/${locale}/work/${project.slug}`}>
               <MotionText text={title} />
             </Link>
-          </h3>
+          </Heading>
           <p className="project-kind">
             {project.nda
               ? d.work.confidential

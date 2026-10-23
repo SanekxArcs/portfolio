@@ -6,6 +6,7 @@ import {getLocalizedProfile} from '@/lib/studio-content'
 import {isLocale} from '@/lib/i18n/locales'
 import {studioMetadata} from '@/lib/studio-metadata'
 import {PageIntro} from '@/components/studio/pages'
+import {JsonLd, pageGraph} from '@/lib/structured-data'
 import {ContactIcons} from '@/components/studio/footer'
 import {EnquiryForm} from '@/components/studio/enquiry-form'
 type Props = {
@@ -24,6 +25,7 @@ export default async function Page({params, searchParams}: Props) {
     profile = getLocalizedProfile(locale)
   return (
     <>
+      <JsonLd data={pageGraph(locale, 'contact')} />
       <PageIntro
         title={d.contact.title}
         intro={d.contact.intro}

@@ -19,12 +19,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: path === '' ? 1 : path.startsWith('/work/') ? 0.6 : 0.8,
       alternates: {
-        languages: Object.fromEntries(
-          locales.map((language) => [
-            language,
-            siteUrl + '/' + language + path,
-          ]),
-        ),
+        languages: {
+          ...Object.fromEntries(
+            locales.map((language) => [
+              language,
+              siteUrl + '/' + language + path,
+            ]),
+          ),
+          'x-default': siteUrl + '/en' + path,
+        },
       },
     })),
   )
