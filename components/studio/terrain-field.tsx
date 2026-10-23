@@ -3,6 +3,7 @@
 import {useEffect, useRef, useSyncExternalStore} from 'react'
 import {createPortal} from 'react-dom'
 import {useStudioReducedMotion} from './motion-text'
+import {isCoarsePointer, whenIdle} from '@/lib/when-idle'
 
 /** Classic 3D gradient noise; a fixed permutation keeps the map identical between visits. */
 const perm = (() => {
@@ -88,17 +89,23 @@ export function TerrainField() {
       last = 0,
       time = 0,
       color = '#087c57',
-      strength = 1
+      strength = 1,
+      scrollFrame = 0,
+      lastScrollPaint = 0
     const pointer = {x: -9999, y: -9999, tx: -9999, ty: -9999, lift: 0, targetLift: 0}
     const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches
+    // Touch screens have no pointer hill to follow: draw a still map that reshapes on scroll,
+    // on a coarser grid, instead of drifting every frame.
+    const still = reduced || isCoarsePointer()
+    const cell = still && !reduced ? CELL * 1.4 : CELL
 
     const sample = () => {
       const z = time * 0.035 + scrollY * 0.00022
       const r2 = HILL_RADIUS * HILL_RADIUS
       for (let j = 0; j <= rows; j++) {
-        const y = j * CELL
+        const y = j * cell
         for (let i = 0; i <= cols; i++) {
-          const x = i * CELL
+          const x = i * cell
           let v =
             noise(x / 520, y / 520, z) * 0.95 +
             noise(x / 190 + 40, y / 190, z * 1.6) * 0.3
@@ -134,25 +141,30 @@ export function TerrainField() {
               (c > threshold ? 2 : 0) |
               (d > threshold ? 1 : 0)
             if (code === 0 || code === 15) continue
-            const x = i * CELL,
-              y = j * CELL
-            const top = () => [x + ((threshold - a) / (b - a)) * CELL, y] as const
-            const right = () => [x + CELL, y + ((threshold - b) / (c - b)) * CELL] as const
-            const bottom = () => [x + ((threshold - d) / (c - d)) * CELL, y + CELL] as const
-            const left = () => [x, y + ((threshold - a) / (d - a)) * CELL] as const
-            const line = (p: readonly [number, number], q: readonly [number, number]) => {
-              path.moveTo(p[0], p[1])
-              path.lineTo(q[0], q[1])
-            }
+            // Edge crossings as plain numbers: no per-cell allocations on the hot path.
+            const x = i * cell,
+              y = j * cell,
+              topX = x + ((threshold - a) / (b - a)) * cell,
+              rightY = y + ((threshold - b) / (c - b)) * cell,
+              bottomX = x + ((threshold - d) / (c - d)) * cell,
+              leftY = y + ((threshold - a) / (d - a)) * cell,
+              right = x + cell,
+              bottom = y + cell
             switch (code) {
-              case 1: case 14: line(left(), bottom()); break
-              case 2: case 13: line(bottom(), right()); break
-              case 3: case 12: line(left(), right()); break
-              case 4: case 11: line(top(), right()); break
-              case 6: case 9: line(top(), bottom()); break
-              case 7: case 8: line(left(), top()); break
-              case 5: line(left(), top()); line(bottom(), right()); break
-              case 10: line(top(), right()); line(left(), bottom()); break
+              case 1: case 14: path.moveTo(x, leftY); path.lineTo(bottomX, bottom); break
+              case 2: case 13: path.moveTo(bottomX, bottom); path.lineTo(right, rightY); break
+              case 3: case 12: path.moveTo(x, leftY); path.lineTo(right, rightY); break
+              case 4: case 11: path.moveTo(topX, y); path.lineTo(right, rightY); break
+              case 6: case 9: path.moveTo(topX, y); path.lineTo(bottomX, bottom); break
+              case 7: case 8: path.moveTo(x, leftY); path.lineTo(topX, y); break
+              case 5:
+                path.moveTo(x, leftY); path.lineTo(topX, y)
+                path.moveTo(bottomX, bottom); path.lineTo(right, rightY)
+                break
+              case 10:
+                path.moveTo(topX, y); path.lineTo(right, rightY)
+                path.moveTo(x, leftY); path.lineTo(bottomX, bottom)
+                break
             }
           }
         }
@@ -185,14 +197,14 @@ export function TerrainField() {
     }
     const start = () => {
       stop()
-      if (reduced) paint()
+      if (still) paint()
       else if (!document.hidden) frame = requestAnimationFrame(animate)
     }
     const resize = () => {
       width = innerWidth
       height = innerHeight
-      cols = Math.ceil(width / CELL)
-      rows = Math.ceil(height / CELL)
+      cols = Math.ceil(width / cell)
+      rows = Math.ceil(height / cell)
       values = new Float32Array((cols + 1) * (rows + 1))
       const dpr = Math.min(devicePixelRatio, 1.5)
       canvas.width = Math.round(width * dpr)
@@ -215,23 +227,37 @@ export function TerrainField() {
     const leave = () => {
       pointer.targetLift = 0
     }
+    // A still map repaints while scrolling at most ~12 times a second.
     const scrolled = () => {
-      if (reduced) paint()
+      if (!still || scrollFrame) return
+      scrollFrame = requestAnimationFrame((now) => {
+        scrollFrame = 0
+        if (now - lastScrollPaint < 80) return scrolled()
+        lastScrollPaint = now
+        paint()
+      })
     }
 
     const themeObserver = new MutationObserver(theme)
-    themeObserver.observe(document.documentElement, {attributes: true, attributeFilter: ['class']})
-    addEventListener('resize', resize)
-    addEventListener('scroll', scrolled, {passive: true})
-    document.addEventListener('visibilitychange', start)
-    if (finePointer && !reduced) {
-      addEventListener('pointermove', move, {passive: true})
-      document.documentElement.addEventListener('pointerleave', leave)
-    }
-    resize()
-    theme()
-    start()
+    // Nothing is drawn until the page has loaded and gone idle.
+    const cancelIdle = whenIdle(() => {
+      themeObserver.observe(document.documentElement, {attributes: true, attributeFilter: ['class']})
+      addEventListener('resize', resize)
+      addEventListener('scroll', scrolled, {passive: true})
+      document.addEventListener('visibilitychange', start)
+      if (finePointer && !still) {
+        addEventListener('pointermove', move, {passive: true})
+        document.documentElement.addEventListener('pointerleave', leave)
+      }
+      const style = getComputedStyle(canvas)
+      color = style.getPropertyValue('--studio-green').trim() || color
+      strength = Number.parseFloat(style.getPropertyValue('--terrain-strength')) || 1
+      resize()
+      start()
+    })
     return () => {
+      cancelIdle()
+      cancelAnimationFrame(scrollFrame)
       stop()
       themeObserver.disconnect()
       removeEventListener('resize', resize)

@@ -1,6 +1,7 @@
 'use client'
 
 import {useEffect, useRef} from 'react'
+import {isCoarsePointer, whenEngaged, whenIdle} from '@/lib/when-idle'
 import {useStudioReducedMotion} from './motion-text'
 
 let logoSource: Promise<string> | undefined
@@ -30,6 +31,7 @@ export function MiniLogo() {
       visible = false
     let cleanup = () => {}
     let repaint = () => {}
+    let cancelInit: (() => void) | undefined
     const initialize = async () => {
       if (started) return
       started = true
@@ -214,7 +216,11 @@ export function MiniLogo() {
       ([entry]) => {
         visible = entry.isIntersecting
         if (visible) {
-          void initialize()
+          // The flat mark shows first; the 3D model builds once the page is idle.
+          if (!started)
+            cancelInit ??= (isCoarsePointer() ? whenEngaged : whenIdle)(
+              () => void initialize(),
+            )
           repaint()
         }
       },
@@ -223,6 +229,7 @@ export function MiniLogo() {
     observer.observe(host)
     return () => {
       disposed = true
+      cancelInit?.()
       observer.disconnect()
       cleanup()
     }

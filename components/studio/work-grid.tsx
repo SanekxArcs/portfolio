@@ -78,7 +78,7 @@ export function WorkGrid({
       <MotionSize>
         <div className="studio-work-grid">
           <AnimatePresence initial={false} mode="popLayout">
-            {filtered.map((project) => (
+            {filtered.map((project, index) => (
               <motion.div
                 key={project.id}
                 className="studio-project-tile"
@@ -95,7 +95,13 @@ export function WorkGrid({
                   layout: {duration: reduced ? 0 : 0.45, ease: smoothEase},
                 }}
               >
-                <ProjectCard project={project} locale={locale} d={d} heading="h2" />
+                <ProjectCard
+                  project={project}
+                  locale={locale}
+                  d={d}
+                  heading="h2"
+                  priority={index === 0}
+                />
               </motion.div>
             ))}
           </AnimatePresence>

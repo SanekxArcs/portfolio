@@ -12,12 +12,15 @@ export function ProjectCard({
   d,
   large = false,
   heading: Heading = 'h3',
+  priority = false,
 }: {
   project: StudioProject
   locale: Locale
   d: Dictionary
   large?: boolean
   heading?: 'h2' | 'h3'
+  /** The first card in view is the largest paint: load its capture eagerly. */
+  priority?: boolean
 }) {
   const title = project.nda ? d.work.ndaTitle : project.title
   return (
@@ -31,7 +34,7 @@ export function ProjectCard({
         aria-label={`${d.work.view}: ${title}`}
       >
         {project.imageUrls?.[0] && !project.nda ? (
-          <ProjectPreview project={project} d={d} />
+          <ProjectPreview project={project} d={d} priority={priority} />
         ) : (
           <div className="project-private-art">
             <LockKeyhole size={48} strokeWidth={1} />

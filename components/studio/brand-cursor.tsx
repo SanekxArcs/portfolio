@@ -5,6 +5,7 @@ import type {ShapeJSON} from 'three'
 import {useStudioReducedMotion} from './motion-text'
 import contour from '@/content/brand-arrow.json'
 import {stepCursorSpring, idleRollProgress} from '@/lib/cursor-physics'
+import {whenIdle} from '@/lib/when-idle'
 
 type Ember = {
   x: number
@@ -28,7 +29,8 @@ export function BrandCursor() {
     if (reduced || !fine.matches || contrast.matches) return
     let disposed = false
     let teardown = () => {}
-    void import('three')
+    // The native brand cursor works until the WebGL arrow loads, once the page is idle.
+    const cancelIdle = whenIdle(() => void import('three')
       .then((THREE) => {
         if (disposed) return
         const arrow = arrowRef.current
@@ -352,9 +354,10 @@ export function BrandCursor() {
           renderer.domElement.remove()
         }
       })
-      .catch(() => {})
+      .catch(() => {}))
     return () => {
       disposed = true
+      cancelIdle()
       teardown()
     }
   }, [reduced])

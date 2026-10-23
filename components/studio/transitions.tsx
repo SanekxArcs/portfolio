@@ -284,15 +284,42 @@ export function ViewRegion({
 export function StudioLink({
   onNavigate,
   onClick,
+  onPointerEnter,
+  onFocus,
+  onTouchStart,
+  prefetch,
   ...props
 }: ComponentProps<typeof NextLink>) {
   const reduced = useStudioReducedMotion()
   const clickOrigin = useRef<WaveOrigin | undefined>(undefined)
+  const prefetched = useRef(false)
   const router = useRouter(),
     {run} = useStudioTransition()
+  // Pages prefetch on intent (hover, focus, touch) instead of for every link in view, so a
+  // slow phone is not downloading every language and project nobody has opened.
+  const intent = () => {
+    if (prefetched.current || prefetch === false || typeof props.href !== 'string') return
+    const url = new URL(props.href, location.href)
+    if (url.origin !== location.origin) return
+    prefetched.current = true
+    router.prefetch(url.pathname + url.search)
+  }
   return (
     <NextLink
       {...props}
+      prefetch={prefetch === true}
+      onPointerEnter={(event) => {
+        onPointerEnter?.(event)
+        intent()
+      }}
+      onFocus={(event) => {
+        onFocus?.(event)
+        intent()
+      }}
+      onTouchStart={(event) => {
+        onTouchStart?.(event)
+        intent()
+      }}
       onClick={(event) => {
         onClick?.(event)
         if (event.defaultPrevented) return

@@ -10,7 +10,7 @@
 .hero-identity { position: relative; isolation: isolate; height: 360px; overflow: clip; }
 .hero-scene-anchor { position: absolute; inset: 0 -20px 16px; pointer-events: none; }
 .intro-sculpture canvas { position: absolute; width: 100%; height: 100%; opacity: 0; }
-.hero-brand-fallback { position: absolute; width: 48%; height: 60%; top: 20%; left: 26%; background: linear-gradient(135deg, #a7f3d0, #10b981 50%, #065f46); mask: url('/logo.svg') center / contain no-repeat; }
+.hero-brand-fallback { position: absolute; display: block; width: 48%; height: 60%; top: 20%; left: 26%; }
 .intro-sculpture[data-ready='true'] canvas { opacity: 1; }
 .intro-sculpture[data-ready='true'] .hero-brand-fallback { visibility: hidden; }
 .hero-portrait-anchor { position: absolute; z-index: 1; width: 220px; height: 260px; top: 40px; left: 50%; transform: translateX(-50%); perspective: 900px; pointer-events: none; }

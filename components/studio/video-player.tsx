@@ -9,6 +9,7 @@ import {
   type PointerEvent,
 } from 'react'
 import {Maximize, Minimize, Pause, Play, RotateCcw, Volume2, VolumeX} from 'lucide-react'
+import {preload} from 'react-dom'
 import type {Dictionary} from '@/lib/i18n/dictionaries'
 import {useStudioReducedMotion} from './motion-text'
 
@@ -51,6 +52,8 @@ export function VideoPlayer({
   const idleTimer = useRef(0)
   const scrubbing = useRef(false)
   const p = d.player
+  // The poster is the largest paint on a project page: fetch it with the document.
+  if (poster) preload(poster, {as: 'image', fetchPriority: 'high'})
 
   const paint = useCallback(() => {
     const video = videoRef.current,

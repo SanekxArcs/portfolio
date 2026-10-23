@@ -2,6 +2,7 @@
 
 import {
   useEffect,
+  useId,
   useLayoutEffect,
   useRef,
   useState,
@@ -10,6 +11,28 @@ import {
 } from 'react'
 import {createPortal} from 'react-dom'
 import {logoJourney, canLiftLogo, type LogoJourney} from '@/lib/logo-journey'
+import {isCoarsePointer, whenEngaged, whenIdle} from '@/lib/when-idle'
+import {LOGO_PATH, LOGO_TRANSFORM, LOGO_VIEWBOX} from './logo-path'
+
+/**
+ * The flat mark shown until WebGL is ready. Inline SVG drawing needs no request and, unlike a
+ * CSS mask image, is not a Largest Contentful Paint candidate: the page's own content is.
+ */
+function FlatMark() {
+  const id = useId()
+  return (
+    <svg className="hero-brand-fallback" viewBox={LOGO_VIEWBOX} aria-hidden="true">
+      <defs>
+        <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#a7f3d0" />
+          <stop offset="0.5" stopColor="#10b981" />
+          <stop offset="1" stopColor="#065f46" />
+        </linearGradient>
+      </defs>
+      <path transform={LOGO_TRANSFORM} fill={`url(#${id})`} d={LOGO_PATH} />
+    </svg>
+  )
+}
 
 type SceneLayout = LogoJourney
 /** Drag state shared with the hero trigger: angles in radians, velocity in radians per second. */
@@ -163,10 +186,17 @@ export function HeroLogoScene({
       readSceneLayout(anchor, backgroundOnly, reducedMotion)
     const current = readLayout()
     let appearance = current.progress
+    // Layout is measured only when something moved (scroll, resize, content size), plus a
+    // slow safety refresh, so idle frames never force a reflow.
+    let target = {...current}
+    let layoutDirty = true,
+      layoutReadAt = 0
+    // Touch devices render at 30fps; the scene is ambient there, not pointer-driven.
+    const frameMs = isCoarsePointer() ? 1000 / 30 : 1000 / 60
     const tick = (time: number) => {
       frame = 0
       if (cancelled || document.hidden) return
-      if (!reducedMotion && previous && time - previous < 1000 / 60 - 1) {
+      if (!reducedMotion && previous && time - previous < frameMs - 1) {
         requestDraw()
         return
       }
@@ -174,7 +204,11 @@ export function HeroLogoScene({
       previous = time
       if (!reducedMotion) elapsed += delta
       elapsedRef.current = elapsed
-      const target = readLayout()
+      if (layoutDirty || time - layoutReadAt > 250) {
+        target = readLayout()
+        layoutDirty = false
+        layoutReadAt = time
+      }
       const scrollDelta = scrollY - previousScroll
       previousScroll = scrollY
       current.y -= scrollDelta * clamp((target.journey - 0.65) / 0.35)
@@ -204,8 +238,12 @@ export function HeroLogoScene({
         frame = 0
       } else requestDraw()
     }
+    const markDirty = () => {
+      layoutDirty = true
+      requestDraw()
+    }
     redrawRef.current = requestDraw
-    const resizeObserver = new ResizeObserver(requestDraw)
+    const resizeObserver = new ResizeObserver(markDirty)
     resizeObserver.observe(anchor)
     const hero = anchor.closest('section')?.querySelector('.hero-main')
     if (hero) resizeObserver.observe(hero)
@@ -213,13 +251,16 @@ export function HeroLogoScene({
     if (mainContent) resizeObserver.observe(mainContent)
     const dock = document.querySelector('[data-logo-dock]')
     if (dock) resizeObserver.observe(dock)
-    window.addEventListener('scroll', requestDraw, {passive: true})
+    window.addEventListener('scroll', markDirty, {passive: true})
     window.addEventListener(LOGO_SPIN_EVENT, requestDraw)
-    window.addEventListener('resize', requestDraw, {passive: true})
+    window.addEventListener('resize', markDirty, {passive: true})
     document.addEventListener('visibilitychange', onVisibility)
     requestDraw()
 
-    void Promise.all([
+    // The SVG fallback carries the first paint; three.js loads once the page is idle, or on
+    // touch devices once the visitor first engages.
+    const defer = isCoarsePointer() ? whenEngaged : whenIdle
+    const cancelIdle = defer(() => void Promise.all([
       import('three'),
       import('three/addons/loaders/SVGLoader.js'),
       fetch('/logo.svg', {signal: abort.signal}).then((response) => {
@@ -492,15 +533,16 @@ export function HeroLogoScene({
       })
       .catch(() => {
         /* The SVG mark still follows the scroll when WebGL is unavailable. */
-      })
+      }))
     return () => {
       cancelled = true
+      cancelIdle()
       abort.abort()
       resizeObserver.disconnect()
       cancelAnimationFrame(frame)
-      window.removeEventListener('scroll', requestDraw)
+      window.removeEventListener('scroll', markDirty)
       window.removeEventListener(LOGO_SPIN_EVENT, requestDraw)
-      window.removeEventListener('resize', requestDraw)
+      window.removeEventListener('resize', markDirty)
       document.removeEventListener('visibilitychange', onVisibility)
       redrawRef.current = () => {}
       disposeScene?.()
@@ -521,7 +563,7 @@ export function HeroLogoScene({
           <div className="portfolio-scene-backdrop" aria-hidden="true">
             <div ref={setHost} className="intro-sculpture hero-scene-layer">
               <div className="hero-scene-fallback">
-                <div className="hero-brand-fallback" />
+                <FlatMark />
                 <i />
                 <i />
               </div>
