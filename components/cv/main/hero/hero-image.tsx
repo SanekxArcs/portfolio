@@ -1,11 +1,13 @@
 'use client'
 
-import {useState} from 'react'
+import {useRef, useState, type KeyboardEvent, type PointerEvent} from 'react'
 import Image from 'next/image'
 import {motion, type Variants} from 'motion/react'
 import {MousePointer2} from 'lucide-react'
 import type {CvProfile} from '@/components/cv/types'
-import {HeroLogoScene} from './hero-logo-scene'
+import {HeroLogoScene, LOGO_SPIN_EVENT, createLogoSpin} from './hero-logo-scene'
+
+const repaintSpin = () => window.dispatchEvent(new Event(LOGO_SPIN_EVENT))
 
 type IdentityLabels = {
   photo: string
@@ -23,6 +25,9 @@ const defaultLabels: IdentityLabels = {
   tap: 'Tap to meet me',
   tapReturn: 'Tap to return',
 }
+// Pixels of travel before a press becomes a drag instead of a click.
+const DRAG_THRESHOLD = 6
+
 type Props = {
   profile: CvProfile
   variants: Variants
@@ -39,18 +44,110 @@ export function HeroImage({
   const [showPhoto, setShowPhoto] = useState(false)
   const [photoLoaded, setPhotoLoaded] = useState(false)
   const photoVisible = showPhoto && photoLoaded
+  const spinRef = useRef(createLogoSpin())
+  const press = useRef({
+    id: -1,
+    startX: 0,
+    startY: 0,
+    lastX: 0,
+    lastY: 0,
+    lastTime: 0,
+    moved: false,
+  })
+  const suppressClick = useRef(false)
+
+  const onPointerDown = (event: PointerEvent<HTMLButtonElement>) => {
+    if (event.button !== 0) return
+    suppressClick.current = false
+    press.current = {
+      id: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      lastX: event.clientX,
+      lastY: event.clientY,
+      lastTime: event.timeStamp,
+      moved: false,
+    }
+  }
+  const onPointerMove = (event: PointerEvent<HTMLButtonElement>) => {
+    const p = press.current,
+      spin = spinRef.current
+    if (p.id !== event.pointerId) return
+    if (!p.moved) {
+      if (
+        Math.hypot(event.clientX - p.startX, event.clientY - p.startY) <
+        DRAG_THRESHOLD
+      )
+        return
+      p.moved = true
+      spin.dragging = true
+      spin.velocity = 0
+      try {
+        event.currentTarget.setPointerCapture(event.pointerId)
+      } catch {
+        /* The pointer already ended; the drag still applies to this move. */
+      }
+    }
+    const dx = event.clientX - p.lastX,
+      dy = event.clientY - p.lastY,
+      dt = Math.max((event.timeStamp - p.lastTime) / 1000, 1 / 240)
+    spin.angleY += dx * 0.012
+    spin.angleX = Math.max(-0.6, Math.min(0.6, spin.angleX + dy * 0.006))
+    // Smoothed release speed, so a flick keeps spinning after the pointer lets go.
+    spin.velocity = spin.velocity * 0.6 + ((dx * 0.012) / dt) * 0.4
+    p.lastX = event.clientX
+    p.lastY = event.clientY
+    p.lastTime = event.timeStamp
+    repaintSpin()
+  }
+  const endPress = (event: PointerEvent<HTMLButtonElement>) => {
+    const p = press.current,
+      spin = spinRef.current
+    if (p.id !== event.pointerId) return
+    if (p.moved) {
+      suppressClick.current = true
+      // A pointer resting before release should not fling the mark.
+      if (event.timeStamp - p.lastTime > 80) spin.velocity = 0
+      spin.velocity = Math.max(-18, Math.min(18, spin.velocity))
+      if (shouldReduceMotion) spin.velocity = 0
+    }
+    spin.dragging = false
+    p.id = -1
+    repaintSpin()
+  }
+  const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return
+    event.preventDefault()
+    const spin = spinRef.current,
+      direction = event.key === 'ArrowRight' ? 1 : -1
+    if (shouldReduceMotion) spin.angleY += (direction * Math.PI) / 4
+    else spin.velocity += direction * 8
+    repaintSpin()
+  }
 
   return (
     <motion.div className="hero-identity" variants={variants}>
       <HeroLogoScene
         reducedMotion={shouldReduceMotion}
         photoVisible={photoVisible}
+        spinRef={spinRef}
       />
       {profile.profilePhotoUrl && (
         <button
           className="hero-identity-trigger"
           type="button"
-          onClick={() => setShowPhoto((value) => !value)}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endPress}
+          onPointerCancel={endPress}
+          onKeyDown={onKeyDown}
+          onClick={() => {
+            if (suppressClick.current) {
+              suppressClick.current = false
+              return
+            }
+            setShowPhoto((value) => !value)
+          }}
           aria-label={showPhoto ? labels.logo : labels.photo}
           aria-controls="hero-profile-portrait"
           aria-pressed={showPhoto}

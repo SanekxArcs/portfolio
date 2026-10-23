@@ -7,7 +7,7 @@ import {smoothEase, useStudioReducedMotion} from './motion-text'
 import {MotionText} from '@/components/studio/motion-text'
 
 import {useState, type FormEvent} from 'react'
-import {ArrowUpRight, Check, Copy} from 'lucide-react'
+import {Check, Copy} from 'lucide-react'
 import {
   Select,
   SelectContent,
@@ -279,7 +279,6 @@ export function EnquiryForm({
               </AnimatePresence>
               <button className="studio-button primary" type="submit">
                 <MotionText text={d.contact.submit} />
-                <ArrowUpRight size={18} />
               </button>
               <p className="enquiry-note">
                 <MotionText text={d.contact.note} />

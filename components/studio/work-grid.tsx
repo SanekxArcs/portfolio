@@ -1,5 +1,5 @@
 'use client'
-import {useState} from 'react'
+import {useRef, useState} from 'react'
 import {AnimatePresence, motion} from 'motion/react'
 import type {Dictionary} from '@/lib/i18n/dictionaries'
 import type {Locale} from '@/lib/i18n/locales'
@@ -23,6 +23,17 @@ export function WorkGrid({
   d: Dictionary
 }) {
   const [filter, setFilter] = useState('all')
+  const top = useRef<HTMLDivElement>(null)
+  // Switching filters far down the list returns to the start of the new results.
+  const choose = (value: string) => {
+    setFilter(value)
+    const start = top.current?.getBoundingClientRect().top ?? 0
+    if (start < 0)
+      window.scrollTo({
+        top: start + window.scrollY - 100,
+        behavior: reduced ? 'instant' : 'smooth',
+      })
+  }
   const reduced = useStudioReducedMotion()
   const matches = (project: StudioProject, category: string) =>
     category === 'all' ||
@@ -31,14 +42,14 @@ export function WorkGrid({
     (category === 'confidential' && project.nda)
   const filtered = projects.filter((project) => matches(project, filter))
   return (
-    <div className="studio-wrap">
+    <div className="studio-wrap" ref={top}>
       <div className="work-filters" role="group" aria-label={d.work.label}>
         {(['all', 'commercial', 'independent', 'confidential'] as const).map(
           (value) => (
             <motion.button
               key={value}
               type="button"
-              onClick={() => setFilter(value)}
+              onClick={() => choose(value)}
               aria-pressed={filter === value}
               whileTap={reduced ? undefined : {scale: 0.97}}
             >
@@ -64,10 +75,6 @@ export function WorkGrid({
       <p className="sr-only" role="status">
         {filtered.length} {d.nav.work}
       </p>
-      <div className="work-results">
-        <MotionNumber value={filtered.length} />
-        <MotionText text={d.nav.work} />
-      </div>
       <MotionSize>
         <div className="studio-work-grid">
           <AnimatePresence initial={false} mode="popLayout">

@@ -3,12 +3,11 @@ import {MotionNumber} from './motion-text'
 import {MotionDisclosure} from './disclosure'
 import {ProjectCard} from './project-card'
 import { ProjectPreview } from "./project-preview";
+import {VideoPlayer} from './video-player'
 import {StudioLink as Link} from '@/components/studio/transitions'
 import Image from 'next/image'
 import {
   ArrowUpRight,
-  ArrowDown,
-  ArrowLeft,
   ArrowRight,
   CircleCheck,
   Globe,
@@ -34,12 +33,10 @@ import {CtaWaves} from './cta-waves'
 import {ContactIcons} from './footer'
 
 export function SectionTitle({
-  label,
   title,
   text,
   action,
 }: {
-  label: string
   title: string
   text?: string
   action?: React.ReactNode
@@ -47,9 +44,6 @@ export function SectionTitle({
   return (
     <div className="studio-section-heading" data-reveal>
       <div>
-        <p className="studio-eyebrow">
-          <MotionText text={label} />
-        </p>
         <h2>
           <MotionText text={title} />
         </h2>
@@ -63,20 +57,15 @@ export function StudioCta({locale, d}: {locale: Locale; d: Dictionary}) {
   return (
     <section className="studio-cta studio-wrap" data-reveal>
       <div className="studio-cta-inner">
-        <p className="studio-eyebrow">
-          <MotionText name="text-d-cta-label-1" text={d.cta.label} />
-        </p>
         <h2>
           <MotionText name="text-d-cta-title-1" text={d.cta.title} />
         </h2>
         <div className="studio-actions">
           <Link href={`/${locale}/contact`} className="studio-button primary">
             <MotionText name="text-d-cta-button-1" text={d.cta.button} />
-            <ArrowUpRight size={18} />
           </Link>
           <Link href={`/${locale}/experience`} className="studio-text-link">
             <MotionText name="text-d-cta-secondary-1" text={d.cta.secondary} />
-            <ArrowUpRight size={16} />
           </Link>
         </div>
         <div className="cta-art-clip"><CtaWaves /></div>
@@ -149,7 +138,7 @@ export function ServiceList({
 export function Process({d}: {d: Dictionary}) {
   return (
     <section className="studio-section studio-wrap">
-      <SectionTitle label={d.process.label} title={d.process.title} />
+      <SectionTitle title={d.process.title} />
       <div className="studio-process">
         {d.process.items.map((item, index) => (
           <article key={item.title} data-reveal>
@@ -186,20 +175,11 @@ export function HomePage({locale}: {locale: Locale}) {
 				>
 					<div className="hero-main">
 						<div className="studio-hero-copy">
-							<p className="studio-eyebrow hero-eyebrow">
-								<span />{" "}
-								<MotionText
-									name="text-d-hero-eyebrow-1"
-									text={d.hero.eyebrow}
-								/>
-							</p>
 							<h1 id="studio-hero-heading">
 								<MotionText text={d.hero.line1} />
 								<br />
 								{' '}
-								<em>
-									<MotionText text={d.hero.line2} />
-								</em>
+								<MotionText text={d.hero.line2} />
 							</h1>
 							<p className="studio-hero-intro">
 								<MotionText
@@ -217,7 +197,6 @@ export function HomePage({locale}: {locale: Locale}) {
 										name="text-d-hero-primary-1"
 										text={d.hero.primary}
 									/>
-									<ArrowUpRight size={18} />
 								</Link>
 								<Link
 									className="studio-text-link"
@@ -227,7 +206,6 @@ export function HomePage({locale}: {locale: Locale}) {
 										name="text-d-hero-secondary-1"
 										text={d.hero.secondary}
 									/>
-									<ArrowUpRight size={16} />
 								</Link>
 							</div>
 						</div>
@@ -241,28 +219,9 @@ export function HomePage({locale}: {locale: Locale}) {
 							</p>
 						</div>
 					</div>
-					<div className="studio-hero-baseline">
-						<span>
-							<MotionText
-								name="text-d-hero-location-1"
-								text={d.hero.location}
-							/>
-						</span>
-						<a href="#selected-work">
-							<MotionText name="text-d-hero-scroll-1" text={d.hero.scroll} />
-							<ArrowDown size={14} />
-						</a>
-						<span>
-							<MotionText
-								name="text-d-hero-specialty-1"
-								text={d.hero.specialty}
-							/>
-						</span>
-					</div>
 				</section>
 				<section id="selected-work" className="studio-section studio-wrap">
 					<SectionTitle
-						label={d.home.workLabel}
 						title={d.home.workTitle}
 						text={d.home.workIntro}
 						action={
@@ -271,7 +230,6 @@ export function HomePage({locale}: {locale: Locale}) {
 									name="text-d-home-allWork-1"
 									text={d.home.allWork}
 								/>
-								<ArrowUpRight size={16} />
 							</Link>
 						}
 					/>
@@ -290,7 +248,6 @@ export function HomePage({locale}: {locale: Locale}) {
 				<StudioClients d={d} />
 				<section className="studio-section studio-wrap">
 					<SectionTitle
-						label={d.home.servicesLabel}
 						title={d.home.servicesTitle}
 						action={
 							<Link href={`/${locale}/services`} className="studio-text-link">
@@ -298,7 +255,6 @@ export function HomePage({locale}: {locale: Locale}) {
 									name="text-d-home-allServices-1"
 									text={d.home.allServices}
 								/>
-								<ArrowUpRight size={16} />
 							</Link>
 						}
 					/>
@@ -319,20 +275,8 @@ export function HomePage({locale}: {locale: Locale}) {
 								sizes="(max-width:760px) 90vw, 450px"
 							/>
 						)}
-						<span>
-							<MotionText
-								name="text-d-home-aboutRole-1"
-								text={d.home.aboutRole}
-							/>
-						</span>
 					</div>
 					<div>
-						<p className="studio-eyebrow">
-							<MotionText
-								name="text-d-home-aboutLabel-1"
-								text={d.home.aboutLabel}
-							/>
-						</p>
 						<h2>
 							<MotionText
 								name="text-d-home-aboutTitle-1"
@@ -345,24 +289,20 @@ export function HomePage({locale}: {locale: Locale}) {
 								text={d.home.aboutText}
 							/>
 						</p>
-						<Link className="studio-text-link" href={`/${locale}/experience`}>
-							<MotionText
-								name="text-d-home-aboutLink-1"
-								text={d.home.aboutLink}
-							/>
-							<ArrowUpRight size={16} />
+						<Link className="studio-hiring-note" href={`/${locale}/experience`}>
+							<div>
+								<h3>
+									<MotionText name="text-d-home-hiring-1" text={d.home.hiring} />
+								</h3>
+								<p>
+									<MotionText
+										name="text-d-home-hiringText-1"
+										text={d.home.hiringText}
+									/>
+								</p>
+							</div>
+							<ArrowUpRight size={22} aria-hidden="true" />
 						</Link>
-						<div className="studio-hiring-note">
-							<h3>
-								<MotionText name="text-d-home-hiring-1" text={d.home.hiring} />
-							</h3>
-							<p>
-								<MotionText
-									name="text-d-home-hiringText-1"
-									text={d.home.hiringText}
-								/>
-							</p>
-						</div>
 					</div>
 				</section>
 				<StudioCta locale={locale} d={d} />
@@ -370,19 +310,14 @@ export function HomePage({locale}: {locale: Locale}) {
 		);
 }
 export function PageIntro({
-  label,
   title,
   intro,
 }: {
-  label: string
   title: string
   intro: string
 }) {
   return (
     <div className="studio-page-intro studio-wrap">
-      <p className="studio-eyebrow">
-        <MotionText name="text-page-label" text={label} />
-      </p>
       <h1>
         <MotionText name="text-page-title" text={title} />
       </h1>
@@ -397,7 +332,6 @@ export function ServicesPage({locale}: {locale: Locale}) {
   return (
     <>
       <PageIntro
-        label={d.services.label}
         title={d.services.title}
         intro={d.services.intro}
       />
@@ -439,19 +373,18 @@ export function ProjectPage({
 			<>
 				<section className="studio-case-intro studio-wrap">
 					<Link href={`/${locale}/work`} className="studio-text-link">
-						<ArrowLeft size={16} />
 						<MotionText text={d.work.back} />
 					</Link>
-					<p className="studio-eyebrow">
+					<h1>
+						<MotionText text={title} />
+					</h1>
+					<p className="case-kind">
 						{project.nda
 							? d.work.confidential
 							: project.petProject
 								? d.work.independent
 								: d.work.commercial}
 					</p>
-					<h1>
-						<MotionText text={title} />
-					</h1>
 					<div className="studio-actions">
 						{project.url && !project.nda && (
 							<a
@@ -461,7 +394,7 @@ export function ProjectPage({
 								className="studio-button primary"
 							>
 								<MotionText text={project.media?.kind === 'extension' ? d.work.extension : d.work.visit} />
-								<ArrowUpRight size={16} />
+								<ExternalLink size={16} aria-hidden="true" />
 							</a>
 						)}
 						{project.urlToCode && !project.nda && (
@@ -482,11 +415,12 @@ export function ProjectPage({
 						className={`case-hero-image ${project.media?.video ? 'case-hero-image--video' : project.media ? "case-hero-image--mockup" : ""}`}
 					>
 						{project.media?.video && !project.nda ? (
-                <video controls playsInline preload="none" poster={project.media.desktop}
-                  aria-label={`${d.work.watchDemo} — ${title}`}>
-                  <source src={project.media.video} type="video/mp4" />
-                  <a href={project.media.video}>{d.work.watchDemo}</a>
-                </video>
+                <VideoPlayer
+                  src={project.media.video}
+                  poster={project.media.desktop}
+                  title={title}
+                  d={d}
+                />
               ) : project.imageUrls?.[0] && !project.nda ? (
 							project.media ? (
 								<ProjectPreview project={project} d={d} priority />
@@ -512,11 +446,8 @@ export function ProjectPage({
 				</div>
 				<section className="studio-section studio-wrap case-overview">
 					<div>
-						<p className="studio-eyebrow">
-							<MotionText text={d.work.overview} />
-						</p>
 						<h2>
-							<MotionText text={title} />
+							<MotionText text={d.work.overview} />
 						</h2>
 						<p>
 							<MotionText text={project.description} />
@@ -651,48 +582,38 @@ export function ExperiencePage({locale}: {locale: Locale}) {
     <>
       <section id="profile" className="studio-career-hero studio-wrap">
         <div>
-          <p className="studio-eyebrow">
-            <MotionText name="text-e-label-1" text={e.label} />
-          </p>
           <h1>
             <MotionText text={p.name} />
           </h1>
           <p className="career-role">
             <MotionText name="text-e-role-1" text={e.role} />
           </p>
-          <h2>
-            <MotionText name="text-e-title-1" text={e.title} />
-          </h2>
           <p>
             <MotionText name="text-e-intro-1" text={e.intro} />
           </p>
+          {/* Everything about the CV sits together: the file, the online copy and its language. */}
           <div className="studio-actions">
             {p.cvFileUrl && (
               <a href={p.cvFileUrl} download className="studio-button primary">
-                <Download size={16} />
+                <Download size={16} aria-hidden="true" />
                 <MotionText name="text-e-download-1" text={e.download} />
               </a>
             )}
-            <Link
-              href={`/${locale}/contact?intent=hiring`}
-              className="studio-text-link"
-            >
-              <MotionText name="text-e-contact-1" text={e.contact} />
-              <ArrowUpRight size={16} />
-            </Link>
-            <ContactIcons profile={p} d={d} />
-          </div>
-          <div className="career-cv-note">
-            <span>
-              <MotionText name="text-e-cvLanguage-1" text={e.cvLanguage} />
-            </span>
             {p.cvUrl && (
-              <a href={p.cvUrl} target="_blank" rel="noopener noreferrer">
+              <a
+                href={p.cvUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="studio-button secondary"
+              >
                 <MotionText name="text-e-view-1" text={e.view} />
-                <ExternalLink size={12} />
+                <ExternalLink size={15} aria-hidden="true" />
               </a>
             )}
           </div>
+          <p className="career-cv-note">
+            <MotionText name="text-e-cvLanguage-1" text={e.cvLanguage} />
+          </p>
         </div>
         <aside className="career-profile-card">
           {p.profilePhotoUrl && (
@@ -800,15 +721,21 @@ export function ExperiencePage({locale}: {locale: Locale}) {
               </span>
             ))}
           </div>
+          <div className="career-contact">
+            <Link
+              href={`/${locale}/contact?intent=hiring`}
+              className="studio-text-link"
+            >
+              <MotionText name="text-e-contact-1" text={e.contact} />
+            </Link>
+            <ContactIcons profile={p} d={d} />
+          </div>
         </aside>
       </section>
       <section id="about" className="studio-wrap studio-section career-about">
         <div>
-          <p className="studio-eyebrow">
-            <MotionText name="text-e-about-1" text={e.about} />
-          </p>
           <h2>
-            <MotionText name="text-e-history-1" text={e.history} />
+            <MotionText name="text-e-about-1" text={e.about} />
           </h2>
         </div>
         <p>
@@ -816,7 +743,7 @@ export function ExperiencePage({locale}: {locale: Locale}) {
         </p>
       </section>
       <section id="experience" className="studio-wrap studio-section">
-        <SectionTitle label={e.history} title={e.role} />
+        <SectionTitle title={e.history} />
         {jobList(relevant)}
         {!!earlier.length && (
           <MotionDisclosure
@@ -835,7 +762,7 @@ export function ExperiencePage({locale}: {locale: Locale}) {
         )}
       </section>
       <section id="skills" className="studio-section studio-wrap">
-        <SectionTitle label={e.frontend + ' / ' + e.backend} title={e.skills} />
+        <SectionTitle title={e.skills} />
         <div className="career-skills">
           {[
             [e.frontend, p.skillsFrontend],
@@ -857,7 +784,7 @@ export function ExperiencePage({locale}: {locale: Locale}) {
         </div>
       </section>
       <section className="studio-section studio-wrap">
-        <SectionTitle label={e.about} title={e.strengths} />
+        <SectionTitle title={e.strengths} />
         <div className="career-strengths">
           {p.softSkills?.map((item, index) => (
             <article key={index} data-reveal>
@@ -940,7 +867,6 @@ export function ExperiencePage({locale}: {locale: Locale}) {
         </h2>
         <Link className="studio-button secondary" href={`/${locale}/work`}>
           <MotionText name="text-d-home-allWork-2" text={d.home.allWork} />
-          <ArrowUpRight size={16} />
         </Link>
       </div>
       <StudioCta locale={locale} d={d} />

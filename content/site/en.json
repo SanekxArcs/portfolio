@@ -19,7 +19,7 @@
     "intro": "I'm Oleksandr, a developer based in Poland. I build websites and web apps for businesses, and I join teams that need development help",
     "primary": "Start a project",
     "secondary": "Explore my experience",
-    "caption": "Click or tap the logo to meet me",
+    "caption": "Drag the logo to spin it, click to meet me",
     "scroll": "Scroll to explore",
     "location": "Based in Poland · Working remotely",
     "specialty": "Design, development and the details between them"
@@ -42,7 +42,7 @@
     "allServices": "Explore services",
     "aboutLabel": "04 / About me",
     "aboutTitle": "A small studio. Direct contact",
-    "aboutText": "I'm Oleksandr Dzisiak, a full-stack developer and Solutions Engineer. When you contact O.D. EMPOWER, you speak with me — the person who will plan and build your project.",
+    "aboutText": "I'm Oleksandr Dzisiak, a full-stack developer and Solutions Engineer. When you contact O.D. EMPOWER, you speak with me, the person who will plan and build your project.",
     "aboutLink": "Get to know my experience",
     "hiring": "Building your team?",
     "hiringText": "See my work history, technical skills and CV.",
@@ -253,7 +253,24 @@
     "rights": "Independent developer based in Poland.",
     "built": "Designed & developed by Oleksandr",
     "email": "Send email",
-    "phone": "Call me"
+    "phone": "Call me",
+    "heading": "Have something in mind?",
+    "localTime": "My local time",
+    "anyTime": "You can contact me any time",
+    "copy": "Copy email",
+    "copied": "Email copied",
+    "write": "Open in your email app"
+  },
+  "player": {
+    "play": "Play",
+    "pause": "Pause",
+    "replay": "Watch again",
+    "mute": "Mute",
+    "unmute": "Unmute",
+    "fullscreen": "Full screen",
+    "exitFullscreen": "Exit full screen",
+    "seek": "Video progress",
+    "of": "of"
   },
   "identity": {
     "photo": "View profile photo",

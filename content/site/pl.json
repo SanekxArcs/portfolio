@@ -19,7 +19,7 @@
     "intro": "Jestem Oleksandr, programista mieszkający w Polsce. Tworzę strony i aplikacje dla firm. Wspieram też zespoły w pracy nad ich projektami",
     "primary": "Porozmawiajmy o projekcie",
     "secondary": "Poznaj moje doświadczenie",
-    "caption": "Kliknij lub dotknij logo, żeby mnie poznać",
+    "caption": "Przeciągnij logo, żeby je obrócić, kliknij, żeby mnie poznać",
     "scroll": "Przewiń i odkryj",
     "location": "Mieszkam w Polsce · Pracuję zdalnie",
     "specialty": "Projektowanie, kod i wszystko pomiędzy"
@@ -42,7 +42,7 @@
     "allServices": "Poznaj usługi",
     "aboutLabel": "04 / O mnie",
     "aboutTitle": "Małe studio. Bezpośredni kontakt",
-    "aboutText": "Jestem Oleksandr Dzisiak, full-stack developer i Solutions Engineer. Gdy piszesz do O.D. EMPOWER, rozmawiasz ze mną — osobą, która zaplanuje i zbuduje Twój projekt.",
+    "aboutText": "Jestem Oleksandr Dzisiak, full-stack developer i Solutions Engineer. Gdy piszesz do O.D. EMPOWER, rozmawiasz ze mną, osobą, która zaplanuje i zbuduje Twój projekt.",
     "aboutLink": "Poznaj moje doświadczenie",
     "hiring": "Rozbudowujesz zespół?",
     "hiringText": "Zobacz moje doświadczenie, umiejętności i CV.",
@@ -88,7 +88,7 @@
       {
         "id": "improvements",
         "title": "Rozwój istniejących produktów",
-        "text": "Popraw to, co utrudnia korzystanie z obecnej strony lub aplikacji — od niewygodnych ekranów po wolne ładowanie.",
+        "text": "Popraw to, co utrudnia korzystanie z obecnej strony lub aplikacji, od niewygodnych ekranów po wolne ładowanie.",
         "deliverables": [
           "Czytelniejsze ekrany i układ mobilny",
           "Szybsze ładowanie i poprawki dostępności",
@@ -253,7 +253,24 @@
     "rights": "Niezależny programista mieszkający w Polsce.",
     "built": "Projekt i wykonanie: Oleksandr",
     "email": "Napisz email",
-    "phone": "Zadzwoń"
+    "phone": "Zadzwoń",
+    "heading": "Masz coś na myśli?",
+    "localTime": "Mój czas lokalny",
+    "anyTime": "Możesz pisać do mnie o każdej porze",
+    "copy": "Kopiuj e-mail",
+    "copied": "E-mail skopiowany",
+    "write": "Otwórz w aplikacji pocztowej"
+  },
+  "player": {
+    "play": "Odtwórz",
+    "pause": "Pauza",
+    "replay": "Obejrzyj ponownie",
+    "mute": "Wycisz",
+    "unmute": "Włącz dźwięk",
+    "fullscreen": "Pełny ekran",
+    "exitFullscreen": "Zamknij pełny ekran",
+    "seek": "Postęp wideo",
+    "of": "z"
   },
   "identity": {
     "photo": "Pokaż zdjęcie profilowe",

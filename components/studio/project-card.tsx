@@ -28,21 +28,6 @@ export function ProjectCard({
         className={`studio-project-image project-tone-${project.id}`}
         aria-label={`${d.work.view}: ${title}`}
       >
-        <div className="project-image-topline">
-          <span>
-            O—D /{' '}
-            {project.featured
-              ? d.home.workLabel.split('/')[1]?.trim()
-              : d.nav.work}
-          </span>
-          <span>
-            {project.nda
-              ? d.work.confidential
-              : project.petProject
-                ? d.work.independent
-                : d.work.commercial}
-          </span>
-        </div>
         {project.imageUrls?.[0] && !project.nda ? (
           <ProjectPreview project={project} d={d} />
         ) : (
@@ -59,14 +44,18 @@ export function ProjectCard({
       </Link>
       <div className="project-card-meta">
         <div>
-          <p className="studio-eyebrow">
-            {project.petProject ? d.work.independent : d.work.commercial}
-          </p>
           <h3>
             <Link href={`/${locale}/work/${project.slug}`}>
               <MotionText text={title} />
             </Link>
           </h3>
+          <p className="project-kind">
+            {project.nda
+              ? d.work.confidential
+              : project.petProject
+                ? d.work.independent
+                : d.work.commercial}
+          </p>
         </div>
         <span className="project-tech">
           <MotionText text={project.technologies?.slice(0, 3).join(' / ')} />
