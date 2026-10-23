@@ -272,6 +272,13 @@
     "seek": "Postęp wideo",
     "of": "z"
   },
+  "consent": {
+    "title": "Zgoda na analitykę",
+    "text": "Korzystam z Google Analytics, żeby wiedzieć, które strony są przydatne. Działa tylko za Twoją zgodą.",
+    "accept": "Zezwól na analitykę",
+    "decline": "Nie, dziękuję",
+    "settings": "Ustawienia cookies"
+  },
   "identity": {
     "photo": "Pokaż zdjęcie profilowe",
     "logo": "Pokaż logo",

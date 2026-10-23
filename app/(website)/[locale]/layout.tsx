@@ -2,7 +2,7 @@ import {StudioTransitions, ViewRegion} from '@/components/studio/transitions'
 import type {Metadata, Viewport} from 'next'
 import {Noto_Sans, Geist_Mono} from 'next/font/google'
 import {notFound} from 'next/navigation'
-import {GoogleAnalytics} from '@next/third-parties/google'
+import {AnalyticsConsent} from '@/components/studio/analytics-consent'
 import {ThemeProvider} from '@/components/theme-provider'
 import {ReducedMotionProvider} from '@/components/reduced-motion-provider'
 import {StudioHeader} from '@/components/studio/header'
@@ -59,6 +59,10 @@ export async function generateMetadata({
     authors: [{name: 'Oleksandr Dzisiak'}],
     manifest: '/manifest.json',
     formatDetection: {telephone: false},
+    // Search Console HTML-tag verification; the token comes from the Search Console setup.
+    ...(process.env.GOOGLE_SITE_VERIFICATION && {
+      verification: {google: process.env.GOOGLE_SITE_VERIFICATION},
+    }),
   }
 }
 export default async function LocaleLayout({
@@ -117,7 +121,7 @@ export default async function LocaleLayout({
           </ThemeProvider>
         </ReducedMotionProvider>
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && (
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID} />
+          <AnalyticsConsent gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID} d={d} />
         )}
       </body>
     </html>

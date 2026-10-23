@@ -272,6 +272,13 @@
     "seek": "Video progress",
     "of": "of"
   },
+  "consent": {
+    "title": "Analytics consent",
+    "text": "I use Google Analytics to see which pages are useful. It only runs if you allow it.",
+    "accept": "Allow analytics",
+    "decline": "No thanks",
+    "settings": "Cookie settings"
+  },
   "identity": {
     "photo": "View profile photo",
     "logo": "View logo",

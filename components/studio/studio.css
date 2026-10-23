@@ -3809,3 +3809,77 @@ html:active-view-transition-type(page)::view-transition-new(.vt-stable-chrome) {
 .studio-site :is(input, textarea) {
   caret-color: var(--studio-green);
 }
+
+/* Analytics consent: a quiet card that asks once; nothing loads from Google until Allow. */
+.consent-banner {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 90;
+  width: min(380px, calc(100% - 32px));
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--card) 94%, transparent);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 18px 40px -18px var(--studio-shadow);
+  animation: consent-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.consent-banner p {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--foreground);
+}
+.consent-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+.consent-actions .studio-button {
+  min-height: 44px;
+  padding: 10px 16px;
+  font-size: 14px;
+}
+.consent-settings {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-underline-offset: 0.25em;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.consent-settings:hover {
+  color: var(--studio-accent);
+}
+.footer-bottom-end {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+@keyframes consent-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .consent-banner {
+    animation: none;
+  }
+}
+body.reduce-motion .consent-banner {
+  animation: none;
+}
+@media (max-width: 760px) {
+  .consent-banner {
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    width: auto;
+  }
+}

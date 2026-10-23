@@ -7,6 +7,7 @@ import type {CvProfile} from '@/components/cv/types'
 import type {Dictionary} from '@/lib/i18n/dictionaries'
 import type {Locale} from '@/lib/i18n/locales'
 import {CopyEmail, FooterClock, FooterStage, FooterWordmark} from './footer-stage'
+import {ConsentSettingsButton} from './analytics-consent'
 
 export function ContactIcons({
   profile,
@@ -147,7 +148,10 @@ export function StudioFooter({
             © {new Date().getFullYear()} O.D. EMPOWER.{' '}
             <MotionText text={d.footer.rights} />
           </span>
-          <span>
+          <span className="footer-bottom-end">
+            {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && (
+              <ConsentSettingsButton label={d.consent.settings} />
+            )}
             <MotionText text={d.footer.built} />
           </span>
         </div>
