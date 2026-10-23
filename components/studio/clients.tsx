@@ -2,7 +2,7 @@
 
 import {useState} from 'react'
 import {AnimatePresence, motion} from 'motion/react'
-import {ArrowUpRight, ChevronDown} from 'lucide-react'
+import {ChevronDown} from 'lucide-react'
 import clients from '@/content/site/clients.json'
 import type {Dictionary} from '@/lib/i18n/dictionaries'
 import {
@@ -28,7 +28,6 @@ export function StudioClients({d}: {d: Dictionary}) {
           aria-label={`${client.name} — ${d.clients.visit}`}
         >
           <span>{client.name}</span>
-          <ArrowUpRight size={14} aria-hidden="true" />
         </a>
       ) : (
         <div className="studio-client-name">
@@ -45,9 +44,6 @@ export function StudioClients({d}: {d: Dictionary}) {
     >
       <div className="studio-clients-heading" data-reveal>
         <div>
-          <p className="studio-eyebrow">
-            <MotionText text={d.clients.label} />
-          </p>
           <h2 id="studio-clients-title">
             <MotionText text={d.clients.title} />
           </h2>

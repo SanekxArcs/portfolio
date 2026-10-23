@@ -17,7 +17,6 @@ export default async function Page({params}: Props) {
   return (
     <>
       <PageIntro
-        label={d.work.label}
         title={d.work.title}
         intro={d.work.intro}
       />

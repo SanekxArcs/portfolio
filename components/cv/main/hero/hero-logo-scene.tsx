@@ -5,12 +5,29 @@ import {
   useLayoutEffect,
   useRef,
   useState,
+  type RefObject,
   useSyncExternalStore,
 } from 'react'
 import {createPortal} from 'react-dom'
 import {logoJourney, canLiftLogo, type LogoJourney} from '@/lib/logo-journey'
 
 type SceneLayout = LogoJourney
+/** Drag state shared with the hero trigger: angles in radians, velocity in radians per second. */
+export type LogoSpin = {
+  angleX: number
+  angleY: number
+  velocity: number
+  dragging: boolean
+}
+/** Fired by the trigger after it changes a spin, so a paused (reduced-motion) scene repaints. */
+export const LOGO_SPIN_EVENT = 'studio:logo-spin'
+export const createLogoSpin = (): LogoSpin => ({
+  angleX: 0,
+  angleY: 0,
+  velocity: 0,
+  dragging: false,
+})
+const TURN = Math.PI * 2
 const subscribeToHydration = () => () => {}
 const clamp = (value: number) => Math.max(0, Math.min(1, value))
 
@@ -94,10 +111,12 @@ export function HeroLogoScene({
   reducedMotion,
   photoVisible,
   backgroundOnly = false,
+  spinRef,
 }: {
   reducedMotion: boolean
   photoVisible: boolean
   backgroundOnly?: boolean
+  spinRef?: RefObject<LogoSpin>
 }) {
   const anchorRef = useRef<HTMLDivElement>(null)
   // A locale commit can replace the portal host while retaining this component.
@@ -130,6 +149,7 @@ export function HeroLogoScene({
     const anchor = anchorRef.current
     if (!mounted || !anchor || !host) return
     const abort = new AbortController()
+    const spin = spinRef?.current
     let cancelled = false
     let disposeScene: (() => void) | undefined
     let paintScene:
@@ -194,6 +214,7 @@ export function HeroLogoScene({
     const dock = document.querySelector('[data-logo-dock]')
     if (dock) resizeObserver.observe(dock)
     window.addEventListener('scroll', requestDraw, {passive: true})
+    window.addEventListener(LOGO_SPIN_EVENT, requestDraw)
     window.addEventListener('resize', requestDraw, {passive: true})
     document.addEventListener('visibilitychange', onVisibility)
     requestDraw()
@@ -373,9 +394,21 @@ export function HeroLogoScene({
                 (layout.journey === 0 ? 1 - layout.progress : 0) -
               baseRotationY) *
             ease
-          sculpture.rotation.y = baseRotationY + photoMix * Math.PI * 2
+          // A released spin coasts, then settles on the nearest whole turn so the mark faces front.
+          if (spin && !spin.dragging && !reducedMotion) {
+            spin.angleY += spin.velocity * delta
+            spin.velocity *= Math.exp(-delta * 1.8)
+            if (Math.abs(spin.velocity) < 1.2) {
+              const rest = Math.round(spin.angleY / TURN) * TURN
+              spin.angleY += (rest - spin.angleY) * (1 - Math.exp(-delta * 2.6))
+              spin.velocity *= Math.exp(-delta * 4)
+            }
+            spin.angleX *= Math.exp(-delta * 4)
+          }
+          sculpture.rotation.y =
+            baseRotationY + photoMix * Math.PI * 2 + (spin?.angleY ?? 0)
           sculpture.rotation.x +=
-            (0.08 +
+            ((spin?.angleX ?? 0) + 0.08 +
               pointerY *
                 0.2 *
                 (layout.journey === 0 ? 1 - layout.progress : 0) -
@@ -466,12 +499,13 @@ export function HeroLogoScene({
       resizeObserver.disconnect()
       cancelAnimationFrame(frame)
       window.removeEventListener('scroll', requestDraw)
+      window.removeEventListener(LOGO_SPIN_EVENT, requestDraw)
       window.removeEventListener('resize', requestDraw)
       document.removeEventListener('visibilitychange', onVisibility)
       redrawRef.current = () => {}
       disposeScene?.()
     }
-  }, [mounted, reducedMotion, host, backgroundOnly])
+  }, [mounted, reducedMotion, host, backgroundOnly, spinRef])
 
   return (
     <>

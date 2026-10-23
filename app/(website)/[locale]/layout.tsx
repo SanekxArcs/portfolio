@@ -10,6 +10,7 @@ import {StudioFooter} from '@/components/studio/footer'
 import {PageMotion} from '@/components/studio/page-motion'
 import {BrandCursor} from '@/components/studio/brand-cursor'
 import {StudioBackgroundScene} from '@/components/studio/background-scene'
+import {TerrainField} from '@/components/studio/terrain-field'
 import {getDictionary} from '@/lib/i18n/dictionaries'
 import {isLocale, locales} from '@/lib/i18n/locales'
 import {getLocalizedProfile} from '@/lib/studio-content'
@@ -80,6 +81,7 @@ export default async function LocaleLayout({
             defaultTheme="dark"
             enableSystem={false}
           >
+            <TerrainField />
             <StudioTransitions
               locale={locale}
               chrome={
@@ -91,6 +93,9 @@ export default async function LocaleLayout({
                     <StudioHeader
                       locale={locale}
                       d={d}
+                      contactLabels={locales.map(
+                        (language) => getDictionary(language).nav.contact,
+                      )}
                       logo={profile.logoUrl}
                     />
                   </ViewRegion>

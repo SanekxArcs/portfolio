@@ -1,7 +1,6 @@
 import {MotionText} from '@/components/studio/motion-text'
 import {socialLabel} from '@/lib/social-links'
 import {notFound} from 'next/navigation'
-import {ArrowUpRight} from 'lucide-react'
 import {getDictionary} from '@/lib/i18n/dictionaries'
 import {getLocalizedProfile} from '@/lib/studio-content'
 import {isLocale} from '@/lib/i18n/locales'
@@ -26,7 +25,6 @@ export default async function Page({params, searchParams}: Props) {
   return (
     <>
       <PageIntro
-        label={d.contact.label}
         title={d.contact.title}
         intro={d.contact.intro}
       />
@@ -60,7 +58,6 @@ export default async function Page({params, searchParams}: Props) {
                   key={index}
                 >
                   <MotionText text={socialLabel(link)} />
-                  <ArrowUpRight size={14} />
                 </a>
               ))}
           </div>
