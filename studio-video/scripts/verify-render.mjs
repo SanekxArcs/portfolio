@@ -8,12 +8,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const locale = process.argv[2] || "en";
 if (!["en", "pl"].includes(locale)) throw new Error("Choose en or pl");
 const tag = locale === "pl" ? "pl-" : "";
-const edit = JSON.parse(
-  readFileSync(
-    resolve(root, locale === "pl" ? "src/timing-pl.json" : "src/timing.json"),
-    "utf8",
-  ),
-);
+const edit = JSON.parse(readFileSync(resolve(root, "src/edit.json"), "utf8"));
 const results = [];
 for (const [format, width, height] of [
   ["wide", 1920, 1080],
@@ -43,11 +38,11 @@ for (const [format, width, height] of [
     throw new Error(`${format}: wrong runtime`);
   // Decode every frame and audio packet: a valid header alone is not enough.
   execFileSync("ffmpeg", ["-v", "error", "-i", file, "-f", "null", "-"]);
-  const selected = edit.scenes
-    .map((scene) => `eq(n,${scene.from + Math.min(100, scene.duration - 20)})`)
+  const selected = edit.sections
+    .map((section) => `eq(n,${section.from + Math.min(edit.beatFrames * 2 + 8, section.beats * edit.beatFrames - 4)})`)
     .join("+");
   const scale = format === "wide" ? "640:360" : "360:640";
-  const grid = format === "wide" ? "2x3" : "3x2";
+  const grid = format === "wide" ? "2x4" : "4x2";
   execFileSync("ffmpeg", [
     "-y",
     "-v",

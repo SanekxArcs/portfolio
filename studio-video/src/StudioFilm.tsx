@@ -1,26 +1,26 @@
 import {
   AbsoluteFill,
-  Img,
   Sequence,
   interpolate,
   staticFile,
   useCurrentFrame,
-  useVideoConfig,
 } from "remotion";
 import { Audio } from "@remotion/media";
 import { loadFont } from "@remotion/fonts";
 import {
-  Applications,
-  Closing,
-  Connections,
-  Opening,
-  Personal,
-  Websites,
+  Breakdown,
+  Connected,
+  Cta,
+  Drop,
+  Finale,
+  Hook,
+  Reel,
+  type ReelShot,
 } from "./scenes";
-import { clamp, color } from "./design";
-import timing from "./timing.json";
-import timingPl from "./timing-pl.json";
-import { FilmLanguage, type FilmLocale } from "./i18n";
+import { Grain, Vignette } from "./elements";
+import { BEAT, clamp, color, noise, pulse, section } from "./design";
+import edit from "./edit.json";
+import { FilmLanguage, useFilmCopy, type FilmLocale } from "./i18n";
 import "./style.css";
 
 void loadFont({
@@ -39,118 +39,102 @@ void loadFont({
   unicodeRange: "U+0100-024F,U+1E00-1EFF",
 });
 
-const scenes = [
-  Opening,
-  Websites,
-  Applications,
-  Connections,
-  Personal,
-  Closing,
+// Two-beat cuts open each half of the reel, then it doubles to one cut per beat.
+const websites: ReelShot[] = [
+  { id: "feigin-electric", name: "Feigin Electric", beats: 2, mobile: true },
+  { id: "liberty-immigration", name: "Liberty Immigration", beats: 2, mobile: true },
+  { id: "love-notes", name: "Love Notes", beats: 1, mobile: true },
+  { id: "plenum", name: "Plenum", beats: 1, mobile: true },
+  { id: "solar-sense", name: "Solar Sense", beats: 1, mobile: true },
+  { id: "club-smart-mam", name: "Club Smart Mam", beats: 1, mobile: true },
+];
+const apps: ReelShot[] = [
+  { id: "work-buddy", name: "Work Buddy", beats: 2 },
+  { id: "erm-system", name: "ERM System", beats: 2, mobile: true },
+  { id: "tunerfest", name: "TunerFest", beats: 1, mobile: true },
+  { id: "movie-browser", name: "Movie Browser", beats: 1, mobile: true },
+  { id: "cusemit", name: "Cusemit", beats: 1 },
+  { id: "gemini-bookmark-manager", name: "Bookmark Manager", beats: 1 },
+];
+const total = websites.length + apps.length;
+
+const flashes = [
+  { at: 112, strength: 0.9 },
+  { at: 168, strength: 0.35 },
+  { at: 280, strength: 0.35 },
+  { at: 392, strength: 0.35 },
+  { at: 560, strength: 0.9 },
+  { at: 616, strength: 0.7 },
+];
+// The kick plays through both drops; the frame bumps with it.
+const grooves = [
+  [112, 448],
+  [560, 672],
 ];
 
-const Transition = ({ index }: { index: number }) => {
-  const frame = useCurrentFrame();
-  const { height, width } = useVideoConfig();
-  const x = interpolate(frame, [0, 10, 24], [-125, 0, 125], { ...clamp });
+const Edit = () => {
+  const copy = useFilmCopy();
+  const scenes = {
+    hook: <Hook />,
+    drop: <Drop />,
+    websites: <Reel label={copy.websites} shots={websites} offset={0} total={total} />,
+    apps: <Reel label={copy.apps} shots={apps} offset={websites.length} total={total} />,
+    connected: <Connected />,
+    breakdown: <Breakdown />,
+    finale: <Finale />,
+    cta: <Cta />,
+  };
   return (
-    <AbsoluteFill style={{ perspective: 1800, pointerEvents: "none" }}>
-      <div
-        style={{
-          position: "absolute",
-          inset: "-10% -15%",
-          background: index % 2 ? color.mint : "#d8edbc",
-          transform: `translateX(${x}%) skewX(-10deg) rotateY(${interpolate(frame, [0, 24], [-9, 9])}deg)`,
-          boxShadow: "0 0 100px #00000044",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            fontSize: Math.min(width, height) * 0.2,
-            fontFamily: "StudioSans",
-            fontWeight: 800,
-            letterSpacing: "-.08em",
-            color: "#0b151115",
-            whiteSpace: "nowrap",
-            rotate: "-8deg",
-          }}
-        >
-          O.D. EMPOWER
-        </div>
-        <Img
-          src={staticFile("brand/logo-dark.svg")}
-          style={{
-            width: Math.min(width, height) * 0.28,
-            height: Math.min(width, height) * 0.34,
-            rotate: `${interpolate(frame, [0, 24], [-25, 40])}deg`,
-          }}
-        />
-      </div>
-    </AbsoluteFill>
+    <>
+      {edit.sections.map(({ id }) => {
+        const { from, duration } = section(id);
+        return (
+          <Sequence key={id} name={id} from={from} durationInFrames={duration} premountFor={15}>
+            {scenes[id as keyof typeof scenes]}
+          </Sequence>
+        );
+      })}
+    </>
   );
 };
 
 export const StudioFilm = ({ locale = "en" }: { locale?: FilmLocale }) => {
-  const edit = locale === "pl" ? timingPl : timing;
   const frame = useCurrentFrame();
-  const { width } = useVideoConfig();
+  const shake = edit.impacts.reduce((sum, at) => {
+    const age = frame - at;
+    return age < 0 || age > 14 ? sum : sum + 18 * Math.exp(-age / 3.2);
+  }, 0);
+  const groove = grooves.some(([a, b]) => frame >= a && frame < b);
+  const punch = groove ? 1 + pulse(frame, 3) * 0.014 : 1;
+  const flash = flashes.reduce((sum, { at, strength }) => {
+    const age = frame - at;
+    return age < 0 || age > 6 ? sum : Math.max(sum, strength * Math.exp(-age / 1.6));
+  }, 0);
   return (
     <FilmLanguage locale={locale}>
       <AbsoluteFill style={{ background: color.ink }}>
-        <Audio
-          src={staticFile(
-            locale === "pl"
-              ? "audio/pl/soundtrack.m4a"
-              : "audio/soundtrack.m4a",
-          )}
-        />
-        {edit.scenes.map((scene, index) => {
-          const Scene = scenes[index];
-          return (
-            <Sequence
-              key={scene.id}
-              name={scene.headline}
-              from={scene.from}
-              durationInFrames={scene.duration}
-              premountFor={15}
-            >
-              <Scene />
-            </Sequence>
-          );
-        })}
-        {edit.scenes.slice(1).map((scene, index) => (
-          <Sequence
-            key={scene.id}
-            name="3D shutter transition"
-            from={scene.from - 10}
-            durationInFrames={24}
-          >
-            <Transition index={index} />
-          </Sequence>
-        ))}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            height: 5,
-            width: (width * frame) / (edit.durationInFrames - 1),
-            background: color.green,
-          }}
-        />
+        <Audio src={staticFile("audio/soundtrack.m4a")} />
         <AbsoluteFill
           style={{
+            translate: `${(noise(frame) - 0.5) * shake}px ${(noise(frame + 99) - 0.5) * shake}px`,
+            rotate: `${(noise(frame + 7) - 0.5) * shake * 0.03}deg`,
+            scale: punch + shake * 0.002,
+          }}
+        >
+          <Edit />
+        </AbsoluteFill>
+        <Vignette />
+        <Grain />
+        <AbsoluteFill style={{ background: color.paper, opacity: flash, pointerEvents: "none" }} />
+        <AbsoluteFill
+          style={{
+            background: "#000",
             opacity: interpolate(
               frame,
-              [0, 6, edit.durationInFrames - 10, edit.durationInFrames - 1],
-              [1, 0, 0, 1],
+              [edit.durationInFrames - BEAT, edit.durationInFrames - 1],
+              [0, 1],
               clamp,
             ),
-            background: color.ink,
             pointerEvents: "none",
           }}
         />

@@ -1,6 +1,12 @@
 import { bundle } from "@remotion/bundler";
 import { getCompositions, renderMedia, renderStill } from "@remotion/renderer";
-import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
+import {
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  writeFileSync,
+} from "node:fs";
 import { resolve, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -8,7 +14,12 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const locale = process.argv[3] || "en";
 if (!["en", "pl"].includes(locale)) throw new Error("Choose en or pl");
 const tag = locale === "pl" ? "pl-" : "";
-const timingFile = locale === "pl" ? "src/timing-pl.json" : "src/timing.json";
+const edit = JSON.parse(readFileSync(resolve(root, "src/edit.json"), "utf8"));
+// One review frame per section, taken once its main move has landed.
+const reviewFrames = edit.sections.map(
+  (section) => section.from + Math.min(edit.beatFrames * 2 + 8, section.beats * edit.beatFrames - 4),
+);
+const posterFrame = 690;
 const out = resolve(root, "out");
 mkdirSync(out, { recursive: true });
 const candidates = [process.env.CHROME_PATH];
@@ -24,7 +35,12 @@ if (existsSync(playwright)) {
 const browserExecutable = candidates.find(
   (candidate) => candidate && existsSync(candidate),
 );
-const browser = { browserExecutable, chromiumOptions: { gl: "angle" } };
+// A fixed port keeps the renderer off a running website dev server.
+const browser = {
+  browserExecutable,
+  chromiumOptions: { gl: "angle" },
+  port: Number(process.env.REMOTION_PORT) || 3079,
+};
 console.log("Bundling the studio film...");
 const serveUrl = await bundle({
   entryPoint: resolve(root, "src/index.ts"),
@@ -40,12 +56,7 @@ for (const baseId of ["StudioWide", "StudioVertical"]) {
   const portrait = baseId === "StudioVertical";
   const suffix = portrait ? "vertical" : "wide";
   if (mode === "stills") {
-    const edit = JSON.parse(
-      (await import("node:fs")).readFileSync(resolve(root, timingFile), "utf8"),
-    );
-    const frames = edit.scenes.map(
-      (scene) => scene.from + Math.min(100, scene.duration - 20),
-    );
+    const frames = reviewFrames;
     for (let index = 0; index < frames.length; index++) {
       const output = resolve(out, `review-${tag}${suffix}-${index + 1}.png`);
       await renderStill({
@@ -92,14 +103,11 @@ if (mode !== "stills") {
   const composition = compositions.find(
     (item) => item.id === (locale === "pl" ? "StudioWidePL" : "StudioWide"),
   );
-  const edit = JSON.parse(
-    (await import("node:fs")).readFileSync(resolve(root, timingFile), "utf8"),
-  );
   await renderStill({
     serveUrl,
     composition,
     output: resolve(out, `od-empower-${tag}poster.png`),
-    frame: edit.scenes.at(-1).from + 115,
+    frame: posterFrame,
     ...browser,
   });
   writeFileSync(

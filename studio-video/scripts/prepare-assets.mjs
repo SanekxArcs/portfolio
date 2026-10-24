@@ -1,11 +1,17 @@
-import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  writeFileSync,
+} from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const portfolio = resolve(root, "..");
-for (const folder of ["public/brand", "public/projects", "public/fonts"]) {
+for (const folder of ["public/brand", "public/reel", "public/fonts"]) {
   mkdirSync(resolve(root, folder), { recursive: true });
 }
 copyFileSync(
@@ -25,25 +31,30 @@ writeFileSync(
   resolve(root, "src/logo-svg.json"),
   JSON.stringify(readFileSync(resolve(portfolio, "public/logo.svg"), "utf8")),
 );
+// The reel's captures: desktop for every project, mobile where the site has one.
 for (const id of [
-  "solar-sense",
   "feigin-electric",
-  "erm-system",
+  "liberty-immigration",
+  "love-notes",
+  "plenum",
+  "solar-sense",
+  "club-smart-mam",
   "work-buddy",
+  "erm-system",
+  "tunerfest",
+  "movie-browser",
+  "cusemit",
+  "gemini-bookmark-manager",
 ]) {
   copyFileSync(
     resolve(portfolio, `public/content/project-${id}-desktop.webp`),
-    resolve(root, `public/projects/${id}.webp`),
+    resolve(root, `public/reel/${id}.webp`),
   );
+  const mobile = resolve(portfolio, `public/content/project-${id}-mobile.webp`);
+  if (existsSync(mobile)) {
+    copyFileSync(mobile, resolve(root, `public/reel/${id}-mobile.webp`));
+  }
 }
-copyFileSync(
-  resolve(portfolio, "public/content/project-solar-sense-mobile.webp"),
-  resolve(root, "public/projects/solar-sense-mobile.webp"),
-);
-copyFileSync(
-  resolve(portfolio, "public/content/project-feigin-electric-mobile.webp"),
-  resolve(root, "public/projects/feigin-electric-mobile.webp"),
-);
 const profile = JSON.parse(
   readFileSync(resolve(portfolio, "content/profile.json"), "utf8"),
 );

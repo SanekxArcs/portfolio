@@ -1,27 +1,17 @@
 # O.D. EMPOWER — studio film
 
-A studio promo in English (36 seconds) and Polish (38.5 seconds), built in Remotion and Three.js. Each language has separate horizontal and vertical layouts. The original O.D. logo, mint/ink colours, website font, portrait and real project captures connect it to the portfolio.
+A 24-second beat-cut promo, built in Remotion and Three.js, in English and Polish, each with its own horizontal and vertical layout. There is no narration: big type, hard cuts and an original synthesized score carry it, so it works with the sound off too.
 
 ## Exports
 
-The four current exports are collected in `out/delivery/`:
+`npm run delivery` collects the current cuts in `out/delivery/`:
 
 | Language | Horizontal, 1920 × 1080        | Vertical, 1080 × 1920        |
 | -------- | ------------------------------ | ---------------------------- |
 | English  | `od-empower-en-horizontal.mp4` | `od-empower-en-vertical.mp4` |
 | Polish   | `od-empower-pl-horizontal.mp4` | `od-empower-pl-vertical.mp4` |
 
-All are 30 fps, H.264 + AAC, with narration, music and effects. `out/od-empower-en-pl.zip` contains all four videos and optional SRT captions.
-
-- `out/od-empower-wide-v3.mp4` and `out/od-empower-vertical-v3.mp4` — current narration and clearer mix; visuals are identical to the original exports
-- `out/od-empower-voice-review.mp3` — name and closing lines without music or effects
-- `out/od-empower-wide.mp4` — 1920 × 1080, 30 fps, H.264 + AAC
-- `out/od-empower-vertical.mp4` — 1080 × 1920, 30 fps, H.264 + AAC
-- `out/od-empower-poster.png` — widescreen cover
-- `out/od-empower-en.srt` — optional narration captions
-- `out/verification-en.json` and `out/verification-pl.json` — export dimensions, duration and full-decode results
-
-The vertical version has its own layout. It is not a crop of the widescreen edit.
+All are 30 fps, H.264 + AAC. The vertical version has its own layout. It is not a crop of the widescreen edit.
 
 ## Preview and render
 
@@ -30,73 +20,43 @@ Run these commands inside this folder:
 ```sh
 npm ci
 npm run studio
-npm run render
+npm run render        # English, both formats
+npm run render:pl     # Polish, both formats
 ```
 
-The preview uses port 3002. Render one format with `npm run render:wide` or `npm run render:vertical`. `npm run stills` renders one review frame per scene and format. Set `CHROME_PATH` if Chrome is installed in a custom location; otherwise the renderer finds a local Playwright Chromium or uses Remotion's browser setup.
+The preview uses port 3002, and renders use port 3079 (override with `REMOTION_PORT`) so they don't collide with the website's dev server. `npm run stills` / `stills:pl` render one review frame per section. `npm run verify` / `verify:pl` fully decode the finished files and write contact sheets from the actual MP4s. Set `CHROME_PATH` if Chrome is in a custom location.
 
-`npm run lint` checks the video source and TypeScript. `npm run verify` decodes both finished files and writes contact sheets from the actual MP4s.
+## How it's built
 
-For Polish, use `npm run render:pl`, `npm run stills:pl`, `npm run audio:pl` and `npm run verify:pl`. Remotion Studio includes `StudioWide`, `StudioVertical`, `StudioWidePL` and `StudioVerticalPL`. Polish uses the native `pl-PL-MarekNeural` voice, its own scene timing and a longer closing hold. Both fonts include Polish characters.
+Everything runs on one grid: **128.6 BPM, so one beat is exactly 14 frames at 30 fps**. `src/edit.json` holds the section boundaries and impact frames. The scenes and the score both read it, so picture and sound can't drift apart.
 
-After verifying both languages, `npm run delivery` collects all four current videos and both caption files in `out/delivery/`.
+| Beats | Section   | Picture                                                                         |
+| ----- | --------- | ------------------------------------------------------------------------------- |
+| 0–7   | hook      | "Got / an / idea?" lands word by word, flips to mint, then rushes into the lens |
+| 8–11  | drop      | Flash; the 3D logo whips in over moving outlined marquee type                   |
+| 12–19 | websites  | Six real sites: two-beat cuts, then one per beat                                |
+| 20–27 | apps      | Six real apps, same acceleration                                                |
+| 28–31 | connected | APIs / Automation / AI tools build a node graph; "All connected." on mint       |
+| 32–39 | breakdown | Music drops out; portrait mask reveal, "One developer. Direct contact."         |
+| 40–43 | finale    | "Let's / build / it." strobing across three palettes, then a recap strobe       |
+| 44–51 | cta       | Logo, o-d.dev, services; hold and fade                                          |
 
-## Edit the film
+- `src/edit.json`: the beat grid, sections and impact frames
+- `src/i18n.tsx`: all on-screen English and Polish wording
+- `src/scenes.tsx`: one component per section
+- `src/StudioFilm.tsx`: edit order, reel project list, camera shake, kick punch, flash frames, grain
+- `src/BrandModel.tsx`: the original SVG logo extruded in Three.js
+- `scripts/generate-soundtrack.py`: the score
 
-- `film.json`: narration, voice, minimum scene durations and music tempo
-- `film-pl.json`: Polish narration, voice and minimum scene durations
-- `src/i18n.tsx`: on-screen English and Polish wording
-- `src/scenes.tsx`: scene layouts
-- `src/BrandModel.tsx`: extruded original SVG, bevels, lights and moving orbit points
-- `src/StudioFilm.tsx`: edit, shutter transitions and mixed soundtrack
-- `src/timing.json`: generated scene boundaries, rounded to the half-second beat
-- `src/timing-pl.json`: independently generated Polish scene boundaries
-- `scripts/generate-soundtrack.py`: original score, transition effects and narration mix
+All animation is driven by the video frame, including grain and shake, which use seeded noise. Every render is identical.
 
-All animation is driven by the video frame. There are no real-time clocks, CSS animations or independent Three.js loops.
+## Sound
 
-To change the narration, install Python dependencies and make sure FFmpeg is available:
+`npm run audio` (needs `numpy` from `requirements.txt` and FFmpeg) synthesizes the whole track from scratch, with no samples. It has a four-on-the-floor kick, clap, hats, a rolling offbeat bass and supersaw stabs, all ducked by the kick, over a D minor i–VI–III–VII loop. It also builds risers, snare rolls, impacts on each section hit and a stutter gate under the recap strobe. The output is mastered to about −14 LUFS. Both languages share one soundtrack, because they share one edit.
 
-```sh
-python -m pip install -r requirements.txt
-python scripts/generate-voice.py --force
-python scripts/generate-soundtrack.py
-npm run render
-```
+## Assets
 
-The selected neural voice is `en-US-AndrewMultilingualNeural`, with a slightly slower delivery. Voice generation needs an internet connection. The generated voice files are included, so previewing and rendering need no speech account or API key.
-
-The personal introduction says **“I'm your developer. We'll work together, from the first sketch to launch.”** The on-screen name remains **Oleksandr Dzisiak**. `speechParts` in `film.json` controls spoken wording, individual phrase rates and pauses separately from the written captions. The brand's speech input is “Oh Dee Empower” to prevent the synthesizer from misreading the initials.
-
-For sound-only edits, regenerate selected lines while keeping the edit boundaries, rebuild the mix, and replace the audio tracks:
-
-```sh
-python scripts/generate-voice.py --force --only personal,closing --keep-edit
-python scripts/generate-soundtrack.py
-npm run audio:replace -- v3
-npm run verify
-```
-
-The replacement checks that the compressed video data is unchanged. Music and effects duck during speech, and the sonic sign-off begins only after the closing words finish.
-
-## Storyboard
-
-| Time      | Picture                                                              | Message                        |
-| --------- | -------------------------------------------------------------------- | ------------------------------ |
-| 0–6 s     | Rotating beveled logo, orbit particles, masked type swap             | Need a website? A web app?     |
-| 6–11.5 s  | Moving desktop and mobile frames for Solar Sense and Feigin Electric | A clear first impression       |
-| 11.5–17 s | ERM transitions into Work Buddy                                      | Built around your work         |
-| 17–22.5 s | Connected store, data and team; moving data pulses                   | Less busywork                  |
-| 22.5–29 s | Portrait enters as a dimensional card                                | One developer. Direct contact. |
-| 29–36 s   | Logo returns, address draws on, ending holds                         | Tell me what you're building   |
-
-## Assets and sound
-
-The music and sound effects are synthesized from scratch by the included script, with a beat aligned to the scene timing. The revised export was measured at approximately −15.8 LUFS with a −2.3 dB true peak.
-
-Project screenshots and portrait come from the existing portfolio. No confidential client assets are used. The logo is the actual supplied SVG, extruded into a Three.js mesh. Noto Sans is distributed under the included SIL Open Font License.
-
-The assets are already local in `public/`. `npm run assets` is an optional refresh from the parent portfolio checkout.
+The project captures in `public/reel/`, the portrait, the logo and the Noto Sans font all come from the portfolio. `npm run assets` refreshes them from the parent checkout. Noto Sans is distributed under the included SIL Open Font License.
 
 ## Website isolation
 

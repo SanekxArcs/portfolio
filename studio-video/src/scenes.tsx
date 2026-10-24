@@ -1,743 +1,593 @@
+import type { CSSProperties, ReactNode } from "react";
 import {
+  AbsoluteFill,
   Img,
   interpolate,
   staticFile,
   useCurrentFrame,
-  useVideoConfig,
 } from "remotion";
 import { BrandModel } from "./BrandModel";
-import { Arrow, Browser, Frame, Grid, Title } from "./elements";
-import { clamp, color, ease, enter } from "./design";
+import { Arrow, NodeIcon, Phone, Shot, Slam, fit } from "./elements";
+import {
+  BEAT,
+  clamp,
+  color,
+  enter,
+  expoOut,
+  font,
+  pulse,
+  snap,
+  useFormat,
+} from "./design";
 import { useFilmCopy } from "./i18n";
 
-const useFormat = () => {
-  const { width, height } = useVideoConfig();
-  return { portrait: height > width, width, height };
-};
+const fill = (background: string, foreground: string): CSSProperties => ({
+  background,
+  color: foreground,
+  fontFamily: font,
+  overflow: "hidden",
+});
 
-export const Opening = () => {
-  const copy = useFilmCopy();
-  const f = useCurrentFrame();
-  const { portrait } = useFormat();
-  const flip = f >= 77;
-  const swap = interpolate(f, [77, 96], [0, 1], { ...clamp, easing: ease });
+/** A line that rises out of a mask. */
+const Rise = ({
+  children,
+  at,
+  style,
+}: {
+  children: ReactNode;
+  at: number;
+  style?: CSSProperties;
+}) => {
+  const frame = useCurrentFrame();
+  const t = interpolate(frame, [at, at + 12], [0, 1], {
+    ...clamp,
+    easing: expoOut,
+  });
   return (
-    <Frame number="01" label={copy.opening.label}>
-      <Grid />
-      <div
-        style={{
-          position: "absolute",
-          width: 700,
-          height: 700,
-          background: "radial-gradient(ellipse,#00b87a22,transparent 68%)",
-          right: portrait ? -180 : -10,
-          top: portrait ? 450 : 0,
-        }}
-      />
-      <div
-        style={{
-          display: "flex",
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: portrait ? "column" : "row",
-          gap: portrait ? 18 : 0,
-        }}
-      >
-        <div
-          style={{
-            width: portrait ? "100%" : "58%",
-            zIndex: 2,
-            flexShrink: 0,
-            paddingTop: portrait ? 80 : 0,
-          }}
-        >
-          <Title lines={[copy.opening.lead]} size={portrait ? 142 : 174} />
-          <div
-            style={{
-              height: portrait ? 190 : 210,
-              position: "relative",
-              fontSize: portrait ? 142 : 174,
-              fontWeight: 750,
-              letterSpacing: "-.065em",
-              lineHeight: 1.06,
-              color: color.mint,
-              overflow: "hidden",
-            }}
-          >
-            <div
-              style={{
-                translate: `0 ${flip ? -swap * 115 : interpolate(f, [14, 42], [115, 0], { ...clamp, easing: ease })}%`,
-                position: "absolute",
-                inset: 0,
-              }}
-            >
-              {copy.opening.first}
-            </div>
-            {flip && (
-              <div
-                style={{
-                  translate: `0 ${(1 - swap) * 115}%`,
-                  position: "absolute",
-                  inset: 0,
-                }}
-              >
-                {copy.opening.second}
-              </div>
-            )}
-          </div>
-          <div
-            style={{
-              fontSize: portrait ? 38 : 35,
-              color: color.muted,
-              marginTop: portrait ? 20 : 34,
-              opacity: enter(f, 43),
-              translate: `0 ${(1 - enter(f, 43)) * 16}px`,
-            }}
-          >
-            {copy.opening.support}
-          </div>
-        </div>
-        <div
-          style={{
-            width: portrait ? 830 : 770,
-            height: portrait ? 850 : 770,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexShrink: 0,
-            marginLeft: portrait ? 0 : -35,
-            marginTop: portrait ? -12 : 0,
-          }}
-        >
-          <BrandModel size={portrait ? 830 : 770} />
-        </div>
+    <div style={{ overflow: "hidden", paddingBottom: ".1em", ...style }}>
+      <div style={{ translate: `0 ${(1 - t) * 110}%`, rotate: `${(1 - t) * 4}deg`, transformOrigin: "0 100%" }}>
+        {children}
       </div>
-    </Frame>
+    </div>
   );
 };
 
-export const Websites = () => {
-  const copy = useFilmCopy();
+const Tag = ({ children, style }: { children: ReactNode; style?: CSSProperties }) => (
+  <div
+    style={{
+      position: "absolute",
+      fontFamily: font,
+      fontSize: 24,
+      fontWeight: 600,
+      letterSpacing: ".14em",
+      textTransform: "uppercase",
+      ...style,
+    }}
+  >
+    {children}
+  </div>
+);
+
+// Accelerating curve for the rush into the drop.
+const Easing3 = (t: number) => t * t * t;
+
+export const Hook = () => {
   const f = useCurrentFrame();
+  const copy = useFilmCopy();
   const { portrait } = useFormat();
-  const move = enter(f, 17, 43);
-  const swap = enter(f, 87, 26);
+  const second = f >= BEAT * 4;
+  const words = copy.hook[second ? 1 : 0];
+  const start = second ? BEAT * 4 : 0;
+  // Last beat: the line rushes past the camera into the drop.
+  const rush = interpolate(f, [BEAT * 7, BEAT * 8], [0, 1], {
+    ...clamp,
+    easing: Easing3,
+  });
+  const lineSize = portrait
+    ? Math.min(...words.map((word) => fit(word, 900, 300)))
+    : fit(words.join(" "), 1650, 330);
+  const accentBeat = interpolate(f, [BEAT * 3, BEAT * 3 + 6], [1.06, 1], clamp);
   return (
-    <Frame theme="paper" number="02" label={copy.websites.label}>
-      <div style={{ paddingTop: portrait ? 85 : 45, flexShrink: 0 }}>
-        <Title
-          lines={portrait ? copy.websites.portrait : copy.websites.wide}
-          size={portrait ? 118 : 130}
-        />
-      </div>
-      <div
+    <AbsoluteFill style={fill(second ? color.mint : color.ink, second ? color.ink : color.paper)}>
+      <Tag style={{ left: portrait ? 80 : 96, top: portrait ? 110 : 70, opacity: 0.6 }}>
+        O.D. Empower
+      </Tag>
+      <AbsoluteFill
         style={{
-          flex: 1,
-          position: "relative",
-          display: "flex",
-          alignItems: "center",
+          alignItems: portrait ? "flex-start" : "center",
           justifyContent: "center",
-          perspective: 1800,
-          minHeight: 0,
+          padding: portrait ? "0 80px" : 0,
+          scale: 1 + rush * 5 + (f >= BEAT * 3 && f < BEAT * 4 ? accentBeat - 1 : 0),
+          filter: rush > 0 ? `blur(${rush * 30}px)` : undefined,
+          opacity: 1 - rush * 0.8,
         }}
       >
         <div
           style={{
-            position: "relative",
-            translate: `${(1 - move) * 150}px ${(1 - move) * 150}px`,
-            rotate: `${interpolate(f, [17, 70, 165], [-7, -3, 0], { ...clamp, easing: ease })}deg`,
-            transform: `rotateY(${(1 - move) * -16}deg) rotateX(${3 - Math.sin(f / 80) * 2}deg)`,
-            opacity: move,
+            display: "flex",
+            flexDirection: portrait ? "column" : "row",
+            gap: portrait ? 0 : "0.24em",
+            fontSize: lineSize,
           }}
         >
-          <div
-            style={{
-              position: "relative",
-              width: portrait ? 865 : 1220,
-              height: portrait ? 690 : 605,
-              translate: `0 ${Math.sin(f / 70) * 9}px`,
-            }}
-          >
-            <Browser
-              project="solar-sense"
-              url="solarsense.o-d.dev"
-              width={portrait ? 865 : 1220}
-              height={portrait ? 690 : 605}
+          {words.map((word, index) => (
+            <Slam
+              key={word}
+              at={start + index * BEAT}
+              size={lineSize}
               style={{
-                position: "absolute",
-                opacity: 1 - swap,
-                translate: `${-swap * 120}px 0`,
-                scale: 1 - swap * 0.03,
+                color:
+                  index === words.length - 1 && !second ? color.mint : undefined,
               }}
-            />
-            <Browser
-              project="feigin-electric"
-              url="feiginelectric.o-d.dev"
-              width={portrait ? 865 : 1220}
-              height={portrait ? 690 : 605}
-              style={{
-                position: "absolute",
-                opacity: swap,
-                translate: `${(1 - swap) * 170}px 0`,
-                scale: 0.97 + swap * 0.03,
-              }}
+            >
+              {word}
+            </Slam>
+          ))}
+        </div>
+      </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+
+const Marquee = ({
+  text,
+  size,
+  y,
+  speed,
+  solid = false,
+}: {
+  text: string;
+  size: number;
+  y: number;
+  speed: number;
+  solid?: boolean;
+}) => {
+  const f = useCurrentFrame();
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: y,
+        left: 0,
+        whiteSpace: "nowrap",
+        fontSize: size,
+        fontWeight: 850,
+        letterSpacing: "-.05em",
+        lineHeight: 1,
+        translate: `${((f * speed) % (size * 6)) - size * 6}px 0`,
+        color: solid ? color.mint : "transparent",
+        WebkitTextStroke: solid ? undefined : `2px ${color.mint}`,
+        opacity: solid ? 0.95 : 0.3,
+      }}
+    >
+      {Array.from({ length: 6 }, () => text).join("  ")}
+    </div>
+  );
+};
+
+export const Drop = () => {
+  const { portrait, width, height } = useFormat();
+  const size = portrait ? 230 : 250;
+  const rows = portrait ? 7 : 4;
+  const gap = height / rows;
+  const model = portrait ? 980 : 900;
+  return (
+    <AbsoluteFill style={fill(color.ink, color.paper)}>
+      {Array.from({ length: rows }, (_, i) => (
+        <Marquee
+          key={i}
+          text="O.D. EMPOWER —"
+          size={size}
+          y={i * gap + (gap - size) / 2}
+          speed={i % 2 ? 46 : -46}
+        />
+      ))}
+      <AbsoluteFill
+        style={{
+          background: `radial-gradient(circle at 50% 50%, ${color.ink} 0%, ${color.ink}cc 28%, transparent 62%)`,
+        }}
+      />
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
+        <div style={{ width: model, height: model, maxWidth: width }}>
+          <BrandModel size={model} beat />
+        </div>
+      </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+
+export type ReelShot = { id: string; name: string; beats: number; mobile?: boolean };
+
+export const Reel = ({
+  label,
+  shots,
+  offset,
+  total,
+}: {
+  label: string;
+  shots: ReelShot[];
+  offset: number;
+  total: number;
+}) => {
+  const f = useCurrentFrame();
+  const { portrait } = useFormat();
+  let start = 0;
+  let index = 0;
+  for (; index < shots.length - 1; index++) {
+    const length = shots[index].beats * BEAT;
+    if (f < start + length) break;
+    start += length;
+  }
+  const shot = shots[index];
+  const lf = f - start;
+  const variant = (index + offset) % 4;
+  const t = enter(lf, 0, 9);
+  const blur = (1 - t) * 22;
+  const drift = 1 + lf * 0.0012;
+  const transforms = [
+    { x: 560 * (1 - t), y: 0, ry: -24 + 14 * t, rx: 4, s: 1 },
+    { x: 0, y: 0, ry: 0, rx: 0, s: 1.35 - 0.35 * t },
+    { x: 0, y: 520 * (1 - t), ry: 0, rx: 26 - 18 * t, s: 1 },
+    { x: -560 * (1 - t), y: 0, ry: 24 - 14 * t, rx: 4, s: 1 },
+  ][variant];
+  const wordSize = portrait ? fit(label, 920, 220) : fit(label, 1300, 290);
+  const cardTransform: CSSProperties = {
+    transform: `perspective(2200px) rotateY(${transforms.ry}deg) rotateX(${transforms.rx}deg)`,
+    translate: `${transforms.x}px ${transforms.y}px`,
+    scale: transforms.s * drift,
+    filter: blur > 0.5 ? `blur(${blur}px)` : undefined,
+  };
+  const showPhone = shot.mobile && shot.beats > 1;
+  return (
+    <AbsoluteFill style={fill(color.deep, color.paper)}>
+      <AbsoluteFill style={{ scale: 1.25 }}>
+        <Img
+          src={staticFile(`reel/${shot.id}.webp`)}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            filter: "blur(60px) brightness(.32) saturate(1.4)",
+          }}
+        />
+      </AbsoluteFill>
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
+        {portrait && shot.mobile ? (
+          <div style={{ ...cardTransform, marginTop: -120 }}>
+            <Phone src={`reel/${shot.id}-mobile.webp`} width={560} />
+          </div>
+        ) : (
+          <div style={{ ...cardTransform, marginLeft: portrait ? 0 : 230, marginTop: portrait ? -160 : -150 }}>
+            <Shot
+              src={`reel/${shot.id}.webp`}
+              width={portrait ? 960 : 1180}
+              height={portrait ? 1100 : 800}
+              position={portrait ? "left top" : "top"}
             />
           </div>
+        )}
+        {showPhone && !portrait && (
           <div
             style={{
               position: "absolute",
-              right: portrait ? -25 : -130,
-              bottom: portrait ? -160 : -30,
-              width: portrait ? 225 : 200,
-              height: portrait ? 450 : 385,
-              border: "9px solid #15251c",
-              borderRadius: 36,
-              overflow: "hidden",
-              boxShadow: "0 24px 55px #001f2b40",
-              rotate: "7deg",
-              scale: enter(f, 47, 28),
+              right: 190,
+              bottom: 70,
+              translate: `0 ${(1 - enter(lf, BEAT, 9)) * 700}px`,
+              rotate: `${6 - enter(lf, BEAT, 9) * 2}deg`,
             }}
           >
-            <Img
-              src={staticFile("projects/solar-sense-mobile.webp")}
-              style={{
-                position: "absolute",
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "top",
-                opacity: 1 - swap,
-              }}
-            />
-            <Img
-              src={staticFile("projects/feigin-electric-mobile.webp")}
-              style={{
-                position: "absolute",
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "top",
-                opacity: swap,
-              }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                top: 5,
-                left: "35%",
-                width: "30%",
-                height: 10,
-                background: color.ink,
-                borderRadius: 10,
-              }}
-            />
+            <Phone src={`reel/${shot.id}-mobile.webp`} width={250} />
           </div>
-        </div>
-      </div>
+        )}
+      </AbsoluteFill>
+      <Tag style={{ left: portrait ? 80 : 96, top: portrait ? 110 : 70 }}>
+        <span style={{ color: color.mint }}>
+          {String(offset + index + 1).padStart(2, "0")}
+        </span>
+        <span style={{ opacity: 0.45 }}> / {total}</span>
+        <span style={{ marginLeft: 22 }}>{shot.name}</span>
+      </Tag>
       <div
         style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 22,
-          paddingBottom: portrait ? 75 : 10,
-          fontSize: portrait ? 35 : 32,
-          color: "#385346",
-          opacity: enter(f, 45),
+          position: "absolute",
+          left: portrait ? 70 : 84,
+          bottom: portrait ? 150 : 40,
+          color: color.paper,
+          textShadow: "0 12px 60px rgba(0,0,0,.55)",
+          scale: 1 + pulse(lf, 2.5) * 0.025,
+          transformOrigin: "0 100%",
         }}
       >
-        <span
-          style={{
-            width: 9,
-            height: 9,
-            borderRadius: "50%",
-            background: color.green,
-          }}
-        />
-        {copy.websites.support}
+        <Slam at={0} size={wordSize} from={1.15}>
+          {label}
+        </Slam>
       </div>
-    </Frame>
+    </AbsoluteFill>
   );
 };
 
-export const Applications = () => {
-  const copy = useFilmCopy();
+export const Connected = () => {
   const f = useCurrentFrame();
-  const { portrait } = useFormat();
-  const swap = enter(f, 79, 26);
-  return (
-    <Frame number="03" label={copy.applications.label}>
-      <Grid />
-      <div style={{ paddingTop: portrait ? 80 : 38, zIndex: 2 }}>
-        <Title
-          lines={portrait ? copy.applications.portrait : copy.applications.wide}
-          size={portrait ? 118 : 130}
-          accent={portrait ? 1 : undefined}
-        />
-      </div>
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          position: "relative",
-          perspective: 2000,
-          minHeight: 0,
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            opacity: 1 - swap,
-            translate: `${-swap * 350}px ${(1 - enter(f, 20)) * 100}px`,
-            transform: `rotateY(${-swap * 24}deg) rotateX(4deg)`,
-            rotate: `${-3 - swap * 7}deg`,
-            scale: interpolate(f, [20, 75], [0.91, 1], {
-              ...clamp,
-              easing: ease,
-            }),
-          }}
-        >
-          <Browser
-            project="erm-system"
-            url={copy.applications.erm}
-            width={portrait ? 870 : 1220}
-            height={portrait ? 660 : 590}
-          />
-        </div>
-        <div
-          style={{
-            position: "absolute",
-            opacity: swap,
-            translate: `${(1 - swap) * 470}px ${(1 - swap) * 50}px`,
-            transform: `rotateY(${(1 - swap) * 25}deg)`,
-            rotate: `${3 - swap * 3}deg`,
-            scale: 0.96 + swap * 0.04,
-          }}
-        >
-          <Browser
-            project="work-buddy"
-            url={copy.applications.buddy}
-            width={portrait ? 870 : 1220}
-            height={portrait ? 660 : 590}
-          />
-        </div>
-      </div>
-      <div
-        style={{
-          fontSize: portrait ? 35 : 32,
-          color: color.muted,
-          paddingBottom: portrait ? 100 : 12,
-          display: "flex",
-          alignItems: "center",
-          gap: 20,
-        }}
-      >
-        <span
-          style={{
-            display: "inline-block",
-            height: 9,
-            width: 9,
-            borderRadius: "50%",
-            background: color.mint,
-          }}
-        />
-        {copy.applications.support}
-      </div>
-    </Frame>
-  );
-};
-
-const ToolIcon = ({ kind, x, y }: { kind: number; x: number; y: number }) => (
-  <g
-    transform={`translate(${x - 30} ${y - 30})`}
-    stroke={color.mint}
-    strokeWidth="3.5"
-    fill="none"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    {kind === 0 ? (
-      <>
-        <path d="M8 24h44l-5 31H13L8 24Z" />
-        <path d="m18 24 8-17m16 17L34 7M23 35v10m14-10v10" />
-      </>
-    ) : kind === 1 ? (
-      <>
-        <ellipse cx="30" cy="12" rx="22" ry="8" />
-        <path d="M8 12v33c0 11 44 11 44 0V12M8 28c0 11 44 11 44 0" />
-      </>
-    ) : (
-      <>
-        <circle cx="30" cy="17" r="10" />
-        <path d="M10 53v-8c0-17 40-17 40 0v8M10 12a8 8 0 0 0 0 16M50 12a8 8 0 0 1 0 16" />
-      </>
-    )}
-  </g>
-);
-
-export const Connections = () => {
   const copy = useFilmCopy();
-  const f = useCurrentFrame();
   const { portrait } = useFormat();
-  const nodes = portrait
-    ? [
-        [450, 170],
-        [450, 470],
-        [450, 770],
-      ]
-    : [
-        [245, 240],
-        [800, 240],
-        [1355, 240],
-      ];
-  const svgWidth = portrait ? 900 : 1600;
-  const svgHeight = portrait ? 1000 : 500;
+  const step = Math.min(3, Math.floor(f / BEAT));
+  const all = step === 3;
+  const word = copy.connected[step];
+  const size = portrait ? fit(word, 920, 210) : fit(word, 1640, 250);
+  const nodes = [300, 800, 1300];
+  const line = all ? color.ink : color.mint;
   return (
-    <Frame theme="mint" number="04" label={copy.connections.label}>
-      <div style={{ paddingTop: portrait ? 90 : 55 }}>
-        <Title
-          lines={portrait ? copy.connections.portrait : copy.connections.wide}
-          size={portrait ? 126 : 168}
-        />
-      </div>
-      <div
+    <AbsoluteFill style={fill(all ? color.mint : color.ink, all ? color.ink : color.paper)}>
+      <AbsoluteFill
         style={{
-          fontSize: portrait ? 40 : 44,
-          marginTop: 28,
-          opacity: enter(f, 25),
-          maxWidth: portrait ? 750 : 1300,
-          lineHeight: 1.3,
+          alignItems: "center",
+          justifyContent: "flex-start",
+          paddingTop: portrait ? 520 : 200,
         }}
       >
-        {copy.connections.support}
-      </div>
-      <div
+        <Slam key={step} at={step * BEAT} size={size}>
+          {word}
+        </Slam>
+      </AbsoluteFill>
+      <AbsoluteFill
         style={{
-          flex: 1,
-          display: "flex",
           alignItems: "center",
-          justifyContent: "center",
-          minHeight: 0,
+          justifyContent: "flex-end",
+          paddingBottom: portrait ? 560 : 150,
         }}
       >
         <svg
-          width="100%"
-          viewBox={`0 0 ${svgWidth} ${svgHeight}`}
+          width={portrait ? 1040 : 1600}
+          viewBox="0 0 1600 420"
           style={{ overflow: "visible" }}
         >
           {[0, 1].map((i) => {
-            const a = nodes[i],
-              b = nodes[i + 1];
-            const path = portrait
-              ? `M${a[0]} ${a[1] + 83}V${b[1] - 83}`
-              : `M${a[0] + 150} ${a[1]}H${b[0] - 150}`;
-            const progress = enter(f, 24 + i * 15, 35);
+            const drawn = interpolate(f, [(i + 1) * BEAT, (i + 1) * BEAT + 9], [0, 1], {
+              ...clamp,
+              easing: expoOut,
+            });
+            const x1 = nodes[i] + 130;
+            const x2 = nodes[i + 1] - 130;
             return (
               <g key={i}>
-                <path d={path} stroke="#0b151126" strokeWidth="2" fill="none" />
-                <path
-                  d={path}
-                  stroke={color.ink}
-                  strokeWidth="3"
-                  fill="none"
-                  pathLength={1}
-                  strokeDasharray={1}
-                  strokeDashoffset={1 - progress}
+                <line
+                  x1={x1}
+                  x2={x1 + (x2 - x1) * drawn}
+                  y1={180}
+                  y2={180}
+                  stroke={line}
+                  strokeWidth={5}
+                  strokeLinecap="round"
                 />
-                {[0, 1, 2].map((j) => {
-                  const t = (f / 65 + j / 3 + i * 0.15) % 1;
-                  return (
-                    <circle
-                      key={j}
-                      cx={
-                        portrait ? a[0] : a[0] + 150 + t * (b[0] - a[0] - 300)
-                      }
-                      cy={portrait ? a[1] + 83 + t * (b[1] - a[1] - 166) : a[1]}
-                      r={7}
-                      fill={color.ink}
-                      opacity={progress * 0.8}
-                    />
-                  );
-                })}
+                {drawn >= 1 &&
+                  [0, 1, 2].map((j) => {
+                    const p = (f * 0.07 + j / 3 + i * 0.2) % 1;
+                    return (
+                      <circle
+                        key={j}
+                        cx={x1 + (x2 - x1) * p}
+                        cy={180}
+                        r={9}
+                        fill={line}
+                      />
+                    );
+                  })}
               </g>
             );
           })}
-          {nodes.map(([x, y], i) => {
-            const reveal = enter(f, 14 + i * 12, 27);
+          {nodes.map((x, i) => {
+            const pop = enter(f, i * BEAT, 8);
+            const lit = all || step === i;
             return (
               <g
-                key={i}
-                transform={`translate(${x} ${y + (1 - reveal) * 70}) scale(${0.9 + reveal * 0.1}) translate(${-x} ${-y})`}
-                opacity={reveal}
+                key={x}
+                transform={`translate(${x} 180) scale(${0.6 + pop * 0.4 + (lit ? pulse(f, 2.5) * 0.06 : 0)})`}
+                opacity={pop}
               >
                 <rect
-                  x={x - 150}
-                  y={y - 83}
-                  width={300}
-                  height={166}
-                  rx={24}
-                  fill={color.ink}
+                  x={-130}
+                  y={-130}
+                  width={260}
+                  height={260}
+                  rx={48}
+                  fill={all ? color.ink : lit ? color.mint : "#13241b"}
+                  stroke={all || lit ? "none" : "#a2f2c855"}
+                  strokeWidth={2}
                 />
-                <ToolIcon kind={i} x={x} y={y - 15} />
+                <g transform="translate(-45 -60) scale(1.5)">
+                  <NodeIcon kind={i} stroke={all ? color.mint : lit ? color.ink : color.mint} />
+                </g>
                 <text
-                  x={x}
-                  y={y + 52}
+                  y={200}
                   textAnchor="middle"
-                  fill={color.paper}
-                  fontSize={26}
-                  fontFamily="StudioSans"
-                  fontWeight={600}
-                  letterSpacing={2}
+                  fontSize={38}
+                  fontWeight={700}
+                  fontFamily={font}
+                  letterSpacing={1}
+                  fill={all ? color.ink : color.paper}
                 >
-                  {copy.connections.nodes[i]}
+                  {copy.nodes[i]}
                 </text>
-                <circle cx={x + 128} cy={y - 62} r={6} fill={color.mint} />
               </g>
             );
           })}
         </svg>
-      </div>
-      <div
-        style={{
-          fontSize: portrait ? 33 : 32,
-          paddingBottom: portrait ? 55 : 5,
-          display: "flex",
-          gap: portrait ? 25 : 42,
-          alignItems: "center",
-          opacity: enter(f, 75),
-        }}
-      >
-        <span>{copy.connections.terms[0]}</span>
-        <span style={{ opacity: 0.3 }}>/</span>
-        <span>{copy.connections.terms[1]}</span>
-        <span style={{ opacity: 0.3 }}>/</span>
-        <span>{copy.connections.terms[2]}</span>
-      </div>
-    </Frame>
+      </AbsoluteFill>
+    </AbsoluteFill>
   );
 };
 
-export const Personal = () => {
-  const copy = useFilmCopy();
+export const Breakdown = () => {
   const f = useCurrentFrame();
+  const copy = useFilmCopy();
   const { portrait } = useFormat();
-  const p = enter(f, 19, 42);
+  const reveal = interpolate(f, [0, 16], [100, 0], { ...clamp, easing: snap });
+  // The last beat pushes in, setting up the final drop.
+  const push = interpolate(f, [BEAT * 6, BEAT * 8], [0, 1], {
+    ...clamp,
+    easing: (t) => t * t,
+  });
+  const longest = copy.breakdown.reduce((a, b) => (a.length > b.length ? a : b));
+  const size = portrait ? fit(longest, 920, 120) : fit(longest, 1000, 150);
   return (
-    <Frame number="05" label={copy.personal.label}>
+    <AbsoluteFill
+      style={{
+        ...fill(color.ink, color.paper),
+        background: `radial-gradient(ellipse at ${portrait ? "50% 30%" : "75% 50%"}, #123224 0%, ${color.ink} 60%)`,
+        scale: 1 + push * 0.12,
+      }}
+    >
       <div
         style={{
           position: "absolute",
-          width: 1100,
-          height: 1100,
-          background: "radial-gradient(ellipse,#00b87a19,transparent 65%)",
-          right: -300,
-          top: -30,
-        }}
-      />
-      <div
-        style={{
-          display: "flex",
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          gap: portrait ? 65 : 90,
-          flexDirection: portrait ? "column" : "row",
-          paddingTop: portrait ? 50 : 0,
+          ...(portrait
+            ? { left: 140, top: 170, width: 800, height: 900 }
+            : { right: 150, top: 120, width: 660, height: 840 }),
+          clipPath: `inset(${reveal}% 0 0 0 round 28px)`,
+          overflow: "hidden",
+          borderRadius: 28,
         }}
       >
-        <div style={{ width: portrait ? "100%" : "58%", zIndex: 2 }}>
-          <Title
-            lines={copy.personal.title}
-            size={copy.personal.size[portrait ? 0 : 1]}
-            accent={1}
-          />
-          <div
-            style={{
-              fontSize: portrait ? 44 : 43,
-              marginTop: portrait ? 35 : 52,
-              opacity: enter(f, 53),
-              color: color.paper,
-            }}
-          >
-            Oleksandr Dzisiak
-          </div>
-          <div
-            style={{
-              fontSize: portrait ? 27 : 27,
-              lineHeight: 1.6,
-              color: color.muted,
-              marginTop: 12,
-              opacity: enter(f, 65),
-            }}
-          >
-            {copy.personal.roles[0]}
-            <br />
-            {copy.personal.roles[1]}
-          </div>
-        </div>
-        <div
+        <Img
+          src={staticFile("brand/portrait.webp")}
           style={{
-            width: portrait ? 640 : 560,
-            height: portrait ? 680 : 650,
-            perspective: 1400,
-            flexShrink: 0,
-            position: "relative",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "50% 35%",
+            scale: 1.25 - enter(f, 0, 40) * 0.17 + f * 0.0006,
+            filter: "contrast(1.06) saturate(.92)",
           }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              inset: -35,
-              border: "1px solid #a2f2c844",
-              borderRadius: 250,
-              rotate: `${-15 + f * 0.08}deg`,
-              scale: 0.85 + p * 0.15,
-            }}
-          />
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: "150px 150px 32px 32px",
-              overflow: "hidden",
-              background: color.mint,
-              opacity: p,
-              transform: `rotateY(${(1 - p) * 65}deg)`,
-              translate: `${(1 - p) * 70}px 0`,
-              rotate: `${(1 - p) * 6}deg`,
-            }}
-          >
-            <Img
-              src={staticFile("brand/portrait.webp")}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "50% 40%",
-                scale: 1.07 - (f / 195) * 0.055,
-              }}
-            />
-          </div>
-          <div
-            style={{
-              position: "absolute",
-              bottom: -24,
-              right: -24,
-              width: 126,
-              height: 126,
-              borderRadius: "50%",
-              background: color.mint,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              rotate: `${interpolate(f, [45, 78], [-80, 0], { ...clamp, easing: ease })}deg`,
-              scale: enter(f, 45, 30),
-            }}
-          >
-            <Img
-              src={staticFile("brand/logo-dark.svg")}
-              style={{ width: 66, height: 77 }}
-            />
-          </div>
-        </div>
+        />
       </div>
-    </Frame>
+      <div
+        style={{
+          position: "absolute",
+          ...(portrait ? { left: 80, top: 1140 } : { left: 140, top: 300 }),
+          fontSize: size,
+          fontWeight: 850,
+          letterSpacing: "-.05em",
+          lineHeight: 1,
+        }}
+      >
+        <Rise at={2}>{copy.breakdown[0]}</Rise>
+        <Rise at={BEAT * 2} style={{ color: color.mint }}>
+          {copy.breakdown[1]}
+        </Rise>
+        <Rise at={BEAT * 4} style={{ fontSize: portrait ? 50 : 48, fontWeight: 650, letterSpacing: "-.02em", marginTop: portrait ? 50 : 70 }}>
+          Oleksandr Dzisiak
+        </Rise>
+        <Rise at={BEAT * 4 + 5} style={{ fontSize: portrait ? 28 : 26, fontWeight: 600, letterSpacing: ".14em", textTransform: "uppercase", color: color.muted, marginTop: 14 }}>
+          {copy.role}
+        </Rise>
+      </div>
+    </AbsoluteFill>
   );
 };
 
-export const Closing = () => {
-  const copy = useFilmCopy();
+const recap = [
+  "feigin-electric",
+  "work-buddy",
+  "love-notes",
+  "tunerfest",
+  "liberty-immigration",
+  "cusemit",
+  "movie-browser",
+];
+
+export const Finale = () => {
   const f = useCurrentFrame();
+  const copy = useFilmCopy();
   const { portrait } = useFormat();
+  const step = Math.floor(f / BEAT);
+  if (step >= 3) {
+    // Two frames per project: a strobe recap of everything we just saw.
+    const id = recap[Math.min(recap.length - 1, Math.floor((f - BEAT * 3) / 2))];
+    return (
+      <AbsoluteFill style={{ background: color.ink }}>
+        <Img
+          src={staticFile(`reel/${id}.webp`)}
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}
+        />
+      </AbsoluteFill>
+    );
+  }
+  const palette = [
+    [color.ink, color.mint],
+    [color.mint, color.ink],
+    [color.paper, color.ink],
+  ][step];
+  const word = copy.finale[step];
+  const size = portrait ? fit(word, 940, 420) : fit(word, 1700, 560);
   return (
-    <Frame theme="paper" number="06" label={copy.closing.label}>
-      <Grid light />
+    <AbsoluteFill style={{ ...fill(palette[0], palette[1]), alignItems: "center", justifyContent: "center" }}>
+      <Slam key={step} at={step * BEAT} size={size} from={1.5}>
+        {word}
+      </Slam>
+    </AbsoluteFill>
+  );
+};
+
+export const Cta = () => {
+  const f = useCurrentFrame();
+  const copy = useFilmCopy();
+  const { portrait } = useFormat();
+  const line = interpolate(f, [12, 34], [0, 1], { ...clamp, easing: expoOut });
+  const model = portrait ? 760 : 700;
+  return (
+    <AbsoluteFill
+      style={{
+        ...fill(color.ink, color.paper),
+        background: `radial-gradient(ellipse at ${portrait ? "50% 28%" : "28% 50%"}, #10301f 0%, ${color.ink} 55%)`,
+      }}
+    >
       <div
         style={{
-          display: "flex",
-          flex: 1,
-          alignItems: portrait ? "flex-start" : "center",
-          justifyContent: "center",
-          flexDirection: portrait ? "column" : "row",
-          gap: portrait ? 10 : 0,
+          position: "absolute",
+          ...(portrait
+            ? { left: (1080 - model) / 2, top: 170 }
+            : { left: 110, top: (1080 - model) / 2 }),
+          width: model,
+          height: model,
         }}
       >
-        <div
-          style={{
-            width: portrait ? "100%" : "65%",
-            zIndex: 2,
-            paddingTop: portrait ? 100 : 0,
-          }}
-        >
-          <Title lines={copy.closing.title} size={portrait ? 118 : 140} />
-          <div
+        <BrandModel size={model} beat={f < BEAT * 4} />
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          ...(portrait ? { left: 90, top: 1030 } : { left: 860, top: 330 }),
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
+          <Slam at={3} size={portrait ? 190 : 210} from={1.25}>
+            o-d.dev
+          </Slam>
+          <Arrow
+            size={portrait ? 110 : 120}
+            stroke={color.mint}
             style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 32,
-              marginTop: portrait ? 65 : 72,
-              opacity: enter(f, 35),
-              translate: `0 ${(1 - enter(f, 35)) * 28}px`,
-            }}
-          >
-            <div
-              style={{
-                fontSize: portrait ? 140 : 164,
-                fontWeight: 700,
-                letterSpacing: "-.07em",
-                lineHeight: 1.1,
-              }}
-            >
-              o-d.dev
-            </div>
-            <Arrow
-              size={portrait ? 85 : 90}
-              stroke={color.green}
-              style={{
-                rotate: `${interpolate(f, [40, 80], [-45, 0], { ...clamp, easing: ease })}deg`,
-              }}
-            />
-          </div>
-          <div
-            style={{
-              height: 5,
-              width: interpolate(f, [42, 80], [0, portrait ? 610 : 700], {
-                ...clamp,
-                easing: ease,
-              }),
-              background: color.green,
-              marginTop: 16,
+              opacity: enter(f, 8),
+              translate: `${(1 - enter(f, 8, 12)) * -60}px ${(1 - enter(f, 8, 12)) * 60}px`,
             }}
           />
-          <div
-            style={{
-              fontSize: portrait ? 31 : 30,
-              marginTop: 30,
-              letterSpacing: ".04em",
-              color: "#426350",
-              opacity: enter(f, 65),
-            }}
-          >
-            {copy.closing.services}
-          </div>
         </div>
         <div
           style={{
-            width: portrait ? 800 : 710,
-            height: portrait ? 700 : 710,
-            marginLeft: portrait ? 40 : -85,
-            marginTop: portrait ? -20 : 0,
-            flexShrink: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            height: 8,
+            width: line * (portrait ? 880 : 920),
+            background: color.mint,
+            marginTop: 26,
+            borderRadius: 4,
           }}
-        >
-          <BrandModel size={portrait ? 800 : 710} light />
-        </div>
+        />
+        <Rise at={18} style={{ fontSize: portrait ? 44 : 42, fontWeight: 600, letterSpacing: "-.01em", marginTop: 40 }}>
+          {copy.services}
+        </Rise>
+        <Rise at={26} style={{ fontSize: portrait ? 28 : 26, fontWeight: 600, letterSpacing: ".14em", textTransform: "uppercase", color: color.muted, marginTop: 18 }}>
+          O.D. Empower · Oleksandr Dzisiak
+        </Rise>
       </div>
-    </Frame>
+    </AbsoluteFill>
   );
 };

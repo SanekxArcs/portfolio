@@ -5,10 +5,169 @@ import {
   interpolate,
   staticFile,
   useCurrentFrame,
-  useVideoConfig,
 } from "remotion";
-import { clamp, color, ease } from "./design";
-import { useFilmCopy } from "./i18n";
+import { clamp, color, expoOut, font } from "./design";
+
+/** Film grain: a new noise seed each frame, so it crawls like real stock. */
+export const Grain = ({ opacity = 0.09 }: { opacity?: number }) => {
+  const frame = useCurrentFrame();
+  return (
+    <AbsoluteFill style={{ pointerEvents: "none", opacity, mixBlendMode: "overlay" }}>
+      <svg width="100%" height="100%">
+        <filter id={`grain-${frame}`}>
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.85"
+            numOctaves="2"
+            seed={frame % 24}
+            stitchTiles="stitch"
+          />
+          <feColorMatrix type="saturate" values="0" />
+        </filter>
+        <rect width="100%" height="100%" filter={`url(#grain-${frame})`} />
+      </svg>
+    </AbsoluteFill>
+  );
+};
+
+export const Vignette = ({ strength = 0.3 }: { strength?: number }) => (
+  <AbsoluteFill
+    style={{
+      pointerEvents: "none",
+      background: `radial-gradient(ellipse 75% 70% at 50% 50%, transparent 55%, rgba(0,0,0,${strength}) 100%)`,
+    }}
+  />
+);
+
+/**
+ * A word that lands on the beat: it arrives oversized and blurred, then locks
+ * into place within a few frames.
+ */
+export const Slam = ({
+  children,
+  at = 0,
+  size,
+  style,
+  from = 1.35,
+}: {
+  children: ReactNode;
+  at?: number;
+  size: number;
+  style?: CSSProperties;
+  from?: number;
+}) => {
+  const frame = useCurrentFrame();
+  const t = interpolate(frame, [at, at + 7], [0, 1], {
+    ...clamp,
+    easing: expoOut,
+  });
+  return (
+    <div
+      style={{
+        // Hidden words still hold their place, so a line never reflows.
+        visibility: frame < at ? "hidden" : undefined,
+        fontFamily: font,
+        fontWeight: 850,
+        fontSize: size,
+        lineHeight: 0.92,
+        letterSpacing: `${-0.055 - (1 - t) * 0.04}em`,
+        whiteSpace: "nowrap",
+        scale: from - (from - 1) * t,
+        filter: t < 0.98 ? `blur(${(1 - t) * 14}px)` : undefined,
+        transformOrigin: "50% 60%",
+        ...style,
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
+/** Rough fit for the heavy, tightly tracked display weight. */
+export const fit = (text: string, maxWidth: number, maxSize: number) =>
+  Math.min(maxSize, maxWidth / (text.length * 0.52));
+
+export const Shot = ({
+  src,
+  width,
+  height,
+  style,
+  radius = 18,
+  position = "top",
+}: {
+  src: string;
+  width: number;
+  height: number;
+  style?: CSSProperties;
+  radius?: number;
+  position?: string;
+}) => (
+  <div
+    style={{
+      width,
+      height,
+      borderRadius: radius,
+      overflow: "hidden",
+      background: color.deep,
+      boxShadow:
+        "0 50px 120px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.12)",
+      ...style,
+    }}
+  >
+    <Img
+      src={staticFile(src)}
+      style={{
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        objectPosition: position,
+      }}
+    />
+  </div>
+);
+
+export const Phone = ({
+  src,
+  width,
+  style,
+}: {
+  src: string;
+  width: number;
+  style?: CSSProperties;
+}) => (
+  <div
+    style={{
+      width,
+      height: width * 2.08,
+      borderRadius: width * 0.16,
+      padding: width * 0.035,
+      background: "#111a15",
+      boxShadow:
+        "0 40px 90px rgba(0,0,0,.6), inset 0 0 0 2px rgba(255,255,255,.14)",
+      ...style,
+    }}
+  >
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        borderRadius: width * 0.13,
+        overflow: "hidden",
+        position: "relative",
+      }}
+    >
+      <Img
+        src={staticFile(src)}
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          objectPosition: "top",
+        }}
+      />
+    </div>
+  </div>
+);
 
 export const Arrow = ({
   size = 58,
@@ -23,258 +182,36 @@ export const Arrow = ({
     <path
       d="M12 49 50 11M15 11h35v35"
       stroke={stroke}
-      strokeWidth="4.5"
+      strokeWidth="5"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
   </svg>
 );
 
-export const Title = ({
-  lines,
-  size = 150,
-  accent,
-  delay = 7,
-  style,
-}: {
-  lines: string[];
-  size?: number;
-  accent?: number;
-  delay?: number;
-  style?: CSSProperties;
-}) => {
-  const frame = useCurrentFrame();
-  return (
-    <div
-      style={{
-        fontWeight: 750,
-        fontSize: size,
-        lineHeight: 1.045,
-        letterSpacing: "-.05em",
-        ...style,
-      }}
-    >
-      {lines.map((line, index) => (
-        <div
-          key={line}
-          style={{
-            overflow: "hidden",
-            paddingBottom: ".12em",
-            marginBottom: "-.12em",
-          }}
-        >
-          <div
-            style={{
-              color: accent === index ? color.mint : undefined,
-              translate: `0 ${interpolate(frame, [delay + index * 5, delay + index * 5 + 27], [115, 0], { ...clamp, easing: ease })}%`,
-              rotate: `${interpolate(frame, [delay + index * 5, delay + index * 5 + 27], [3, 0], { ...clamp, easing: ease })}deg`,
-              transformOrigin: "0 100%",
-            }}
-          >
-            {line}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-export const Frame = ({
-  children,
-  theme = "dark",
-  number,
-  label,
-}: {
-  children: ReactNode;
-  theme?: "dark" | "paper" | "mint";
-  number: string;
-  label: string;
-}) => {
-  const { width, height } = useVideoConfig();
-  const portrait = height > width;
-  const copy = useFilmCopy();
-  const light = theme !== "dark";
-  const foreground = light ? color.ink : color.paper;
-  return (
-    <AbsoluteFill
-      style={{
-        background:
-          theme === "dark"
-            ? color.ink
-            : theme === "paper"
-              ? color.paper
-              : color.mint,
-        color: foreground,
-        padding: portrait ? "100px 82px 100px" : "58px 96px 56px",
-        fontFamily: "StudioSans, sans-serif",
-        overflow: "hidden",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 24,
-          height: 52,
-          flexShrink: 0,
-          fontSize: portrait ? 28 : 25,
-          fontWeight: 650,
-          letterSpacing: "-.025em",
-          zIndex: 3,
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-          <Img
-            src={staticFile(`brand/logo-${light ? "dark" : "mint"}.svg`)}
-            style={{ width: 38, height: 45 }}
-          />
-          <span>O.D. EMPOWER</span>
-        </div>
-        <span
-          style={{
-            fontSize: 20,
-            fontWeight: 450,
-            letterSpacing: ".13em",
-            opacity: 0.55,
-          }}
-        >
-          {copy.header[portrait ? 0 : 1]}
-        </span>
-      </div>
-      <div
-        style={{
-          flex: 1,
-          minHeight: 0,
-          position: "relative",
-          display: "flex",
-          flexDirection: "column",
-          zIndex: 1,
-        }}
-      >
-        {children}
-      </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 20,
-          fontSize: portrait ? 25 : 22,
-          letterSpacing: ".08em",
-          fontWeight: 500,
-          opacity: 0.65,
-          flexShrink: 0,
-          paddingTop: 22,
-          zIndex: 3,
-        }}
-      >
-        <span>
-          {number} / {label}
-        </span>
-        <span>o-d.dev</span>
-      </div>
-    </AbsoluteFill>
-  );
-};
-
-export const Browser = ({
-  project,
-  url,
-  width,
-  height,
-  style,
-  children,
-}: {
-  project: string;
-  url: string;
-  width: number;
-  height: number;
-  style?: CSSProperties;
-  children?: ReactNode;
-}) => (
-  <div
-    style={{
-      width,
-      height,
-      display: "flex",
-      flexDirection: "column",
-      background: "#17261d",
-      borderRadius: 20,
-      overflow: "hidden",
-      boxShadow: "0 35px 100px #00150f38, 0 0 0 1px #ffffff22",
-      ...style,
-    }}
+export const NodeIcon = ({ kind, stroke }: { kind: number; stroke: string }) => (
+  <g
+    stroke={stroke}
+    strokeWidth="3.5"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
   >
-    <div
-      style={{
-        height: 44,
-        display: "flex",
-        alignItems: "center",
-        gap: 9,
-        padding: "0 18px",
-        background: "#19291f",
-        flexShrink: 0,
-      }}
-    >
-      {[0, 1, 2].map((i) => (
-        <span
-          key={i}
-          style={{
-            width: 9,
-            height: 9,
-            borderRadius: "50%",
-            background: i === 0 ? "#a2f2c8" : "#ffffff35",
-          }}
-        />
-      ))}
-      <div
-        style={{
-          margin: "0 auto",
-          fontSize: 17,
-          letterSpacing: ".03em",
-          color: "#b7c8bd",
-          paddingRight: 42,
-        }}
-      >
-        {url}
-      </div>
-    </div>
-    <div
-      style={{
-        flex: 1,
-        minHeight: 0,
-        overflow: "hidden",
-        position: "relative",
-        background: project === "work-buddy" ? "#080909" : "#f3f5ef",
-      }}
-    >
-      <Img
-        src={staticFile(`projects/${project}.webp`)}
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: project === "work-buddy" ? "contain" : "cover",
-          objectPosition: project === "work-buddy" ? "center" : "top",
-        }}
-      />
-      {children}
-    </div>
-  </div>
+    {kind === 0 ? (
+      <>
+        <path d="M8 24h44l-5 31H13L8 24Z" />
+        <path d="m18 24 8-17m16 17L34 7M23 35v10m14-10v10" />
+      </>
+    ) : kind === 1 ? (
+      <>
+        <ellipse cx="30" cy="12" rx="22" ry="8" />
+        <path d="M8 12v33c0 11 44 11 44 0V12M8 28c0 11 44 11 44 0" />
+      </>
+    ) : (
+      <>
+        <circle cx="30" cy="17" r="10" />
+        <path d="M10 53v-8c0-17 40-17 40 0v8M10 12a8 8 0 0 0 0 16M50 12a8 8 0 0 1 0 16" />
+      </>
+    )}
+  </g>
 );
-
-export const Grid = ({ light = false }: { light?: boolean }) => {
-  const frame = useCurrentFrame();
-  return (
-    <AbsoluteFill
-      style={{
-        pointerEvents: "none",
-        opacity: light ? 0.09 : 0.08,
-        backgroundImage: `linear-gradient(${light ? "#005f39" : "#a2f2c8"} 1px,transparent 1px),linear-gradient(90deg,${light ? "#005f39" : "#a2f2c8"} 1px,transparent 1px)`,
-        backgroundSize: "100px 100px",
-        transform: `perspective(1000px) rotateX(55deg) scale(2.1) translateY(${frame * 0.05}px)`,
-        maskImage: "radial-gradient(ellipse at center,black,transparent 66%)",
-      }}
-    />
-  );
-};

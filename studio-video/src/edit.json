@@ -1,0 +1,16 @@
+{
+  "fps": 30,
+  "beatFrames": 14,
+  "durationInFrames": 728,
+  "sections": [
+    { "id": "hook", "from": 0, "beats": 8 },
+    { "id": "drop", "from": 112, "beats": 4 },
+    { "id": "websites", "from": 168, "beats": 8 },
+    { "id": "apps", "from": 280, "beats": 8 },
+    { "id": "connected", "from": 392, "beats": 4 },
+    { "id": "breakdown", "from": 448, "beats": 8 },
+    { "id": "finale", "from": 560, "beats": 4 },
+    { "id": "cta", "from": 616, "beats": 8 }
+  ],
+  "impacts": [112, 168, 280, 392, 434, 560, 602, 616]
+}

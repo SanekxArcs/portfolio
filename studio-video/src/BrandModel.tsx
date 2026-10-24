@@ -4,9 +4,9 @@ import { useCurrentFrame, interpolate } from "remotion";
 import { Box3, BufferGeometry, ExtrudeGeometry, Vector3 } from "three";
 import { SVGLoader } from "three/addons/loaders/SVGLoader.js";
 import logoSvg from "./logo-svg.json";
-import { clamp, color, ease } from "./design";
+import { clamp, color, expoOut, pulse } from "./design";
 
-const Model = ({ light }: { light: boolean }) => {
+const Model = ({ light, beat }: { light: boolean; beat: boolean }) => {
   const frame = useCurrentFrame();
   const geometry = useMemo(() => {
     const paths = new SVGLoader().parse(logoSvg).paths;
@@ -54,35 +54,33 @@ const Model = ({ light }: { light: boolean }) => {
     },
     [geometry, orbit],
   );
-  const spin = interpolate(frame, [0, 50], [Math.PI * 1.65, 0.15], {
+  // Whips in with several fast turns, then settles into a slow drift and
+  // bumps on each kick.
+  const spin = interpolate(frame, [0, 24], [Math.PI * 5, 0.2], {
     ...clamp,
-    easing: ease,
+    easing: expoOut,
   });
-  const secondSpin = interpolate(frame, [82, 125], [0, Math.PI * 2], {
+  const arrive = interpolate(frame, [0, 14], [0.35, 1], {
     ...clamp,
-    easing: ease,
+    easing: expoOut,
   });
+  const kick = beat ? 1 + pulse(frame, 2.6) * 0.045 : 1;
   return (
     <group
       rotation={[
-        Math.sin(frame / 95) * 0.12 - 0.08,
-        spin + secondSpin + Math.sin(frame / 80) * 0.13,
+        Math.sin(frame / 60) * 0.12 - 0.08,
+        spin + Math.sin(frame / 45) * 0.22,
         -0.1,
       ]}
     >
-      <group
-        scale={interpolate(frame, [0, 40], [0.78, 1], {
-          ...clamp,
-          easing: ease,
-        })}
-      >
+      <group scale={arrive * kick}>
         {geometry.map((item, i) => (
           <mesh key={i} geometry={item}>
             <meshStandardMaterial
               attach="material-0"
               color={light ? "#00a76b" : "#32d79a"}
-              metalness={0.42}
-              roughness={0.24}
+              metalness={0.5}
+              roughness={0.2}
             />
             <meshStandardMaterial
               attach="material-1"
@@ -94,7 +92,7 @@ const Model = ({ light }: { light: boolean }) => {
         ))}
       </group>
       {[0, 1, 2].map((i) => {
-        const angle = frame * 0.013 + i * 2.1;
+        const angle = frame * 0.04 + i * 2.1;
         return (
           <group
             key={i}
@@ -131,9 +129,11 @@ const Model = ({ light }: { light: boolean }) => {
 export const BrandModel = ({
   size,
   light = false,
+  beat = false,
 }: {
   size: number;
   light?: boolean;
+  beat?: boolean;
 }) => (
   <ThreeCanvas
     width={size}
@@ -147,6 +147,6 @@ export const BrandModel = ({
     <directionalLight position={[-4, 6, 7]} intensity={4} color="#e2fff2" />
     <directionalLight position={[5, 0, -4]} intensity={4} color="#72ffc6" />
     <pointLight position={[0, -5, 5]} intensity={12} color="#7ae4ae" />
-    <Model light={light} />
+    <Model light={light} beat={beat} />
   </ThreeCanvas>
 );

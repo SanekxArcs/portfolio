@@ -1,7 +1,7 @@
 {
   "name": "od-empower-studio-film",
   "version": "1.0.0",
-  "description": "O.D. EMPOWER studio film in English and Polish, landscape and portrait",
+  "description": "O.D. EMPOWER beat-cut studio film in English and Polish, landscape and portrait",
   "repository": {},
   "license": "UNLICENSED",
   "engines": {
@@ -37,14 +37,12 @@
     "render:wide": "node scripts/render.mjs wide",
     "render:vertical": "node scripts/render.mjs vertical",
     "stills": "node scripts/render.mjs stills",
-    "audio": "python scripts/generate-voice.py && python scripts/generate-soundtrack.py",
+    "audio": "python scripts/generate-soundtrack.py",
     "assets": "node scripts/prepare-assets.mjs",
     "verify": "node scripts/verify-render.mjs",
     "lint": "eslint src && tsc --noEmit",
-    "audio:replace": "node scripts/replace-audio.mjs",
     "render:pl": "node scripts/render.mjs all pl",
     "stills:pl": "node scripts/render.mjs stills pl",
-    "audio:pl": "python scripts/generate-voice.py --locale pl && python scripts/generate-soundtrack.py --locale pl",
     "verify:pl": "node scripts/verify-render.mjs pl",
     "delivery": "node scripts/package-delivery.mjs"
   },
