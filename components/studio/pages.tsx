@@ -22,6 +22,7 @@ import {
 import {getDictionary, type Dictionary} from '@/lib/i18n/dictionaries'
 import type {Locale} from '@/lib/i18n/locales'
 import {
+  getClients,
   getFeaturedProjects,
   getLocalizedProfile,
   getProjects,
@@ -167,9 +168,11 @@ export function Process({d}: {d: Dictionary}) {
     </section>
   )
 }
-export function HomePage({locale}: {locale: Locale}) {
+export async function HomePage({locale}: {locale: Locale}) {
   const d = getDictionary(locale),
-    profile = getLocalizedProfile(locale)
+    profile = await getLocalizedProfile(locale),
+    featured = await getFeaturedProjects(locale),
+    clients = await getClients()
   return (
 			<>
 				<section
@@ -237,7 +240,7 @@ export function HomePage({locale}: {locale: Locale}) {
 						}
 					/>
 					<div className="studio-featured-grid">
-						{getFeaturedProjects(locale).map((project, index) => (
+						{featured.map((project, index) => (
 							<ProjectCard
 								key={project.id}
 								project={project}
@@ -248,7 +251,7 @@ export function HomePage({locale}: {locale: Locale}) {
 						))}
 					</div>
 				</section>
-				<StudioClients d={d} />
+				<StudioClients d={d} clients={clients} />
 				<section className="studio-section studio-wrap">
 					<SectionTitle
 						title={d.home.servicesTitle}
@@ -360,7 +363,7 @@ export function ServicesPage({locale}: {locale: Locale}) {
     </>
   )
 }
-export function ProjectPage({
+export async function ProjectPage({
   locale,
   project,
 }: {
@@ -369,7 +372,7 @@ export function ProjectPage({
 }) {
   const d = getDictionary(locale)
   const title = project.nda ? d.work.ndaTitle : project.title
-  const all = getProjects(locale),
+  const all = await getProjects(locale),
     next =
       all[(all.findIndex((item) => item.id === project.id) + 1) % all.length]
   return (
@@ -523,9 +526,9 @@ export function ProjectPage({
 			</>
 		);
 }
-export function ExperiencePage({locale}: {locale: Locale}) {
+export async function ExperiencePage({locale}: {locale: Locale}) {
   const d = getDictionary(locale),
-    p = getLocalizedProfile(locale),
+    p = await getLocalizedProfile(locale),
     e = d.experience
   const jobs = p.workExperience ?? [],
     relevant = jobs.filter((item) => item.isRelated),

@@ -13,7 +13,7 @@ export default async function Page({params}: Props) {
   if (!isLocale(locale)) notFound()
   return (
     <>
-      <JsonLd data={pageGraph(locale, 'services')} />
+      <JsonLd data={await pageGraph(locale, 'services')} />
       <ServicesPage locale={locale} />
     </>
   )

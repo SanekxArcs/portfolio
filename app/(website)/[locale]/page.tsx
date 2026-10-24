@@ -11,7 +11,7 @@ export default async function Page({
   if (!isLocale(locale)) notFound()
   return (
     <>
-      <JsonLd data={pageGraph(locale, 'home')} />
+      <JsonLd data={await pageGraph(locale, 'home')} />
       <HomePage locale={locale} />
     </>
   )

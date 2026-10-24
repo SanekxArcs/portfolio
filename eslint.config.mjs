@@ -12,6 +12,7 @@ const eslintConfig = defineConfig([
     "dist/**",
     "studio-video/**",
     "next-env.d.ts",
+    "convex/_generated/**",
   ]),
 ]);
 

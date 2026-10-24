@@ -2,14 +2,14 @@ import type {MetadataRoute} from 'next'
 import {siteUrl} from '@/lib/site'
 import {locales} from '@/lib/i18n/locales'
 import {getProjects} from '@/lib/studio-content'
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const paths = [
     '',
     '/services',
     '/work',
     '/experience',
     '/contact',
-    ...getProjects('en')
+    ...(await getProjects('en'))
       .filter((project) => !project.nda)
       .map((project) => '/work/' + project.slug),
   ]

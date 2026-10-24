@@ -25,15 +25,16 @@ function snippet(text: string | null | undefined, limit = 155) {
   }
   return out
 }
-export const dynamicParams = false
+// Projects added in the admin after a build render on first visit.
+export const dynamicParams = true
 
-export function generateStaticParams() {
-  return getProjects('en').map((project) => ({slug: project.slug}))
+export async function generateStaticParams() {
+  return (await getProjects('en')).map((project) => ({slug: project.slug}))
 }
 export async function generateMetadata({params}: Props) {
   const {locale, slug} = await params
   if (!isLocale(locale)) return {}
-  const project = getProjects(locale).find((item) => item.slug === slug)
+  const project = (await getProjects(locale)).find((item) => item.slug === slug)
   if (!project) return {}
   const metadata = studioMetadata(
     locale,
@@ -64,11 +65,11 @@ export async function generateMetadata({params}: Props) {
 export default async function Page({params}: Props) {
   const {locale, slug} = await params
   if (!isLocale(locale)) notFound()
-  const project = getProjects(locale).find((item) => item.slug === slug)
+  const project = (await getProjects(locale)).find((item) => item.slug === slug)
   if (!project) notFound()
   return (
     <>
-      {!project.nda && <JsonLd data={projectGraph(locale, project)} />}
+      {!project.nda && <JsonLd data={await projectGraph(locale, project)} />}
       <ProjectPage locale={locale} project={project} />
     </>
   )

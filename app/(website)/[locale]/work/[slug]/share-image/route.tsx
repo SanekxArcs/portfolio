@@ -4,14 +4,17 @@ import {projectSocialImage} from '@/lib/project-social-image'
 
 // One prerendered PNG per public project and language, shared as the page's social image.
 export const dynamic = 'force-static'
-export const dynamicParams = false
+export const dynamicParams = true
 
-export function generateStaticParams() {
-  return locales.flatMap((locale) =>
-    getProjects(locale)
-      .filter((project) => !project.nda)
-      .map((project) => ({locale, slug: project.slug})),
+export async function generateStaticParams() {
+  const perLocale = await Promise.all(
+    locales.map(async (locale) =>
+      (await getProjects(locale))
+        .filter((project) => !project.nda)
+        .map((project) => ({locale, slug: project.slug})),
+    ),
   )
+  return perLocale.flat()
 }
 
 export async function GET(
@@ -20,7 +23,7 @@ export async function GET(
 ) {
   const {locale, slug} = await context.params
   if (!isLocale(locale)) return new Response(null, {status: 404})
-  const project = getProjects(locale).find((item) => item.slug === slug)
+  const project = (await getProjects(locale)).find((item) => item.slug === slug)
   if (!project || project.nda) return new Response(null, {status: 404})
   return projectSocialImage(locale, project)
 }

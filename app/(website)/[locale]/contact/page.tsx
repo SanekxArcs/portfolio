@@ -22,10 +22,10 @@ export default async function Page({params, searchParams}: Props) {
   if (!isLocale(locale)) notFound()
   const query = await searchParams,
     d = getDictionary(locale),
-    profile = getLocalizedProfile(locale)
+    profile = await getLocalizedProfile(locale)
   return (
     <>
-      <JsonLd data={pageGraph(locale, 'contact')} />
+      <JsonLd data={await pageGraph(locale, 'contact')} />
       <PageIntro
         title={d.contact.title}
         intro={d.contact.intro}

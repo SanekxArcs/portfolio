@@ -13,14 +13,22 @@ export const projectImageSize = {width: 1200, height: 630}
  * Social crawlers do not all read WebP, and ImageResponse cannot decode it, so the capture is
  * converted to PNG here at build time.
  */
+// Screenshots live in Convex storage (a URL) or, before migration, in /public.
+async function screenshot(source: string) {
+  if (!source.startsWith('http')) return readFile(join(process.cwd(), 'public', source))
+  const response = await fetch(source)
+  if (!response.ok) throw new Error(`Could not load ${source}: ${response.status}`)
+  return Buffer.from(await response.arrayBuffer())
+}
+
 export async function projectSocialImage(locale: Locale, project: StudioProject) {
   const d = getDictionary(locale)
   const source = project.media?.desktop ?? project.imageUrls?.[0]
   const [font, logo, shot] = await Promise.all([
     readFile(join(process.cwd(), 'public/fonts/NotoSans-Regular.ttf')),
     readFile(join(process.cwd(), 'public/logo.svg'), 'utf8'),
-    source && !source.startsWith('http')
-      ? sharp(join(process.cwd(), 'public', source))
+    source
+      ? sharp(await screenshot(source))
           .resize(760, 528, {fit: 'cover', position: 'top'})
           .png()
           .toBuffer()

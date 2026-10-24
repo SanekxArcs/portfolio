@@ -15,10 +15,10 @@ export default async function Page({params}: Props) {
   const {locale} = await params
   if (!isLocale(locale)) notFound()
   const d = getDictionary(locale),
-    projects = getProjects(locale)
+    projects = await getProjects(locale)
   return (
     <>
-      <JsonLd data={pageGraph(locale, 'work', projects)} />
+      <JsonLd data={await pageGraph(locale, 'work', projects)} />
       <PageIntro
         title={d.work.title}
         intro={d.work.intro}

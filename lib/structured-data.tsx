@@ -15,8 +15,8 @@ const ids = {
 const absolute = (path: string) => (path.startsWith('http') ? path : siteUrl + path)
 const languageCodes = {en: 'en', pl: 'pl', uk: 'uk'} as const
 
-function personNode(locale: Locale) {
-  const profile = getLocalizedProfile(locale)
+async function personNode(locale: Locale) {
+  const profile = await getLocalizedProfile(locale)
   return {
     '@type': 'Person',
     '@id': ids.person,
@@ -99,9 +99,9 @@ function page(type: string, locale: Locale, path: string, extra: Record<string, 
 
 type PageKind = 'home' | 'services' | 'work' | 'experience' | 'contact'
 
-export function pageGraph(locale: Locale, kind: PageKind, projects: StudioProject[] = []) {
+export async function pageGraph(locale: Locale, kind: PageKind, projects: StudioProject[] = []) {
   const d = getDictionary(locale)
-  const graph: Record<string, unknown>[] = [personNode(locale), businessNode(locale), websiteNode(locale)]
+  const graph: Record<string, unknown>[] = [await personNode(locale), businessNode(locale), websiteNode(locale)]
   if (kind === 'home') graph.push(page('WebPage', locale, '', {name: d.meta.home}))
   if (kind === 'services')
     graph.push(
@@ -139,14 +139,14 @@ export function pageGraph(locale: Locale, kind: PageKind, projects: StudioProjec
   return {'@context': 'https://schema.org', '@graph': graph}
 }
 
-export function projectGraph(locale: Locale, project: StudioProject) {
+export async function projectGraph(locale: Locale, project: StudioProject) {
   const d = getDictionary(locale)
   const path = `/work/${project.slug}`
   const image = project.media?.desktop ?? project.imageUrls?.[0]
   return {
     '@context': 'https://schema.org',
     '@graph': [
-      personNode(locale),
+      await personNode(locale),
       businessNode(locale),
       websiteNode(locale),
       {

@@ -3,8 +3,9 @@
 import {useState} from 'react'
 import {AnimatePresence, motion} from 'motion/react'
 import {ChevronDown} from 'lucide-react'
-import clients from '@/content/site/clients.json'
 import type {Dictionary} from '@/lib/i18n/dictionaries'
+
+type Client = {name: string; url: string; featured: boolean; linked: boolean}
 import {
   MotionNumber,
   MotionText,
@@ -12,12 +13,12 @@ import {
   useStudioReducedMotion,
 } from './motion-text'
 
-export function StudioClients({d}: {d: Dictionary}) {
+export function StudioClients({d, clients}: {d: Dictionary; clients: Client[]}) {
   const [expanded, setExpanded] = useState(false)
   const reduced = useStudioReducedMotion()
   const featured = clients.filter((client) => client.featured)
   const remaining = clients.filter((client) => !client.featured)
-  const renderClient = (client: (typeof clients)[number]) => (
+  const renderClient = (client: Client) => (
     <li key={client.url}>
       {client.linked ? (
         <a

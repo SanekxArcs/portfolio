@@ -75,7 +75,7 @@ export default async function LocaleLayout({
   const {locale} = await params
   if (!isLocale(locale)) notFound()
   const d = getDictionary(locale),
-    profile = getLocalizedProfile(locale)
+    profile = await getLocalizedProfile(locale)
   return (
     <html lang={locale} className={sans.variable} suppressHydrationWarning>
       <body className={mono.variable + ' studio-site antialiased'} id="top">
