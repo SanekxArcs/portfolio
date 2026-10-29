@@ -1,6 +1,6 @@
 import { createContext, useContext, type ReactNode } from "react";
 
-export type FilmLocale = "en" | "pl";
+export type FilmLocale = "en" | "pl" | "ua";
 const LocaleContext = createContext<FilmLocale>("en");
 const copies = {
   en: {
@@ -31,6 +31,20 @@ const copies = {
     services: "Strony · Aplikacje · Integracje",
     nodes: ["Sklep", "Dane", "Zespół"],
   },
+  ua: {
+    hook: [
+      ["Маєш", "круту", "ідею?"],
+      ["Втілимо", "її", "разом."],
+    ],
+    websites: "Сайти.",
+    apps: "Вебзастосунки.",
+    connected: ["API", "Автоматизація", "ШІ-інструменти", "Усе пов’язано."],
+    breakdown: ["Один розробник.", "Прямий зв’язок."],
+    role: "Full-stack розробник",
+    finale: ["Втілимо", "її", "разом."],
+    services: "Сайти · Вебзастосунки · Інтеграції",
+    nodes: ["Магазин", "Дані", "Команда"],
+  },
 };
 
 export const FilmLanguage = ({
@@ -43,3 +57,5 @@ export const FilmLanguage = ({
   <LocaleContext.Provider value={locale}>{children}</LocaleContext.Provider>
 );
 export const useFilmCopy = () => copies[useContext(LocaleContext)];
+
+export const useFilmLocale = () => useContext(LocaleContext);

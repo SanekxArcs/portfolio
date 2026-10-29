@@ -8,11 +8,11 @@ const formats = [
 ] as const;
 export const RemotionRoot = () => (
   <>
-    {(["en", "pl"] as const).map((locale) =>
+    {(["en", "pl", "ua"] as const).map((locale) =>
       formats.map(([name, width, height]) => (
         <Composition
           key={locale + name}
-          id={`Studio${name}${locale === "pl" ? "PL" : ""}`}
+          id={`Studio${name}${locale === "en" ? "" : locale.toUpperCase()}`}
           component={StudioFilm}
           defaultProps={{ locale }}
           width={width}

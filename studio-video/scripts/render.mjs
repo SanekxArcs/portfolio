@@ -12,8 +12,8 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const locale = process.argv[3] || "en";
-if (!["en", "pl"].includes(locale)) throw new Error("Choose en or pl");
-const tag = locale === "pl" ? "pl-" : "";
+if (!["en", "pl", "ua"].includes(locale)) throw new Error("Choose en, pl or ua");
+const tag = locale === "en" ? "" : `${locale}-`;
 const edit = JSON.parse(readFileSync(resolve(root, "src/edit.json"), "utf8"));
 // One review frame per section, taken once its main move has landed.
 const reviewFrames = edit.sections.map(
@@ -50,7 +50,7 @@ const compositions = await getCompositions(serveUrl, browser);
 const mode = process.argv[2] || "all";
 const results = [];
 for (const baseId of ["StudioWide", "StudioVertical"]) {
-  const id = baseId + (locale === "pl" ? "PL" : "");
+  const id = baseId + (locale === "en" ? "" : locale.toUpperCase());
   const composition = compositions.find((item) => item.id === id);
   if (!composition) throw new Error(`Missing composition: ${id}`);
   const portrait = baseId === "StudioVertical";
@@ -101,7 +101,7 @@ for (const baseId of ["StudioWide", "StudioVertical"]) {
 }
 if (mode !== "stills") {
   const composition = compositions.find(
-    (item) => item.id === (locale === "pl" ? "StudioWidePL" : "StudioWide"),
+    (item) => item.id === (`StudioWide${locale === "en" ? "" : locale.toUpperCase()}`),
   );
   await renderStill({
     serveUrl,

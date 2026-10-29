@@ -1,7 +1,7 @@
 {
   "name": "od-empower-studio-film",
   "version": "1.0.0",
-  "description": "O.D. EMPOWER beat-cut studio film in English and Polish, landscape and portrait",
+  "description": "O.D. EMPOWER beat-cut studio film in English, Polish and Ukrainian, landscape and portrait",
   "repository": {},
   "license": "UNLICENSED",
   "engines": {
@@ -44,7 +44,10 @@
     "render:pl": "node scripts/render.mjs all pl",
     "stills:pl": "node scripts/render.mjs stills pl",
     "verify:pl": "node scripts/verify-render.mjs pl",
-    "delivery": "node scripts/package-delivery.mjs"
+    "delivery": "node scripts/package-delivery.mjs",
+    "render:ua": "node scripts/render.mjs all ua",
+    "stills:ua": "node scripts/render.mjs stills ua",
+    "verify:ua": "node scripts/verify-render.mjs ua"
   },
   "allowScripts": {
     "esbuild": false

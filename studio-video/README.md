@@ -1,6 +1,6 @@
 # O.D. EMPOWER — studio film
 
-A 24-second beat-cut promo, built in Remotion and Three.js, in English and Polish, each with its own horizontal and vertical layout. There is no narration: big type, hard cuts and an original synthesized score carry it, so it works with the sound off too.
+A 24-second beat-cut promo, built in Remotion and Three.js, in English, Polish and Ukrainian, each with its own horizontal and vertical layout. There is no narration: big type, hard cuts and an original synthesized score carry it, so it works with the sound off too.
 
 ## Exports
 
@@ -10,6 +10,7 @@ A 24-second beat-cut promo, built in Remotion and Three.js, in English and Polis
 | -------- | ------------------------------ | ---------------------------- |
 | English  | `od-empower-en-horizontal.mp4` | `od-empower-en-vertical.mp4` |
 | Polish   | `od-empower-pl-horizontal.mp4` | `od-empower-pl-vertical.mp4` |
+| Ukrainian | `od-empower-ua-horizontal.mp4` | `od-empower-ua-vertical.mp4` |
 
 All are 30 fps, H.264 + AAC. The vertical version has its own layout. It is not a crop of the widescreen edit.
 
@@ -22,9 +23,10 @@ npm ci
 npm run studio
 npm run render        # English, both formats
 npm run render:pl     # Polish, both formats
+npm run render:ua     # Ukrainian, both formats
 ```
 
-The preview uses port 3002, and renders use port 3079 (override with `REMOTION_PORT`) so they don't collide with the website's dev server. `npm run stills` / `stills:pl` render one review frame per section. `npm run verify` / `verify:pl` fully decode the finished files and write contact sheets from the actual MP4s. Set `CHROME_PATH` if Chrome is in a custom location.
+The preview uses port 3002, and renders use port 3079 (override with `REMOTION_PORT`) so they don't collide with the website's dev server. `npm run stills` / `stills:pl` / `stills:ua` render one review frame per section. `npm run verify` / `verify:pl` / `verify:ua` fully decode the finished files and write contact sheets from the actual MP4s. Set `CHROME_PATH` if Chrome is in a custom location.
 
 ## How it's built
 
@@ -42,7 +44,7 @@ Everything runs on one grid: **128.6 BPM, so one beat is exactly 14 frames at 30
 | 44–51 | cta       | Logo, o-d.dev, services; hold and fade                                          |
 
 - `src/edit.json`: the beat grid, sections and impact frames
-- `src/i18n.tsx`: all on-screen English and Polish wording
+- `src/i18n.tsx`: all on-screen English, Polish and Ukrainian wording
 - `src/scenes.tsx`: one component per section
 - `src/StudioFilm.tsx`: edit order, reel project list, camera shake, kick punch, flash frames, grain
 - `src/BrandModel.tsx`: the original SVG logo extruded in Three.js
@@ -52,11 +54,11 @@ All animation is driven by the video frame, including grain and shake, which use
 
 ## Sound
 
-`npm run audio` (needs `numpy` from `requirements.txt` and FFmpeg) synthesizes the whole track from scratch, with no samples. It has a four-on-the-floor kick, clap, hats, a rolling offbeat bass and supersaw stabs, all ducked by the kick, over a D minor i–VI–III–VII loop. It also builds risers, snare rolls, impacts on each section hit and a stutter gate under the recap strobe. The output is mastered to about −14 LUFS. Both languages share one soundtrack, because they share one edit.
+`npm run audio` (needs `numpy` from `requirements.txt` and FFmpeg) synthesizes the whole track from scratch, with no samples. It has a four-on-the-floor kick, clap, hats, a rolling offbeat bass and supersaw stabs, all ducked by the kick, over a D minor i–VI–III–VII loop. It also builds risers, snare rolls, impacts on each section hit and a stutter gate under the recap strobe. The output is mastered to about −14 LUFS. All languages share one soundtrack, because they share one edit.
 
 ## Assets
 
-The project captures in `public/reel/`, the portrait, the logo and the Noto Sans font all come from the portfolio. `npm run assets` refreshes them from the parent checkout. Noto Sans is distributed under the included SIL Open Font License.
+The project captures in `public/reel/`, the portrait, the logo and the Noto Sans font come from the portfolio. The bundled Cyrillic Noto Sans subset comes from Google Fonts (Noto Sans v42) under the same SIL Open Font License. `npm run assets` refreshes them from the parent checkout. Noto Sans is distributed under the included SIL Open Font License.
 
 ## Website isolation
 

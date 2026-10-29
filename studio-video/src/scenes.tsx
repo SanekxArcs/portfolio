@@ -19,7 +19,7 @@ import {
   snap,
   useFormat,
 } from "./design";
-import { useFilmCopy } from "./i18n";
+import { useFilmCopy, useFilmLocale } from "./i18n";
 
 const fill = (background: string, foreground: string): CSSProperties => ({
   background,
@@ -72,6 +72,7 @@ const Tag = ({ children, style }: { children: ReactNode; style?: CSSProperties }
 const Easing3 = (t: number) => t * t * t;
 
 export const Hook = () => {
+  const locale = useFilmLocale();
   const f = useCurrentFrame();
   const copy = useFilmCopy();
   const { portrait } = useFormat();
@@ -84,7 +85,7 @@ export const Hook = () => {
     easing: Easing3,
   });
   const lineSize = portrait
-    ? Math.min(...words.map((word) => fit(word, 900, 300)))
+    ? Math.min(...words.map((word) => fit(word, locale === "ua" ? 800 : 900, 300)))
     : fit(words.join(" "), 1650, 330);
   const accentBeat = interpolate(f, [BEAT * 3, BEAT * 3 + 6], [1.06, 1], clamp);
   return (
@@ -418,6 +419,7 @@ export const Connected = () => {
 };
 
 export const Breakdown = () => {
+  const locale = useFilmLocale();
   const f = useCurrentFrame();
   const copy = useFilmCopy();
   const { portrait } = useFormat();
@@ -428,7 +430,7 @@ export const Breakdown = () => {
     easing: (t) => t * t,
   });
   const longest = copy.breakdown.reduce((a, b) => (a.length > b.length ? a : b));
-  const size = portrait ? fit(longest, 920, 120) : fit(longest, 1000, 150);
+  const size = portrait ? fit(longest, locale === "ua" ? 820 : 920, 120) : fit(longest, locale === "ua" ? 860 : 1000, 150);
   return (
     <AbsoluteFill
       style={{

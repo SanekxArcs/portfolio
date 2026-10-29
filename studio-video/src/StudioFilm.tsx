@@ -39,6 +39,14 @@ void loadFont({
   unicodeRange: "U+0100-024F,U+1E00-1EFF",
 });
 
+void loadFont({
+  family: "StudioSans",
+  url: staticFile("fonts/noto-sans-cyrillic.woff2"),
+  weight: "100 900",
+  display: "block",
+  unicodeRange: "U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116",
+});
+
 // Two-beat cuts open each half of the reel, then it doubles to one cut per beat.
 const websites: ReelShot[] = [
   { id: "feigin-electric", name: "Feigin Electric", beats: 2, mobile: true },

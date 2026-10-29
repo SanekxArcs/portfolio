@@ -6,8 +6,8 @@ import { readFileSync } from "node:fs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const locale = process.argv[2] || "en";
-if (!["en", "pl"].includes(locale)) throw new Error("Choose en or pl");
-const tag = locale === "pl" ? "pl-" : "";
+if (!["en", "pl", "ua"].includes(locale)) throw new Error("Choose en, pl or ua");
+const tag = locale === "en" ? "" : `${locale}-`;
 const edit = JSON.parse(readFileSync(resolve(root, "src/edit.json"), "utf8"));
 const results = [];
 for (const [format, width, height] of [
